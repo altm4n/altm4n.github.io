@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="实验吧看到的题，之前觉得很难最近有空再做一次记录一下学习过程 0x01 hash函数原理网上有很多讲解，大概就是将明文分为n个区块，在进行多轮运算。大部分明文不能被区块长度整除，所以必须被padding至区块长度的整数倍。然后进行n次运算后得到密文。 0x02 攻击方式当key未知，key的位数已知，md5(key)已知。那么可以求出md5(key+”填充数据”+”任意数据”)。通过一道实验吧的题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="哈希长度拓展攻击">
+<meta property="og:url" content="http://altmanz.cn/2017/12/20/hash长度扩展攻击/index.html">
+<meta property="og:site_name" content="Altm4nz">
+<meta property="og:description" content="实验吧看到的题，之前觉得很难最近有空再做一次记录一下学习过程 0x01 hash函数原理网上有很多讲解，大概就是将明文分为n个区块，在进行多轮运算。大部分明文不能被区块长度整除，所以必须被padding至区块长度的整数倍。然后进行n次运算后得到密文。 0x02 攻击方式当key未知，key的位数已知，md5(key)已知。那么可以求出md5(key+”填充数据”+”任意数据”)。通过一道实验吧的题">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-02-03T14:48:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="哈希长度拓展攻击">
+<meta name="twitter:description" content="实验吧看到的题，之前觉得很难最近有空再做一次记录一下学习过程 0x01 hash函数原理网上有很多讲解，大概就是将明文分为n个区块，在进行多轮运算。大部分明文不能被区块长度整除，所以必须被padding至区块长度的整数倍。然后进行n次运算后得到密文。 0x02 攻击方式当key未知，key的位数已知，md5(key)已知。那么可以求出md5(key+”填充数据”+”任意数据”)。通过一道实验吧的题">
+
+
+
+
+
+
+  <link rel="canonical" href="http://altmanz.cn/2017/12/20/hash长度扩展攻击/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>哈希长度拓展攻击 | Altm4nz</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Altm4nz</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://altmanz.cn/2017/12/20/hash长度扩展攻击/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Altm4nz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Altm4nz">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">哈希长度拓展攻击
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-12-20 00:00:00" itemprop="dateCreated datePublished" datetime="2017-12-20T00:00:00+08:00">2017-12-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-02-03 22:48:05" itemprop="dateModified" datetime="2018-02-03T22:48:05+08:00">2018-02-03</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>实验吧看到的题，之前觉得很难<br>最近有空再做一次<br>记录一下学习过程</p>
+<h2 id="0x01-hash函数原理"><a href="#0x01-hash函数原理" class="headerlink" title="0x01 hash函数原理"></a>0x01 hash函数原理</h2><p>网上有很多讲解，大概就是将明文分为n个区块，在进行多轮运算。大部分明文不能被区块长度整除，所以必须被padding至区块长度的整数倍。然后进行n次运算后得到密文。</p>
+<h2 id="0x02-攻击方式"><a href="#0x02-攻击方式" class="headerlink" title="0x02 攻击方式"></a>0x02 攻击方式</h2><p>当key未知，key的位数已知，md5(key)已知。那么可以求出md5(key+”填充数据”+”任意数据”)。<br>通过一道实验吧的题来理解。<br>源码如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">$flag = &quot;XXXXXXXXXXXXXXXXXXXXXXX&quot;;</span><br><span class="line">$secret = &quot;XXXXXXXXXXXXXXX&quot;; // This secret is 15 characters long for security!</span><br><span class="line"></span><br><span class="line">$username = $_POST[&quot;username&quot;];</span><br><span class="line">$password = $_POST[&quot;password&quot;];</span><br><span class="line"></span><br><span class="line">if (!empty($_COOKIE[&quot;getmein&quot;])) &#123;</span><br><span class="line">    if (urldecode($username) === &quot;admin&quot; &amp;&amp; urldecode($password) != &quot;admin&quot;) &#123;</span><br><span class="line">        if ($COOKIE[&quot;getmein&quot;] === md5($secret . urldecode($username . $password))) &#123;</span><br><span class="line">            echo &quot;Congratulations! You are a registered user.\n&quot;;</span><br><span class="line">            die (&quot;The flag is &quot;. $flag);</span><br><span class="line">        &#125;</span><br><span class="line">        else &#123;</span><br><span class="line">            die (&quot;Your cookies don&apos;t match up! STOP HACKING THIS SITE.&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        die (&quot;You are not an admin! LEAVE.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">setcookie(&quot;sample-hash&quot;, md5($secret . urldecode(&quot;admin&quot; . &quot;admin&quot;)), time() + (60 * 60 * 24 * 7));</span><br><span class="line"></span><br><span class="line">if (empty($_COOKIE[&quot;source&quot;])) &#123;</span><br><span class="line">    setcookie(&quot;source&quot;, 0, time() + (60 * 60 * 24 * 7));</span><br><span class="line">&#125;</span><br><span class="line">else &#123;</span><br><span class="line">    if ($_COOKIE[&quot;source&quot;] != 0) &#123;</span><br><span class="line">        echo &quot;&quot;; // This source code is outputted here</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>要满足要求<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$COOKIE[&quot;getmein&quot;] === md5($secret . urldecode($username . $password))</span><br></pre></td></tr></table></figure></p>
+<p>知道了$secret的位数，通过cookie得知md5($secret+admin)=571580b26c65f306376d4f64e53cb5c7。那么通过hash拓展攻击可以满足上面的要求。<br>首先将$secret+admin填充至512bits，然后在加上任意数据例如altman得到新的值X，这里将X进行hash运算，分为两组进行两轮运算。<br>第一组运算md5($secret+admin+填充值)，会发现他与已知md5($secret+admin)相同，那么我们直接利用md5($secret+admin)得到第一轮运算结果。<br>然后通过第一轮运算结果得到第二轮结果，这样我们就在不知道$secret值的情况下算出了md5($secret+admin+”填充值”+”任意数据”)。<br>构造<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">username=admin</span><br><span class="line">password=admin%80%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%c8%00%00%00%00%00%00%00altman</span><br><span class="line">cookie:getmein=10a4b3dc8626cb07d24bda61be701b9f</span><br></pre></td></tr></table></figure></p>
+<p>成功绕过了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$COOKIE[&quot;getmein&quot;] === md5($secret . urldecode($username . $password))</span><br></pre></td></tr></table></figure></p>
+<p>拿到flag /。</p>
+<h2 id="0x03-攻击脚本"><a href="#0x03-攻击脚本" class="headerlink" title="0x03 攻击脚本"></a>0x03 攻击脚本</h2><p>github有好几个攻击脚本，但是试了试感觉都太麻烦。<br>发现github有个攻击工具很好用。<br>HashPump<br>简单说下安装(linux)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/bwall/HashPump</span><br><span class="line">apt-get install g++ libssl-dev</span><br><span class="line">cd HashPump</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure></p>
+<p>用起来很简单<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># hashpump</span><br><span class="line">Input Signature: 571580b26c65f306376d4f64e53cb5c7 //(已知的hash值)</span><br><span class="line">Input Data: admin</span><br><span class="line">Input Key Length: 20 //($secret 15位+admin 5位)</span><br><span class="line">Input Data to Add: altman  //添加的任意数据</span><br></pre></td></tr></table></figure></p>
+<p>然后就会得到payload：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">10a4b3dc8626cb07d24bda61be701b9f //md5($secret+admin+passwd)</span><br><span class="line">admin\x80\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xc8\x00\x00\x00\x00\x00\x00\x00altman //构造的passwd</span><br></pre></td></tr></table></figure></p>
+<h2 id="0x04-当无法获取密钥长度时"><a href="#0x04-当无法获取密钥长度时" class="headerlink" title="0x04 当无法获取密钥长度时"></a>0x04 当无法获取密钥长度时</h2><p>只能通过脚本爆破了，正确的长度会返回不一样的报错信息。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/14/CUMTCTF2018/" rel="prev" title="CUMTCTF2018">
+                CUMTCTF2018 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Altm4nz</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-hash函数原理"><span class="nav-number">1.</span> <span class="nav-text">0x01 hash函数原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-攻击方式"><span class="nav-number">2.</span> <span class="nav-text">0x02 攻击方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-攻击脚本"><span class="nav-number">3.</span> <span class="nav-text">0x03 攻击脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-当无法获取密钥长度时"><span class="nav-number">4.</span> <span class="nav-text">0x04 当无法获取密钥长度时</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Altm4nz</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Muse</a> v6.3.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
