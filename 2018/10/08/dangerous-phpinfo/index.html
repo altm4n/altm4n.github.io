@@ -89,7 +89,7 @@
 <meta property="og:image" content="http://altmanz.cn/2018/10/08/dangerous-phpinfo/1.png">
 <meta property="og:image" content="http://altmanz.cn/2018/10/08/dangerous-phpinfo/2.png">
 <meta property="og:image" content="http://altmanz.cn/2018/10/08/dangerous-phpinfo/3.png">
-<meta property="og:updated_time" content="2018-10-10T12:24:52.124Z">
+<meta property="og:updated_time" content="2018-10-10T12:27:28.014Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="dangerous-phpinfo">
 <meta name="twitter:description" content="关于phpinfo()的不适当配置造成的危险漏洞 前言本文章测试环境基于osx+apache2+php5.6 0x00 session.upload_progress原理分析先来看php手册中给的定义 【http://php.net/manual/zh/session.upload-progress.php】 当 session.upload_progress.enabled INI 选项开启时，">
@@ -317,7 +317,7 @@
 <p>构造POST文件的数据包成功执行命令<br><img src="/2018/10/08/dangerous-phpinfo/3.png" alt=""><br>剩下的就是常规操作了</p>
 <h1 id="0x01-phpinfo-LFI"><a href="#0x01-phpinfo-LFI" class="headerlink" title="0x01 phpinfo()+LFI"></a>0x01 phpinfo()+LFI</h1><p>同样是上传文件,POST一个文件上去后可以再phpinfo中看到文件的信息<br>![]<br>在tmp目录下生成一个名为phpXXXXXX的文件，内容为POST的文件内容。但是它只会存在一瞬间，所以需要条件竞争来触发它。<br>我们使用同一个数据包来发送文件并且查看文件。<br>![]<br>如果同时存在LFI，我们包含这个这个phpXXXXXXX文件就可以getshell了。</p>
 <h1 id="0X02-OPCACHE覆盖"><a href="#0X02-OPCACHE覆盖" class="headerlink" title="0X02 OPCACHE覆盖"></a>0X02 OPCACHE覆盖</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>当phpinfo()中opcache.enable =&gt; On =&gt; On时，<br>访问网站index.php时，网站会生成index.php.bin。<br>再次访问时，会加载index.php.bin。而存在上传时，如果可以找到index.php.bin文件所在的目录，我们就可以覆盖index.php.bin，下一次访问index.php时，会加载我们上传的恶意index.php.bin。</p>
-<h2 id="CTF实战-1"><a href="#CTF实战-1" class="headerlink" title="CTF实战"></a>CTF实战</h2><p>见博客</p>
+<h2 id="CTF实战-1"><a href="#CTF实战-1" class="headerlink" title="CTF实战"></a>CTF实战</h2><p>见博客<a href="https://altmanz.cn/2018/10/10/0ctf-Ezdoor/">https://altmanz.cn/2018/10/10/0ctf-Ezdoor/</a></p>
 
       
     </div>
