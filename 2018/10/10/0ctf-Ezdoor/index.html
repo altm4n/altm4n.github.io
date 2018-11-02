@@ -1,308 +1,142 @@
 <!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="zh-Hans">
+<html>
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <meta charset="utf-8">
+  
+  <title>0ctf-Ezdoor | Altm4nz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="web" />
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="前言复现以前几个月前的0ctf-Ezdoor，一个关于php7_opcache_override的题目。 环境https://github.com/LyleMi/My-CTF-Challengesdockerfile有一点问题，需要加一句1RUN mkdir /var/www/html/sandbox/ 而且因为php更新，docker的php镜像不再是7.0.28，而是7.0.32。解题过程中要">
+  
+  
+  <meta name="description" content="前言复现以前几个月前的0ctf-Ezdoor，一个关于php7_opcache_override的题目。">
+<meta name="keywords" content="web">
 <meta property="og:type" content="article">
 <meta property="og:title" content="0ctf-Ezdoor">
-<meta property="og:url" content="http://altmanz.cn/2018/10/10/0ctf-Ezdoor/index.html">
+<meta property="og:url" content="http://altman.vip/2018/10/10/0ctf-Ezdoor/index.html">
 <meta property="og:site_name" content="Altm4nz">
-<meta property="og:description" content="前言复现以前几个月前的0ctf-Ezdoor，一个关于php7_opcache_override的题目。 环境https://github.com/LyleMi/My-CTF-Challengesdockerfile有一点问题，需要加一句1RUN mkdir /var/www/html/sandbox/ 而且因为php更新，docker的php镜像不再是7.0.28，而是7.0.32。解题过程中要">
+<meta property="og:description" content="前言复现以前几个月前的0ctf-Ezdoor，一个关于php7_opcache_override的题目。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://altmanz.cn/2018/10/10/0ctf-Ezdoor/1.png">
-<meta property="og:image" content="http://altmanz.cn/2018/10/10/0ctf-Ezdoor/2.png">
-<meta property="og:updated_time" content="2018-10-10T12:27:28.011Z">
+<meta property="og:image" content="http://altman.vip/2018/10/10/0ctf-Ezdoor/1.png">
+<meta property="og:image" content="http://altman.vip/2018/10/10/0ctf-Ezdoor/2.png">
+<meta property="og:image" content="http://altman.vip/2018/10/10/0ctf-Ezdoor/3.png">
+<meta property="og:updated_time" content="2018-11-02T05:39:45.562Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="0ctf-Ezdoor">
-<meta name="twitter:description" content="前言复现以前几个月前的0ctf-Ezdoor，一个关于php7_opcache_override的题目。 环境https://github.com/LyleMi/My-CTF-Challengesdockerfile有一点问题，需要加一句1RUN mkdir /var/www/html/sandbox/ 而且因为php更新，docker的php镜像不再是7.0.28，而是7.0.32。解题过程中要">
-<meta name="twitter:image" content="http://altmanz.cn/2018/10/10/0ctf-Ezdoor/1.png">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '5.1.4',
-    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://altmanz.cn/2018/10/10/0ctf-Ezdoor/"/>
-
-
-
-
-
-  <title>0ctf-Ezdoor | Altm4nz</title>
+<meta name="twitter:description" content="前言复现以前几个月前的0ctf-Ezdoor，一个关于php7_opcache_override的题目。">
+<meta name="twitter:image" content="http://altman.vip/2018/10/10/0ctf-Ezdoor/1.png">
   
+    <link rel="alternate" href="/atom.xml" title="Altm4nz" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/pokemon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
 
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
 
+  <script src="/js/jquery-3.1.1.min.js"></script>
 
-
-
-
-
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
 
   
-  
-    
-  
 
-  <div class="container sidebar-position-right page-post-detail">
-    <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
+      <div class="site-branding">
 
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Altm4nz</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle"></p>
-      
+          <h1 class="site-title">
+            
+              <a href="/" title="Altm4nz" rel="home"> Altm4nz </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
   </div>
+</header>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
 
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
         
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
+          <section id="main" style="float:none;"><article id="post-0ctf-Ezdoor" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://altmanz.cn/2018/10/10/0ctf-Ezdoor/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Altm4nz">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/IMG_4178.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Altm4nz">
-    </span>
-
     
-      <header class="post-header">
-
+      <header class="article-header">
         
-        
-          <h1 class="post-title" itemprop="name headline">0ctf-Ezdoor</h1>
-        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      0ctf-Ezdoor
+    </h1>
+  
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-10T19:51:13+08:00">
-                2018-10-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
       </header>
     
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+    <div class="article-meta">
       
-      
+	<a href="/2018/10/10/0ctf-Ezdoor/" class="article-date">
+	  <time datetime="2018-10-10T11:51:13.000Z" itemprop="datePublished">October 10, 2018</time>
+	</a>
 
+       
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>复现以前几个月前的0ctf-Ezdoor，一个关于php7_opcache_override的题目。</p>
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>复现以前几个月前的0ctf-Ezdoor，一个关于php7_opcache_override的题目。<br><a id="more"></a></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p><a href="https://github.com/LyleMi/My-CTF-Challenges" target="_blank" rel="noopener">https://github.com/LyleMi/My-CTF-Challenges</a><br>dockerfile有一点问题，需要加一句<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RUN</span> <span class="keyword">mkdir</span> /<span class="keyword">var</span>/www/html/sandbox/</span><br></pre></td></tr></table></figure></p>
 <p>而且因为php更新，docker的php镜像不再是7.0.28，而是7.0.32。解题过程中要注意版本为7.0.32，其他不变。</p>
 <h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>简单粗暴的源码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">$dir = <span class="string">'sandbox/'</span> . sha1($_SERVER[<span class="string">'REMOTE_ADDR'</span>]) . <span class="string">'/'</span>;</span><br><span class="line"><span class="keyword">if</span>(!file_exists($dir))&#123;</span><br><span class="line">  mkdir($dir);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(!file_exists($dir . <span class="string">"index.php"</span>))&#123;</span><br><span class="line">  touch($dir . <span class="string">"index.php"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function clear($dir)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span>(!is_dir($dir))&#123;</span><br><span class="line">    unlink($dir);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  foreach (scandir($dir) <span class="keyword">as</span> $file) &#123;</span><br><span class="line">    <span class="keyword">if</span> (in_array($file, [<span class="string">"."</span>, <span class="string">".."</span>])) &#123;</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    unlink($dir . $file);</span><br><span class="line">  &#125;</span><br><span class="line">  rmdir($dir);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">switch ($_GET["action"] ?? "") &#123;</span><br><span class="line">  case <span class="string">'pwd'</span>:</span><br><span class="line">    echo $dir;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  case <span class="string">'phpinfo'</span>:</span><br><span class="line">    echo file_get_contents(<span class="string">"phpinfo.txt"</span>);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  case <span class="string">'reset'</span>:</span><br><span class="line">    clear($dir);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  case <span class="string">'time'</span>:</span><br><span class="line">    echo time();</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  case <span class="string">'upload'</span>:</span><br><span class="line">    <span class="keyword">if</span> (!isset($_GET[<span class="string">"name"</span>]) || !isset($_FILES[<span class="string">'file'</span>])) &#123;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ($_FILES[<span class="string">'file'</span>][<span class="string">'size'</span>] &gt; <span class="number">100000</span>) &#123;</span><br><span class="line">      clear($dir);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    $name = $dir . $_GET[<span class="string">"name"</span>];</span><br><span class="line">    <span class="keyword">if</span> (preg_match(<span class="string">"/[^a-zA-Z0-9.\/]/"</span>, $name) ||</span><br><span class="line">      stristr(pathinfo($name)[<span class="string">"extension"</span>], <span class="string">"h"</span>)) &#123;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    move_uploaded_file($_FILES[<span class="string">'file'</span>][<span class="string">'tmp_name'</span>], $name);</span><br><span class="line">    $size = <span class="number">0</span>;</span><br><span class="line">    foreach (scandir($dir) <span class="keyword">as</span> $file) &#123;</span><br><span class="line">      <span class="keyword">if</span> (in_array($file, [<span class="string">"."</span>, <span class="string">".."</span>])) &#123;</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      $size += filesize($dir . $file);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ($size &gt; <span class="number">100000</span>) &#123;</span><br><span class="line">      clear($dir);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  case <span class="string">'shell'</span>:</span><br><span class="line">    ini_set(<span class="string">"open_basedir"</span>, <span class="string">"/var/www/html/$dir:/var/www/html/flag"</span>);</span><br><span class="line">    include $dir . <span class="string">"index.php"</span>;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  default:</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -319,386 +153,173 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?</span><br><span class="line">file_get_contents(<span class="string">'/var/www/html/flag/93f4c28c0cf0b07dfd7012dca2cb868cc0228cad'</span>);</span><br><span class="line">//这是个bin文件，最好转成base64再打印出来。</span><br></pre></td></tr></table></figure>
 <p>发现是个opcache头的bin文件，剩下的就是逆向大佬的事情了</p>
 <h2 id="解法二（非预期）"><a href="#解法二（非预期）" class="headerlink" title="解法二（非预期）"></a>解法二（非预期）</h2><p>使用aa/../index.php/.即可绕过检测。</p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>直接查看php的底层实现文件路径处理的代码tsrm_realpath()<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">i = <span class="built_in">len</span>;  </span><br><span class="line">// i的初始值为字符串的长度</span><br><span class="line"> <span class="keyword">while</span> (i &gt; start &amp;&amp; !IS_SLASH(<span class="built_in">path</span>[i<span class="number">-1</span>])) &#123;</span><br><span class="line">     i<span class="comment">--;   </span></span><br><span class="line">   // 把i定位到第一个/的后面</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">if</span> (i == <span class="built_in">len</span> ||</span><br><span class="line">     (i == <span class="built_in">len</span> - <span class="number">1</span> &amp;&amp; <span class="built_in">path</span>[i] == <span class="string">'.'</span>)) &#123;</span><br><span class="line">     <span class="built_in">len</span> = i - <span class="number">1</span>;  </span><br><span class="line">    //  删除路径中最后的 /. , 也就是 /<span class="built_in">path</span>/test.php/. 会变为 /<span class="built_in">path</span>/test.php  </span><br><span class="line">     is_dir = <span class="number">1</span>;</span><br><span class="line">     continue;</span><br><span class="line"> &#125; <span class="keyword">else</span> <span class="keyword">if</span> (i == <span class="built_in">len</span> - <span class="number">2</span> &amp;&amp; <span class="built_in">path</span>[i] == <span class="string">'.'</span> &amp;&amp; <span class="built_in">path</span>[i+<span class="number">1</span>] == <span class="string">'.'</span>) &#123;</span><br><span class="line">     //删除路径结尾的 /.. </span><br><span class="line">     is_dir = <span class="number">1</span>;</span><br><span class="line">     <span class="keyword">if</span> (link_is_dir) &#123;</span><br><span class="line">         *link_is_dir = <span class="number">1</span>;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">if</span> (i - <span class="number">1</span> &lt;= start) &#123;</span><br><span class="line">         <span class="keyword">return</span> start ? start : <span class="built_in">len</span>;</span><br><span class="line">     &#125;</span><br><span class="line">     j = tsrm_realpath_r(<span class="built_in">path</span>, start, i<span class="number">-1</span>, ll, t, use_realpath, <span class="number">1</span>, NULL TSRMLS_CC);</span><br><span class="line">    // 进行递归调用的时候，这里把strlen设置为了i<span class="number">-1</span>，</span><br></pre></td></tr></table></figure></p>
+<p>php会递归删除文件名后的/.和/..<br>我们上传index.php/.会被处理为index.php<br>这样就绕过了检测，但是这样的上传不会覆盖已有文件内容。<br>具体原因如下<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1077</span> <span class="keyword">if</span> (save &amp;&amp; php_sys_lstat(path, &amp;st) &lt; <span class="number">0</span>) &#123;</span><br><span class="line"><span class="number">1078</span>            <span class="keyword">if</span> (use_realpath == CWD_REALPATH) &#123;</span><br><span class="line"><span class="number">1079</span>                <span class="comment">/* file not found */</span></span><br><span class="line"><span class="number">1080</span>                <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line"><span class="number">1081</span>            &#125;</span><br><span class="line"><span class="number">1082</span>            <span class="comment">/* continue resolution anyway but don't save result in the cache */</span></span><br><span class="line"><span class="number">1083</span>            save = <span class="number">0</span>;</span><br><span class="line"><span class="number">1084</span>        &#125;</span><br><span class="line">    </span><br><span class="line"><span class="number">1120</span> <span class="keyword">if</span> (save) &#123;</span><br><span class="line"><span class="number">1121</span>                directory = S_ISDIR(st.st_mode);</span><br><span class="line"><span class="number">1122</span>                <span class="keyword">if</span> (link_is_dir) &#123;</span><br><span class="line"><span class="number">1123</span>                    *link_is_dir = directory;</span><br><span class="line"><span class="number">1124</span>                &#125;</span><br><span class="line"><span class="number">1125</span>                <span class="keyword">if</span> (is_dir &amp;&amp; !directory) &#123;</span><br><span class="line"><span class="number">1125</span>                    <span class="comment">/* not a directory */</span></span><br><span class="line"><span class="number">1127</span>                    free_alloca(tmp, use_heap);</span><br><span class="line"><span class="number">1128</span>                    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line"><span class="number">1129</span>                &#125;</span><br><span class="line"><span class="number">1130</span>            &#125;</span><br></pre></td></tr></table></figure></p>
+<p>是一个宏定义，其实是系统函数lstat,主要功能是获取文件的描述信息存入st结构体中,由于上面分析会删除掉路径中的/.，所以调用时传入的test.php 。 当第一次执行时不存在test.php文件，函数php_sys_lstat返回 -1,所以第1083行会被执行，重置save为0，所以1120-1130行都没有被执行。</p>
+<p>当第二次执行，覆盖老文件的时候，test.php已经是一个存在的文件了，所以php_sys_lstat返回0，st中存储的是一个文件的信息，save还是1，导致1120-1130行被执行。由于之前php认为test.php/. 是一个目录（is_dir是1），现在有获取到test.php 是一个文件，所以is_dir &amp;&amp; !directory为true，函数返回了-1，得到的路径长度出错，所以无法覆盖老文件了。</p>
+<h3 id="move-uploaded-file"><a href="#move-uploaded-file" class="headerlink" title="move_uploaded_file()"></a>move_uploaded_file()</h3><p>查看move_uploaded_file()的底层代码<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">php</span><br><span class="line"><span class="keyword">if</span> (VCWD_RENAME(path, <span class="keyword">new</span><span class="type">_path</span>) == <span class="number">0</span>) &#123;</span><br><span class="line">        successful = <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (php_copy_file_ex(path, <span class="keyword">new</span><span class="type">_path</span>, STREAM_DISABLE_OPEN_BASEDIR) == SUCCESS) &#123;</span><br><span class="line">        VCWD_UNLINK(path);</span><br><span class="line">        successful = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>由于index.php已经存在，会返回0，<br>那么我们拼接上一个不存在路径 aa/../index.php/.<br>php_sys_lstat返回-1，就可以成功覆盖文件。</p>
+<p>最终payload aa/../index.php<br><img src="/2018/10/10/0ctf-Ezdoor/3.png" alt=""></p>
 
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
+    <footer class="entry-meta entry-footer">
       
       
-      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/">web</a></li></ul>
 
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/10/08/dangerous-phpinfo/" rel="next" title="dangerous-phpinfo">
-                <i class="fa fa-chevron-left"></i> dangerous-phpinfo
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-          </div>
-        </div>
-      
-
-      
       
     </footer>
+    <hr class="entry-footer-hr">
   </div>
   
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
     
-    <div class="sidebar-inner">
+<nav id="article-nav">
+  
+    <a href="/2018/10/26/phar反序列化rce/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          phar反序列化rce
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/10/08/dangerous-phpinfo/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">dangerous-phpinfo</div>
+    </a>
+  
+</nav>
 
-      
+  
+</article>
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
+<!-- Table of Contents -->
 
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image"
-                src="/images/IMG_4178.JPG"
-                alt="Altm4nz" />
-            
-              <p class="site-author-name" itemprop="name">Altm4nz</p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">21</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                
-                  <span class="site-state-item-count">1</span>
-                  <span class="site-state-item-name">标签</span>
-                
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-            <div class="links-of-author motion-element">
-                
-                  <span class="links-of-author-item">
-                    <a href="mailto:872801413@qq.com" target="_blank" title="E-Mail">
-                      
-                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-                  </span>
-                
-            </div>
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境"><span class="nav-number">1.1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目分析"><span class="nav-number">1.2.</span> <span class="nav-text">题目分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解法一（预期解）"><span class="nav-number">1.3.</span> <span class="nav-text">解法一（预期解）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取路径"><span class="nav-number">1.3.1.</span> <span class="nav-text">获取路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#伪造缓存文件"><span class="nav-number">1.3.2.</span> <span class="nav-text">伪造缓存文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更改timestamps"><span class="nav-number">1.3.3.</span> <span class="nav-text">更改timestamps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行命令"><span class="nav-number">1.3.4.</span> <span class="nav-text">执行命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解法二（非预期）"><span class="nav-number">1.4.</span> <span class="nav-text">解法二（非预期）</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境"><span class="nav-number">1.1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目分析"><span class="nav-number">1.2.</span> <span class="nav-text">题目分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解法一（预期解）"><span class="nav-number">1.3.</span> <span class="nav-text">解法一（预期解）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取路径"><span class="nav-number">1.3.1.</span> <span class="nav-text">获取路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#伪造缓存文件"><span class="nav-number">1.3.2.</span> <span class="nav-text">伪造缓存文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更改timestamps"><span class="nav-number">1.3.3.</span> <span class="nav-text">更改timestamps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行命令"><span class="nav-number">1.3.4.</span> <span class="nav-text">执行命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解法二（非预期）"><span class="nav-number">1.4.</span> <span class="nav-text">解法二（非预期）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原理"><span class="nav-number">1.4.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#move-uploaded-file"><span class="nav-number">1.4.2.</span> <span class="nav-text">move_uploaded_file()</span></a></li></ol></li></ol></li></ol>
+    
     </div>
   </aside>
-
-
+</section>
         
       </div>
-    </main>
 
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Altm4nz</span>
-
+    </div>
+    <!-- <nav id="mobile-nav">
   
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2018 Altm4nz All Rights Reserved.
+        
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
 </div>
 
+<!-- mathjax config similar to math.stackexchange -->
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
 
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
 
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
 
 
 
 
 
-  
 
 
-  
 
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
 
 
 
 
 
 
+  </div>
 
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
 </body>
 </html>
