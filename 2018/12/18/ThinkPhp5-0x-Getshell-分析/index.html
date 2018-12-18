@@ -11,23 +11,23 @@
   
   
   
-  <meta name="description" content="前言分析一下前几天很火的tp5任意代码执行漏洞。 可以先看下官方公告。 测试版本为ThinkPHP V5.0.22，测试环境为OSX+apache2+php5.6+Mysql5.7。 漏洞分析更新信息已修复的版本5.0.23在/library/think/App.php中555-556行中增加了对$controller的过滤。 123if (!preg_match(&apos;/^[A-Za-z](\w|\">
+  <meta name="description" content="前言分析一下前几天很火的tp5任意代码执行漏洞。 可以先看下官方公告。 测试版本为ThinkPHP V5.0.22，测试环境为OSX+apache2+php5.6+Mysql5.7。">
 <meta name="keywords" content="web">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ThinkPhp5.0x_Getshell_分析">
 <meta property="og:url" content="http://altman.vip/2018/12/18/ThinkPhp5-0x-Getshell-分析/index.html">
 <meta property="og:site_name" content="Altm4nz">
-<meta property="og:description" content="前言分析一下前几天很火的tp5任意代码执行漏洞。 可以先看下官方公告。 测试版本为ThinkPHP V5.0.22，测试环境为OSX+apache2+php5.6+Mysql5.7。 漏洞分析更新信息已修复的版本5.0.23在/library/think/App.php中555-556行中增加了对$controller的过滤。 123if (!preg_match(&apos;/^[A-Za-z](\w|\">
+<meta property="og:description" content="前言分析一下前几天很火的tp5任意代码执行漏洞。 可以先看下官方公告。 测试版本为ThinkPHP V5.0.22，测试环境为OSX+apache2+php5.6+Mysql5.7。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://altman.vip/2018/12/18/ThinkPhp5-0x-Getshell-分析/1.png">
 <meta property="og:image" content="http://altman.vip/2018/12/18/ThinkPhp5-0x-Getshell-分析/2.png">
 <meta property="og:image" content="http://altman.vip/2018/12/18/ThinkPhp5-0x-Getshell-分析/3.png">
 <meta property="og:image" content="http://altman.vip/2018/12/18/ThinkPhp5-0x-Getshell-分析/4.png">
 <meta property="og:image" content="http://altman.vip/2018/12/18/ThinkPhp5-0x-Getshell-分析/5.png">
-<meta property="og:updated_time" content="2018-12-18T14:59:58.688Z">
+<meta property="og:updated_time" content="2018-12-18T15:03:28.262Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ThinkPhp5.0x_Getshell_分析">
-<meta name="twitter:description" content="前言分析一下前几天很火的tp5任意代码执行漏洞。 可以先看下官方公告。 测试版本为ThinkPHP V5.0.22，测试环境为OSX+apache2+php5.6+Mysql5.7。 漏洞分析更新信息已修复的版本5.0.23在/library/think/App.php中555-556行中增加了对$controller的过滤。 123if (!preg_match(&apos;/^[A-Za-z](\w|\">
+<meta name="twitter:description" content="前言分析一下前几天很火的tp5任意代码执行漏洞。 可以先看下官方公告。 测试版本为ThinkPHP V5.0.22，测试环境为OSX+apache2+php5.6+Mysql5.7。">
 <meta name="twitter:image" content="http://altman.vip/2018/12/18/ThinkPhp5-0x-Getshell-分析/1.png">
   
     <link rel="alternate" href="/atom.xml" title="Altm4nz" type="application/atom+xml">
@@ -141,6 +141,7 @@
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>分析一下前几天很火的tp5任意代码执行漏洞。</p>
 <p>可以先看下<a href="https://blog.thinkphp.cn/869075" target="_blank" rel="noopener">官方公告</a>。</p>
 <p>测试版本为ThinkPHP V5.0.22，测试环境为OSX+apache2+php5.6+Mysql5.7。</p>
+<a id="more"></a>
 <h1 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h1><h2 id="更新信息"><a href="#更新信息" class="headerlink" title="更新信息"></a>更新信息</h2><p>已修复的版本5.0.23在/library/think/App.php中555-556行中增加了对$controller的过滤。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!preg_match(<span class="string">'/^[A-Za-z](\w|\.)*$/'</span>, $controller)) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> HttpException(<span class="number">404</span>, <span class="string">'controller not exists:'</span> . $controller);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 <p>显然问题是出在控制器过滤不严格导致调用了不安全的控制器。</p>
