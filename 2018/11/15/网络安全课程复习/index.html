@@ -25,7 +25,7 @@
 <meta property="og:image" content="http://altman.vip/2018/11/15/网络安全课程复习/4.png">
 <meta property="og:image" content="http://altman.vip/2018/11/15/网络安全课程复习/5.png">
 <meta property="og:image" content="http://altman.vip/2018/11/15/网络安全课程复习/6.png">
-<meta property="og:updated_time" content="2018-11-25T13:16:23.117Z">
+<meta property="og:updated_time" content="2018-11-26T05:36:25.949Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络安全课程复习">
 <meta name="twitter:description" content="快考试了，总结一下网络安全的知识点。">
@@ -331,7 +331,7 @@
 <p>​      ④邮件加密：OpenPGP，S/MIME。</p>
 <h3 id="0x04-DNS欺骗"><a href="#0x04-DNS欺骗" class="headerlink" title="0x04 DNS欺骗"></a>0x04 DNS欺骗</h3><p><strong>1.DNS欺骗的原理及实现步骤</strong></p>
 <p>   当向本地DNS服务器查询域名时，如果服务器缓存中已有相应记录，就直接将这条记录返回给用户。DNS欺骗的关键是在DNS服务器的本地Cache中缓存一条伪造的解析记录。</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> 攻击者可以控制本地域名服务器 :</span><br><span class="line">     在其数据库中增加一个附加记录，将攻击目标的域名(例 如www<span class="selector-class">.cumt</span><span class="selector-class">.edu</span><span class="selector-class">.cn</span>)指向攻击者的欺骗IP</span><br><span class="line"><span class="keyword">if</span> 攻击者无法控制DNS服务器:</span><br><span class="line">     但可以控制DNS服务器所在网络的某台主机，并可以监听该网络中的通信情况。黑客要对远程的某DNS服务器进行欺骗,首先，黑客要冒充某个域名服务器的IP地址.其次，黑客要能预测目标域名服务器所发送DNS数据包的ID号.</span><br><span class="line">(确定目标DNS服务器的ID号为DNS欺骗攻击的关键)</span><br><span class="line"><span class="keyword">if</span>  即使无法监听拥有DNS服务器的网络，也有办法得到目标DNS服务器的ID号:</span><br><span class="line">     <span class="number">1</span>. 向目标DNS服务器请求某个不存在域名地址（但该域存在）</span><br><span class="line">     <span class="number">2</span>. 冒充所请求域的DNS服务器，向目标DNS服务器连续发送应 答包，包中的ID号依次递增</span><br><span class="line">     <span class="number">3</span>. 一段时间后，再次向目标DNS服务器发送针对该域名的解析 请求，如果得到返回结果，就说明目标DNS服务器</span><br><span class="line">     接受了刚才的伪造应答，否则，再次尝试。</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> 攻击者可以控制本地域名服务器 :</span><br><span class="line">     在其数据库中增加一个附加记录，将攻击目标的域名(例 如www<span class="selector-class">.cumt</span><span class="selector-class">.edu</span><span class="selector-class">.cn</span>)指向攻击者的欺骗IP</span><br><span class="line"><span class="keyword">if</span> 攻击者无法控制DNS服务器:</span><br><span class="line">     但可以控制DNS服务器所在网络的某台主机，并可以监听该网络中的通信情况。黑客要对远程的某DNS服务器进行欺骗,首先，黑客要冒充某个域名服务器的IP地址.其次，黑客要能预测目标域名服务器所发送DNS数据包的ID号.</span><br><span class="line">(确定目标DNS服务器的ID号为DNS欺骗攻击的关键)</span><br><span class="line"><span class="keyword">if</span>  即使无法监听拥有DNS服务器的网络，也有办法得到目标DNS服务器的ID号:</span><br><span class="line">     <span class="number">1</span>. 向目标DNS服务器请求某个不存在域名地址（但该域存在）</span><br><span class="line">     <span class="number">2</span>. 冒充所请求域的DNS服务器，向目标DNS服务器连续发送应 答包，包中的ID号依次递增</span><br><span class="line">     <span class="number">3</span>. 一段时间后，再次向目标DNS服务器发送针对该域名的解析 请求，如果得到返回结果，就说明目标DNS服务器接受了刚才的伪造应答，否则，再次尝试。</span><br></pre></td></tr></table></figure>
 <h3 id="0x05-WEB欺骗"><a href="#0x05-WEB欺骗" class="headerlink" title="0x05 WEB欺骗"></a>0x05 WEB欺骗</h3><p>创造一个完整的令人信服的Web世界，但实际是一个虚假的复制。</p>
 <p>Web欺骗成功的关键是在受害者和真实Web服务器之 间插入攻击者的Web服务器—中间人攻击（man-in-the-middle)。</p>
 <h2 id="第六章-web攻击"><a href="#第六章-web攻击" class="headerlink" title="第六章  web攻击"></a>第六章  web攻击</h2><h3 id="0x00-概述"><a href="#0x00-概述" class="headerlink" title="0x00 概述"></a>0x00 概述</h3><p><strong>1.Web服务器的安全：</strong></p>
@@ -389,7 +389,7 @@
 <p><strong>5.恢复</strong>：配置实时或增量备份策略是非常必要的，在紧急关头可以使得服务器的关键数据得以保存，从而可以迅速恢复服务以减少损失，同时便于事后取证的进行，以追查入侵者。</p>
 <h2 id="第七章-缓冲区溢出"><a href="#第七章-缓冲区溢出" class="headerlink" title="第七章 缓冲区溢出"></a>第七章 缓冲区溢出</h2><h3 id="0x00-概述-1"><a href="#0x00-概述-1" class="headerlink" title="0x00 概述"></a>0x00 概述</h3><p><strong>什么是缓冲区:</strong> 包含相同数据类型实例的一个连续的计算机内存块， 是程序运行期间在内存中分配的一个连续区域，用于保存包括字符数组在内的各种数据类型。</p>
 <p><strong>缓冲区溢出（Buffer Overflow）</strong>：向固定长度的缓冲区中写入超出其预定长度的内容，造成缓冲区数据溢出，从而覆盖缓冲区周围的内存空间。</p>
-<p><strong><em>黑客借此精心构造填充数据，可以修改内存中变量的 值，导致原有流程改变，甚至可以劫持进程，执行恶 意代码，最终获取系统控制权</em></strong>。</p>
+<p><strong><em>黑客借此精心构造填充数据，可以修改内存中变量的 值，导致原有流程改变，甚至可以劫持进程，执行恶意代码，最终获取系统控制权</em></strong>。</p>
 <p><strong>其他攻击类型相比，缓冲区溢出攻击</strong>：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">技术性强</span><br><span class="line">破坏力大</span><br><span class="line">隐蔽性强</span><br></pre></td></tr></table></figure>
 <h3 id="0x01-缓冲区溢出原理"><a href="#0x01-缓冲区溢出原理" class="headerlink" title="0x01 缓冲区溢出原理"></a>0x01 缓冲区溢出原理</h3><p>栈溢出</p>
