@@ -27,7 +27,7 @@
 <meta property="og:image" content="http://altman.vip/2019/01/27/phpshe1-7-sqlinjection/8.png">
 <meta property="og:image" content="http://altman.vip/2019/01/27/phpshe1-7-sqlinjection/9.png">
 <meta property="og:image" content="http://altman.vip/2019/01/27/phpshe1-7-sqlinjection/5.png">
-<meta property="og:updated_time" content="2019-01-28T12:30:29.849Z">
+<meta property="og:updated_time" content="2019-01-28T12:34:48.244Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CVE-2019-6707 CVE-2019-6708分析">
 <meta name="twitter:description" content="前言phpshe最新1.7版本的后台sql注入分析。 官网：http://www.phpshe.com/">
@@ -150,7 +150,7 @@
 <p><img src="/2019/01/27/phpshe1-7-sqlinjection/10.png" alt=""></p>
 <h2 id="CVE-2019-6707"><a href="#CVE-2019-6707" class="headerlink" title="CVE-2019-6707"></a>CVE-2019-6707</h2><p>在后台批量上下架操作中存在注入。</p>
 <p><img src="/2019/01/27/phpshe1-7-sqlinjection/11.png" alt=""></p>
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>我们先根据路由查看源码，抓包拿到操作的路径</p>
+<p>我们先根据路由查看源码，抓包拿到操作的路径</p>
 <figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST /phpshe/admin.php?mod=product&amp;act=<span class="keyword">state</span>&amp;<span class="keyword">state</span>=<span class="number">1</span>&amp;token=c04c2e7a55d84759c0e09eb54b16fccf</span><br></pre></td></tr></table></figure>
 <p>定位admin.php:86</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (in_array(<span class="string">"&#123;$mod&#125;.php"</span>, pe_dirlist(<span class="string">"&#123;$pe['path_root']&#125;module/&#123;$module&#125;/*.php"</span>))) &#123;</span><br><span class="line">	<span class="keyword">include</span>(<span class="string">"&#123;$pe['path_root']&#125;module/&#123;$module&#125;/&#123;$mod&#125;.php"</span>);</span><br><span class="line">&#125;</span><br><span class="line">pe_result();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
@@ -228,7 +228,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CVE-2019-6707"><span class="nav-number">1.1.</span> <span class="nav-text">CVE-2019-6707</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-number">1.1.1.</span> <span class="nav-text">分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CVE-2019-6708"><span class="nav-number">1.2.</span> <span class="nav-text">CVE-2019-6708</span></a></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CVE-2019-6707"><span class="nav-number">1.1.</span> <span class="nav-text">CVE-2019-6707</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CVE-2019-6708"><span class="nav-number">1.2.</span> <span class="nav-text">CVE-2019-6708</span></a></li></ol></li></ol>
     
     </div>
   </aside>
