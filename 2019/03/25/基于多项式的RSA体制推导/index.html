@@ -11,20 +11,20 @@
   
   
   
-  <meta name="description" content="1首发先知社区：https://xz.aliyun.com/t/4545 前言周末做了0CTF的babyrsa，其中在对于多项式的欧拉函数计算时遇到一些阻碍，记录一下解决过程。 算法分析代码很容易看懂 123456789101112131415161718192021222324#!/usr/bin/env sage# coding=utf-8from pubkey import P, n, ef">
+  <meta name="description" content="1首发先知社区：https://xz.aliyun.com/t/4545 前言周末做了0CTF的babyrsa，其中在对于多项式的欧拉函数计算时遇到一些阻碍，记录一下解决过程。">
 <meta name="keywords" content="crypto">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于多项式的RSA体制">
 <meta property="og:url" content="http://altman.vip/2019/03/25/基于多项式的RSA体制推导/index.html">
 <meta property="og:site_name" content="Altm4nz">
-<meta property="og:description" content="1首发先知社区：https://xz.aliyun.com/t/4545 前言周末做了0CTF的babyrsa，其中在对于多项式的欧拉函数计算时遇到一些阻碍，记录一下解决过程。 算法分析代码很容易看懂 123456789101112131415161718192021222324#!/usr/bin/env sage# coding=utf-8from pubkey import P, n, ef">
+<meta property="og:description" content="1首发先知社区：https://xz.aliyun.com/t/4545 前言周末做了0CTF的babyrsa，其中在对于多项式的欧拉函数计算时遇到一些阻碍，记录一下解决过程。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://altman.vip/2019/03/25/基于多项式的RSA体制推导/2.png">
 <meta property="og:image" content="http://altman.vip/2019/03/25/基于多项式的RSA体制推导/1.png">
-<meta property="og:updated_time" content="2019-04-01T15:42:49.546Z">
+<meta property="og:updated_time" content="2019-04-01T15:46:13.732Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于多项式的RSA体制">
-<meta name="twitter:description" content="1首发先知社区：https://xz.aliyun.com/t/4545 前言周末做了0CTF的babyrsa，其中在对于多项式的欧拉函数计算时遇到一些阻碍，记录一下解决过程。 算法分析代码很容易看懂 123456789101112131415161718192021222324#!/usr/bin/env sage# coding=utf-8from pubkey import P, n, ef">
+<meta name="twitter:description" content="1首发先知社区：https://xz.aliyun.com/t/4545 前言周末做了0CTF的babyrsa，其中在对于多项式的欧拉函数计算时遇到一些阻碍，记录一下解决过程。">
 <meta name="twitter:image" content="http://altman.vip/2019/03/25/基于多项式的RSA体制推导/2.png">
   
     <link rel="alternate" href="/atom.xml" title="Altm4nz" type="application/atom+xml">
@@ -139,6 +139,7 @@
       
         <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">首发先知社区：https:<span class="regexp">//</span>xz.aliyun.com<span class="regexp">/t/</span><span class="number">4545</span></span><br></pre></td></tr></table></figure>
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>周末做了0CTF的babyrsa，其中在对于多项式的欧拉函数计算时遇到一些阻碍，记录一下解决过程。</p>
+<a id="more"></a>
 <h1 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h1><p>代码很容易看懂</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env sage</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pubkey <span class="keyword">import</span> P, n, e</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag</span><br><span class="line"><span class="keyword">from</span> os <span class="keyword">import</span> urandom</span><br><span class="line"></span><br><span class="line">R.&lt;a&gt; = GF(<span class="number">2</span>^<span class="number">2049</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encrypt</span><span class="params">(m)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> n</span><br><span class="line">    <span class="keyword">assert</span> len(m) &lt;= <span class="number">256</span></span><br><span class="line">    m_int = Integer(m.encode(<span class="string">'hex'</span>), <span class="number">16</span>)</span><br><span class="line">    m_poly = P(R.fetch_int(m_int)) </span><br><span class="line">    c_poly = pow(m_poly, e, n)</span><br><span class="line">    c_int = R(c_poly).integer_representation() </span><br><span class="line">    c = format(c_int, <span class="string">'0256x'</span>).decode(<span class="string">'hex'</span>)</span><br><span class="line">    <span class="keyword">return</span> c</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    ptext = flag + os.urandom(<span class="number">256</span>-len(flag))</span><br><span class="line">    ctext = encrypt(ptext)</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'flag.enc'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(ctext)</span><br></pre></td></tr></table></figure>
 <p>encrypt函数是一个标准的RSA加密过程。但是区别在于这里的明文与N都是多项式表达。</p>
