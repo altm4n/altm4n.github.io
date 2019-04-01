@@ -100,6 +100,101 @@
         
           <section id="main">
   
+    <article id="post-基于多项式的RSA体制推导"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/03/25/基于多项式的RSA体制推导/">基于多项式的RSA体制</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/03/25/基于多项式的RSA体制推导/" class="article-date">
+	  <time datetime="2019-03-25T03:38:20.000Z" itemprop="datePublished">March 25, 2019</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">首发先知社区：https:<span class="regexp">//</span>xz.aliyun.com<span class="regexp">/t/</span><span class="number">4545</span></span><br></pre></td></tr></table></figure>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>周末做了0CTF的babyrsa，其中在对于多项式的欧拉函数计算时遇到一些阻碍，记录一下解决过程。</p>
+<h1 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h1><p>代码很容易看懂</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env sage</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pubkey <span class="keyword">import</span> P, n, e</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag</span><br><span class="line"><span class="keyword">from</span> os <span class="keyword">import</span> urandom</span><br><span class="line"></span><br><span class="line">R.&lt;a&gt; = GF(<span class="number">2</span>^<span class="number">2049</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encrypt</span><span class="params">(m)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> n</span><br><span class="line">    <span class="keyword">assert</span> len(m) &lt;= <span class="number">256</span></span><br><span class="line">    m_int = Integer(m.encode(<span class="string">'hex'</span>), <span class="number">16</span>)</span><br><span class="line">    m_poly = P(R.fetch_int(m_int)) </span><br><span class="line">    c_poly = pow(m_poly, e, n)</span><br><span class="line">    c_int = R(c_poly).integer_representation() </span><br><span class="line">    c = format(c_int, <span class="string">'0256x'</span>).decode(<span class="string">'hex'</span>)</span><br><span class="line">    <span class="keyword">return</span> c</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    ptext = flag + os.urandom(<span class="number">256</span>-len(flag))</span><br><span class="line">    ctext = encrypt(ptext)</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'flag.enc'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(ctext)</span><br></pre></td></tr></table></figure>
+<p>encrypt函数是一个标准的RSA加密过程。但是区别在于这里的明文与N都是多项式表达。</p>
+<p>我们先回顾一下基于整数的RSA加解密原理。</p>
+<h2 id="整数RSA加解密原理"><a href="#整数RSA加解密原理" class="headerlink" title="整数RSA加解密原理"></a>整数RSA加解密原理</h2><p>首先 选取素数p q。$n=p*q​$</p>
+<p>然后求 φ(n)，那么 $φ(n)=(p-1)*(q-1)​$</p>
+<p>选取一个e与φ(n)互质。</p>
+<p>之后就可以加密 $(m^e)\equiv c \ mod \ n​$ 得到密文c。</p>
+<p>计算私钥d 满足 $e*d \equiv 1\ mod \ φ(n)​$</p>
+<p>解密原理  ：首先得到式子①<br>$$<br>c^d \equiv (m^e)^d \equiv m^{ed} \equiv m^{φ(n)+1}\ mod \ n \ \<br>$$<br>暂且仅考虑 $ gcd(n,m)=1$</p>
+<p>由欧拉定理得 式子②<br>$$<br>m^{φ(n)}\equiv1 \ mod \ n \<br>m^{φ(n)+1}\equiv m \ mod \ n<br>$$<br>有①②得出<br>$$<br>(c^d)\equiv m \ mod \ n<br>$$</p>
+<h2 id="多项式RSA推导"><a href="#多项式RSA推导" class="headerlink" title="多项式RSA推导"></a>多项式RSA推导</h2><p>在上面RSA原理的基础上将多项式的代入整数进行分析。</p>
+<p>在有限域上选取两个不可约多项式 g(p) g(q)  。$g(n)=g(p)*g(q)​$</p>
+<p>计算出 $g(n)$的欧拉函数 $φ(g(n))=phi$。</p>
+<p>选取一个整数e作为公钥，e与phi是互素的。</p>
+<p>那么对于明文g(m),加密过程 $g(m)^e \equiv g(c)\ mod \ g(n)$</p>
+<p>计算私钥d 满足         ($ e*d \equiv 1\mod\ phi$)</p>
+<p>接下来与上面的推导一样。<br>$$<br>g(c)^d \equiv (g(m)^e)^d \equiv g(m)^{ed} \equiv g(m)^{phi+1}\ mod \ g(n) \ \<br>$$<br>同样考虑 g(n)与g(m)互素。</p>
+<p>欧拉定理对于多项式亦成立,得到：<br>$$<br>g(m)^{phi+1}\equiv g(m) \ mod \ n \<br>所以 (g(c)^d)\equiv g(m) \ mod \ g(n)<br>$$<br>那么显然RSA对于整数的体制可以适用于有限域上的多项式。</p>
+<h1 id="解题踩坑"><a href="#解题踩坑" class="headerlink" title="解题踩坑"></a>解题踩坑</h1><p>利用sage语言来解题。</p>
+<p>先对密文进行还原</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">file_object = <span class="built_in">open</span>(<span class="string">'./flag.enc'</span>,<span class="string">'rb'</span>)</span><br><span class="line">file_context = file_object.<span class="built_in">read</span>()</span><br><span class="line">x=<span class="keyword">int</span>(file_context.encode(<span class="string">'hex'</span>),<span class="number">16</span>)</span><br><span class="line"><span class="built_in">print</span> x</span><br></pre></td></tr></table></figure>
+<p>得到明文的整数形式。</p>
+<p>对n进行分解得到两个不可约多项式p q</p>
+<p><img src="/2019/03/25/基于多项式的RSA体制推导/2.png" alt=""></p>
+<p>计算phi，以及d。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sage: phi=(p-1)*(q-1)</span><br><span class="line">sage: d=inverse_mod(e,phi)</span><br></pre></td></tr></table></figure>
+<p>此时出现了报错，因为e是整数而phi为多项式，将phi转为整数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sage:phi_int=R(P(phi)).integer_representation()</span><br></pre></td></tr></table></figure>
+<p>继而求出了d。</p>
+<p>解密</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sage:<span class="attribute">flag</span>=pow(c,d,n)</span><br><span class="line">sage:<span class="attribute">flag_int</span>=R(P(flag)).integer_representation()</span><br></pre></td></tr></table></figure>
+<p>接下来对flag_int转string发现乱码。</p>
+<p>接下来陷入了自闭。</p>
+<p>多次进行检查验证，算法本身是没有问题的，出问题可能就出在求d的过程中。</p>
+<h2 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h2><p>求d需要e和phi。那么问题只能出在phi身上。</p>
+<p>对于素数x，φ(x)=x-1。</p>
+<p>但是对于不可约多项式p(x)，经过简单验证φ(p(x))=x-1是不成立的。</p>
+<p>那么是否$φ(x)=x-y $    (y为$GF(2^n)$的本源多项式) ，经过简单的举例验证他依旧是不成立的。</p>
+<p>不可约多项式的欧拉函数怎么求呢。回到欧拉函数定义本身，<strong>欧拉函数</strong>是小于或等于<em>n</em>的正整数中与<em>n</em><a href="https://zh.wikipedia.org/wiki/%E4%BA%92%E8%B3%AA" target="_blank" rel="noopener">互质</a>的数的数目。</p>
+<p>再看不可约多项式p(x)，除了0，长度为n每一个多项式都与p(x)互素，因此，$φ(p(x))=2^n-1$。</p>
+<p>那么对于此题的$φ(p) = 2^{821}-1   \ φ(q)=2^{1227}-1​$</p>
+<p>正确的phi即为 $φ(p)*φ(q)​$</p>
+<h2 id="获得flag"><a href="#获得flag" class="headerlink" title="获得flag"></a>获得flag</h2><p>得到了正确的phi再进行解密</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sage: c_poly=P(R.fetch_int(c))</span><br><span class="line">sage: phi_int=(2^1227-1)*(2^821-1)</span><br><span class="line">sage: d=inverse_mod(e_int,phi_int)</span><br><span class="line">sage: flag=pow(c_poly,d,n)</span><br><span class="line">sage: flag_int=R(P(flag)).integer_representation()</span><br></pre></td></tr></table></figure>
+<p>得到flag_int，转为字符串</p>
+<p><img src="/2019/03/25/基于多项式的RSA体制推导/1.png" alt=""></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>总的来说基于整数和基于多项式的RSA体制大致相同，只是多项式在值的计算上例如欧拉函数，取模反等地方需要注意区别。</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/crypto/">crypto</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
     <article id="post-人工神经网络学习"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -606,63 +701,6 @@ POST题目描述1234567Go make some posts.Hint: flag is in dbHint2: the lovely X
 
 
   
-    <article id="post-ThinkPhp5-0x-Getshell-分析"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/12/18/ThinkPhp5-0x-Getshell-分析/">ThinkPhp5.0x_Getshell_分析</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2018/12/18/ThinkPhp5-0x-Getshell-分析/" class="article-date">
-	  <time datetime="2018-12-18T03:14:33.000Z" itemprop="datePublished">December 18, 2018</time>
-	</a>
-
-       
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-
-          
-          <div class="entry-summary">
-          前言分析一下前几天很火的tp5任意代码执行漏洞。
-可以先看下官方公告。
-测试版本为ThinkPHP V5.0.22，测试环境为OSX+apache2+php5.6+Mysql5.7。
-
-        
-          <p class="article-more-link">
-            <a href="/2018/12/18/ThinkPhp5-0x-Getshell-分析/#more">Continue Reading →</a>
-          </p>
-        </div>
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/">web</a></li></ul>
-
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
 
 
   <nav id="page-nav">
@@ -733,6 +771,18 @@ POST题目描述1234567Go make some posts.Hint: flag is in dbHint2: the lovely X
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/2019/03/25/基于多项式的RSA体制推导/">基于多项式的RSA体制</a></h6>
+              <span>March 25, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/2019/02/18/人工神经网络学习/">人工神经网络学习</a></h6>
               <span>February 18, 2019</span>
             </div>
@@ -787,18 +837,6 @@ POST题目描述1234567Go make some posts.Hint: flag is in dbHint2: the lovely X
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2019/01/27/phpshe1-7-sqlinjection/">CVE-2019-6707 CVE-2019-6708分析</a></h6>
-              <span>January 27, 2019</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -811,7 +849,7 @@ POST题目描述1234567Go make some posts.Hint: flag is in dbHint2: the lovely X
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/awd/">awd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/">crypto</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wp/">wp</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课程复习/">课程复习</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/awd/">awd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/">crypto</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wp/">wp</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课程复习/">课程复习</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -822,7 +860,7 @@ POST题目描述1234567Go make some posts.Hint: flag is in dbHint2: the lovely X
     <h3 class="widget-title">Archives</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
