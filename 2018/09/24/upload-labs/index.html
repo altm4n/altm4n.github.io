@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Upload-labs | Altm4nz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="web" />
+  
+  
+  
+  
+  <meta name="description" content="环境搭建 github源码 https://github.com/c0ny1/upload-labs 本地搭建 docker pull c0ny1/upload-labs">
+<meta name="keywords" content="web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Upload-labs">
+<meta property="og:url" content="http://altman.vip/2018/09/24/upload-labs/index.html">
+<meta property="og:site_name" content="Altm4nz">
+<meta property="og:description" content="环境搭建 github源码 https://github.com/c0ny1/upload-labs 本地搭建 docker pull c0ny1/upload-labs">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://altman.vip/2018/09/24/upload-labs/1.png">
+<meta property="og:image" content="http://altman.vip/2018/09/24/upload-labs/2.png">
+<meta property="og:image" content="http://altman.vip/2018/09/24/upload-labs/4.png">
+<meta property="og:image" content="http://altman.vip/2018/09/24/upload-labs/屏幕快照%202019-06-25%20下午7.00.49.png?r=76">
+<meta property="og:image" content="http://altman.vip/2018/09/24/upload-labs/屏幕快照%202019-06-25%20下午7.03.44.png">
+<meta property="og:updated_time" content="2019-07-31T06:02:21.228Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Upload-labs">
+<meta name="twitter:description" content="环境搭建 github源码 https://github.com/c0ny1/upload-labs 本地搭建 docker pull c0ny1/upload-labs">
+<meta name="twitter:image" content="http://altman.vip/2018/09/24/upload-labs/1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Altm4nz" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/pokemon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Altm4nz" rel="home"> Altm4nz </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/friend">friend</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-upload-labs" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Upload-labs
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/09/24/upload-labs/" class="article-date">
+	  <time datetime="2018-09-24T09:18:01.000Z" itemprop="datePublished">September 24, 2018</time>
+	</a>
+
+       
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><ul>
+<li>github源码 <a href="https://github.com/c0ny1/upload-labs" target="_blank" rel="noopener">https://github.com/c0ny1/upload-labs</a> 本地搭建</li>
+<li>docker pull c0ny1/upload-labs </li>
+</ul>
+<a id="more"></a>
+<h1 id="做题记录"><a href="#做题记录" class="headerlink" title="做题记录"></a>做题记录</h1><p>基于源码分析的做题记录。<br>每一关上传一个可执行phpinfo()的文件在upload目录下即视为成功。</p>
+<h2 id="pass-1"><a href="#pass-1" class="headerlink" title="pass-1"></a>pass-1</h2><p>查看源码发现是前端校验，定义了checkFile()函数对选择的文件拓展名校验。<br><strong>方法一</strong> 上传后缀为jpg的文件，然后用burp抓包修改后缀。<br><strong>方法二</strong> 直接在前端页面修改<br><img src="/2018/09/24/upload-labs/1.png" alt=""><br>删除 checkFile() 函数。</p>
+<h2 id="pass-2"><a href="#pass-2" class="headerlink" title="pass-2"></a>pass-2</h2><p>查看源码<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (($_FILES[<span class="string">'upload_file'</span>][<span class="string">'type'</span>] == <span class="string">'image/jpeg'</span>) || ($_FILES[<span class="string">'upload_file'</span>][<span class="string">'type'</span>] == <span class="string">'image/png'</span>) || ($_FILES[<span class="string">'upload_file'</span>][<span class="string">'type'</span>] == <span class="string">'image/gif'</span>))</span><br></pre></td></tr></table></figure></p>
+<p>是对content-type的校验，上传抓包修改即可<br><img src="/2018/09/24/upload-labs/2.png" alt=""><br>即可成功上传</p>
+<h2 id="pass-3"><a href="#pass-3" class="headerlink" title="pass-3"></a>pass-3</h2><p>查看源码<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'submit'</span>])) &#123;</span><br><span class="line">    <span class="keyword">if</span> (file_exists(UPLOAD_PATH)) &#123;</span><br><span class="line">        $deny_ext = <span class="keyword">array</span>(<span class="string">'.asp'</span>,<span class="string">'.aspx'</span>,<span class="string">'.php'</span>,<span class="string">'.jsp'</span>);</span><br><span class="line">        $file_name = trim($_FILES[<span class="string">'upload_file'</span>][<span class="string">'name'</span>]);</span><br><span class="line">        $file_name = deldot($file_name);<span class="comment">//删除文件名末尾的点</span></span><br><span class="line">        $file_ext = strrchr($file_name, <span class="string">'.'</span>);</span><br><span class="line">        $file_ext = strtolower($file_ext); <span class="comment">//转换为小写</span></span><br><span class="line">        $file_ext = str_ireplace(<span class="string">'::$DATA'</span>, <span class="string">''</span>, $file_ext);<span class="comment">//去除字符串::$DATA</span></span><br><span class="line">        $file_ext = trim($file_ext); <span class="comment">//收尾去空</span></span><br></pre></td></tr></table></figure></p>
+<p>黑名单绕过，不许上传黑名单中的后缀名。并且生成的文件名随机。<br>尝试上传php5文件，成功解析执行。</p>
+<h2 id="pass-4"><a href="#pass-4" class="headerlink" title="pass-4"></a>pass-4</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'submit'</span>])) &#123;</span><br><span class="line">    <span class="keyword">if</span> (file_exists(UPLOAD_PATH)) &#123;</span><br><span class="line">        $deny_ext = <span class="keyword">array</span>(<span class="string">".php"</span>,<span class="string">".php5"</span>,<span class="string">".php4"</span>,<span class="string">".php3"</span>,<span class="string">".php2"</span>,<span class="string">"php1"</span>,<span class="string">".html"</span>,<span class="string">".htm"</span>,<span class="string">".phtml"</span>,<span class="string">".pht"</span>,<span class="string">".pHp"</span>,<span class="string">".pHp5"</span>,<span class="string">".pHp4"</span>,<span class="string">".pHp3"</span>,<span class="string">".pHp2"</span>,<span class="string">"pHp1"</span>,<span class="string">".Html"</span>,<span class="string">".Htm"</span>,<span class="string">".pHtml"</span>,<span class="string">".jsp"</span>,<span class="string">".jspa"</span>,<span class="string">".jspx"</span>,<span class="string">".jsw"</span>,<span class="string">".jsv"</span>,<span class="string">".jspf"</span>,<span class="string">".jtml"</span>,<span class="string">".jSp"</span>,<span class="string">".jSpx"</span>,<span class="string">".jSpa"</span>,<span class="string">".jSw"</span>,<span class="string">".jSv"</span>,<span class="string">".jSpf"</span>,<span class="string">".jHtml"</span>,<span class="string">".asp"</span>,<span class="string">".aspx"</span>,<span class="string">".asa"</span>,<span class="string">".asax"</span>,<span class="string">".ascx"</span>,<span class="string">".ashx"</span>,<span class="string">".asmx"</span>,<span class="string">".cer"</span>,<span class="string">".aSp"</span>,<span class="string">".aSpx"</span>,<span class="string">".aSa"</span>,<span class="string">".aSax"</span>,<span class="string">".aScx"</span>,<span class="string">".aShx"</span>,<span class="string">".aSmx"</span>,<span class="string">".cEr"</span>,<span class="string">".sWf"</span>,<span class="string">".swf"</span>);</span><br><span class="line">        $file_name = trim($_FILES[<span class="string">'upload_file'</span>][<span class="string">'name'</span>]);</span><br><span class="line">        $file_name = deldot($file_name);<span class="comment">//删除文件名末尾的点</span></span><br><span class="line">        $file_ext = strrchr($file_name, <span class="string">'.'</span>);</span><br><span class="line">        $file_ext = strtolower($file_ext); <span class="comment">//转换为小写</span></span><br><span class="line">        $file_ext = str_ireplace(<span class="string">'::$DATA'</span>, <span class="string">''</span>, $file_ext);<span class="comment">//去除字符串::$DATA</span></span><br><span class="line">        $file_ext = trim($file_ext); <span class="comment">//收尾去空</span></span><br></pre></td></tr></table></figure>
+<p>黑名单加强了，各种可能被解析的后缀都不能用了。<br>通过上传.htaccess文件改变解析规则。<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AddType <span class="built_in">application</span>/x-httpd-php .abc</span><br></pre></td></tr></table></figure></p>
+<p>之后上传后缀为.abc的文件，apache会将.abc后缀当做php来解析。<br><img src="/2018/09/24/upload-labs/4.png" alt=""></p>
+<h2 id="pass-5"><a href="#pass-5" class="headerlink" title="pass-5"></a>pass-5</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$is_upload = <span class="keyword">false</span>;</span><br><span class="line">$msg = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'submit'</span>])) &#123;</span><br><span class="line">    <span class="keyword">if</span> (file_exists(UPLOAD_PATH)) &#123;</span><br><span class="line">        $deny_ext = <span class="keyword">array</span>(<span class="string">".php"</span>,<span class="string">".php5"</span>,<span class="string">".php4"</span>,<span class="string">".php3"</span>,<span class="string">".php2"</span>,<span class="string">".html"</span>,<span class="string">".htm"</span>,<span class="string">".phtml"</span>,<span class="string">".pht"</span>,<span class="string">".pHp"</span>,<span class="string">".pHp5"</span>,<span class="string">".pHp4"</span>,<span class="string">".pHp3"</span>,<span class="string">".pHp2"</span>,<span class="string">".Html"</span>,<span class="string">".Htm"</span>,<span class="string">".pHtml"</span>,<span class="string">".jsp"</span>,<span class="string">".jspa"</span>,<span class="string">".jspx"</span>,<span class="string">".jsw"</span>,<span class="string">".jsv"</span>,<span class="string">".jspf"</span>,<span class="string">".jtml"</span>,<span class="string">".jSp"</span>,<span class="string">".jSpx"</span>,<span class="string">".jSpa"</span>,<span class="string">".jSw"</span>,<span class="string">".jSv"</span>,<span class="string">".jSpf"</span>,<span class="string">".jHtml"</span>,<span class="string">".asp"</span>,<span class="string">".aspx"</span>,<span class="string">".asa"</span>,<span class="string">".asax"</span>,<span class="string">".ascx"</span>,<span class="string">".ashx"</span>,<span class="string">".asmx"</span>,<span class="string">".cer"</span>,<span class="string">".aSp"</span>,<span class="string">".aSpx"</span>,<span class="string">".aSa"</span>,<span class="string">".aSax"</span>,<span class="string">".aScx"</span>,<span class="string">".aShx"</span>,<span class="string">".aSmx"</span>,<span class="string">".cEr"</span>,<span class="string">".sWf"</span>,<span class="string">".swf"</span>,<span class="string">".htaccess"</span>);</span><br><span class="line">        $file_name = trim($_FILES[<span class="string">'upload_file'</span>][<span class="string">'name'</span>]);</span><br><span class="line">        $file_name = deldot($file_name);<span class="comment">//删除文件名末尾的点</span></span><br><span class="line">        $file_ext = strrchr($file_name, <span class="string">'.'</span>);</span><br><span class="line">        $file_ext = str_ireplace(<span class="string">'::$DATA'</span>, <span class="string">''</span>, $file_ext);<span class="comment">//去除字符串::$DATA</span></span><br><span class="line">        $file_ext = trim($file_ext); <span class="comment">//首尾去空</span></span><br></pre></td></tr></table></figure>
+<p>这一关过滤了.htaccess后缀。思考了半天，发现比第四关少了一行代码<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$file_ext</span> = strtolower(<span class="variable">$file_ext</span>); <span class="regexp">//</span>转换为小写</span><br></pre></td></tr></table></figure></p>
+<p>那么用大小写绕过即可。<br>上传文件名为1.pHP。</p>
+<h2 id="pass-6"><a href="#pass-6" class="headerlink" title="pass-6"></a>pass-6</h2><p>继续与第五关对比，少一句<br><figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$file_ext = <span class="keyword">trim</span>($file_ext); <span class="comment">//首尾去空</span></span><br></pre></td></tr></table></figure></p>
+<p>后缀名后面加上一个空格进行绕过。<br>ps：此题利用windows特性，存储文件时会去除最后的空格，在linux环境下没有成功。</p>
+<h2 id="pass-7"><a href="#pass-7" class="headerlink" title="pass-7"></a>pass-7</h2><p>对比<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$file_name = deldot($file_name);<span class="comment">//删除文件名末尾的点</span></span><br></pre></td></tr></table></figure></p>
+<p>上传 1.php. </p>
+<h2 id="pass-8"><a href="#pass-8" class="headerlink" title="pass-8"></a>pass-8</h2><p> 少了一个<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$file_ext</span> = str_ireplace(<span class="string">'::$DATA'</span>, <span class="string">''</span>, <span class="variable">$file_ext</span>);<span class="regexp">//</span>去除字符串::<span class="variable">$DATA</span></span><br></pre></td></tr></table></figure></p>
+<p>参考文章：<a href="https://www.owasp.org/index.php/Windows_::DATA_alternate_data_stream" target="_blank" rel="noopener">https://www.owasp.org/index.php/Windows_::DATA_alternate_data_stream</a><br>ps 此关只能在windows环境下。</p>
+<h2 id="pass-9"><a href="#pass-9" class="headerlink" title="pass-9"></a>pass-9</h2><p>有pass7知道1.php.可以被服务器解释为php。<br>上传 <code>1.php.%20.</code><br>经过<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$file_name = deldot($file_name);<span class="comment">//删除文件名末尾的点</span></span><br></pre></td></tr></table></figure></p>
+<p>操作后会变成1.php.%20<br>检测后缀名为.%20，成功绕过。<br><img src="/2018/09/24/upload-labs/屏幕快照 2019-06-25 下午7.00.49.png?r=76" alt=""></p>
+<h2 id="pass-10"><a href="#pass-10" class="headerlink" title="pass-10"></a>pass-10</h2><p>关键代码<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$file_name = str_ireplace($deny_ext,<span class="string">""</span>, $file_name);</span><br></pre></td></tr></table></figure></p>
+<p>将黑名单替换为空，很好处理，双写绕过即可。<br>1.pphphp经过处理后变成 1.php<br><img src="/2018/09/24/upload-labs/屏幕快照 2019-06-25 下午7.03.44.png" alt=""></p>
+<h2 id="pass-11"><a href="#pass-11" class="headerlink" title="pass-11"></a>pass-11</h2><p>关键代码<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$img_path = $_GET[<span class="string">'save_path'</span>].<span class="string">"/"</span>.rand(<span class="number">10</span>, <span class="number">99</span>).date(<span class="string">"YmdHis"</span>).<span class="string">"."</span>.$file_ext;</span><br></pre></td></tr></table></figure></p>
+<p>文件路径是可控的<br>但是后面拼接了随机文件名，<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">move_uploaded_file($temp_file,$img_path)</span><br></pre></td></tr></table></figure></p>
+<p>我们知道mov_uploaded_file可以用%00截断路径。<br>所以构造路径</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/">web</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/09/27/seacmsv6.61-getshell/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          seacms v6.61-GetShell
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/08/22/WDB-2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">WDB.2</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#环境搭建"><span class="nav-number">1.</span> <span class="nav-text">环境搭建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#做题记录"><span class="nav-number">2.</span> <span class="nav-text">做题记录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-1"><span class="nav-number">2.1.</span> <span class="nav-text">pass-1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-2"><span class="nav-number">2.2.</span> <span class="nav-text">pass-2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-3"><span class="nav-number">2.3.</span> <span class="nav-text">pass-3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-4"><span class="nav-number">2.4.</span> <span class="nav-text">pass-4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-5"><span class="nav-number">2.5.</span> <span class="nav-text">pass-5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-6"><span class="nav-number">2.6.</span> <span class="nav-text">pass-6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-7"><span class="nav-number">2.7.</span> <span class="nav-text">pass-7</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-8"><span class="nav-number">2.8.</span> <span class="nav-text">pass-8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-9"><span class="nav-number">2.9.</span> <span class="nav-text">pass-9</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-10"><span class="nav-number">2.10.</span> <span class="nav-text">pass-10</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-11"><span class="nav-number">2.11.</span> <span class="nav-text">pass-11</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/friend" class="mobile-nav-link">Friend</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2019 Altm4nz All Rights Reserved.
+        
+            <span id="busuanzi_container_site_uv">  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
