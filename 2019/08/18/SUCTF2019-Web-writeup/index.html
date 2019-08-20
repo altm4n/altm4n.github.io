@@ -27,7 +27,7 @@
 <meta property="og:image" content="http://altman.vip/2019/08/18/SUCTF2019-Web-writeup/2019-08-19-01-01-20.png">
 <meta property="og:image" content="http://altman.vip/2019/08/18/SUCTF2019-Web-writeup/屏幕快照%202019-08-19%2001.03.36.png">
 <meta property="og:image" content="http://altman.vip/2019/08/18/SUCTF2019-Web-writeup/屏幕快照%202019-08-19%2001.06.19.png">
-<meta property="og:updated_time" content="2019-08-18T17:13:20.269Z">
+<meta property="og:updated_time" content="2019-08-20T01:15:51.299Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SUCTF2019_Web_writeup">
 <meta name="twitter:description" content="check in简单的文件上传首先文件中加入">
@@ -165,8 +165,7 @@
 <p>在端口收到flag。<br><img src="/2019/08/18/SUCTF2019-Web-writeup/屏幕快照 2019-08-19 00.17.31.png" alt=""></p>
 <h2 id="Cocktail’s-Remix"><a href="#Cocktail’s-Remix" class="headerlink" title="Cocktail’s Remix"></a>Cocktail’s Remix</h2><p>（赛后做出）<br>扫到robots.txt，给了一处任意文件下载。<br>一番读文件找到了数据库的账户密码。<br>尝试gopher打mysql失败。<br>读取info.php<br><img src="/2019/08/18/SUCTF2019-Web-writeup/屏幕快照 2019-08-19 00.59.55.png" alt=""><br>发现一个奇怪的mod<br>将其下载下来<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/lib/apache2/modules/mod_cocktail.so</span><br></pre></td></tr></table></figure></p>
 <p>然后逆出来找到一个后门(别问我，不会逆)<br><img src="/2019/08/18/SUCTF2019-Web-writeup/2019-08-19-01-01-20.png" alt=""><br>后门在heads中的Reffer。将命令b64后传递即可执行。<br><img src="/2019/08/18/SUCTF2019-Web-writeup/屏幕快照 2019-08-19 01.03.36.png" alt=""></p>
-<p>一番寻找没找到flag，想起来mysql。<br>写入一个shell做代理连接mysql，在数据库中找到flag。</p>
-<p>或者直接执行<br><figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -hMysqlServer -udba -prNhHmmNkN3xu4MBYhm -e "show databases;use flag;show tables;<span class="keyword">select</span> * <span class="keyword">from</span> flag;" &gt; /tmp/1.txt</span><br></pre></td></tr></table></figure></p>
+<p>一番寻找没找到flag，想起来mysql。<br>想写入一个shell做代理连接mysql，<br>但是发现没有写权限。<br>于是直接执行<br><figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -hMysqlServer -udba -prNhHmmNkN3xu4MBYhm -e "show databases;use flag;show tables;<span class="keyword">select</span> * <span class="keyword">from</span> flag;" &gt; /tmp/1.txt</span><br></pre></td></tr></table></figure></p>
 <p>然后在1.txt中读取flag<br><img src="/2019/08/18/SUCTF2019-Web-writeup/屏幕快照 2019-08-19 01.06.19.png" alt=""></p>
 
       
@@ -184,15 +183,6 @@
   
     
 <nav id="article-nav">
-  
-    <a href="/2019/08/18/SUCTF2019_WEB/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          SUCTF2019_WEB
-        
-      </div>
-    </a>
   
   
     <a href="/2019/08/05/De1ctf-web/" id="article-nav-older" class="article-nav-link-wrap">
