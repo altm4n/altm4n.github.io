@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>哈希长度拓展攻击 | Altm4nz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="web" />
+  
+  
+  
+  
+  <meta name="description" content="实验吧看到的题，之前觉得很难最近有空再做一次记录一下学习过程">
+<meta name="keywords" content="web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="哈希长度拓展攻击">
+<meta property="og:url" content="http:&#x2F;&#x2F;altman.vip&#x2F;2017&#x2F;12&#x2F;20&#x2F;hash%E9%95%BF%E5%BA%A6%E6%89%A9%E5%B1%95%E6%94%BB%E5%87%BB&#x2F;index.html">
+<meta property="og:site_name" content="Altm4nz">
+<meta property="og:description" content="实验吧看到的题，之前觉得很难最近有空再做一次记录一下学习过程">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-02T05:49:02.387Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Altm4nz" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/pokemon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Altm4nz" rel="home"> Altm4nz </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/friend">friend</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-hash长度扩展攻击" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      哈希长度拓展攻击
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/12/20/hash%E9%95%BF%E5%BA%A6%E6%89%A9%E5%B1%95%E6%94%BB%E5%87%BB/" class="article-date">
+	  <time datetime="2017-12-19T16:00:00.000Z" itemprop="datePublished">December 20, 2017</time>
+	</a>
+
+       
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>实验吧看到的题，之前觉得很难<br>最近有空再做一次<br>记录一下学习过程</p>
+<a id="more"></a>
+<h2 id="0x01-hash函数原理"><a href="#0x01-hash函数原理" class="headerlink" title="0x01 hash函数原理"></a>0x01 hash函数原理</h2><p>网上有很多讲解，大概就是将明文分为n个区块，在进行多轮运算。大部分明文不能被区块长度整除，所以必须被padding至区块长度的整数倍。然后进行n次运算后得到密文。</p>
+<h2 id="0x02-攻击方式"><a href="#0x02-攻击方式" class="headerlink" title="0x02 攻击方式"></a>0x02 攻击方式</h2><p>当key未知，key的位数已知，md5(key)已知。那么可以求出md5(key+”填充数据”+”任意数据”)。<br>通过一道实验吧的题来理解。<br>源码如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">$flag = <span class="string">"XXXXXXXXXXXXXXXXXXXXXXX"</span>;</span><br><span class="line">$secret = <span class="string">"XXXXXXXXXXXXXXX"</span>; <span class="comment">// This secret is 15 characters long for security!</span></span><br><span class="line"></span><br><span class="line">$username = $_POST[<span class="string">"username"</span>];</span><br><span class="line">$password = $_POST[<span class="string">"password"</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">empty</span>($_COOKIE[<span class="string">"getmein"</span>])) &#123;</span><br><span class="line">    <span class="keyword">if</span> (urldecode($username) === <span class="string">"admin"</span> &amp;&amp; urldecode($password) != <span class="string">"admin"</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> ($COOKIE[<span class="string">"getmein"</span>] === md5($secret . urldecode($username . $password))) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">"Congratulations! You are a registered user.\n"</span>;</span><br><span class="line">            <span class="keyword">die</span> (<span class="string">"The flag is "</span>. $flag);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">die</span> (<span class="string">"Your cookies don't match up! STOP HACKING THIS SITE."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">die</span> (<span class="string">"You are not an admin! LEAVE."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">setcookie(<span class="string">"sample-hash"</span>, md5($secret . urldecode(<span class="string">"admin"</span> . <span class="string">"admin"</span>)), time() + (<span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span> * <span class="number">7</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">empty</span>($_COOKIE[<span class="string">"source"</span>])) &#123;</span><br><span class="line">    setcookie(<span class="string">"source"</span>, <span class="number">0</span>, time() + (<span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span> * <span class="number">7</span>));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> ($_COOKIE[<span class="string">"source"</span>] != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">""</span>; <span class="comment">// This source code is outputted here</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>要满足要求</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$COOKIE[<span class="string">"getmein"</span>] === md5($secret . urldecode($username . $password))</span><br></pre></td></tr></table></figure>
+<p>知道了$secret的位数，通过cookie得知md5($secret+admin)=571580b26c65f306376d4f64e53cb5c7。那么通过hash拓展攻击可以满足上面的要求。<br>首先将$secret+admin填充至512bits，然后在加上任意数据例如altman得到新的值X，这里将X进行hash运算，分为两组进行两轮运算。<br>第一组运算md5($secret+admin+填充值)，会发现他与已知md5($secret+admin)相同，那么我们直接利用md5($secret+admin)得到第一轮运算结果。<br>然后通过第一轮运算结果得到第二轮结果，这样我们就在不知道$secret值的情况下算出了md5($secret+admin+”填充值”+”任意数据”)。<br>构造</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">username=admin</span><br><span class="line">password=admin%<span class="number">80</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%c8%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>altman</span><br><span class="line">cookie:getmein=<span class="number">10</span>a4b3dc8626cb07d24bda61be701b9f</span><br></pre></td></tr></table></figure>
+<p>成功绕过了</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$COOKIE[<span class="string">"getmein"</span>] === md5($secret . urldecode($username . $password))</span><br></pre></td></tr></table></figure>
+<p>拿到flag /。</p>
+<h2 id="0x03-攻击脚本"><a href="#0x03-攻击脚本" class="headerlink" title="0x03 攻击脚本"></a>0x03 攻击脚本</h2><p>github有好几个攻击脚本，但是试了试感觉都太麻烦。<br>发现github有个攻击工具很好用。<br>HashPump<br>简单说下安装(linux)</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone http<span class="variable">s:</span>//github.<span class="keyword">com</span>/bwall/HashPump</span><br><span class="line">apt-<span class="built_in">get</span> install g++ libssl-dev</span><br><span class="line"><span class="keyword">cd</span> HashPump</span><br><span class="line"><span class="keyword">make</span></span><br><span class="line"><span class="keyword">make</span> install</span><br></pre></td></tr></table></figure>
+<p>用起来很简单</p>
+<figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># hashpump</span></span><br><span class="line"><span class="keyword">Input</span> Signature: <span class="number">571580</span>b26c65f306376d4f64e53cb5c7 <span class="comment">//(已知的hash值)</span></span><br><span class="line"><span class="keyword">Input</span> Data: admin</span><br><span class="line"><span class="keyword">Input</span> Key <span class="keyword">Length</span>: <span class="number">20</span> <span class="comment">//($secret 15位+admin 5位)</span></span><br><span class="line"><span class="keyword">Input</span> Data to Add: altman  <span class="comment">//添加的任意数据</span></span><br></pre></td></tr></table></figure>
+<p>然后就会得到payload：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">10a4b3dc8626cb07d24bda61be701b9f //md5(<span class="formula">$secret+admin+passwd)</span></span><br><span class="line"><span class="formula">admin<span class="tag">\<span class="name">x</span></span>80<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">xc</span></span>8<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00<span class="tag">\<span class="name">x</span></span>00altman //构造的passwd</span></span><br></pre></td></tr></table></figure>
+<h2 id="0x04-当无法获取密钥长度时"><a href="#0x04-当无法获取密钥长度时" class="headerlink" title="0x04 当无法获取密钥长度时"></a>0x04 当无法获取密钥长度时</h2><p>只能通过脚本爆破了，正确的长度会返回不一样的报错信息。</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/01/14/CUMTCTF2018/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          CUMTCTF2018
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-hash函数原理"><span class="nav-number">1.</span> <span class="nav-text">0x01 hash函数原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-攻击方式"><span class="nav-number">2.</span> <span class="nav-text">0x02 攻击方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-攻击脚本"><span class="nav-number">3.</span> <span class="nav-text">0x03 攻击脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-当无法获取密钥长度时"><span class="nav-number">4.</span> <span class="nav-text">0x04 当无法获取密钥长度时</span></a></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/friend" class="mobile-nav-link">Friend</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2019 Altm4nz All Rights Reserved.
+        
+            <span id="busuanzi_container_site_uv">  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

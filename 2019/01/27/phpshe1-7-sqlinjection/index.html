@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CVE-2019-6707 CVE-2019-6708分析 | Altm4nz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  
+  <meta name="description" content="前言phpshe最新1.7版本的后台sql注入分析。 官网：http:&#x2F;&#x2F;www.phpshe.com&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CVE-2019-6707 CVE-2019-6708分析">
+<meta property="og:url" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;01&#x2F;27&#x2F;phpshe1-7-sqlinjection&#x2F;index.html">
+<meta property="og:site_name" content="Altm4nz">
+<meta property="og:description" content="前言phpshe最新1.7版本的后台sql注入分析。 官网：http:&#x2F;&#x2F;www.phpshe.com&#x2F;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;01&#x2F;27&#x2F;phpshe1-7-sqlinjection&#x2F;10.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;01&#x2F;27&#x2F;phpshe1-7-sqlinjection&#x2F;11.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;01&#x2F;27&#x2F;phpshe1-7-sqlinjection&#x2F;2.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;01&#x2F;27&#x2F;phpshe1-7-sqlinjection&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;01&#x2F;27&#x2F;phpshe1-7-sqlinjection&#x2F;3.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;01&#x2F;27&#x2F;phpshe1-7-sqlinjection&#x2F;4.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;01&#x2F;27&#x2F;phpshe1-7-sqlinjection&#x2F;6.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;01&#x2F;27&#x2F;phpshe1-7-sqlinjection&#x2F;7.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;01&#x2F;27&#x2F;phpshe1-7-sqlinjection&#x2F;8.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;01&#x2F;27&#x2F;phpshe1-7-sqlinjection&#x2F;9.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;01&#x2F;27&#x2F;phpshe1-7-sqlinjection&#x2F;5.png">
+<meta property="og:updated_time" content="2019-01-28T12:58:25.776Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;01&#x2F;27&#x2F;phpshe1-7-sqlinjection&#x2F;10.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Altm4nz" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/pokemon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Altm4nz" rel="home"> Altm4nz </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/friend">friend</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-phpshe1-7-sqlinjection" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      CVE-2019-6707 CVE-2019-6708分析
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/01/27/phpshe1-7-sqlinjection/" class="article-date">
+	  <time datetime="2019-01-27T04:48:29.000Z" itemprop="datePublished">January 27, 2019</time>
+	</a>
+
+       
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>phpshe最新1.7版本的后台sql注入分析。</p>
+<p>官网：<a href="http://www.phpshe.com/" target="_blank" rel="noopener">http://www.phpshe.com/</a></p>
+<a id="more"></a>
+
+<p>实验环境 </p>
+<p><img src="/2019/01/27/phpshe1-7-sqlinjection/10.png" alt=""></p>
+<h2 id="CVE-2019-6707"><a href="#CVE-2019-6707" class="headerlink" title="CVE-2019-6707"></a>CVE-2019-6707</h2><p>在后台批量上下架操作中存在注入。</p>
+<p><img src="/2019/01/27/phpshe1-7-sqlinjection/11.png" alt=""></p>
+<p>我们先根据路由查看源码，抓包拿到操作的路径</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST /phpshe/admin.php?mod=product&amp;act=<span class="keyword">state</span>&amp;<span class="keyword">state</span>=<span class="number">1</span>&amp;token=c04c2e7a55d84759c0e09eb54b16fccf</span><br></pre></td></tr></table></figure>
+
+<p>定位admin.php:86</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (in_array(<span class="string">"&#123;$mod&#125;.php"</span>, pe_dirlist(<span class="string">"&#123;$pe['path_root']&#125;module/&#123;$module&#125;/*.php"</span>))) &#123;</span><br><span class="line">	<span class="keyword">include</span>(<span class="string">"&#123;$pe['path_root']&#125;module/&#123;$module&#125;/&#123;$mod&#125;.php"</span>);</span><br><span class="line">&#125;</span><br><span class="line">pe_result();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>此时引入了admin模型中的product.php</p>
+<p>在switch中找到state分支</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="string">'state'</span>:</span><br><span class="line">	pe_token_match();</span><br><span class="line">	$product_id = is_array($_p_product_id) ? $_p_product_id : $_g_id;</span><br><span class="line">	<span class="keyword">if</span> ($db-&gt;pe_update(<span class="string">'product'</span>, <span class="keyword">array</span>(<span class="string">'product_id'</span>=&gt;$product_id), <span class="keyword">array</span>(<span class="string">'product_state'</span>=&gt;$_g_state))) &#123;</span><br><span class="line">		pe_success(<span class="string">"操作成功!"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		pe_error(<span class="string">"操作失败..."</span>);</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
+
+<p>如果提交的<em>p</em>product_id是一个数组的话会直接进入db-&gt;pe_update操作中。没有任何过滤防护措施。</p>
+<p>继续跟进db-&gt;pe_update，在db.class.php：226</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">pe_update</span><span class="params">($table, $where, $set)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//处理设置语句</span></span><br><span class="line">	$sqlset = <span class="keyword">$this</span>-&gt;_doset($set);</span><br><span class="line">	<span class="comment">//处理条件语句</span></span><br><span class="line">	$sqlwhere = <span class="keyword">$this</span>-&gt;_dowhere($where);</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">$this</span>-&gt;sql_update(<span class="string">"update `"</span>.dbpre.<span class="string">"&#123;$table&#125;` &#123;$sqlset&#125; &#123;$sqlwhere&#125;"</span>);	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>pe_update会将参数抛向sql_update，继续跟进一下，</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">sql_update</span><span class="params">($sql)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;query($sql) == <span class="keyword">true</span>) &#123;</span><br><span class="line">		$result = <span class="keyword">$this</span>-&gt;affected_rows();<span class="comment">//affected_rows()是获取insert/update/delete结果集条数。</span></span><br><span class="line">		<span class="keyword">return</span> $result == <span class="number">0</span> ? <span class="keyword">true</span> : $result;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;		</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时我们从product_id传上的数据会被直接拼接在语句中执行。</p>
+<p>构造一个POST包进行测试，由于没有回显，我们进行延时    </p>
+<p><img src="/2019/01/27/phpshe1-7-sqlinjection/2.png" alt=""></p>
+<p>成功延时，网站对传入的product_id没有过滤处理造成了时间盲注。</p>
+<p>之后继续审计发现</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="string">'tuijian'</span>:</span><br><span class="line">	pe_token_match();</span><br><span class="line">	<span class="keyword">foreach</span> ($_p_product_id <span class="keyword">as</span> $v) &#123;</span><br><span class="line">		$result = $db-&gt;pe_update(<span class="string">'product'</span>, <span class="keyword">array</span>(<span class="string">'product_id'</span>=&gt;$v), <span class="keyword">array</span>(<span class="string">'product_istuijian'</span>=&gt;$_g_tuijian));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> ($result) &#123;</span><br><span class="line">		pe_success(<span class="string">"操作成功!"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		pe_error(<span class="string">"操作失败..."</span>);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不仅 state 分支，tuijian order move分支均没有对$product_id进行处理。</p>
+<p>均存在注入点</p>
+<p><img src="/2019/01/27/phpshe1-7-sqlinjection/1.png" alt=""></p>
+<h2 id="CVE-2019-6708"><a href="#CVE-2019-6708" class="headerlink" title="CVE-2019-6708"></a>CVE-2019-6708</h2><p>在管理页面订单处</p>
+<p>定位到order.php</p>
+<p><img src="/2019/01/27/phpshe1-7-sqlinjection/3.png" alt=""></p>
+<p>这里依旧采取了一个语句的拼接</p>
+<p>然后sql_where进入pe_selectall方法</p>
+<p><img src="/2019/01/27/phpshe1-7-sqlinjection/4.png" alt=""></p>
+<p>继续跟进pe_selectall方法</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">pe_selectall</span><span class="params">($table, $where = <span class="string">''</span>, $field = <span class="string">'*'</span>, $limit_page = array<span class="params">()</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//处理条件语句</span></span><br><span class="line">	$sqlwhere = <span class="keyword">$this</span>-&gt;_dowhere($where);</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">$this</span>-&gt;sql_selectall(<span class="string">"select &#123;$field&#125; from `"</span>.dbpre.<span class="string">"&#123;$table&#125;` &#123;$sqlwhere&#125;"</span>, $limit_page);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>看到此方法依然没有对语句的过滤处理就直接执行。</p>
+<p>回到后台页面,进入订单页面。</p>
+<p><img src="/2019/01/27/phpshe1-7-sqlinjection/6.png" alt=""></p>
+<p>之后进入wsend分支</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="comment">//127.0.0.1/phpshe/admin.php?mod=order&amp;state=wsend</span></span><br></pre></td></tr></table></figure>
+
+<p>在state处进行注入</p>
+<p><img src="/2019/01/27/phpshe1-7-sqlinjection/7.png" alt=""></p>
+<p>成功延时。可进行时间盲注。</p>
+<p>如果wsend分支中有订单存在，同样可以进行bool盲注。</p>
+<p>见下面两图</p>
+<p><img src="/2019/01/27/phpshe1-7-sqlinjection/8.png" alt=""></p>
+<p><img src="/2019/01/27/phpshe1-7-sqlinjection/9.png" alt=""></p>
+<p>我们对比user.php和admin.php中对订单查询的处理</p>
+<p><img src="/2019/01/27/phpshe1-7-sqlinjection/5.png" alt=""></p>
+<p>user.php多了一层对<em>g</em>state的过滤，admin.php则没有这个操作。</p>
+<p>继续审计发现在order_pay页面中，同样没有对<em>g</em>state进行过滤就直接拼接。</p>
+<p>同样存在注入，payload如下</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="regexp">//</span><span class="number">127.0</span>.<span class="number">0</span>.<span class="number">1</span>/phpshe/admin.php?mod=order_pay&amp;<span class="keyword">state</span>=wpay%27and%201=<span class="number">1</span>%20--%201</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/01/30/CVE-2019-7160/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          CVE-2019-7160
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/01/15/35C3-CTF-wp/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">35C3_POST_wp</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CVE-2019-6707"><span class="nav-number">1.1.</span> <span class="nav-text">CVE-2019-6707</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CVE-2019-6708"><span class="nav-number">1.2.</span> <span class="nav-text">CVE-2019-6708</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/friend" class="mobile-nav-link">Friend</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2019 Altm4nz All Rights Reserved.
+        
+            <span id="busuanzi_container_site_uv">  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

