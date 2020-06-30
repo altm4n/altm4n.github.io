@@ -1,154 +1,111 @@
+
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>QWB2019_writeup | Altm4nz</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  
-  
-  
-  
-  <meta name="description" content="WEBupload审计分析先收集信息，找到源代码www.tar.gz开始代码审计。每个控制器中都定义了类，尝试寻找反序列化的点。在login中发现cookie的序列化过程">
-<meta property="og:type" content="article">
-<meta property="og:title" content="QWB2019_writeup">
-<meta property="og:url" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;28&#x2F;QWB2019-writeup&#x2F;index.html">
-<meta property="og:site_name" content="Altm4nz">
-<meta property="og:description" content="WEBupload审计分析先收集信息，找到源代码www.tar.gz开始代码审计。每个控制器中都定义了类，尝试寻找反序列化的点。在login中发现cookie的序列化过程">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;28&#x2F;QWB2019-writeup&#x2F;%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-27%20%E4%B8%8A%E5%8D%8811.12.52.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;28&#x2F;QWB2019-writeup&#x2F;%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-27%20%E4%B8%8A%E5%8D%8811.17.10.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;28&#x2F;QWB2019-writeup&#x2F;15587965945276&#x2F;%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-27%20%E4%B8%8A%E5%8D%8811.22.03.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;28&#x2F;QWB2019-writeup&#x2F;%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-27%20%E4%B8%8A%E5%8D%8811.22.03.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;28&#x2F;QWB2019-writeup&#x2F;15589297130459.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;28&#x2F;QWB2019-writeup&#x2F;%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-27%20%E4%B8%8B%E5%8D%8812.02.36.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;28&#x2F;QWB2019-writeup&#x2F;%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-27%20%E4%B8%8B%E5%8D%8812.06.17.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;28&#x2F;QWB2019-writeup&#x2F;%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-27%20%E4%B8%8B%E5%8D%8812.07.49.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;28&#x2F;QWB2019-writeup&#x2F;%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-27%20%E4%B8%8B%E5%8D%8812.11.26.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;28&#x2F;QWB2019-writeup&#x2F;%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-27%20%E4%B8%8A%E5%8D%8811.29.46.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;28&#x2F;QWB2019-writeup&#x2F;15589279018437.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;28&#x2F;QWB2019-writeup&#x2F;15589280222995.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;28&#x2F;QWB2019-writeup&#x2F;C6B56DE8FEB563045E51901442AA1380.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;28&#x2F;QWB2019-writeup&#x2F;%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-27%20%E4%B8%8A%E5%8D%8811.35.29.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;28&#x2F;QWB2019-writeup&#x2F;15589284998213.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;28&#x2F;QWB2019-writeup&#x2F;788BCCDA110BDF3D121071BE06087E65.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;28&#x2F;QWB2019-writeup&#x2F;E49C45F46049C891DFAD6EEE3662C1C9.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;28&#x2F;QWB2019-writeup&#x2F;%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-27%20%E4%B8%8A%E5%8D%8811.41.53.png">
-<meta property="og:updated_time" content="2019-08-01T08:50:32.893Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;28&#x2F;QWB2019-writeup&#x2F;%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-27%20%E4%B8%8A%E5%8D%8811.12.52.png">
-  
-    <link rel="alternate" href="/atom.xml" title="Altm4nz" type="application/atom+xml">
-  
-  <link rel="icon" href="/css/images/pokemon.ico">
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
-  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-  <style type="text/css">
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+<html lang="zh-Hans">
+    <head>
+        <title>QWB2019_writeup</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2.0">
+<link rel="stylesheet", href="/./css/style.css">
+<link rel="shortcut icon", href="/../../../../favicon.ico">
+<link rel="apple-touch-icon", href="/./apple-touch-icon.png">
+
+        
     
-  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+    <link rel='stylesheet' href="/./css/dracula.css">
 
-  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
-  <link rel="stylesheet" href="/css/style.css">
-
-  <script src="/js/jquery-3.1.1.min.js"></script>
-
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="/css/bootstrap.css" >
-  <link rel="stylesheet" href="/css/fashion.css" >
-  <link rel="stylesheet" href="/css/glyphs.css" >
-
-</head>
-
-
-
-  <body data-spy="scroll" data-target="#toc" data-offset="50">
-
-
-  
-
-
-<header id="allheader" class="site-header" role="banner" 
-   >
-  <div class="clearfix container">
-      <div class="site-branding">
-
-          <h1 class="site-title">
-            
-              <a href="/" title="Altm4nz" rel="home"> Altm4nz </a>
-            
-          </h1>
-          
-          
-            
-          <nav id="main-navigation" class="main-navigation" role="navigation">
-            <a class="nav-open">Menu</a>
-            <a class="nav-close">Close</a>
-
-            <div class="clearfix sf-menu">
-              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/friend">friend</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
-                    
-              </ul>
+    </head>
+    <body>
+        <header class="al_header al_pos_fixed">
+    <div class="al_header_container dis_flex_jcenter">
+        <div class="al_header_container_left">
+            <div class="al_header_site_title">
+                <a href="/">Altm4nz's blog</a>
             </div>
-          </nav>
+        </div>
 
-      </div>
-  </div>
+        <div class="dis_flex_jcenter">
+            <div class="al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-menu"></use>
+                </svg>
+            </div>
+        </div>
+    </div>
 </header>
 
+        <div class="al_sidebar">
 
-  <div id="container">
-    <div id="wrap">
+    <div class="al_sidebar_overlay al_full_cover"></div>
+
+    <div class="al_pos_fixed al_sidebar_cnt">
+        <div class="dis_flex_acenter al_sidebar_header">
+            <h3>Altm4nz's blog</h3>
+            <div class="al_sidebar_close al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-close"></use>
+                </svg>
+            </div>
+        </div>
+
+        <div class="al_sidebar_author_cnt">
+
+            <div class="al_sidebar_author_info">
+                
+                <img class="al_sidebar_avatar" src="../../../../images/IMG_4178.JPG">
+                <p></p>
+                <h4>WEB划水选手</h4>
+            </div>
+
             
-      <div id="content" class="outer">
-        
-          <section id="main" style="float:none;"><article id="post-QWB2019-writeup" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" class="article-title" itemprop="name">
-      QWB2019_writeup
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2019/05/28/QWB2019-writeup/" class="article-date">
-	  <time datetime="2019-05-28T05:07:01.000Z" itemprop="datePublished">May 28, 2019</time>
-	</a>
-
-       
-      
-	<span id="busuanzi_container_page_pv">
-	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-	</span>
-
+        </div>
     </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h1><h2 id="upload"><a href="#upload" class="headerlink" title="upload"></a>upload</h2><h3 id="审计分析"><a href="#审计分析" class="headerlink" title="审计分析"></a>审计分析</h3><p>先收集信息，找到源代码<a href="http://www.tar.gz" target="_blank" rel="noopener">www.tar.gz</a><br>开始代码审计。每个控制器中都定义了类，尝试寻找反序列化的点。<br>在login中发现cookie的序列化过程</p>
+</div>
+
+        
+    <div class="dis_flex_center al_lightbox_cnt al_full_cover">
+        <img class="al_lightbox_img"/>
+    </div>
+    <div class="al_page_background dis_flex_center al_full_cover"></div>
+    <div class="al_page_container">
+        <div class="al_pos_ab al_fake_background"></div>
+        <div class="al_main_container al_shadow al_main_page_container">
+            <article class="al_article">
+                <header>
+                    <h1 class="al_page_title">
+                        QWB2019_writeup
+                    </h1>
+                    <div class="al_page_info dis_flex">
+                        <div class="al_page_content_info">
+                            May 28, 2019 05:05 AM
+                        </div>
+
+                        
+                            <div class="al_page_content_info">
+                                2.8k words
+                            </div>
+                        
+
+                        
+                            <div class="al_page_content_info">
+                                13 minutes read
+                            </div>
+                            <div class="al_page_content_info">
+                                本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+                            </div>
+                        
+                        <span class="tags"></span>
+                    </div>
+                </header>
+
+                
+                    <div class="al_page_content_outline">
+                        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#WEB"><span class="toc-text">WEB</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#upload"><span class="toc-text">upload</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#审计分析"><span class="toc-text">审计分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开始操作"><span class="toc-text">开始操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#高明的黑客"><span class="toc-text">高明的黑客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#随便注"><span class="toc-text">随便注</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#护网先锋上单"><span class="toc-text">护网先锋上单</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CRYPTO"><span class="toc-text">CRYPTO</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#BABYBANK"><span class="toc-text">BABYBANK</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#babybet"><span class="toc-text">babybet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#强网先锋-辅助"><span class="toc-text">强网先锋_辅助</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#copperstudy"><span class="toc-text">copperstudy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#challenge1"><span class="toc-text">challenge1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#challenge2"><span class="toc-text">challenge2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#challenge3"><span class="toc-text">challenge3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#challenge4"><span class="toc-text">challenge4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#challenge5"><span class="toc-text">challenge5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#challenge6"><span class="toc-text">challenge6</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                
+
+                
+                <section id="post-body">
+                    <h1 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h1><h2 id="upload"><a href="#upload" class="headerlink" title="upload"></a>upload</h2><h3 id="审计分析"><a href="#审计分析" class="headerlink" title="审计分析"></a>审计分析</h3><p>先收集信息，找到源代码<a href="http://www.tar.gz" target="_blank" rel="noopener">www.tar.gz</a><br>开始代码审计。每个控制器中都定义了类，尝试寻找反序列化的点。<br>在login中发现cookie的序列化过程</p>
 <a id="more"></a>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (md5($password) === $user_info[<span class="string">'password'</span>]) &#123;</span><br><span class="line">                    $cookie_data=base64_encode(serialize($user_info));</span><br><span class="line">                    cookie(<span class="string">"user"</span>,$cookie_data,<span class="number">3600</span>);</span><br><span class="line">                    <span class="keyword">$this</span>-&gt;success(<span class="string">'Login successful!'</span>, url(<span class="string">'../home'</span>));</span><br></pre></td></tr></table></figure>
 <p>又在logincheck函数中发现了反序列化的点</p>
@@ -229,163 +186,62 @@
 <p>Boneh and Durfee attack. </p>
 <p>用这个脚本 <a href="https://github.com/mimoo/RSA-and-LLL-attacks/blob/master/boneh_durfee.sage" target="_blank" rel="noopener">https://github.com/mimoo/RSA-and-LLL-attacks/blob/master/boneh_durfee.sage</a></p>
 
-      
+                </section>
+
+                
+                
+                
+
+
+            
+            <nav class="dis_flex al_post_nav">
+                <a class="al_post_nav_item dis_flex_acenter" href="/2019/08/05/De1ctf-web/">
+                    
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-left"></use>
+                        </svg>
+                        <span class="al_text_ellipsis al_post_nav_desc">De1ctf_web</span>
+                    
+                </a>
+                <a class="al_post_nav_item dis_flex_acenter" href="/2019/05/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/">
+                    
+                        <span class="al_text_ellipsis al_post_nav_desc">操作系统安全</span>
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-right"></use>
+                        </svg>
+                    
+                </a>
+            </nav>
+        </div>
     </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2019/08/05/De1ctf-web/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          De1ctf_web
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2019/05/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">操作系统安全</div>
-    </a>
-  
-</nav>
 
-  
-</article>
 
-<!-- Table of Contents -->
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="al_index_footer dis_flex_center">
 
-  <aside id="sidebar">
-    <div id="toc" class="toc-article">
-    <strong class="toc-title">Contents</strong>
+
+
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#WEB"><span class="nav-number">1.</span> <span class="nav-text">WEB</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#upload"><span class="nav-number">1.1.</span> <span class="nav-text">upload</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#审计分析"><span class="nav-number">1.1.1.</span> <span class="nav-text">审计分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始操作"><span class="nav-number">1.1.2.</span> <span class="nav-text">开始操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高明的黑客"><span class="nav-number">1.2.</span> <span class="nav-text">高明的黑客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随便注"><span class="nav-number">1.3.</span> <span class="nav-text">随便注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#护网先锋上单"><span class="nav-number">1.4.</span> <span class="nav-text">护网先锋上单</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CRYPTO"><span class="nav-number">2.</span> <span class="nav-text">CRYPTO</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#BABYBANK"><span class="nav-number">2.1.</span> <span class="nav-text">BABYBANK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#babybet"><span class="nav-number">2.2.</span> <span class="nav-text">babybet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#强网先锋-辅助"><span class="nav-number">2.3.</span> <span class="nav-text">强网先锋_辅助</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#copperstudy"><span class="nav-number">2.4.</span> <span class="nav-text">copperstudy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#challenge1"><span class="nav-number">2.4.1.</span> <span class="nav-text">challenge1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#challenge2"><span class="nav-number">2.4.2.</span> <span class="nav-text">challenge2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#challenge3"><span class="nav-number">2.4.3.</span> <span class="nav-text">challenge3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#challenge4"><span class="nav-number">2.4.4.</span> <span class="nav-text">challenge4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#challenge5"><span class="nav-number">2.4.5.</span> <span class="nav-text">challenge5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#challenge6"><span class="nav-number">2.4.6.</span> <span class="nav-text">challenge6</span></a></li></ol></li></ol></li></ol>
     
+
+    <div class="al_index_footer_item al_index_footer_extra">
+        Power By 
+        <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>
     </div>
-  </aside>
 
-</section>
-        
-      </div>
-
+    <div class="al_index_footer_item al_index_footer_extra_right">
+        All Right Reserved
     </div>
-    <!-- <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-    <a href="/tags" class="mobile-nav-link">Tags</a>
-  
-    <a href="/friend" class="mobile-nav-link">Friend</a>
-  
-    <a href="/about" class="mobile-nav-link">About</a>
-  
-</nav> -->
-    <footer id="footer" class="site-footer">
-  
-
-  <div class="clearfix container">
-      <div class="site-info">
-	      &copy; 2020 Altm4nz All Rights Reserved.
-        
-            <span id="busuanzi_container_site_uv">  
-              本站总访问量<span id="busuanzi_value_site_pv"></span>次
-            </span>
-          
-      </div>
-      <div class="site-credit">
-        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
-      </div>
-  </div>
-</footer>
-
-
-<!-- min height -->
-
-<script>
-    var wrapdiv = document.getElementById("wrap");
-    var contentdiv = document.getElementById("content");
-
-    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
-    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
-
-
-    <!-- headerblur min height -->
-    
-    
-</script>
-    
-<div style="display: none;">
-  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+    <div class="al_index_footer_item al_index_footer_extra_right">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+    </div>
+            
 </div>
 
-<!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
-<script src="/js/bootstrap.js"></script>
-<script src="/js/main.js"></script>
-
-
-
-
-
-
-
-
-	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-
-
-
-  </div>
-
-  <a id="rocket" href="#top" class=""></a>
-  <script type="text/javascript" src="/js/totop.js" async=""></script>
-</body>
+        <script type="text/javascript" async="async" src="/javascripts/acelog.js"></script>
+        
+        
+        
+    </body>
 </html>
+        

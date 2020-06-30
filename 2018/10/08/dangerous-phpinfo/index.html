@@ -1,142 +1,111 @@
+
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>dangerous-phpinfo | Altm4nz</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  
-  <meta name="keywords" content="web" />
-  
-  
-  
-  
-  <meta name="description" content="关于phpinfo()的不适当配置造成的危险漏洞 前言本文章测试环境基于osx+apache2+php5.6">
-<meta name="keywords" content="web">
-<meta property="og:type" content="article">
-<meta property="og:title" content="dangerous-phpinfo">
-<meta property="og:url" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;10&#x2F;08&#x2F;dangerous-phpinfo&#x2F;index.html">
-<meta property="og:site_name" content="Altm4nz">
-<meta property="og:description" content="关于phpinfo()的不适当配置造成的危险漏洞 前言本文章测试环境基于osx+apache2+php5.6">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;10&#x2F;08&#x2F;dangerous-phpinfo&#x2F;1.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;10&#x2F;08&#x2F;dangerous-phpinfo&#x2F;2.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;10&#x2F;08&#x2F;dangerous-phpinfo&#x2F;3.png">
-<meta property="og:updated_time" content="2018-11-02T05:40:45.436Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2018&#x2F;10&#x2F;08&#x2F;dangerous-phpinfo&#x2F;1.png">
-  
-    <link rel="alternate" href="/atom.xml" title="Altm4nz" type="application/atom+xml">
-  
-  <link rel="icon" href="/css/images/pokemon.ico">
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
-  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-  <style type="text/css">
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+<html lang="zh-Hans">
+    <head>
+        <title>dangerous-phpinfo</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2.0">
+<link rel="stylesheet", href="/./css/style.css">
+<link rel="shortcut icon", href="/../../../../favicon.ico">
+<link rel="apple-touch-icon", href="/./apple-touch-icon.png">
+
+        
     
-  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+    <link rel='stylesheet' href="/./css/dracula.css">
 
-  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
-  <link rel="stylesheet" href="/css/style.css">
-
-  <script src="/js/jquery-3.1.1.min.js"></script>
-
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="/css/bootstrap.css" >
-  <link rel="stylesheet" href="/css/fashion.css" >
-  <link rel="stylesheet" href="/css/glyphs.css" >
-
-</head>
-
-
-
-  <body data-spy="scroll" data-target="#toc" data-offset="50">
-
-
-  
-
-
-<header id="allheader" class="site-header" role="banner" 
-   >
-  <div class="clearfix container">
-      <div class="site-branding">
-
-          <h1 class="site-title">
-            
-              <a href="/" title="Altm4nz" rel="home"> Altm4nz </a>
-            
-          </h1>
-          
-          
-            
-          <nav id="main-navigation" class="main-navigation" role="navigation">
-            <a class="nav-open">Menu</a>
-            <a class="nav-close">Close</a>
-
-            <div class="clearfix sf-menu">
-              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/friend">friend</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
-                    
-              </ul>
+    </head>
+    <body>
+        <header class="al_header al_pos_fixed">
+    <div class="al_header_container dis_flex_jcenter">
+        <div class="al_header_container_left">
+            <div class="al_header_site_title">
+                <a href="/">Altm4nz's blog</a>
             </div>
-          </nav>
+        </div>
 
-      </div>
-  </div>
+        <div class="dis_flex_jcenter">
+            <div class="al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-menu"></use>
+                </svg>
+            </div>
+        </div>
+    </div>
 </header>
 
+        <div class="al_sidebar">
 
-  <div id="container">
-    <div id="wrap">
+    <div class="al_sidebar_overlay al_full_cover"></div>
+
+    <div class="al_pos_fixed al_sidebar_cnt">
+        <div class="dis_flex_acenter al_sidebar_header">
+            <h3>Altm4nz's blog</h3>
+            <div class="al_sidebar_close al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-close"></use>
+                </svg>
+            </div>
+        </div>
+
+        <div class="al_sidebar_author_cnt">
+
+            <div class="al_sidebar_author_info">
+                
+                <img class="al_sidebar_avatar" src="../../../../images/IMG_4178.JPG">
+                <p></p>
+                <h4>WEB划水选手</h4>
+            </div>
+
             
-      <div id="content" class="outer">
-        
-          <section id="main" style="float:none;"><article id="post-dangerous-phpinfo" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" class="article-title" itemprop="name">
-      dangerous-phpinfo
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2018/10/08/dangerous-phpinfo/" class="article-date">
-	  <time datetime="2018-10-08T03:34:42.000Z" itemprop="datePublished">October 8, 2018</time>
-	</a>
-
-       
-      
-	<span id="busuanzi_container_page_pv">
-	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-	</span>
-
+        </div>
     </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>关于phpinfo()的不适当配置造成的危险漏洞</p>
+</div>
+
+        
+    <div class="dis_flex_center al_lightbox_cnt al_full_cover">
+        <img class="al_lightbox_img"/>
+    </div>
+    <div class="al_page_background dis_flex_center al_full_cover"></div>
+    <div class="al_page_container">
+        <div class="al_pos_ab al_fake_background"></div>
+        <div class="al_main_container al_shadow al_main_page_container">
+            <article class="al_article">
+                <header>
+                    <h1 class="al_page_title">
+                        dangerous-phpinfo
+                    </h1>
+                    <div class="al_page_info dis_flex">
+                        <div class="al_page_content_info">
+                            October 08, 2018 03:10 AM
+                        </div>
+
+                        
+                            <div class="al_page_content_info">
+                                770 words
+                            </div>
+                        
+
+                        
+                            <div class="al_page_content_info">
+                                3 minutes read
+                            </div>
+                            <div class="al_page_content_info">
+                                本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+                            </div>
+                        
+                        <span class="tags"></span>
+                    </div>
+                </header>
+
+                
+                    <div class="al_page_content_outline">
+                        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x00-session-upload-progress"><span class="toc-text">0x00 session.upload_progress</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#原理分析"><span class="toc-text">原理分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CTF实战"><span class="toc-text">CTF实战</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01-phpinfo-LFI"><span class="toc-text">0x01 phpinfo()+LFI</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0X02-OPCACHE覆盖"><span class="toc-text">0X02 OPCACHE覆盖</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#原理"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CTF实战-1"><span class="toc-text">CTF实战</span></a></li></ol></li></ol>
+                    </div>
+                
+
+                
+                <section id="post-body">
+                    <p>关于phpinfo()的不适当配置造成的危险漏洞</p>
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文章测试环境基于osx+apache2+php5.6</p>
 <a id="more"></a>
 <h1 id="0x00-session-upload-progress"><a href="#0x00-session-upload-progress" class="headerlink" title="0x00 session.upload_progress"></a>0x00 session.upload_progress</h1><h2 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h2><p>先来看php手册中给的定义 【<a href="http://php.net/manual/zh/session.upload-progress.php】" target="_blank" rel="noopener">http://php.net/manual/zh/session.upload-progress.php】</a></p>
@@ -157,166 +126,62 @@
 <h1 id="0X02-OPCACHE覆盖"><a href="#0X02-OPCACHE覆盖" class="headerlink" title="0X02 OPCACHE覆盖"></a>0X02 OPCACHE覆盖</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>当phpinfo()中opcache.enable =&gt; On =&gt; On时，<br>访问网站index.php时，网站会生成index.php.bin。<br>再次访问时，会加载index.php.bin。而存在上传时，如果可以找到index.php.bin文件所在的目录，我们就可以覆盖index.php.bin，下一次访问index.php时，会加载我们上传的恶意index.php.bin。</p>
 <h2 id="CTF实战-1"><a href="#CTF实战-1" class="headerlink" title="CTF实战"></a>CTF实战</h2><p>见博客<a href="https://altmanz.cn/2018/10/10/0ctf-Ezdoor/" target="_blank" rel="noopener">https://altmanz.cn/2018/10/10/0ctf-Ezdoor/</a></p>
 
-      
+                </section>
+
+                
+                
+                
+
+
+            
+            <nav class="dis_flex al_post_nav">
+                <a class="al_post_nav_item dis_flex_acenter" href="/2018/10/10/0ctf-Ezdoor/">
+                    
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-left"></use>
+                        </svg>
+                        <span class="al_text_ellipsis al_post_nav_desc">0ctf-Ezdoor</span>
+                    
+                </a>
+                <a class="al_post_nav_item dis_flex_acenter" href="/2018/09/27/seacmsv6.61-getshell/">
+                    
+                        <span class="al_text_ellipsis al_post_nav_desc">seacms v6.61-GetShell</span>
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-right"></use>
+                        </svg>
+                    
+                </a>
+            </nav>
+        </div>
     </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
 
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
+
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="al_index_footer dis_flex_center">
+
+
+
     
-<nav id="article-nav">
-  
-    <a href="/2018/10/10/0ctf-Ezdoor/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          0ctf-Ezdoor
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2018/09/27/seacmsv6.61-getshell/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">seacms v6.61-GetShell</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-<!-- Table of Contents -->
-
-  <aside id="sidebar">
-    <div id="toc" class="toc-article">
-    <strong class="toc-title">Contents</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x00-session-upload-progress"><span class="nav-number">2.</span> <span class="nav-text">0x00 session.upload_progress</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理分析"><span class="nav-number">2.1.</span> <span class="nav-text">原理分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CTF实战"><span class="nav-number">2.2.</span> <span class="nav-text">CTF实战</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x01-phpinfo-LFI"><span class="nav-number">3.</span> <span class="nav-text">0x01 phpinfo()+LFI</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0X02-OPCACHE覆盖"><span class="nav-number">4.</span> <span class="nav-text">0X02 OPCACHE覆盖</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">4.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CTF实战-1"><span class="nav-number">4.2.</span> <span class="nav-text">CTF实战</span></a></li></ol></li></ol>
-    
+
+    <div class="al_index_footer_item al_index_footer_extra">
+        Power By 
+        <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>
     </div>
-  </aside>
 
-</section>
-        
-      </div>
-
+    <div class="al_index_footer_item al_index_footer_extra_right">
+        All Right Reserved
     </div>
-    <!-- <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-    <a href="/tags" class="mobile-nav-link">Tags</a>
-  
-    <a href="/friend" class="mobile-nav-link">Friend</a>
-  
-    <a href="/about" class="mobile-nav-link">About</a>
-  
-</nav> -->
-    <footer id="footer" class="site-footer">
-  
-
-  <div class="clearfix container">
-      <div class="site-info">
-	      &copy; 2020 Altm4nz All Rights Reserved.
-        
-            <span id="busuanzi_container_site_uv">  
-              本站总访问量<span id="busuanzi_value_site_pv"></span>次
-            </span>
-          
-      </div>
-      <div class="site-credit">
-        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
-      </div>
-  </div>
-</footer>
-
-
-<!-- min height -->
-
-<script>
-    var wrapdiv = document.getElementById("wrap");
-    var contentdiv = document.getElementById("content");
-
-    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
-    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
-
-
-    <!-- headerblur min height -->
-    
-    
-</script>
-    
-<div style="display: none;">
-  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+    <div class="al_index_footer_item al_index_footer_extra_right">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+    </div>
+            
 </div>
 
-<!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
-<script src="/js/bootstrap.js"></script>
-<script src="/js/main.js"></script>
-
-
-
-
-
-
-
-
-	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-
-
-
-  </div>
-
-  <a id="rocket" href="#top" class=""></a>
-  <script type="text/javascript" src="/js/totop.js" async=""></script>
-</body>
+        <script type="text/javascript" async="async" src="/javascripts/acelog.js"></script>
+        
+        
+        
+    </body>
 </html>
+        

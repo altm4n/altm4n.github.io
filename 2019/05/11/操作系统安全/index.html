@@ -1,143 +1,111 @@
+
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>操作系统安全 | Altm4nz</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  
-  
-  
-  
-  <meta name="description" content="0x00 基本概念0.1 信息安全评估标准 TCSEC A  ：校验级保护，提供低级别手段  B3：安全域，数据隐藏与分层，屏蔽  B2:  结构化内容保护，支持硬件保护  B1：标记安全保护，如System V等  C2：有自主的访问安全性，区分用户  C1：不区分用户，基本的访问控制  D：没有安全性可言，例如MS DOS">
-<meta property="og:type" content="article">
-<meta property="og:title" content="操作系统安全">
-<meta property="og:url" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;11&#x2F;%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8&#x2F;index.html">
-<meta property="og:site_name" content="Altm4nz">
-<meta property="og:description" content="0x00 基本概念0.1 信息安全评估标准 TCSEC A  ：校验级保护，提供低级别手段  B3：安全域，数据隐藏与分层，屏蔽  B2:  结构化内容保护，支持硬件保护  B1：标记安全保护，如System V等  C2：有自主的访问安全性，区分用户  C1：不区分用户，基本的访问控制  D：没有安全性可言，例如MS DOS">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;11&#x2F;%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8&#x2F;%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-11%20%E4%B8%8B%E5%8D%883.53.57.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;11&#x2F;%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8&#x2F;%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-11%20%E4%B8%8B%E5%8D%884.06.25.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;11&#x2F;%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8&#x2F;%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-11%20%E4%B8%8B%E5%8D%886.56.28.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;11&#x2F;%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8&#x2F;%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-11%20%E4%B8%8B%E5%8D%886.56.28-1.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;11&#x2F;%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8&#x2F;%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-12%20%E4%B8%8B%E5%8D%883.11.59.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;11&#x2F;%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8&#x2F;%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-12%20%E4%B8%8B%E5%8D%883.29.50.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;11&#x2F;%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8&#x2F;%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-14%20%E4%B8%8A%E5%8D%8811.27.33.png">
-<meta property="og:updated_time" content="2019-05-27T06:22:01.381Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;altman.vip&#x2F;2019&#x2F;05&#x2F;11&#x2F;%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8&#x2F;%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-11%20%E4%B8%8B%E5%8D%883.53.57.png">
-  
-    <link rel="alternate" href="/atom.xml" title="Altm4nz" type="application/atom+xml">
-  
-  <link rel="icon" href="/css/images/pokemon.ico">
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
-  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-  <style type="text/css">
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+<html lang="zh-Hans">
+    <head>
+        <title>操作系统安全</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2.0">
+<link rel="stylesheet", href="/./css/style.css">
+<link rel="shortcut icon", href="/../../../../favicon.ico">
+<link rel="apple-touch-icon", href="/./apple-touch-icon.png">
+
+        
     
-  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+    <link rel='stylesheet' href="/./css/dracula.css">
 
-  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
-  <link rel="stylesheet" href="/css/style.css">
-
-  <script src="/js/jquery-3.1.1.min.js"></script>
-
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="/css/bootstrap.css" >
-  <link rel="stylesheet" href="/css/fashion.css" >
-  <link rel="stylesheet" href="/css/glyphs.css" >
-
-</head>
-
-
-
-  <body data-spy="scroll" data-target="#toc" data-offset="50">
-
-
-  
-
-
-<header id="allheader" class="site-header" role="banner" 
-   >
-  <div class="clearfix container">
-      <div class="site-branding">
-
-          <h1 class="site-title">
-            
-              <a href="/" title="Altm4nz" rel="home"> Altm4nz </a>
-            
-          </h1>
-          
-          
-            
-          <nav id="main-navigation" class="main-navigation" role="navigation">
-            <a class="nav-open">Menu</a>
-            <a class="nav-close">Close</a>
-
-            <div class="clearfix sf-menu">
-              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/friend">friend</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
-                    
-              </ul>
+    </head>
+    <body>
+        <header class="al_header al_pos_fixed">
+    <div class="al_header_container dis_flex_jcenter">
+        <div class="al_header_container_left">
+            <div class="al_header_site_title">
+                <a href="/">Altm4nz's blog</a>
             </div>
-          </nav>
+        </div>
 
-      </div>
-  </div>
+        <div class="dis_flex_jcenter">
+            <div class="al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-menu"></use>
+                </svg>
+            </div>
+        </div>
+    </div>
 </header>
 
+        <div class="al_sidebar">
 
-  <div id="container">
-    <div id="wrap">
+    <div class="al_sidebar_overlay al_full_cover"></div>
+
+    <div class="al_pos_fixed al_sidebar_cnt">
+        <div class="dis_flex_acenter al_sidebar_header">
+            <h3>Altm4nz's blog</h3>
+            <div class="al_sidebar_close al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-close"></use>
+                </svg>
+            </div>
+        </div>
+
+        <div class="al_sidebar_author_cnt">
+
+            <div class="al_sidebar_author_info">
+                
+                <img class="al_sidebar_avatar" src="../../../../images/IMG_4178.JPG">
+                <p></p>
+                <h4>WEB划水选手</h4>
+            </div>
+
             
-      <div id="content" class="outer">
-        
-          <section id="main" style="float:none;"><article id="post-操作系统安全" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" class="article-title" itemprop="name">
-      操作系统安全
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2019/05/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/" class="article-date">
-	  <time datetime="2019-05-11T07:30:08.000Z" itemprop="datePublished">May 11, 2019</time>
-	</a>
-
-       
-      
-	<span id="busuanzi_container_page_pv">
-	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-	</span>
-
+        </div>
     </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="0x00-基本概念"><a href="#0x00-基本概念" class="headerlink" title="0x00 基本概念"></a>0x00 基本概念</h1><h2 id="0-1-信息安全评估标准-TCSEC"><a href="#0-1-信息安全评估标准-TCSEC" class="headerlink" title="0.1 信息安全评估标准 TCSEC"></a>0.1 信息安全评估标准 TCSEC</h2><ul>
+</div>
+
+        
+    <div class="dis_flex_center al_lightbox_cnt al_full_cover">
+        <img class="al_lightbox_img"/>
+    </div>
+    <div class="al_page_background dis_flex_center al_full_cover"></div>
+    <div class="al_page_container">
+        <div class="al_pos_ab al_fake_background"></div>
+        <div class="al_main_container al_shadow al_main_page_container">
+            <article class="al_article">
+                <header>
+                    <h1 class="al_page_title">
+                        操作系统安全
+                    </h1>
+                    <div class="al_page_info dis_flex">
+                        <div class="al_page_content_info">
+                            May 11, 2019 07:05 AM
+                        </div>
+
+                        
+                            <div class="al_page_content_info">
+                                6.4k words
+                            </div>
+                        
+
+                        
+                            <div class="al_page_content_info">
+                                22 minutes read
+                            </div>
+                            <div class="al_page_content_info">
+                                本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+                            </div>
+                        
+                        <span class="tags"></span>
+                    </div>
+                </header>
+
+                
+                    <div class="al_page_content_outline">
+                        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x00-基本概念"><span class="toc-text">0x00 基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-1-信息安全评估标准-TCSEC"><span class="toc-text">0.1 信息安全评估标准 TCSEC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0-2-windows系统安全概述"><span class="toc-text">0.2.windows系统安全概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0-2-1win的安全体系结构"><span class="toc-text">0.2.1win的安全体系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0-2-2-本地安全授权-LSA"><span class="toc-text">0.2.2 本地安全授权 LSA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0-2-3-安全引用监控器SRM"><span class="toc-text">0.2.3 安全引用监控器SRM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0-2-5-系统资源访问过程"><span class="toc-text">0.2.5 系统资源访问过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0-3-windows的用户和组"><span class="toc-text">0.3 windows的用户和组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0-4工作组，域和信任关系"><span class="toc-text">0.4工作组，域和信任关系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0-4-1-工作组"><span class="toc-text">0.4.1 工作组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0-4-2-Domain"><span class="toc-text">0.4.2 Domain</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0-4-5-域和工作组的对比"><span class="toc-text">0.4.5 域和工作组的对比</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01-活动目录"><span class="toc-text">0x01 活动目录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1基础"><span class="toc-text">1.1基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-活动目录功能的机制"><span class="toc-text">1.2 活动目录功能的机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1单点登录-kerberos"><span class="toc-text">1.2.1单点登录(kerberos)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-3智能的信息复制"><span class="toc-text">1.2.3智能的信息复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-4组策略"><span class="toc-text">1.2.4组策略</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3活动目录管理的对象"><span class="toc-text">1.3活动目录管理的对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-1-对象标准属性"><span class="toc-text">1.3.1 对象标准属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-活动目录组件"><span class="toc-text">1.4 活动目录组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-1活动目录中资源组织的逻辑结构"><span class="toc-text">1.4.1活动目录中资源组织的逻辑结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-2-物理结构"><span class="toc-text">1.4.2 物理结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5活动目录搭建"><span class="toc-text">1.5活动目录搭建</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x02-组策略"><span class="toc-text">0x02 组策略</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1组策略简介"><span class="toc-text">2.1组策略简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2组策略的设置对象"><span class="toc-text">2.2组策略的设置对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3组策略应用顺序"><span class="toc-text">2.3组策略应用顺序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-1组策略继承"><span class="toc-text">2.3.1组策略继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-2累加性和相应优先级"><span class="toc-text">2.3.2累加性和相应优先级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-3-首先处理计算机配置，然后处理用户"><span class="toc-text">2.3.3 首先处理计算机配置，然后处理用户</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4组策略的处理总结"><span class="toc-text">2.4组策略的处理总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5组策略的实现和管理"><span class="toc-text">2.5组策略的实现和管理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x03公钥基础结构PKI"><span class="toc-text">0x03公钥基础结构PKI</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-PKI的组件"><span class="toc-text">3.1 PKI的组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-1核心块"><span class="toc-text">3.1.1核心块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-2-组件1-证书注册机构RA"><span class="toc-text">3.1.2 组件1 证书注册机构RA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-3-组件2-证书颁发机构-CA"><span class="toc-text">3.1.3 组件2 证书颁发机构 CA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-4-组件3-证书库"><span class="toc-text">3.1.4 组件3 证书库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-5-组件4-档案库"><span class="toc-text">3.1.5 组件4 档案库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-6-组件5-密钥备份及恢复系统"><span class="toc-text">3.1.6 组件5 密钥备份及恢复系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-7-组件6-证书吊销-CRL"><span class="toc-text">3.1.7 组件6 证书吊销 CRL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-8-组件7-PKI应用系统接口"><span class="toc-text">3.1.8 组件7 PKI应用系统接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-证书的使用及验证"><span class="toc-text">3.3 证书的使用及验证</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x04-文件系统"><span class="toc-text">0x04 文件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1文件系统基础"><span class="toc-text">4.1文件系统基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2NTFS"><span class="toc-text">4.2NTFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-EFS"><span class="toc-text">4.3 EFS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-1加密过程"><span class="toc-text">4.3.1加密过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-2"><span class="toc-text">4.3.2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-3优势"><span class="toc-text">4.3.3优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-4-局限性"><span class="toc-text">4.3.4 局限性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-磁盘配额"><span class="toc-text">4.4 磁盘配额</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-5-数据备份的策略，RAID机制的几种备份机制"><span class="toc-text">4.5 数据备份的策略，RAID机制的几种备份机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-1完全备份"><span class="toc-text">4.5.1完全备份</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-2差异备份"><span class="toc-text">4.5.2差异备份</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-3增量备份"><span class="toc-text">4.5.3增量备份</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-6-数据恢复机制"><span class="toc-text">4.6 数据恢复机制</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x05身份验证"><span class="toc-text">0x05身份验证</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-针对字典，穷举攻击的防范策略"><span class="toc-text">5.1 针对字典，穷举攻击的防范策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2交互式本地登录，域登录各组件作用"><span class="toc-text">5.2交互式本地登录，域登录各组件作用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-1-winlogon"><span class="toc-text">5.2.1 winlogon</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-2-GINA动态链接库"><span class="toc-text">5.2.2 GINA动态链接库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-3-网络提供程序的动态链接库"><span class="toc-text">5.2.3 网络提供程序的动态链接库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-kerberos用户身份验证服务和票据授予服务"><span class="toc-text">5.3 kerberos用户身份验证服务和票据授予服务</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x06-访问控制"><span class="toc-text">0x06 访问控制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1windows的访问控制模型及组件"><span class="toc-text">6.1windows的访问控制模型及组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-主体和客体的安全描述"><span class="toc-text">6.2 主体和客体的安全描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-客体中策略的冲突解决办法"><span class="toc-text">6.3 客体中策略的冲突解决办法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-4-分布式访问控制实现"><span class="toc-text">6.4 分布式访问控制实现</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x07网络传输安全"><span class="toc-text">0x07网络传输安全</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-IPSEC封装协议"><span class="toc-text">7.1 IPSEC封装协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-1-工作模式"><span class="toc-text">7.1.1 工作模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-2-安全协议"><span class="toc-text">7.1.2 安全协议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-直接访问-主机对主机"><span class="toc-text">7.2 直接访问 主机对主机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-3-VPN访问"><span class="toc-text">7.3 VPN访问</span></a></li></ol></li></ol>
+                    </div>
+                
+
+                
+                <section id="post-body">
+                    <h1 id="0x00-基本概念"><a href="#0x00-基本概念" class="headerlink" title="0x00 基本概念"></a>0x00 基本概念</h1><h2 id="0-1-信息安全评估标准-TCSEC"><a href="#0-1-信息安全评估标准-TCSEC" class="headerlink" title="0.1 信息安全评估标准 TCSEC"></a>0.1 信息安全评估标准 TCSEC</h2><ul>
 <li><p>A  ：校验级保护，提供低级别手段</p>
 </li>
 <li><p>B3：安全域，数据隐藏与分层，屏蔽</p>
@@ -760,163 +728,62 @@
 <li>数据交互：利用商量好的算法和密钥对数据进行安全处理。</li>
 </ul>
 <h2 id="7-2-直接访问-主机对主机"><a href="#7-2-直接访问-主机对主机" class="headerlink" title="7.2 直接访问 主机对主机"></a>7.2 直接访问 主机对主机</h2><h2 id="7-3-VPN访问"><a href="#7-3-VPN访问" class="headerlink" title="7.3 VPN访问"></a>7.3 VPN访问</h2>
-      
+                </section>
+
+                
+                
+                
+
+
+            
+            <nav class="dis_flex al_post_nav">
+                <a class="al_post_nav_item dis_flex_acenter" href="/2019/05/28/QWB2019-writeup/">
+                    
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-left"></use>
+                        </svg>
+                        <span class="al_text_ellipsis al_post_nav_desc">QWB2019_writeup</span>
+                    
+                </a>
+                <a class="al_post_nav_item dis_flex_acenter" href="/2019/04/05/phpshe%E5%89%8D%E5%8F%B0%E4%B8%A4%E4%B8%AA%E6%B3%A8%E5%85%A5/">
+                    
+                        <span class="al_text_ellipsis al_post_nav_desc">phpshe前台两个注入</span>
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-right"></use>
+                        </svg>
+                    
+                </a>
+            </nav>
+        </div>
     </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2019/05/28/QWB2019-writeup/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          QWB2019_writeup
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2019/04/05/phpshe%E5%89%8D%E5%8F%B0%E4%B8%A4%E4%B8%AA%E6%B3%A8%E5%85%A5/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">phpshe前台两个注入</div>
-    </a>
-  
-</nav>
 
-  
-</article>
 
-<!-- Table of Contents -->
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="al_index_footer dis_flex_center">
 
-  <aside id="sidebar">
-    <div id="toc" class="toc-article">
-    <strong class="toc-title">Contents</strong>
+
+
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0x00-基本概念"><span class="nav-number">1.</span> <span class="nav-text">0x00 基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-1-信息安全评估标准-TCSEC"><span class="nav-number">1.1.</span> <span class="nav-text">0.1 信息安全评估标准 TCSEC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0-2-windows系统安全概述"><span class="nav-number">1.2.</span> <span class="nav-text">0.2.windows系统安全概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-2-1win的安全体系结构"><span class="nav-number">1.2.1.</span> <span class="nav-text">0.2.1win的安全体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-2-2-本地安全授权-LSA"><span class="nav-number">1.2.2.</span> <span class="nav-text">0.2.2 本地安全授权 LSA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-2-3-安全引用监控器SRM"><span class="nav-number">1.2.3.</span> <span class="nav-text">0.2.3 安全引用监控器SRM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-2-5-系统资源访问过程"><span class="nav-number">1.2.4.</span> <span class="nav-text">0.2.5 系统资源访问过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0-3-windows的用户和组"><span class="nav-number">1.3.</span> <span class="nav-text">0.3 windows的用户和组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0-4工作组，域和信任关系"><span class="nav-number">1.4.</span> <span class="nav-text">0.4工作组，域和信任关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-4-1-工作组"><span class="nav-number">1.4.1.</span> <span class="nav-text">0.4.1 工作组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-4-2-Domain"><span class="nav-number">1.4.2.</span> <span class="nav-text">0.4.2 Domain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-4-5-域和工作组的对比"><span class="nav-number">1.4.3.</span> <span class="nav-text">0.4.5 域和工作组的对比</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x01-活动目录"><span class="nav-number">2.</span> <span class="nav-text">0x01 活动目录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1基础"><span class="nav-number">2.1.</span> <span class="nav-text">1.1基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-活动目录功能的机制"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 活动目录功能的机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1单点登录-kerberos"><span class="nav-number">2.2.1.</span> <span class="nav-text">1.2.1单点登录(kerberos)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-3智能的信息复制"><span class="nav-number">2.2.2.</span> <span class="nav-text">1.2.3智能的信息复制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-4组策略"><span class="nav-number">2.2.3.</span> <span class="nav-text">1.2.4组策略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3活动目录管理的对象"><span class="nav-number">2.3.</span> <span class="nav-text">1.3活动目录管理的对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-对象标准属性"><span class="nav-number">2.3.1.</span> <span class="nav-text">1.3.1 对象标准属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-活动目录组件"><span class="nav-number">2.4.</span> <span class="nav-text">1.4 活动目录组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-1活动目录中资源组织的逻辑结构"><span class="nav-number">2.4.1.</span> <span class="nav-text">1.4.1活动目录中资源组织的逻辑结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-2-物理结构"><span class="nav-number">2.4.2.</span> <span class="nav-text">1.4.2 物理结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5活动目录搭建"><span class="nav-number">2.5.</span> <span class="nav-text">1.5活动目录搭建</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x02-组策略"><span class="nav-number">3.</span> <span class="nav-text">0x02 组策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1组策略简介"><span class="nav-number">3.1.</span> <span class="nav-text">2.1组策略简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2组策略的设置对象"><span class="nav-number">3.2.</span> <span class="nav-text">2.2组策略的设置对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3组策略应用顺序"><span class="nav-number">3.3.</span> <span class="nav-text">2.3组策略应用顺序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-1组策略继承"><span class="nav-number">3.3.1.</span> <span class="nav-text">2.3.1组策略继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-2累加性和相应优先级"><span class="nav-number">3.3.2.</span> <span class="nav-text">2.3.2累加性和相应优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-3-首先处理计算机配置，然后处理用户"><span class="nav-number">3.3.3.</span> <span class="nav-text">2.3.3 首先处理计算机配置，然后处理用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4组策略的处理总结"><span class="nav-number">3.4.</span> <span class="nav-text">2.4组策略的处理总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5组策略的实现和管理"><span class="nav-number">3.5.</span> <span class="nav-text">2.5组策略的实现和管理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x03公钥基础结构PKI"><span class="nav-number">4.</span> <span class="nav-text">0x03公钥基础结构PKI</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-PKI的组件"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 PKI的组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-1核心块"><span class="nav-number">4.1.1.</span> <span class="nav-text">3.1.1核心块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-2-组件1-证书注册机构RA"><span class="nav-number">4.1.2.</span> <span class="nav-text">3.1.2 组件1 证书注册机构RA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-3-组件2-证书颁发机构-CA"><span class="nav-number">4.1.3.</span> <span class="nav-text">3.1.3 组件2 证书颁发机构 CA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-4-组件3-证书库"><span class="nav-number">4.1.4.</span> <span class="nav-text">3.1.4 组件3 证书库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-5-组件4-档案库"><span class="nav-number">4.1.5.</span> <span class="nav-text">3.1.5 组件4 档案库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-6-组件5-密钥备份及恢复系统"><span class="nav-number">4.1.6.</span> <span class="nav-text">3.1.6 组件5 密钥备份及恢复系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-7-组件6-证书吊销-CRL"><span class="nav-number">4.1.7.</span> <span class="nav-text">3.1.7 组件6 证书吊销 CRL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-8-组件7-PKI应用系统接口"><span class="nav-number">4.1.8.</span> <span class="nav-text">3.1.8 组件7 PKI应用系统接口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-证书的使用及验证"><span class="nav-number">4.2.</span> <span class="nav-text">3.3 证书的使用及验证</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x04-文件系统"><span class="nav-number">5.</span> <span class="nav-text">0x04 文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1文件系统基础"><span class="nav-number">5.1.</span> <span class="nav-text">4.1文件系统基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2NTFS"><span class="nav-number">5.2.</span> <span class="nav-text">4.2NTFS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-EFS"><span class="nav-number">5.3.</span> <span class="nav-text">4.3 EFS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-1加密过程"><span class="nav-number">5.3.1.</span> <span class="nav-text">4.3.1加密过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-2"><span class="nav-number">5.3.2.</span> <span class="nav-text">4.3.2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-3优势"><span class="nav-number">5.3.3.</span> <span class="nav-text">4.3.3优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-4-局限性"><span class="nav-number">5.3.4.</span> <span class="nav-text">4.3.4 局限性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-磁盘配额"><span class="nav-number">5.4.</span> <span class="nav-text">4.4 磁盘配额</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-数据备份的策略，RAID机制的几种备份机制"><span class="nav-number">5.5.</span> <span class="nav-text">4.5 数据备份的策略，RAID机制的几种备份机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-1完全备份"><span class="nav-number">5.5.1.</span> <span class="nav-text">4.5.1完全备份</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-2差异备份"><span class="nav-number">5.5.2.</span> <span class="nav-text">4.5.2差异备份</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-3增量备份"><span class="nav-number">5.5.3.</span> <span class="nav-text">4.5.3增量备份</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-6-数据恢复机制"><span class="nav-number">5.6.</span> <span class="nav-text">4.6 数据恢复机制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x05身份验证"><span class="nav-number">6.</span> <span class="nav-text">0x05身份验证</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-针对字典，穷举攻击的防范策略"><span class="nav-number">6.1.</span> <span class="nav-text">5.1 针对字典，穷举攻击的防范策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2交互式本地登录，域登录各组件作用"><span class="nav-number">6.2.</span> <span class="nav-text">5.2交互式本地登录，域登录各组件作用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-1-winlogon"><span class="nav-number">6.2.1.</span> <span class="nav-text">5.2.1 winlogon</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-2-GINA动态链接库"><span class="nav-number">6.2.2.</span> <span class="nav-text">5.2.2 GINA动态链接库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-3-网络提供程序的动态链接库"><span class="nav-number">6.2.3.</span> <span class="nav-text">5.2.3 网络提供程序的动态链接库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-kerberos用户身份验证服务和票据授予服务"><span class="nav-number">6.3.</span> <span class="nav-text">5.3 kerberos用户身份验证服务和票据授予服务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x06-访问控制"><span class="nav-number">7.</span> <span class="nav-text">0x06 访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1windows的访问控制模型及组件"><span class="nav-number">7.1.</span> <span class="nav-text">6.1windows的访问控制模型及组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-主体和客体的安全描述"><span class="nav-number">7.2.</span> <span class="nav-text">6.2 主体和客体的安全描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3-客体中策略的冲突解决办法"><span class="nav-number">7.3.</span> <span class="nav-text">6.3 客体中策略的冲突解决办法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-4-分布式访问控制实现"><span class="nav-number">7.4.</span> <span class="nav-text">6.4 分布式访问控制实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x07网络传输安全"><span class="nav-number">8.</span> <span class="nav-text">0x07网络传输安全</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-IPSEC封装协议"><span class="nav-number">8.1.</span> <span class="nav-text">7.1 IPSEC封装协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-1-工作模式"><span class="nav-number">8.1.1.</span> <span class="nav-text">7.1.1 工作模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-2-安全协议"><span class="nav-number">8.1.2.</span> <span class="nav-text">7.1.2 安全协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2-直接访问-主机对主机"><span class="nav-number">8.2.</span> <span class="nav-text">7.2 直接访问 主机对主机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-3-VPN访问"><span class="nav-number">8.3.</span> <span class="nav-text">7.3 VPN访问</span></a></li></ol></li></ol>
     
+
+    <div class="al_index_footer_item al_index_footer_extra">
+        Power By 
+        <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>
     </div>
-  </aside>
 
-</section>
-        
-      </div>
-
+    <div class="al_index_footer_item al_index_footer_extra_right">
+        All Right Reserved
     </div>
-    <!-- <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-    <a href="/tags" class="mobile-nav-link">Tags</a>
-  
-    <a href="/friend" class="mobile-nav-link">Friend</a>
-  
-    <a href="/about" class="mobile-nav-link">About</a>
-  
-</nav> -->
-    <footer id="footer" class="site-footer">
-  
-
-  <div class="clearfix container">
-      <div class="site-info">
-	      &copy; 2020 Altm4nz All Rights Reserved.
-        
-            <span id="busuanzi_container_site_uv">  
-              本站总访问量<span id="busuanzi_value_site_pv"></span>次
-            </span>
-          
-      </div>
-      <div class="site-credit">
-        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
-      </div>
-  </div>
-</footer>
-
-
-<!-- min height -->
-
-<script>
-    var wrapdiv = document.getElementById("wrap");
-    var contentdiv = document.getElementById("content");
-
-    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
-    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
-
-
-    <!-- headerblur min height -->
-    
-    
-</script>
-    
-<div style="display: none;">
-  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+    <div class="al_index_footer_item al_index_footer_extra_right">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+    </div>
+            
 </div>
 
-<!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
-<script src="/js/bootstrap.js"></script>
-<script src="/js/main.js"></script>
-
-
-
-
-
-
-
-
-	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-
-
-
-  </div>
-
-  <a id="rocket" href="#top" class=""></a>
-  <script type="text/javascript" src="/js/totop.js" async=""></script>
-</body>
+        <script type="text/javascript" async="async" src="/javascripts/acelog.js"></script>
+        
+        
+        
+    </body>
 </html>
+        
