@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans">
+    <head>
+        <title>两个有趣的XSS</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2.0">
+<link rel="stylesheet", href="/./css/style.css">
+<link rel="shortcut icon", href="/../../../../images/favicon.ico">
+<link rel="apple-touch-icon", href="/./apple-touch-icon.png">
+
+        
+    
+    <link rel='stylesheet' href="/./css/dracula.css">
+
+    </head>
+    <body>
+        <header class="al_header al_pos_fixed">
+    <div class="al_header_container dis_flex_jcenter">
+        <div class="al_header_container_left">
+            <div class="al_header_site_title">
+                <a href="/">Altm4nz's blog</a>
+            </div>
+        </div>
+
+        <div class="dis_flex_jcenter">
+            <div class="al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-menu"></use>
+                </svg>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="al_sidebar">
+
+    <div class="al_sidebar_overlay al_full_cover"></div>
+
+    <div class="al_pos_fixed al_sidebar_cnt">
+        <div class="dis_flex_acenter al_sidebar_header">
+            <h3>Altm4nz's blog</h3>
+            <div class="al_sidebar_close al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-close"></use>
+                </svg>
+            </div>
+        </div>
+
+        <div class="al_sidebar_author_cnt">
+
+            <div class="al_sidebar_author_info">
+                
+                <img class="al_sidebar_avatar" src="../../../../images/IMG_4178.JPG">
+                <p></p>
+                <h4>WEB划水选手</h4>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+
+        
+    <div class="dis_flex_center al_lightbox_cnt al_full_cover">
+        <img class="al_lightbox_img"/>
+    </div>
+    <div class="al_page_background dis_flex_center al_full_cover"></div>
+    <div class="al_page_container">
+        <div class="al_pos_ab al_fake_background"></div>
+        <div class="al_main_container al_shadow al_main_page_container">
+            <article class="al_article">
+                <header>
+                    <h1 class="al_page_title">
+                        两个有趣的XSS
+                    </h1>
+                    <div class="al_page_info dis_flex">
+                        <div class="al_page_content_info">
+                            May 31, 2020 04:05 PM
+                        </div>
+
+                        
+                            <div class="al_page_content_info">
+                                31 words
+                            </div>
+                        
+
+                        
+                            <div class="al_page_content_info">
+                                1 minutes read
+                            </div>
+                            <div class="al_page_content_info">
+                                本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+                            </div>
+                        
+                        <span class="tags"></span>
+                    </div>
+                </header>
+
+                
+                    <div class="al_page_content_outline">
+                        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#De1CTF-Animal-Crossing"><span class="toc-text">De1CTF  Animal Crossing</span></a></li></ol>
+                    </div>
+                
+
+                
+                <section id="post-body">
+                    <h2 id="De1CTF-Animal-Crossing"><a href="#De1CTF-Animal-Crossing" class="headerlink" title="De1CTF  Animal Crossing"></a>De1CTF  Animal Crossing</h2><p>[<a href="https://github.com/De1ta-team/De1CTF2020/blob/master/writeup/web/Animal%20Crossing/README_zh.md]" target="_blank" rel="noopener">https://github.com/De1ta-team/De1CTF2020/blob/master/writeup/web/Animal%20Crossing/README_zh.md]</a>(<a href="https://github.com/De1ta-team/De1CTF2020/blob/master/writeup/web/Animal" target="_blank" rel="noopener">https://github.com/De1ta-team/De1CTF2020/blob/master/writeup/web/Animal</a> Crossing/README_zh.md)</p>
+
+                </section>
+
+                
+                
+                
+
+
+            
+            <nav class="dis_flex al_post_nav">
+                <a class="al_post_nav_item dis_flex_acenter" href="/2020/06/24/%E7%AC%AC%E4%BA%94%E7%A9%BA%E9%97%B4%E7%BA%BF%E4%B8%8A%E8%B5%9B/">
+                    
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-left"></use>
+                        </svg>
+                        <span class="al_text_ellipsis al_post_nav_desc">第五空间线上赛</span>
+                    
+                </a>
+                <a class="al_post_nav_item dis_flex_acenter" href="/2019/09/09/ByteCTF-WEB/">
+                    
+                        <span class="al_text_ellipsis al_post_nav_desc">ByteCTF_WEB</span>
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-right"></use>
+                        </svg>
+                    
+                </a>
+            </nav>
+        </div>
+    </div>
+
+
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="al_index_footer dis_flex_center">
+
+
+
+    
+    
+
+    <div class="al_index_footer_item al_index_footer_extra">
+        Power By 
+        <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>
+    </div>
+
+    <div class="al_index_footer_item al_index_footer_extra_right">
+        All Right Reserved
+    </div>
+    <div class="al_index_footer_item al_index_footer_extra_right">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+    </div>
+            
+</div>
+
+        <script type="text/javascript" async="async" src="/javascripts/acelog.js"></script>
+        
+        
+        
+    </body>
+</html>
+        
